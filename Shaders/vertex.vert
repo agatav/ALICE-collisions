@@ -7,9 +7,11 @@ out VS_OUT {
 } vs_out;
 
 uniform mat4 transform;
+uniform mat4 view;
+uniform mat4 projection;
 
 void main()
 {
     vs_out.color = aColor;
-    gl_Position = transform * vec4(aPos.x, aPos.y, aPos.z, 1.0);
+    gl_Position = projection * view * transform * vec4(aPos.x, aPos.y, aPos.z, 1.0);
 }
