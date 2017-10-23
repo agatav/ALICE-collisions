@@ -1,90 +1,75 @@
-\documentclass[paper=a4, fontsize=11pt]{scrartcl} % A4 paper and 11pt font size
-\usepackage[section]{placeins}
-\usepackage[T1]{fontenc}
-\usepackage[polish]{babel}
-\usepackage[utf8x]{inputenc}
-\usepackage{lmodern}
-\selectlanguage{polish}
-\usepackage{mathtools}
-\usepackage{listings}   
-\usepackage{enumerate}
-\usepackage{tikz}
-\usepackage{circuitikz}
-\usepackage{graphicx}
-\usepackage{dblfloatfix}
-\usepackage{caption}
-\usepackage{subcaption}
-\usepackage{sectsty} % Allows customizing section commands
-\allsectionsfont{\centering \normalfont\scshape} % Make all sections centered, the default font and small caps
-\setlength\parindent{0pt} % Removes all indentation from paragraphs - comment this line for an assignment with lots of text
+\input{preamble/preamble.tex}
+\graphicspath{{images/}}
 
 \begin{document}
 
-\begin{titlepage}
+\includepdf[pages={-}]{preamble/begining.pdf}
+\tableofcontents
+\thispagestyle{empty}
+\thesisstyle
+\newpage 
 
-\newcommand{\HRule}{\rule{\linewidth}{0.5mm}} % Defines a new command for the horizontal lines, change thickness here
-
-\center % Center everything on the page
-%----------------------------------------------------------------------------------------
-%	HEADING SECTIONS
-%----------------------------------------------------------------------------------------
-\textsc{\LARGE Politechnika Warszawska}\\[1.5cm] % Name of your university/college
-\textsc{\Large Wydział Elektroniki i Technik Informacyjnych}\\[0.5cm] % Major heading such as course name
-\textsc{\large Praca dyplomowa inżynierska\\
-na kierunku Informatyka\\
-w specjalności Inżynieria Systemów Informatycznych}\\[0.5cm] % Minor heading such as course title
-
-%----------------------------------------------------------------------------------------
-%	TITLE SECTION
-%----------------------------------------------------------------------------------------
-
-\HRule \\[0.4cm]
-{ \huge \bfseries Opracowanie programu do stereoskopowej wizualizacji detektora ALICE}\\[0.4cm] % Title of your document
-\HRule \\[1.5cm]
- 
-%----------------------------------------------------------------------------------------
-%	AUTHOR SECTION
-%----------------------------------------------------------------------------------------
-
-\begin{minipage}{0.4\textwidth}
-\begin{flushleft} \large
-\emph{Autor:}\\
-Ahata \textsc{Valiukevich}
-\end{flushleft}
-\end{minipage}
-~
-\begin{minipage}{0.4\textwidth}
-\begin{flushright} \large
-\emph{Promotor:} \\
-mgr inż. Julian \textsc{Myrcha} % Supervisor's Name
-\end{flushright}
-\end{minipage}\\[4cm]
-
-
-%----------------------------------------------------------------------------------------
-%	DATE SECTION
-%----------------------------------------------------------------------------------------
-
-{\large \today}\\[3cm] % Date, change the \today to a set date if you want to be precise
-\vfill % Fill the rest of the page with whitespace
-\end{titlepage}
-
-\newpage
-
-\section{Wstęp}
+\section[Wstęp]{Wstęp}
 W przeciągu ostatnich kilku lat nauka zrobiła duży postęp w kierunku rozwoju fizyki dużych energii. Osiągnięcie to składa się z wyników dużej liczby badań oraz eksperymentów prowadzonych w różnych naukowo-badawczych instytucjach. Równolegle z naukami fizycznymi rozwiajała się również branża informatyczna, a w szczególności grafika komputerowa. Obecnie jest obserwowany coraz silniejszy trend związany z rozwojem technik stereoskopowych. Przy połączeniu badań fizycznych i grafiki komputerowej powstaje możliwość dogłębnego przestudiowania zjawisk zachodzących podczas rożnych eksperymentów.
 
 
 \subsection{Cele i zakres pracy}
-Pierwszym celem niniejszej pracy dyplomowej jest stereoskopwa wizualizacja detektora oraz zdarzeń ciężkich ionów w eksperymencie ALICE. Kolejnym istotnym celem pracy jest połączenie wyżej wymienionych wizualizacji do jednego spójnego obrazu. \\
-Dla realizacji celi podstawowych niezbędne jest zapoznanie się z technologią stereoskopii i aktualnie dostępnymi rozwiązaniami,przestudiowanie podstaw działania eksperymentu ALICE oraz środowiska informatycznego w CERN. \\
+Pierwszym celem niniejszej pracy dyplomowej jest stereoskopwa wizualizacja detektora oraz zdarzeń ciężkich ionów w eksperymencie ALICE. Kolejnym istotnym celem pracy jest połączenie wyżej wymienionych wizualizacji do jednego spójnego obrazu. 
+\paragraph{}
+Dla realizacji celi podstawowych niezbędne jest zapoznanie się z technologią stereoskopii i aktualnie dostępnymi rozwiązaniami,przestudiowanie podstaw działania eksperymentu ALICE oraz środowiska informatycznego w CERN. \paragraph{}
 Celem pośrednim danej pracy jest zapoznanie się z możliwościami biblioteki OpenGL, a także innymi uwarunkowaniami ważymi w aspekcie projektowanej aplikacji.
+
 \newpage
-\section{Teoria}
-\subsection{Biblioteka OpenGL} 
-	OpenGL (z angielskiego Open Graphics Library) jest potężnym systemem graficznym stanowiącym niejako pomost między programistą a sprzętem komputera. Biblioteka ta została stworzona przez firmę \textit{Silicon Graphics}, jednego z potentatów na rynku grafiki komputerowej.\\
-	 Procedury OpenGL umożliwiają rendorowanie obiektów o rożnych poziomach skomplikowania zaczynając od prostego punktu geometrycznego, linii lub wypełnionego wielokąta do utworzenia najbardziej złożonej, zakrzywionej powierzchni, oświetlonej i odwzorowanej teksturą. OpenGL pozwala programistom na dostęp do prymitywów geometrycznych i obrazowych, list wyświetlania, przekształcania modelu, oświetlenia i teksturowania, antyaliasingu, mieszania i wielu innych funkcji. Wszystkie elementy stanu OpenGL - nawet treść pamięci tekstur i bufor ramki - można uzyskać za pomocą aplikacji OpenGL. Dany system obsługuje także aplikacje wizualizacji z obrazami 2D traktowanymi jako typy prymitywów, którymi można manipulować podobnie jak obiektami geometrycznymi 3D.\\
-	Mimo że specyfikacja OpenGL definiuje konkretny ciąg przetwarzania graficznego, dostawcy platformy mają swobodę dostosowywania konkretnej implementacji OpenGL w celu osiągnięcia sprecyzowanych celów w zakresie kosztów i wydajności. Pojedyncze wywołania mogą być wykonywane na dedykowanym sprzęcie, uruchamiane jako procedury programowe w standardowym systemie CPU lub implementowane jako kombinacja zarówno dedykowanych procedur sprzętowych, jak i programowych. Ta elastyczność implementacji skutkuje ​​przyśpieszeniem renderowania, w dodatku jest powszechnie dostępna na wszystkich jednostkach od komputerów o niskich kosztach, po wysokiej klasy stacjach roboczych i superkomputerach.\\
+\section[Część analityczna]{Część analityczna}
+
+\subsection{Stereoskopia}
+Stereoskopią nazywa się technikę służącą do tworzenia iluzji głębi obrazu. Ta metoda nie zapewnia prawdziwie trójwymiarowych widoków, ale zapewnia efekt trójwymiarowości. Sceny wydają się mieć głębię, dzięki temu że dla każdego oka obserwatora jest prezentowany inny widok. 
+\subsubsection{Historia} 
+Historia stereoskopii liczy już ponad 180 lat. Za odkrywcę tej techniki uważa się Charlesa Wheatstone'a, który jako pierwszy zaobserwował zjawisko widzenia stereoskopowego, opisał go w artykule Philosophical Transactions\footnote{Wheatstone, Charles. “Contributions to the Physiology of Vision.–Part the First. On some remarkable, and hitherto unobserved, Phenomena of Binocular Vision.” Philosophical Transactions of the Royal Society. Vol. 128 (1838) pp. 371-394. http://www.stereoscopy.com/library/wheatstone-paper1838.html (2009-05-27).} oraz skonstruował urządzenie potwierdzające słuszność jego teorii\footnote{Brewster, David. The Stereoscope: its history, theory, and construction, with its application to the fine and useful arts and to education. London, 1856}. 
+\paragraph{} Wheatstone wyjaśnia, że gdy patrzy się na obiekty znajdujące się w dużej odległości, to nie ma znaczenia, którym okiem to się robi, ponieważ wygląd przedmiotów jest dokładnie ten sam dla obu oczu. Ale jeśli obiekt znajduje się znacznie bliżej, to każde oko widzi przedmiot pod nieco innym kątem. Wykorzystując tę tezę, autor skonstruował urządzenie, które umożliwiło przedstawienie delikatnie różniących się obrazków prawemu i lewemu oku z osobna. W efekcie powstawała iluzja trójwymiarowości obrazu.
+  
+\subsubsection{Popularne techniki stereoskopowe}
+Istnieje kilka różnych technik osiągnięcia efektu stereoskopowego. Dla każdej techniki przeglądania niezbędny jest materiał stereoskopowy dostosowany do konkretnego celu. Poniżej są przedstwione krótkie opisy kilku popularnych technik. Niektóre z opisanych technik są odpowiednie tylko dla jednego widza, podczas gdy istnieją różne typy okularów 3D, które sprawdzają się dla większej grupy odbiorców.
+\begin{itemize}
+\itemi Najprostszą metodą doświadczenia widzenia stereoskopowego jest umieszczenie dwuch oddzielnych obrazów obok siebie. Perspektywa jednego z obrazów reprezentuje lewe oko, odpowiednio druga perspektywa jest dla oka prawego. Obrazy te można zazwyczaj oglądać bez użycia dodatkowych narzędzi. Jedyna różnica polega na sposobie ich oglądania. Jeśli obraz dla lewego oka znajduje się po lewej stronie, to poprawnie jest patrzeć trzymając oczy równolegle. Jeśli natomiast sytuacja jest odwrotna (obraz dla lewego oka jest po prawej stronie), obrazy mają być oglądane poprzez skrzyżowanie oczu. Użycie niewłaściwej metody oglądania spowoduje odwrócenie efektu stereoskopowego. Może to ujawnić się w postaci zniekształconych odległości pomiędzy obiektami na obrazie.\\
+Warto zauważyć, że oglądanie takich obrazów tworzy duże obciążenie dla oczu. W celu zmniejszenia negatywnych skutków używa się stereoskopu. Dane urządzenie w znacznej mierze redukuje przemęczenie oczu, co ułatwia długie oglądanie obrazów.
+
+\itemi Autostereogram – Similar to the images that are made for cross-eyed viewing,
+the autostereogram images show a three-dimensional depth when the right
+viewing technique is used to look at them. Though, as shown in Figure 2, they
+can sometimes be hidden behind what seems to be a totally random mess of
+colors. This “mess” is actually not so random for it is a repeated pattern that
+conceals the three-dimensional objects [6]. Figure 3 shows an image which is
+not hidden with a pattern which is an image of a chessboard where the pieces
+are repeated horizontally. By using the parallel viewing technique, a
+stereoscopic effect will be created as the adjacent pieces merge together. This
+is also how the images with a random pattern work. By using a z-depth image
+(where objects closer to the camera is lighter and objects further away darker)
+of a 3D object or scene, shown in Figure 4, the final image is calculated and
+hidden behind either random dots or a pattern [7].
+
+\itemi Polarized 3D-glasses – Polarized stereoscopy is when two projectors project
+images onto a silver or aluminum covered screen, where the orientation of the
+electric field of the light from the projectors has been specified [8]. When
+using this method to show stereoscopic material, there are two methods how
+the light is polarized: linearly and circularly. The electric field of the linearly
+polarized light is directed horizontally and vertically from the projectors, and
+the viewer wears a pair of 3D-glasses which passes through light from only
+one direction for each eye. If the glasses are tilted their polarization will no
+longer match the polarization of the light and a bleeding effect between the
+two images will occur. This is avoided when using circularly polarized light
+and glasses. The light is then directed in a circular motion, either leftwards or
+rightwards, which remains even if the glasses are tilted to either side.
+
+\end{itemize}
+
+
+
+\subsubsection{Techniki anaglifowe}
+
+\newpage
+\subsection{Biblioteka OpenGL}
+OpenGL (z angielskiego Open Graphics Library) jest potężnym systemem graficznym stanowiącym niejako pomost między programistą a sprzętem komputera. Biblioteka ta została stworzona przez firmę \textit{Silicon Graphics}, jednego z potentatów na rynku grafiki komputerowej.\\Procedury OpenGL umożliwiają rendorowanie obiektów o rożnych poziomach skomplikowania zaczynając od prostego punktu geometrycznego, linii lub wypełnionego wielokąta do utworzenia najbardziej złożonej, zakrzywionej powierzchni, oświetlonej i odwzorowanej teksturą. OpenGL pozwala programistom na dostęp do prymitywów geometrycznych i obrazowych, list wyświetlania, przekształcania modelu, oświetlenia i teksturowania, antyaliasingu, mieszania i wielu innych funkcji. Wszystkie elementy stanu OpenGL - nawet treść pamięci tekstur i bufor ramki - można uzyskać za pomocą aplikacji OpenGL. Dany system obsługuje także aplikacje wizualizacji z obrazami 2D traktowanymi jako typy prymitywów, którymi można manipulować podobnie jak obiektami geometrycznymi 3D.\\Mimo że specyfikacja OpenGL definiuje konkretny ciąg przetwarzania graficznego, dostawcy platformy mają swobodę dostosowywania konkretnej implementacji OpenGL w celu osiągnięcia sprecyzowanych celów w zakresie kosztów i wydajności. Pojedyncze wywołania mogą być wykonywane na dedykowanym sprzęcie, uruchamiane jako procedury programowe w standardowym systemie CPU lub implementowane jako kombinacja zarówno dedykowanych procedur sprzętowych, jak i programowych. Ta elastyczność implementacji skutkuje ​​przyśpieszeniem renderowania, w dodatku jest powszechnie dostępna na wszystkich jednostkach od komputerów o niskich kosztach, po wysokiej klasy stacjach roboczych i superkomputerach.\\
 \begin{figure}[h]
 \includegraphics[width=6cm]{Hierarchy_UNIX.jpg}
 \centering
@@ -127,11 +112,7 @@ OpenGL Mathematics (GLM) jest nagłówkiem tylko do biblioteki matematycznej C++
 Ta biblioteka działa doskonale z OpenGL, ale zapewnia również współdziałanie z innymi bibliotekami i SDK innych firm. Jest dobrym kandydatem do oprogramowania renderowania (raytracing czy rasteryzacji), przetwarzania obrazu, symulacji fizycznych i dowolnego kontekstu programowania, który wymaga prostej i wygodnej biblioteki matematycznej. 
 \footnote{http://glm.g-truc.net/0.9.8/index.html}
 
-\subsection{Stereoskopia}
-Technika przedstawiania trójwymiarowych obiektów w postaci stereoskopowych widoków. Ta metoda nie zapewnia prawdziwie trójwymiarowych obrazów, ale zapewnia efekt trójwymiarowości, prezentując inny widok dla każdego oka obserwatora, dzięki temu sceny wydają się mieć głębię.\\
-	Aby uzyskać projekcję stereoskopową, najpierw trzeba uzyskać dwa widoki sceny generowanej z miesca obserwacji, odpowiadającej każdemu oku (lewemu i prawemu). Istenieje wiele możliwości skonstruowania dwóch widoków: jako scen generowanych przez komputer z różnymi pozycjami oglądania lub przy użyciu pary kamer stereo do fotografowania obiektu lub sceny. Kiedy jednocześnie spojrzy się na lewy widok lewym okiem i na prawy widok prawym, dwa widoki łączą się w jeden obraz i można spostrzec scenę w głębi. \\ 
-	Jednym ze sposobów uzyskania efektu stereoskopowego jest wyświetlanie każdego z dwóch widoków w systemie rastrowym na alternatywnych cyklach odświeżania. Ekran jest oglądany przez okulary, a każda soczewka ma działać jak szybka migawka, która jest zsynchronizowana w taki sposób, żeby zablokować jeden z widoków.
-\footnote{Donald Hearn, M. Pauline Baker: Computer Graphics}
+
 
 \subsection{ALICE}
 A Large Ion Collider Experiment został zaprojektowany tak, aby w jak najbardziej kompletny sposób mierzyć cząstki powstałe w kolizjach, które mają miejsce w środku akceleratora, tak, aby można było zrekonstruować i zbadać ewolucję systemu w przestrzeni i czasie. Aby to zrobić, należy użyć wielu różnych detektorów, z których każdy dostarcza różne informacje. Aby zrozumieć tak złożony system, należy obserwować zjawisko z różnych punktów widzenia, przy użyciu różnych instrumentów jednocześnie. \footnote{http://aliceinfo.cern.ch/Public/en/Chapter2/Chap2Experiment-en.html}
@@ -140,6 +121,7 @@ W ekstremalnych warunkach temperatury i/lub gęstości materia hadronowa "topi s
 \subsection{Tracking particles}
 Zespół detektorów cylindrycznych (od wewnątrz na zewnątrz: ITS Drift, ITS Strips, TPC, TRD) mierzy w wielu punktach (ponad 100 tylko dla TPC) przejście każdej cząstki przenoszącej ładunek elektryczny tak, że trajektoria jest dokładnie znana. Detektory ALICE są osadzone w polu magnetycznym (wytwarzanym przez duży czerwony magnes), wyginając w ten sposób trajektorie cząstek: z krzywizny śladów można znaleźć ich pęd. ITS jest tak precyzyjny, że cząstki, które są generowane przez rozkład innych cząstek o bardzo krótkim czasie życia można zidentyfikować, widząc, że nie pochodzą one z punktu, w którym nastąpiła interakcja ("wierzchołek" zdarzenia).
 \footnote{http://aliceinfo.cern.ch/Public/en/Chapter2/Page3-subdetectors-en.html}
+
 \newpage
 \section{Projekt}
 \subsection{Wymagania}
@@ -186,8 +168,9 @@ B(t)=(1-t^{3})P_{0}+3(1-t)^{2}P_{1}+3(1-t)t^{2}P_{2}+t^{3}P_{3}
 \end{equation}
 
 Stosowany wzór nazywany jest sześcienną krzywą Beziera, ponieważ mamy 2 styczne (na przykład 2 punkty w środku). P0 i P3 to dwa punkty końcowe. P1 i P2 są dwoma stycznymi punktami. Krzywa Beziera wprowadza również nową zmienną. T jest wartością pomiędzy [0-1], która w zasadzie mówi, ile punktów pośrednich chcemy między dwoma punktami końcowymi.
-Kod przedstawia obliczanie punktów: \\
-\lstset{language=C++}
+\begin{table}[H]
+\caption{Kod źródłowy programu. Aproksymacja krzywych Beziera.}
+\label{tab2}
 \begin{lstlisting}[frame=single]
 GLfloat bezier(float t, GLfloat P0,
                   GLfloat P1, GLfloat P2, GLfloat P3) {
@@ -206,15 +189,51 @@ void drawStuff() {
   drawPoint(midpoint_x, midpoint_y);
 }
 \end{lstlisting}
+\end{table}
 
 OpenGL ma pojęcie "\ current point "\ , zaczyna się od podania pojedynczego punktu, oblicza się następny punkt za pomocą krzywej Beziera (\ textit {\ textbf {var newMidPoint}}, a następnie podaje się nowy punkt do OpenGL. OpenGL automatycznie rysuje linię między tymi dwoma punktami, ale nowy "\ current point "\ wskazuje teraz na (\textit {\textbf {newMidPoint}}. Więc przechodzi się przez pętlę, oblicza się nowy punkt krzywej Beziera (\textit {\textbf {var secondMidPoint}}, \textit {\textbf {secondMidPoint}} do OpenGL, a OpenGL rysuje linię między (\textit {\textbf {newMidPoint -> secondMidPoint}}), powtarza się kolejne kroki itracji.
 
+\newpage
+\section[Część weryfikacyjna]{Część weryfikacyjna/Wyniki eksperymentów/Wyniki symulacji}
+
+
+\section[Zakończenie]{Zakończenie/Wnioski/Podsumowanie}
+
 
 \newpage
-\subsection{Weryfikacja}
-\section{Podsumowanie}
-\section{Bibliografia}
-https://pomax.github.io/bezierinfo/ \\
-Donald Hearn, M. Pauline Baker: Computer Graphics
+\section[Przykłady]{Przykłady rysunków, tabel itp.}
+\subsection{Listowanie}
+Listuje się w sposób następujący:
+\begin{itemize}
+	\itemi pierwszy poziom listy - element pierwszy,
+	\itemi pierwszy poziom listy - element drugi,
+	\begin{itemize}
+		\itemii drugi poziom listy - element pierwszy,
+		\itemii drugi poziom listy - element drugi,
+		\itemii drugi poziom listy - element trzeci,
+		\begin{itemize}
+			\itemiii trzeci (ostatni) poziom listy - element pierwszy,
+			\itemiii trzeci (ostatni) poziom listy - element drugi,
+			\itemiii trzeci (ostatni) poziom listy - element trzeci,
+		\end{itemize}
+		\itemii drugi poziom listy - element czwarty,
+		\end{itemize}
+	\itemi pierwszy poziom listy - element trzeci,
+	\itemi pierwszy poziom listy - element czwarty.
+\end{itemize}
+
+\subsection{Cytowania i przypisy}
+This document is an example of BibTeX using in bibliography management. Three items 
+are cited: \textit{The \LaTeX\ Companion} book \cite{latexcompanion}, the Einstein
+journal paper \cite{einstein}, and the Donald Knuth's website \cite{knuthwebsite}. 
+The \LaTeX\ related items are \cite{latexcompanion,knuthwebsite}.\footnotemark[1]
+
+\fancyfootnotetextss{1}{Źródło: \url{https://www.sharelatex.com/learn/Bibliography_management_with_bibtex}}{2}{Niestety nie ma automatycznej numeracji przypisów.}{3}{Ich liczba na stronie ograniczona jest do trzech (jednak można to rozszerzyć)}
+
+
+\newpage
+\bibliographystyle{plain} % bibliography style
+\bibliography{bibliography} % add bibliography
+
 
 \end{document}
