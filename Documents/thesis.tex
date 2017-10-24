@@ -16,7 +16,7 @@ W przeciągu ostatnich kilku lat nauka zrobiła duży postęp w kierunku rozwoju
 \subsection{Cele i zakres pracy}
 Pierwszym celem niniejszej pracy dyplomowej jest stereoskopwa wizualizacja detektora oraz zdarzeń ciężkich ionów w eksperymencie ALICE. Kolejnym istotnym celem pracy jest połączenie wyżej wymienionych wizualizacji do jednego spójnego obrazu. 
 \paragraph{}
-Dla realizacji celi podstawowych niezbędne jest zapoznanie się z technologią stereoskopii i aktualnie dostępnymi rozwiązaniami,przestudiowanie podstaw działania eksperymentu ALICE oraz środowiska informatycznego w CERN. \paragraph{}
+Dla realizacji celi podstawowych niezbędne jest zapoznanie się z technologią stereoskopii i aktualnie dostępnymi rozwiązaniami, przestudiowanie podstaw działania eksperymentu ALICE oraz środowiska informatycznego w CERN. \paragraph{}
 Celem pośrednim danej pracy jest zapoznanie się z możliwościami biblioteki OpenGL, a także innymi uwarunkowaniami ważymi w aspekcie projektowanej aplikacji.
 
 \newpage
@@ -24,48 +24,83 @@ Celem pośrednim danej pracy jest zapoznanie się z możliwościami biblioteki O
 
 \subsection{Stereoskopia}
 Stereoskopią nazywa się technikę służącą do tworzenia iluzji głębi obrazu. Ta metoda nie zapewnia prawdziwie trójwymiarowych widoków, ale zapewnia efekt trójwymiarowości. Sceny wydają się mieć głębię, dzięki temu że dla każdego oka obserwatora jest prezentowany inny widok. 
+\paragraph{} Istnieje kilka różnych technik osiągnięcia efektu stereoskopowego. Dla każdej techniki przeglądania niezbędny jest materiał stereoskopowy dostosowany do konkretnego celu. Poniżej są przedstawione krótkie opisy kilku popularnych technik. Niektóre z opisanych technik są odpowiednie tylko dla jednego widza, podczas gdy istnieją różne typy okularów 3D, które sprawdzają się dla większej grupy odbiorców.
 \subsubsection{Historia} 
 Historia stereoskopii liczy już ponad 180 lat. Za odkrywcę tej techniki uważa się Charlesa Wheatstone'a, który jako pierwszy zaobserwował zjawisko widzenia stereoskopowego, opisał go w artykule Philosophical Transactions\footnote{Wheatstone, Charles. “Contributions to the Physiology of Vision.–Part the First. On some remarkable, and hitherto unobserved, Phenomena of Binocular Vision.” Philosophical Transactions of the Royal Society. Vol. 128 (1838) pp. 371-394. http://www.stereoscopy.com/library/wheatstone-paper1838.html (2009-05-27).} oraz skonstruował urządzenie potwierdzające słuszność jego teorii\footnote{Brewster, David. The Stereoscope: its history, theory, and construction, with its application to the fine and useful arts and to education. London, 1856}. 
 \paragraph{} Wheatstone wyjaśnia, że gdy patrzy się na obiekty znajdujące się w dużej odległości, to nie ma znaczenia, którym okiem to się robi, ponieważ wygląd przedmiotów jest dokładnie ten sam dla obu oczu. Ale jeśli obiekt znajduje się znacznie bliżej, to każde oko widzi przedmiot pod nieco innym kątem. Wykorzystując tę tezę, autor skonstruował urządzenie, które umożliwiło przedstawienie delikatnie różniących się obrazków prawemu i lewemu oku z osobna. W efekcie powstawała iluzja trójwymiarowości obrazu.
   
-\subsubsection{Popularne techniki stereoskopowe}
-Istnieje kilka różnych technik osiągnięcia efektu stereoskopowego. Dla każdej techniki przeglądania niezbędny jest materiał stereoskopowy dostosowany do konkretnego celu. Poniżej są przedstwione krótkie opisy kilku popularnych technik. Niektóre z opisanych technik są odpowiednie tylko dla jednego widza, podczas gdy istnieją różne typy okularów 3D, które sprawdzają się dla większej grupy odbiorców.
-\begin{itemize}
-\itemi Najprostszą metodą doświadczenia widzenia stereoskopowego jest umieszczenie dwuch oddzielnych obrazów obok siebie. Perspektywa jednego z obrazów reprezentuje lewe oko, odpowiednio druga perspektywa jest dla oka prawego. Obrazy te można zazwyczaj oglądać bez użycia dodatkowych narzędzi. Jedyna różnica polega na sposobie ich oglądania. Jeśli obraz dla lewego oka znajduje się po lewej stronie, to poprawnie jest patrzeć trzymając oczy równolegle. Jeśli natomiast sytuacja jest odwrotna (obraz dla lewego oka jest po prawej stronie), obrazy mają być oglądane poprzez skrzyżowanie oczu. Użycie niewłaściwej metody oglądania spowoduje odwrócenie efektu stereoskopowego. Może to ujawnić się w postaci zniekształconych odległości pomiędzy obiektami na obrazie.\\
+\subsubsection{Side by Side stereogram}
+Najprostszą metodą doświadczenia widzenia stereoskopowego jest umieszczenie dwuch oddzielnych obrazów obok siebie. Perspektywa jednego z obrazów reprezentuje lewe oko, odpowiednio druga perspektywa jest dla oka prawego. Obrazy te można zazwyczaj oglądać bez użycia dodatkowych narzędzi. Jedyna różnica polega na sposobie ich oglądania. Jeśli obraz dla lewego oka znajduje się po lewej stronie, to poprawnie jest patrzeć trzymając oczy równolegle. Jeśli natomiast sytuacja jest odwrotna (obraz dla lewego oka jest po prawej stronie), obrazy mają być oglądane poprzez skrzyżowanie oczu. Użycie niewłaściwej metody oglądania spowoduje odwrócenie efektu stereoskopowego. Może to ujawnić się w postaci zniekształconych odległości pomiędzy obiektami na obrazie.\\
 Warto zauważyć, że oglądanie takich obrazów tworzy duże obciążenie dla oczu. W celu zmniejszenia negatywnych skutków używa się stereoskopu. Dane urządzenie w znacznej mierze redukuje przemęczenie oczu, co ułatwia długie oglądanie obrazów.
+\footnote{http://blogs.hebali.com/itp/?p=378}
+\begin{figure}[H]
+		\centering
+ 		\includegraphics[width=10cm]{sbs.jpg}
+ 		\captionsetup{font={up, footnotesize}}
+    	\caption{Stereogram.}
+ 		\label{rys1}
+\end{figure}
 
-\itemi Autostereogram – Similar to the images that are made for cross-eyed viewing,
-the autostereogram images show a three-dimensional depth when the right
-viewing technique is used to look at them. Though, as shown in Figure 2, they
-can sometimes be hidden behind what seems to be a totally random mess of
-colors. This “mess” is actually not so random for it is a repeated pattern that
-conceals the three-dimensional objects [6]. Figure 3 shows an image which is
-not hidden with a pattern which is an image of a chessboard where the pieces
-are repeated horizontally. By using the parallel viewing technique, a
-stereoscopic effect will be created as the adjacent pieces merge together. This
-is also how the images with a random pattern work. By using a z-depth image
-(where objects closer to the camera is lighter and objects further away darker)
-of a 3D object or scene, shown in Figure 4, the final image is calculated and
-hidden behind either random dots or a pattern [7].
+\subsubsection{Single-image stereogram} 
+\begin{itemize}
+\itemi Autostereogram. Do oglądania obrazów stereoskopowych z wykorzystaniem tej techniki nie są potrzebne żadne urządzenia, aczkolwiek okulary pryzmatyczne ułatwiają przegladanie poprzeczne, a także nad- i podgląd.\\
+Pzy użyciu poprawnej techniki oglądania autostereogram stwarza efekt trójwymiarowej głębi obrazu. Czasem obrazy mogą wyglądać jak zniekształcone lub losowo umieszczone kolorowe plamy. "Bałagan"\ tego rodzaju w rzeczywistości zupełnie nie jest przypadkowy, ponieważ jest to powtarzalny wzór ukrywający obiekty trójwymiarowe. \footnote{Autostereogram. http://en.wikipedia.org/wiki/Autostereogram (2017-10-23)}
+\begin{figure}[H]
+		\centering
+ 		\includegraphics[width=10cm]{autostereogram.png}
+ 		\captionsetup{font={up, footnotesize}}
+    	\caption{Autostereogram.}
+ 		\label{rys1}
+\end{figure}
 
-\itemi Polarized 3D-glasses – Polarized stereoscopy is when two projectors project
-images onto a silver or aluminum covered screen, where the orientation of the
-electric field of the light from the projectors has been specified [8]. When
-using this method to show stereoscopic material, there are two methods how
-the light is polarized: linearly and circularly. The electric field of the linearly
-polarized light is directed horizontally and vertically from the projectors, and
-the viewer wears a pair of 3D-glasses which passes through light from only
-one direction for each eye. If the glasses are tilted their polarization will no
-longer match the polarization of the light and a bleeding effect between the
-two images will occur. This is avoided when using circularly polarized light
-and glasses. The light is then directed in a circular motion, either leftwards or
-rightwards, which remains even if the glasses are tilted to either side.
-
+\itemi Z buffor
+\itemi ....
 \end{itemize}
 
+\subsubsection{Stereoskopia pasywna - okulary spolaryzowane} 
+Do tworzenia iluzji obrazów trójwymiarowych są wykorzystywane specjalne okulary, ograniczające światło docierające do każdego oka. \\
+W celu przedstawienia widoku stereoskopowego dwa obrazy są wyświetlane na tym samym ekranie z użyciem różnych filtrów polaryzacji. 
+Istenieją 2 rodzaje filtrów: liniowe oraz kołowe.\\
+W przypadku liniowej polaryzacji pole elektryczne światła jest skierowane pionowo bądź poziomo. Odbiorca zakłada odpowiednio dopasowane okulary, w których każda soczewka przepuszcza światło o innym kierunku polaryzacji. W ten sposób każde oko widzi nieco inny obraz. Minimalne pochylenie okularów może spowodować niezgodność polaryzacji światła a soczewek. Nieporządany efekt można wyeliminować korzystając z filtrów kołowych. W tym przypadku światło jest skierowane w ruch kołowy zgodnie lub nie z kierunkiem wskazówek zegara. Ruch ten pozostaje niezmienny, nawet jeśli okulary są dowolnie pochylone.\\
+Niewątpliwą zaletą stereoskopii spolaryzowanej jest to, że wiele osób może wyświetlać obrazy stereoskopowe w tym samym momencie.
+\footnote{\foreignlanguage{russian}{http://ru.knowledgr.com/17401974/Поляризованная3DСистема}}
+
+\subsubsection{Stereoskopia aktywna - ciekłokrystaliczne okulary migawkowe} 
+Szkło, które tworzy soczewki okularów, zawiera ciekłe kryształy oraz filtr polaryzacyjny. Stosując napięcie zmieniamy kolor soczewki na czarny, to bezpośrednio wiąże się z blokowaniem widoku dla jednego oka. Dzięki przykrywaniu widoku z dużą częstotliwością w każdej soczewce, każdemu oku są przedstawiane obrazy z różną perspektywą. Częstotliwość migotania okularów jest zsynchronizowana z aktualnym źródłem wyświetlania, żeby stale dostarczać prawidłowej perspektywy dla oczu. Jeśli prędkość aktualizacji soczewek w okularach nie jest wystarczająco wysoka, to może nastąpić zauważalne zniekształcenie obrazu końcowego. Przykładem takiego zniekształcenia może posłużyć część obrazu, która była przeznaczona dla innego oka. 
+
+
+\subsubsection{Interference filter technique - INFITEC}
+INFITEC to nowa technika wyświetlania obrazów stereoskopowych. Opiera ona się na tym, że widmo światła widzialnego można podzielić na fale o różnej długości używając do tego filtrów optycznych. \footnote{Jorke, Helmut & Fritz, Markus. INFITEC – A new stereoscopic visualisation tool
+by wavelength multiplex imaging. Wiesbaden, 2003.\\https://www.it.uu.se/edu/course/homepage/igs/ht07/lectures/F4_070913_infitec_english.pdf} Światło widzialne jest podzielone na 6 części, po 2 na każdy z podstawowych kolorów: czerwony, zielony oraz niebieski. Poszczególne części przeznaczone są dla lewego oka, reszta dla prawego.
+
+ This will provide slightly different colors to
+each eye (a display method is needed to be used where the primary colors have
+a very narrow bandwidth), but the eyes are not sensitive enough to notice the
+small spectral differences, and the technique is therefore able to show full
+color images
 
 
 \subsubsection{Techniki anaglifowe}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 \newpage
 \subsection{Biblioteka OpenGL}
