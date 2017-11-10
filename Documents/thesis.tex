@@ -1,6 +1,5 @@
 \input{preamble/preamble.tex}
 \graphicspath{{images/}}
-
 \begin{document}
 
 \includepdf[pages={-}]{preamble/begining.pdf}
@@ -12,7 +11,6 @@
 \section[Wstęp]{Wstęp}
 W przeciągu ostatnich kilku lat nauka zrobiła duży postęp w kierunku rozwoju fizyki dużych energii. Osiągnięcie to składa się z wyników dużej liczby badań oraz eksperymentów prowadzonych w różnych naukowo-badawczych instytucjach. Równolegle z naukami fizycznymi rozwiajała się również branża informatyczna, a w szczególności grafika komputerowa. Obecnie jest obserwowany coraz silniejszy trend związany z rozwojem technik stereoskopowych. Przy połączeniu badań fizycznych i grafiki komputerowej powstaje możliwość dogłębnego przestudiowania zjawisk zachodzących podczas rożnych eksperymentów.
 
-
 \subsection{Cele i zakres pracy}
 Pierwszym celem niniejszej pracy dyplomowej jest stereoskopwa wizualizacja detektora oraz zdarzeń ciężkich ionów w eksperymencie ALICE. Kolejnym istotnym celem pracy jest połączenie wyżej wymienionych wizualizacji do jednego spójnego obrazu. 
 \paragraph{}
@@ -23,15 +21,15 @@ Celem pośrednim danej pracy jest zapoznanie się z możliwościami biblioteki O
 \section[Część analityczna]{Część analityczna}
 
 \subsection{Stereoskopia}
-Stereoskopią nazywa się technikę służącą do tworzenia iluzji głębi obrazu. Ta metoda nie zapewnia prawdziwie trójwymiarowych widoków, ale zapewnia efekt trójwymiarowości. Sceny wydają się mieć głębię, dzięki temu że dla każdego oka obserwatora jest prezentowany inny widok. 
-\paragraph{} Istnieje kilka różnych technik osiągnięcia efektu stereoskopowego. Dla każdej techniki przeglądania niezbędny jest materiał stereoskopowy dostosowany do konkretnego celu. Poniżej są przedstawione krótkie opisy kilku popularnych technik. Niektóre z opisanych technik są odpowiednie tylko dla jednego widza, podczas gdy istnieją różne typy okularów 3D, które sprawdzają się dla większej grupy odbiorców.
+Stereoskopią nazywa się technikę służącą do tworzenia iluzji głębi obrazu. Ta metoda nie zapewnia prawdziwie trójwymiarowych widoków, ale zapewnia efekt trójwymiarowości. Sceny wydają się mieć głębię, ponieważ każdemu oku obserwatora jest prezentowany inny widok. 
+\paragraph{} Istnieje kilka różnych technik osiągnięcia efektu stereoskopowego. Dla każdego rodzaju przeglądania niezbędny jest materiał stereoskopowy dostosowany do konkretnego celu. Poniżej są przedstawione krótkie opisy kilku technik cieszących się dużą rozpoznawalnością. Niektóre z nich są odpowiednie tylko dla jednego widza, podczas gdy istnieją różne typy okularów 3D, które sprawdzają się dla większej grupy odbiorców.
 \subsubsection{Historia} 
-Historia stereoskopii liczy już ponad 180 lat. Za odkrywcę tej techniki uważa się Charlesa Wheatstone'a, który jako pierwszy zaobserwował zjawisko widzenia stereoskopowego, opisał go w artykule Philosophical Transactions\footnote{Wheatstone, Charles. “Contributions to the Physiology of Vision.–Part the First. On some remarkable, and hitherto unobserved, Phenomena of Binocular Vision.” Philosophical Transactions of the Royal Society. Vol. 128 (1838) pp. 371-394. http://www.stereoscopy.com/library/wheatstone-paper1838.html (2009-05-27).} oraz skonstruował urządzenie potwierdzające słuszność jego teorii\footnote{Brewster, David. The Stereoscope: its history, theory, and construction, with its application to the fine and useful arts and to education. London, 1856}. 
-\paragraph{} Wheatstone wyjaśnia, że gdy patrzy się na obiekty znajdujące się w dużej odległości, to nie ma znaczenia, którym okiem to się robi, ponieważ wygląd przedmiotów jest dokładnie ten sam dla obu oczu. Ale jeśli obiekt znajduje się znacznie bliżej, to każde oko widzi przedmiot pod nieco innym kątem. Wykorzystując tę tezę, autor skonstruował urządzenie, które umożliwiło przedstawienie delikatnie różniących się obrazków prawemu i lewemu oku z osobna. W efekcie powstawała iluzja trójwymiarowości obrazu.
-  
+Historia stereoskopii liczy już ponad 180 lat. Za odkrywcę tej techniki uważa się Charlesa Wheatstone'a, który jako pierwszy zaobserwował zjawisko widzenia stereoskopowego, opisał go w artykule \cite{wheatstone} oraz skonstruował urządzenie potwierdzające słuszność jego teorii \cite{stereoscopehistory}.
+\paragraph{} Wheatstone wyjaśnia, że jeśli obiekt znajduje się w małej odległości od oczu, to każde oko widzi przedmiot pod nieco innym kątem, z innej perspektywy. Podczas gdy dla obiektów na dużej odległości nie ma to znaczenia. Wykorzystując te obserwacje, autor skonstruował urządzenie, które umożliwiło przedstawienie delikatnie różniących się obrazów prawemu i lewemu oku z osobna. W efekcie powstawała iluzja trójwymiarowości obrazu.
+
 \subsubsection{Side by Side stereogram}
-Najprostszą metodą doświadczenia widzenia stereoskopowego jest umieszczenie dwuch oddzielnych obrazów obok siebie. Perspektywa jednego z obrazów reprezentuje lewe oko, odpowiednio druga perspektywa jest dla oka prawego. Obrazy te można zazwyczaj oglądać bez użycia dodatkowych narzędzi. Jedyna różnica polega na sposobie ich oglądania. Jeśli obraz dla lewego oka znajduje się po lewej stronie, to poprawnie jest patrzeć trzymając oczy równolegle. Jeśli natomiast sytuacja jest odwrotna (obraz dla lewego oka jest po prawej stronie), obrazy mają być oglądane poprzez skrzyżowanie oczu. Użycie niewłaściwej metody oglądania spowoduje odwrócenie efektu stereoskopowego. Może to ujawnić się w postaci zniekształconych odległości pomiędzy obiektami na obrazie.\\
-Warto zauważyć, że oglądanie takich obrazów tworzy duże obciążenie dla oczu. W celu zmniejszenia negatywnych skutków używa się stereoskopu. Dane urządzenie w znacznej mierze redukuje przemęczenie oczu, co ułatwia długie oglądanie obrazów.
+Najprostszą metodą doświadczenia widzenia stereoskopowego jest umieszczenie dwuch oddzielnych obrazów obok siebie. Perspektywa jednego z obrazów reprezentuje lewe oko, odpowiednio druga perspektywa jest dla oka prawego. Obrazy te można zazwyczaj oglądać bez użycia dodatkowych narzędzi. Jedyna różnica polega na sposobie ich oglądania. Jeśli obraz dla lewego oka znajduje się po lewej stronie, to stosuje się technikę patrzenia równolegległego, w innym przypadku obrazy mają być oglądane poprzez skrzyżowanie oczu. Użycie niewłaściwej metody spowoduje odwrócenie efektu stereoskopowego. Może to ujawnić się w postaci zniekształconych odległości pomiędzy obiektami na obrazie lub oddalenia się dwóch obrazów. \\
+Warto zauważyć, że oglądanie stereogramów tworzy duże obciążenie dla oczu. W celu zmniejszenia negatywnych skutków używa się stereoskopu. To urządzenie w znacznej mierze redukuje przemęczenie oczu i pozwala przez dłuższy czas przyglądać się efektom widzenia stereoskopowego.
 \footnote{http://blogs.hebali.com/itp/?p=378}
 \begin{figure}[H]
 		\centering
@@ -42,9 +40,8 @@ Warto zauważyć, że oglądanie takich obrazów tworzy duże obciążenie dla o
 \end{figure}
 
 \subsubsection{Single-image stereogram} 
-\begin{itemize}
-\itemi Autostereogram. Do oglądania obrazów stereoskopowych z wykorzystaniem tej techniki nie są potrzebne żadne urządzenia, aczkolwiek okulary pryzmatyczne ułatwiają przegladanie poprzeczne, a także nad- i podgląd.\\
-Pzy użyciu poprawnej techniki oglądania autostereogram stwarza efekt trójwymiarowej głębi obrazu. Czasem obrazy mogą wyglądać jak zniekształcone lub losowo umieszczone kolorowe plamy. "Bałagan"\ tego rodzaju w rzeczywistości zupełnie nie jest przypadkowy, ponieważ jest to powtarzalny wzór ukrywający obiekty trójwymiarowe. \footnote{Autostereogram. http://en.wikipedia.org/wiki/Autostereogram (2017-10-23)}
+Do oglądania autostereogramów nie są potrzebne żadne urządzenia, aczkolwiek okulary pryzmatyczne ułatwiają przegladanie poprzeczne, a także nad- i podgląd.\\
+Pzy użyciu poprawnej techniki oglądania specjalnie stworzonego obrazu powstaje wrażenie trójwymiarowości. Czasem obrazy mogą wyglądać jak zniekształcone lub losowo umieszczone kolorowe plamy. "Bałagan"\ tego rodzaju w rzeczywistości zupełnie nie jest przypadkowy, ponieważ jest to powtarzalny wzór ukrywający obiekty trójwymiarowe \cite{stereoscopythesis}.
 \begin{figure}[H]
 		\centering
  		\includegraphics[width=10cm]{autostereogram.png}
@@ -53,58 +50,138 @@ Pzy użyciu poprawnej techniki oglądania autostereogram stwarza efekt trójwymi
  		\label{rys1}
 \end{figure}
 
-\itemi Z buffor
-\itemi ....
-\end{itemize}
-
-\subsubsection{Stereoskopia pasywna - okulary spolaryzowane} 
-Do tworzenia iluzji obrazów trójwymiarowych są wykorzystywane specjalne okulary, ograniczające światło docierające do każdego oka. \\
+\subsubsection{Stereoskopia pasywna} 
+Do tworzenia iluzji obrazów trójwymiarowych są wykorzystywane specjalnie spolaryzowane okulary, ograniczające światło docierające do każdego oka. \\
 W celu przedstawienia widoku stereoskopowego dwa obrazy są wyświetlane na tym samym ekranie z użyciem różnych filtrów polaryzacji. 
 Istenieją 2 rodzaje filtrów: liniowe oraz kołowe.\\
-W przypadku liniowej polaryzacji pole elektryczne światła jest skierowane pionowo bądź poziomo. Odbiorca zakłada odpowiednio dopasowane okulary, w których każda soczewka przepuszcza światło o innym kierunku polaryzacji. W ten sposób każde oko widzi nieco inny obraz. Minimalne pochylenie okularów może spowodować niezgodność polaryzacji światła a soczewek. Nieporządany efekt można wyeliminować korzystając z filtrów kołowych. W tym przypadku światło jest skierowane w ruch kołowy zgodnie lub nie z kierunkiem wskazówek zegara. Ruch ten pozostaje niezmienny, nawet jeśli okulary są dowolnie pochylone.\\
-Niewątpliwą zaletą stereoskopii spolaryzowanej jest to, że wiele osób może wyświetlać obrazy stereoskopowe w tym samym momencie.
-\footnote{\foreignlanguage{russian}{http://ru.knowledgr.com/17401974/Поляризованная3DСистема}}
+W przypadku liniowej polaryzacji pole elektryczne światła jest skierowane pionowo bądź poziomo. Odbiorca zakłada odpowiednio dopasowane okulary, w których każda soczewka przepuszcza światło o innym kierunku polaryzacji. W ten sposób oczy obserwują różniące się obrazy. Minimalne pochylenie okularów może spowodować niezgodność polaryzacji światła a soczewek. Nieporządany efekt można wyeliminować korzystając z filtrów kołowych prawo- lub lewoskrętnych. Ruch ten pozostaje niezmienny, nawet jeśli okulary są dowolnie pochylone.\\
+Niewątpliwą zaletą stereoskopii spolaryzowanej jest to, że wiele osób może wyświetlać obrazy stereoskopowe w tym samym momencie \cite{russianpage}.
+\begin{figure}[H]
+		\centering
+ 		\includegraphics[width=8cm]{circular.png}
+ 		\captionsetup{font={up, footnotesize}}
+    	\caption{Polaryzacja kołowa prawoskrętna.}
+ 		\label{rys1}
+\end{figure}
 
-\subsubsection{Stereoskopia aktywna - ciekłokrystaliczne okulary migawkowe} 
-Szkło, które tworzy soczewki okularów, zawiera ciekłe kryształy oraz filtr polaryzacyjny. Stosując napięcie zmieniamy kolor soczewki na czarny, to bezpośrednio wiąże się z blokowaniem widoku dla jednego oka. Dzięki przykrywaniu widoku z dużą częstotliwością w każdej soczewce, każdemu oku są przedstawiane obrazy z różną perspektywą. Częstotliwość migotania okularów jest zsynchronizowana z aktualnym źródłem wyświetlania, żeby stale dostarczać prawidłowej perspektywy dla oczu. Jeśli prędkość aktualizacji soczewek w okularach nie jest wystarczająco wysoka, to może nastąpić zauważalne zniekształcenie obrazu końcowego. Przykładem takiego zniekształcenia może posłużyć część obrazu, która była przeznaczona dla innego oka. 
 
+\subsubsection{Stereoskopia aktywna} 
+Możliwość oglądania obrazów stereoskopowych pojawia się dzięki ciekłokrystalicznym okularom migawkowym. Szkło, które tworzy soczewki okularów, zawiera ciekłe kryształy oraz filtr polaryzacyjny. Stosując napięcie zmieniamy kolor soczewki na czarny, co bezpośrednio wiąże się z blokowaniem widoku dla jednego oka. Dzięki przykrywaniu widoku z dużą częstotliwością, każdemu oku są przedstawiane obrazy z różną perspektywą. Częstotliwość migotania okularów jest zsynchronizowana z aktualnym źródłem wyświetlania, żeby stale dostarczać prawidłowej perspektywy dla oczu. Jeśli prędkość aktualizacji soczewek w okularach nie jest wystarczająco wysoka, to może nastąpić zauważalne zniekształcenie obrazu końcowego. Przykładem takiego zniekształcenia może posłużyć część obrazu ze złą perspektywą, przeznaczonej innemu oku. 
 
-\subsubsection{Interference filter technique - INFITEC}
-INFITEC to nowa technika wyświetlania obrazów stereoskopowych. Opiera ona się na tym, że widmo światła widzialnego można podzielić na fale o różnej długości używając do tego filtrów optycznych. \footnote{Jorke, Helmut & Fritz, Markus. INFITEC – A new stereoscopic visualisation tool
-by wavelength multiplex imaging. Wiesbaden, 2003.\\https://www.it.uu.se/edu/course/homepage/igs/ht07/lectures/F4_070913_infitec_english.pdf} Światło widzialne jest podzielone na 6 części, po 2 na każdy z podstawowych kolorów: czerwony, zielony oraz niebieski. Poszczególne części przeznaczone są dla lewego oka, reszta dla prawego.
-
- This will provide slightly different colors to
-each eye (a display method is needed to be used where the primary colors have
-a very narrow bandwidth), but the eyes are not sensitive enough to notice the
-small spectral differences, and the technique is therefore able to show full
-color images
+\subsubsection{Wizualizacja wielopasmowa}
+Nowa technika wyświetlania obrazów stereoskopowych, znana też pod tytułem Interference filter technique (INFITEC). Opiera ona się na tym, że widmo światła widzialnego można podzielić na fale o różnej długości używając do tego filtrów optycznych \cite{infitec}.
+ Światło widzialne jest podzielone na 6 części, po 2 na każdy z podstawowych kolorów: czerwony, zielony oraz niebieski. Poszczególne części przeznaczone są dla jednego oka, w ten sposób lekko różniące się barwy docierają do każdego oka z osobna. Wykorzystując fakt niewystarczającej wrażliwości oka do zauważenia tak niedużej różnicy, technika wizualizacji welopasmowej stwarza obrazy pełnokolorowe.  
 
 
 \subsubsection{Techniki anaglifowe}
+Do generowania stereogramu anaglifowego potrzebne są 2 obrazy z delikatnie różniącą się perspektywą dla każdego oka. Każdy obraz jest wykonany w podstawowych kolorach. Najbardziej popularną kombinacją jest obraz w kolorze czerwonym dla lewego oka i obraz wykonany w przy połączeniu zielonego i niebieskiego (otrzymany kolor nazywa się cyan) odpowiednio dla prawego oka. Obrazy umieszcza się jeden nad drugim. Efekt stereoskopowego widoku jest osiągany przy użyciu okularów z poprawnymi kolorowymi filtrami (podobnie jak obrazy: czerwony dla lewego oka, cyan dla prawego). Niestety przy użyciu tej techniki nigdy nie zostanie stworzony pełnokolorowy obraz, gdyż są ograniczone barwy widziane przez każde oko.\footnote{Wattie,John.Anaglyphs for computer stereoscopy.} \\
+Istenieją tak że filtry o innych kolorach, zachowując główną zasadę anaglifów: przedstawienie innych obrazów każdemu oku poprzez ograniczenie pewnych kolorów. \\
 
+\begin{figure}[H]
+		\centering
+ 		\includegraphics[width=6.5cm]{anaglif.jpg}
+ 		\captionsetup{font={up, footnotesize}}
+    	\caption{Anaglif.}
+ 		\label{rys1}
+\end{figure}
 
+\newpage
+\subsection{Formaty plików 3D}
+Obecnie w informatyce istnieje ponad 70 odmiennych formatów plików 3D%\footnote{https://en.wikipedia.org/wiki/List_of_file_formats#3D_graphics}%
+. Są one wykorzystywane w różnych dziedzinach grafiki komputerowej zaczynając od druku 3D, gier komputerowych, architektury aż po medycynę i nauki przyrodnicze. \\
+Podstawowym celem formatu pliku 3D jest przechowywanie informacji o modelu w postaci tekstu lub danych binarnych. W szczególności muszą one zawierać dane o geometrii modelu, jego wyglądzie, scenie oraz animacjach. Geometria modelu opisuje jego dokładny kształt, do wyglądu zalicza się kolory, tekstury, typy wykorzystanych materiałów. Dane o scenie opisują między innymi położenia światła, kamer i obiektów pereferyjnych. \\
+Poniżej zostaną przedstawione krótkie opisy techniczne najczęściej używanych formatów. %przez kogo?%
 
+\subsubsection{Collada}
+Collada to format pliku 3D z rozszerzeniem .dae, powszechnie jest używany do modelowania w grach komputerowych i filmografii. W całości opiera się na strukturalizowaną reprezentację w XML. Przechowuje wszystkie dane dotyczące modelu 3D, jeden z niewielu formatów wspierających kinematykę i informacje o cieniowaniu.
+Struktura formatu zaczyna się w korzeniu zwanym COLLADA, który zawiera elementy mianowane bibliotekami i sceną. Element scena mieści w sobie odnośnik do rzeczywistego początku hierarchii sceny. Natomiast każdy element biblioteka składa się ze specjalnych zestawów danych dokładnie opisujących model: informacje o siatce (library\_geometries), obrazie (library\_images) itd. Taki podział jest bardzo wygodny pod względem odwoływania się do konkretnych sekcji.  
+ %coś o parsowaniu XML?%
 
+\subsubsection{STL}
+STL (STereoLithography) jest jednym z najważniejszych formatów plików w dziedzinach druku 3D, tworzenia prototypów oraz komputerowo wspieranej produkcji. Rozszerzenie odpowiadające temu formatowi to .STL. Są dostępne oba rodzaje reprezentacji: tekstowy i binarny, przy czym binarny jest bardziej wykorzystywany ze względu na porównywalnie mały rozmiar plików. \\
+W STL są pominięte takie dane jak wygląd, scena czy animacje. Jedyne ważne informacje w tym formacie to geometria obiektów, która jest zapisywana w postaci przybliżonej siatki trójkątów. Dotychczas jest to najprostszy i najściślejszy format przechowywania informacji o pliku 3D. 
+Wadą tego formatu jest duża liczba plików pośrednich, które powstają podczas aproksymacji kształtu obiektu siatką trójkątów. Do wad też można zaliczyć brak przechowywania danych o kolorach, ze  względu na dynamiczny rozwój technologii druku pełnokolorowego.
 
+\subsubsection{OBJ}
+OBJ jest jednym z najbardziej znanych i wykorzystywanych formatów plików 3D, obecnie nabiera szczególnej wagi w druku 3D. Ten format przechowuje informacje o objekcie w postaci tekstu ASCII (rozszerzenie .obj) bądź pliku binarnego (rozszerzenie .MOD)\cite{obj}.
+Format binarny jest zastrzeżony i nieudokumentowany, dlatego poniżej zostanie opisana tylko postać tekstowa formatu.\\
+OBJ wspiera dane o prostych, wielokątach, krzywych oraz powierzniach o różnych kształtach. Proste i wielokąty są opisywane poprzez wierzchołki, z których się składają. W przypadku krzywych oraz płaszczyzn kluczowymi są punkty kontrolne i inne niezbędne do opisu informacje, w zależności od typu krzywej. \\
+Wszystkie atrybuty opisujące obiekt można podzielić na kilka kategorii: 
+\begin{itemize}
+\itemi dane o wierzchołkach, takie jak: 
+	\begin{itemize}
+	\itemii położenie
+	\itemii	tekstury
+	\itemii	normalne
+	\itemii	parametry przestrzeni 
+	\end{itemize}
+\itemi atrybuty krzywych oraz powierzni:
+	\begin{itemize}
+	\itemii kąt
+	\itemii macierz podstawowa
+	\itemii rozmiar kroku
+	\itemii typ kryzwej lub płaszczyzny
+	\end{itemize}
+\itemi rodzaje elementów:
+	\begin{itemize}
+	\itemii punkt
+	\itemii prosta
+	\itemii krzywa
+	\itemii krzywa 2D
+	\itemii powierzchnia
+	\end{itemize}
+\itemi elementy opisujące kształt krzywych lub powierzchni
+\itemi połącznenia pomiędzy powierzchniami
+\itemi zgrupowania elementów i ich cechy
+\itemi atrybuty wyświetlania i renderowania (w tym interpolacje, materiały, cieniowanie i techniki aproksymacji krzywych)
+\end{itemize}
 
+\subsubsection{3DS}
+3DS jest to format pliku początkowo wykorzystywany tylko w programie Autodesk 3D Studio. W dużej mierze stosuje się w architekturze, inżynierii, edukacji oraz produkcji. 
+Format 3DS przechowuje tylko podstawowe informacje o geomertii, wyglądzie: kolory, tekstury i materiały, scenie oraz animacji. Gromadząc dane o scenie zapisuje położenie kamer i świateł, ale dane o kierunkowych żródłach światła nie są przechowywane. Opisywany format używa siatki trójkątów do przybliżenia powierzchni geometrii. Liczba trójkątów jest ograniczona do 65536. \\
+3DS wykorzystuje kodowanie binarne i dzieli dane na mniejsze fragmenty. To daje możliwość analizatorowi składni pominąć fragmenty nieczytelne oraz rozszerzyć format.\\
+Jest to najstarszy format tego typu, który z czasem stał się standardem w przechowywaniu modeli 3D oraz w przejściu z jednego formatu na drugi.
+Obsługują go praktycznie wszystkie pakiety oprogramowania 3D. Z względu na to, że jednak ten format zbiera tylko podstawowe informacje o modelu 3D, nie można go używać w sytuacjach, gdzie rozszerzone dane są ważne. W takim przypadku 3DS musi być uzupełniony o format MAX (obecnie zastąpiony formatem PRJ), który zawiera dodatkowe informacje specyficzne dla Autodesk 3DS Max, aby umożliwić całkowite zapisanie czy też załadowanie sceny.
 
+\subsubsection{X3D}
+Początkowo X3D nazywał się VRML (rozszerzenie pliku .WRL), oznacza to Virtual Reality Modeling Language. Format został opracowany na potrzeby WWW (World Wide Web), z czasem został zastąpiony przez X3D. Jest oparty o składnię XML. Wykorzystuje siatkę wielokątów do zakodowania kształtu modelu, umożliwia przechowywanie wyglądu i danych, które wiążą się z tym parametrem. Zostało dodane kodowanie NURBS powierzchni geometrii a także możliwość gromadzenia danych o scenie i animacjach.
 
-
-
-
-
-
-
-
-
-
-
-
-
+\subsection{Porównanie formatów plików}
+Poniższa tabela przedstawia porównanie opisanych formatów plików 3D pod względem różnorodności przechowywanych danych. 
+\begin{table}[H]
+\caption{Macierz funkcjonalności najpopularniejszych formatów plików 3D}
+\centering
+\footnotesize
+\label{tab1}
+  \begin{tabular}{!{\color{sapphire}\vrule width 1pt}l!{\color{black}\vrule width 1pt}l!{\color{black}\vrule width 1pt}l!{\color{black}\vrule width 1pt}l!{\color{black}\vrule width 1pt}l!{\color{black}\vrule width 1pt}l!{\color{black}\vrule width 1pt}l!{\color{black}\vrule width 1pt}l!{\color{black}\vrule width 1pt}l!{\color{black}\vrule width 1pt}l!{\color{black}\vrule width 1pt}l!{\color{sapphire}\vrule width 1pt}}
+	\arrayrulecolor{sapphire}\hline
+    \multirow{2}{*}{\bfseries Format} &
+      \multicolumn{3}{c!{\color{black}\vrule width 1pt}}{\bfseries Geometria} &
+      \multicolumn{3}{c!{\color{black}\vrule width 1pt}}{\bfseries Wygląd} &
+      \multicolumn{3}{c!{\color{black}\vrule width 1pt}}{\bfseries Scena} &
+     \multirow{2}{*}{\bfseries Animacje}\\
+     \cline{2-10}
+    & Aprox & Precise & CSG & Color & Materiał & Tekstury & Kamera & Światło & Positioning & \\
+    \hline
+    Collada & Tak & Tak & Nie & Tak & Tak & Tak & Tak & Tak & Tak & Tak\\   
+    \arrayrulecolor{black}
+	\hline
+    STL & Tak & Nie & Nie & Nie & Nie & Nie & Nie & Nie & Nie & Nie\\
+    \hline
+    OBJ & Tak & Tak & Nie & Tak & Tak & Tak & Nie & Nie & Nie & Nie\\
+    \hline
+    3DS & Tak & Nie & Nie & Tak & Tak & Tak & Tak & Tak & Tak & Nie\\ 
+    \hline
+    X3D & Tak & Tak & Tak & Tak & Tak & Tak & Tak & Tak & Tak & Tak\\     
+   \arrayrulecolor{sapphire}\hline
+  \end{tabular}
+\end{table}
 
 \newpage
 \subsection{Biblioteka OpenGL}
-OpenGL (z angielskiego Open Graphics Library) jest potężnym systemem graficznym stanowiącym niejako pomost między programistą a sprzętem komputera. Biblioteka ta została stworzona przez firmę \textit{Silicon Graphics}, jednego z potentatów na rynku grafiki komputerowej.\\Procedury OpenGL umożliwiają rendorowanie obiektów o rożnych poziomach skomplikowania zaczynając od prostego punktu geometrycznego, linii lub wypełnionego wielokąta do utworzenia najbardziej złożonej, zakrzywionej powierzchni, oświetlonej i odwzorowanej teksturą. OpenGL pozwala programistom na dostęp do prymitywów geometrycznych i obrazowych, list wyświetlania, przekształcania modelu, oświetlenia i teksturowania, antyaliasingu, mieszania i wielu innych funkcji. Wszystkie elementy stanu OpenGL - nawet treść pamięci tekstur i bufor ramki - można uzyskać za pomocą aplikacji OpenGL. Dany system obsługuje także aplikacje wizualizacji z obrazami 2D traktowanymi jako typy prymitywów, którymi można manipulować podobnie jak obiektami geometrycznymi 3D.\\Mimo że specyfikacja OpenGL definiuje konkretny ciąg przetwarzania graficznego, dostawcy platformy mają swobodę dostosowywania konkretnej implementacji OpenGL w celu osiągnięcia sprecyzowanych celów w zakresie kosztów i wydajności. Pojedyncze wywołania mogą być wykonywane na dedykowanym sprzęcie, uruchamiane jako procedury programowe w standardowym systemie CPU lub implementowane jako kombinacja zarówno dedykowanych procedur sprzętowych, jak i programowych. Ta elastyczność implementacji skutkuje ​​przyśpieszeniem renderowania, w dodatku jest powszechnie dostępna na wszystkich jednostkach od komputerów o niskich kosztach, po wysokiej klasy stacjach roboczych i superkomputerach.\\
+OpenGL (z angielskiego Open Graphics Library) jest potężnym systemem graficznym stanowiącym niejako pomost między programistą a sprzętem komputera. Biblioteka ta została stworzona przez firmę \textit{Silicon Graphics}, jednego z potentatów na rynku grafiki komputerowej. \\
+Procedury OpenGL umożliwiają rendorowanie obiektów o rożnych poziomach skomplikowania zaczynając od prostego punktu geometrycznego, linii lub wypełnionego wielokąta do utworzenia najbardziej złożonej, zakrzywionej powierzchni, oświetlonej i odwzorowanej teksturą. OpenGL pozwala programistom na dostęp do prymitywów geometrycznych i obrazowych, list wyświetlania, przekształcania modelu, oświetlenia i teksturowania, antyaliasingu, mieszania i wielu innych funkcji. Wszystkie elementy stanu OpenGL - nawet treść pamięci tekstur i bufor ramki - można uzyskać za pomocą aplikacji OpenGL. Dany system obsługuje także aplikacje wizualizacji z obrazami 2D traktowanymi jako typy prymitywów, którymi można manipulować podobnie jak obiektami geometrycznymi 3D.\\
+Mimo że specyfikacja OpenGL definiuje konkretny ciąg przetwarzania graficznego, dostawcy platformy mają swobodę dostosowywania konkretnej implementacji OpenGL w celu osiągnięcia sprecyzowanych celów w zakresie kosztów i wydajności. Pojedyncze wywołania mogą być wykonywane na dedykowanym sprzęcie, uruchamiane jako procedury programowe w standardowym systemie CPU lub implementowane jako kombinacja zarówno dedykowanych procedur sprzętowych, jak i programowych. Ta elastyczność implementacji skutkuje przyśpieszeniem renderowania, w dodatku jest powszechnie dostępna na wszystkich jednostkach od komputerów o niskich kosztach, po wysokiej klasy stacjach roboczych i superkomputerach.
 \begin{figure}[h]
 \includegraphics[width=6cm]{Hierarchy_UNIX.jpg}
 \centering
@@ -153,7 +230,7 @@ Ta biblioteka działa doskonale z OpenGL, ale zapewnia również współdziałan
 A Large Ion Collider Experiment został zaprojektowany tak, aby w jak najbardziej kompletny sposób mierzyć cząstki powstałe w kolizjach, które mają miejsce w środku akceleratora, tak, aby można było zrekonstruować i zbadać ewolucję systemu w przestrzeni i czasie. Aby to zrobić, należy użyć wielu różnych detektorów, z których każdy dostarcza różne informacje. Aby zrozumieć tak złożony system, należy obserwować zjawisko z różnych punktów widzenia, przy użyciu różnych instrumentów jednocześnie. \footnote{http://aliceinfo.cern.ch/Public/en/Chapter2/Chap2Experiment-en.html}
 \subsubsection{Eksperyment}
 W ekstremalnych warunkach temperatury i/lub gęstości materia hadronowa "topi się" w osoczu wolnych kwarków i gluonów - tak zwanej plazmy kwarkowo-gluonowej (QGP). Aby stworzyć odpowiednie warunki w laboratorium, ciężkie jony (np. cząstki ołowiu) przyśpiesza się do niemal prędkości światła, po czym jest powodowana kolizja, zostało to zrobione w LHC w dwóch okresach w 2010 i 2011 roku. Kluczowym rozważaniem dotyczącym eksperymentu ALICE na LHC jest zdolność do badania QCD i quarków w tych ekstremalnych warunkach. Odbywa się to przy użyciu cząstek, utworzonych wewnątrz gorącej objętości podczas jej rozszerzania się i ochładzania. Cząstki te żyją wystarczająco długo, aby dotrzeć do wrażliwych warstw detektora zlokalizowanych wokół obszaru oddziaływania. Fizyka w ALICE polega na tym, żeby być w stanie zidentyfikować wszystkie z nich (tj. określić, czy są to elektrony, fotony, piony itd.), czy też określić ich ładunek. Wiąże się to w większości z różnymi sposobami oddziaływania cząstek z materią. \footnote{http://cerncourier.com/cws/article/cern/50561}
-\subsection{Tracking particles}
+\subsubsection{Tracking particles}
 Zespół detektorów cylindrycznych (od wewnątrz na zewnątrz: ITS Drift, ITS Strips, TPC, TRD) mierzy w wielu punktach (ponad 100 tylko dla TPC) przejście każdej cząstki przenoszącej ładunek elektryczny tak, że trajektoria jest dokładnie znana. Detektory ALICE są osadzone w polu magnetycznym (wytwarzanym przez duży czerwony magnes), wyginając w ten sposób trajektorie cząstek: z krzywizny śladów można znaleźć ich pęd. ITS jest tak precyzyjny, że cząstki, które są generowane przez rozkład innych cząstek o bardzo krótkim czasie życia można zidentyfikować, widząc, że nie pochodzą one z punktu, w którym nastąpiła interakcja ("wierzchołek" zdarzenia).
 \footnote{http://aliceinfo.cern.ch/Public/en/Chapter2/Page3-subdetectors-en.html}
 
@@ -256,15 +333,6 @@ Listuje się w sposób następujący:
 	\itemi pierwszy poziom listy - element trzeci,
 	\itemi pierwszy poziom listy - element czwarty.
 \end{itemize}
-
-\subsection{Cytowania i przypisy}
-This document is an example of BibTeX using in bibliography management. Three items 
-are cited: \textit{The \LaTeX\ Companion} book \cite{latexcompanion}, the Einstein
-journal paper \cite{einstein}, and the Donald Knuth's website \cite{knuthwebsite}. 
-The \LaTeX\ related items are \cite{latexcompanion,knuthwebsite}.\footnotemark[1]
-
-\fancyfootnotetextss{1}{Źródło: \url{https://www.sharelatex.com/learn/Bibliography_management_with_bibtex}}{2}{Niestety nie ma automatycznej numeracji przypisów.}{3}{Ich liczba na stronie ograniczona jest do trzech (jednak można to rozszerzyć)}
-
 
 \newpage
 \bibliographystyle{plain} % bibliography style
