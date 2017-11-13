@@ -67,46 +67,40 @@ int main()
                   "/home/agata/Documents/tracks/Shaders/fragment.frag",
                   "/home/agata/Documents/tracks/Shaders/geometry.geom");
 
-    float* tracks = new float[300]();
+    float tracks[20][300]={};
     ifstream ifs("/home/agata/Documents/tracks/track.json");
 
     Json::Value obj;
 
     ifs >> obj; //cLion bug, works perfectly.
+    int trackSize = obj["fTracks"].size();
+    unsigned int VBO[trackSize], VAO[trackSize];
 
     for (Json::Value::iterator it = obj["fTracks"].begin(); it != obj["fTracks"].end(); ++it){
+        int TrackIndex = it.key().asInt();
 
-        int polyCoordinateSize = (*it)["fPolyX"].size();
-        for (int i = 0; i < polyCoordinateSize; i++){
-            tracks[i*5] = (*it)["fPolyX"][i].asFloat();
-            tracks[i*5 + 1] = (*it)["fPolyY"][i].asFloat();
-            tracks[i*5 + 2] = (*it)["fPolyZ"][i].asFloat();
-            tracks[i*5 + 3] = 1.0;
-            tracks[i*5 + 4] = 0.0;
+        for (int i = 0; i < (*it)["fPolyX"].size(); i++){
+            tracks[TrackIndex][i*5] = (*it)["fPolyX"][i].asFloat();
+            tracks[TrackIndex][i*5 + 1] = (*it)["fPolyY"][i].asFloat();
+            tracks[TrackIndex][i*5 + 2] = (*it)["fPolyZ"][i].asFloat();
+            tracks[TrackIndex][i*5 + 3] = 1.0;
+            tracks[TrackIndex][i*5 + 4] = 0.0;
         }
-        for (int i = 0; i< polyCoordinateSize; i++){
-            cout<< tracks[i*5] << " ";
-            cout<< tracks[i*5+1] << " ";
-            cout<< tracks[i*5+2] << " ";
-            cout<< tracks[i*5+3] << " ";
-            cout<< tracks[i*5+4] << " ";
-            cout<<"\n";
-        }
+
+        glGenBuffers(1, &VBO[TrackIndex]);
+        glGenVertexArrays(1, &VAO[TrackIndex]);
+        glBindVertexArray(VAO[TrackIndex]);
+        glBindBuffer(GL_ARRAY_BUFFER, VBO[TrackIndex]);
+        glBufferData(GL_ARRAY_BUFFER, sizeof(tracks[TrackIndex]), &tracks[TrackIndex], GL_STATIC_DRAW);
+        glEnableVertexAttribArray(0);
+        glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), 0);
+        glEnableVertexAttribArray(1);
+        glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(2 * sizeof(float)));
+        glBindVertexArray(0);
     }
 
     ifs.close();
 
-    unsigned int VBO, VAO;
-    glGenBuffers(1, &VBO);
-    glGenVertexArrays(1, &VAO);
-    glBindVertexArray(VAO);
-    glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(tracks), &tracks[0], GL_STATIC_DRAW);
-    glEnableVertexAttribArray(0);
-    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), 0);
-    glEnableVertexAttribArray(1);
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(2 * sizeof(float)));
-    glBindVertexArray(0);
 
     while (!glfwWindowShouldClose(window))
     {
@@ -128,20 +122,23 @@ int main()
         glm::mat4 view = camera.GetViewMatrix();
         shader.setMat4("view", view);
 
-        glBindVertexArray(VAO);
-
         glm::mat4 transform;
         transform = glm::scale(transform, glm::vec3(0.01, 0.01, 0.01));
         GLint transformLoc = glGetUniformLocation(shader.ID, "transform");
         glUniformMatrix4fv(transformLoc, 1, GL_FALSE, glm::value_ptr(transform));
 
-        glDrawArrays(GL_LINE_STRIP_ADJACENCY, 0, 4);
-
+        for (int iterator =0; iterator < trackSize; iterator++) {
+            glBindVertexArray(VAO[iterator]);
+            glDrawArrays(GL_LINE_STRIP_ADJACENCY, 0, 4);
+        }
         glfwSwapBuffers(window);
         glfwPollEvents();
+
     }
-    glDeleteVertexArrays(1, &VAO);
-    glDeleteBuffers(1, &VBO);
+    for (int iterator =0; iterator < trackSize; iterator++) {
+        glDeleteVertexArrays(1, &VAO[iterator]);
+        glDeleteBuffers(1, &VBO[iterator]);
+    }
 
     glfwTerminate();
     return 0;
