@@ -26,9 +26,16 @@ bool firstMouse = true;
 float deltaTime = 0.0f;	// time between current frame and last frame
 float lastFrame = 0.0f;
 
+ifstream ifs("/home/agata/Documents/tracks/track.json");
+const char* vertexShaderPath = "/home/agata/Documents/tracks/Shaders/vertex.vert";
+const char* fragmentShaderPath = "/home/agata/Documents/tracks/Shaders/fragment.frag";
+const char* geometryShaderPath = "/home/agata/Documents/tracks/Shaders/geometry.geom";
+
+
 int main()
 {
     glfwInit();
+    glfwWindowHint(GLFW_SAMPLES, 8);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
@@ -59,21 +66,25 @@ int main()
         return -1;
     }
 
-    glEnable(GL_DEPTH_TEST);
+    glEnable(GL_MULTISAMPLE);
     glViewport(0, 0, SCR_WIDTH, SCR_HEIGHT);
 
-
-    Shader shader("/home/agata/Documents/tracks/Shaders/vertex.vert",
-                  "/home/agata/Documents/tracks/Shaders/fragment.frag",
-                  "/home/agata/Documents/tracks/Shaders/geometry.geom");
-
-    float tracks[20][300]={};
-    ifstream ifs("/home/agata/Documents/tracks/track.json");
+    Shader shader(vertexShaderPath, fragmentShaderPath, geometryShaderPath );
 
     Json::Value obj;
 
     ifs >> obj; //cLion bug, works perfectly.
     int trackSize = obj["fTracks"].size();
+    int maxPolyXValue = 0;
+
+    for (Json::Value::iterator it = obj["fTracks"].begin(); it != obj["fTracks"].end(); ++it) {
+       if ( (*it)["fPolyX"].size() > maxPolyXValue) {
+           maxPolyXValue = (*it)["fPolyX"].size();
+       }
+    }
+
+    float tracks[trackSize][maxPolyXValue*5]={};
+
     unsigned int VBO[trackSize], VAO[trackSize];
 
     for (Json::Value::iterator it = obj["fTracks"].begin(); it != obj["fTracks"].end(); ++it){
@@ -100,7 +111,6 @@ int main()
     }
 
     ifs.close();
-
 
     while (!glfwWindowShouldClose(window))
     {

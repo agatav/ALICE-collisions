@@ -6,6 +6,11 @@ option(GLFW_BUILD_EXAMPLES OFF)
 option(GLFW_BUILD_TESTS OFF)
 add_subdirectory(Glitter/Glitter/Vendor/glfw)
 
+option(ASSIMP_BUILD_ASSIMP_TOOLS OFF)
+option(ASSIMP_BUILD_SAMPLES OFF)
+option(ASSIMP_BUILD_TESTS OFF)
+add_subdirectory(Glitter/Glitter/Vendor/assimp)
+
 
 if(MSVC)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /W4")
@@ -19,6 +24,7 @@ endif()
 include_directories(Glitter/Glitter/Headers/
         Headers/
         Shaders/
+        Glitter/Glitter/Vendor/assimp/include/
         Glitter/Glitter/Vendor/glad/include/
         Glitter/Glitter/Vendor/glfw/include/
         Glitter/Glitter/Vendor/glm/
@@ -28,9 +34,9 @@ file(GLOB VENDORS_SOURCES Glitter/Glitter/Vendor/glad/src/glad.c)
 file(GLOB PROJECT_HEADERS Glitter/Glitter/Headers/*.hpp)
 file(GLOB PROJECT_SOURCES main.cpp)
 file(GLOB PROJECT_SHADERS Shaders/*.comp
-        Shaders/*.frag
-        Shaders/*.geom
-        Shaders/*.vert)
+                          Shaders/*.frag
+                          Shaders/*.geom
+                          Shaders/*.vert)
 file(GLOB PROJECT_CONFIGS CMakeLists.txt
         Readme.md
         .gitattributes
@@ -47,7 +53,7 @@ add_definitions(-DGLFW_INCLUDE_NONE
 add_executable(${PROJECT_NAME} ${PROJECT_SOURCES} ${PROJECT_HEADERS}
         ${PROJECT_SHADERS} ${PROJECT_CONFIGS}
         ${VENDORS_SOURCES} Headers/Camera.h)
-target_link_libraries(${PROJECT_NAME} glfw jsoncpp
+target_link_libraries(${PROJECT_NAME} assimp glfw jsoncpp
         ${GLFW_LIBRARIES} ${GLAD_LIBRARIES}
         )
 set_target_properties(${PROJECT_NAME} PROPERTIES
