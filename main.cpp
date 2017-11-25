@@ -10,8 +10,8 @@
 
 using namespace std;
 
-const unsigned int SCR_WIDTH = 1020;
-const unsigned int SCR_HEIGHT = 800;
+int SCR_WIDTH = 1020;
+int SCR_HEIGHT = 800;
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void mouse_callback(GLFWwindow* window, double xpos, double ypos);
@@ -30,6 +30,12 @@ ifstream ifs("/home/agata/Documents/tracks/track.json");
 const char* vertexShaderPath = "/home/agata/Documents/tracks/Shaders/vertex.vert";
 const char* fragmentShaderPath = "/home/agata/Documents/tracks/Shaders/fragment.frag";
 const char* geometryShaderPath = "/home/agata/Documents/tracks/Shaders/geometry.geom";
+
+
+float rotateY = 0.0f;
+float rotateX = 0.0f;
+float IOD = 0.0001f;
+float depthZ = 100000.0f;
 
 
 int main()
@@ -112,8 +118,10 @@ int main()
 
     ifs.close();
 
-    while (!glfwWindowShouldClose(window))
-    {
+    GLuint program_id = glCreateProgram();
+    GLuint matrix_id = glGetUniformLocation(program_id,"MVP");
+
+    while (!glfwWindowShouldClose(window)) {
         float currentFrame = glfwGetTime();
         deltaTime = currentFrame - lastFrame;
         lastFrame = currentFrame;
@@ -125,15 +133,21 @@ int main()
 
         shader.use();
 
-        glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
-        shader.setMat4("projection", projection);
+        glViewport(0, 0, SCR_WIDTH / 2, SCR_HEIGHT);
+        camera.computeStereoViewProjectionMatrices(window, IOD, depthZ, true);
+        //gets the View and Model Matrix and apply to the rendering
+        glm::mat4 projection_matrix = camera.getProjectionMatrix();
+        shader.setMat4("projection", projection_matrix);
 
-        // camera/view transformation
-        glm::mat4 view = camera.GetViewMatrix();
-        shader.setMat4("view", view);
+        glm::mat4 view_matrix = camera.getViewMatrix();
+        shader.setMat4("view", view_matrix);
+
+        glm::mat4 model_matrix = glm::mat4(1.0);
 
         glm::mat4 transform;
-        transform = glm::scale(transform, glm::vec3(0.01, 0.01, 0.01));
+        transform = glm::translate(model_matrix, glm::vec3(0.0f, 0.0f, -depthZ));
+        transform = glm::rotate(model_matrix, glm::pi<float>() * rotateY, glm::vec3(0.0f, 1.0f, 0.0f));
+        transform = glm::rotate(model_matrix, glm::pi<float>() * rotateX, glm::vec3(1.0f, 0.0f, 0.0f));
         GLint transformLoc = glGetUniformLocation(shader.ID, "transform");
         glUniformMatrix4fv(transformLoc, 1, GL_FALSE, glm::value_ptr(transform));
 
@@ -141,8 +155,52 @@ int main()
             glBindVertexArray(VAO[iterator]);
             glDrawArrays(GL_LINE_STRIP_ADJACENCY, 0, 4);
         }
+
+            //Draw the RIGHT eye, right half of the screen
+            glViewport(SCR_WIDTH/2, 0, SCR_WIDTH/2, SCR_HEIGHT);
+            camera.computeStereoViewProjectionMatrices(window, IOD, depthZ, false);
+            //gets the View and Model Matrix and apply to the rendering
+            projection_matrix = camera.getProjectionMatrix();
+            shader.setMat4("projection", projection_matrix);
+
+            view_matrix = camera.getViewMatrix();
+            shader.setMat4("view", view_matrix);
+
+            model_matrix = glm::mat4(1.0);
+
+            transform = glm::translate(model_matrix, glm::vec3(0.0f, 0.0f, -depthZ));
+            transform = glm::rotate(model_matrix, glm::pi<float>() * rotateY, glm::vec3(0.0f, 1.0f, 0.0f));
+            transform = glm::rotate(model_matrix, glm::pi<float>() * rotateX, glm::vec3(1.0f, 0.0f, 0.0f));
+            transformLoc = glGetUniformLocation(shader.ID, "transform");
+            glUniformMatrix4fv(transformLoc, 1, GL_FALSE, glm::value_ptr(transform));
+
+            for (int iterator =0; iterator < trackSize; iterator++) {
+                glBindVertexArray(VAO[iterator]);
+                glDrawArrays(GL_LINE_STRIP_ADJACENCY, 0, 4);
+            }
         glfwSwapBuffers(window);
         glfwPollEvents();
+
+
+//        glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
+//        shader.setMat4("projection", projection);
+//
+//        // camera/view transformation
+//        glm::mat4 view = camera.GetViewMatrix();
+//        shader.setMat4("view", view);
+//
+//        glm::mat4 transform;
+//        transform = glm::scale(transform, glm::vec3(0.01, 0.01, 0.01));
+//        GLint transformLoc = glGetUniformLocation(shader.ID, "transform");
+//        glUniformMatrix4fv(transformLoc, 1, GL_FALSE, glm::value_ptr(transform));
+//
+//        for (int iterator =0; iterator < trackSize; iterator++) {
+//            glBindVertexArray(VAO[iterator]);
+//            glDrawArrays(GL_LINE_STRIP_ADJACENCY, 0, 4);
+//        }
+//        glfwSwapBuffers(window);
+//        glfwPollEvents();
+//
 
     }
     for (int iterator =0; iterator < trackSize; iterator++) {
