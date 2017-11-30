@@ -31,7 +31,7 @@ public:
     glm::vec3 Right;
     glm::vec3 WorldUp;
 
-    float g_initial_fov = glm::pi<float>()*0.9;
+    float g_initial_fov = glm::pi<float>()*0.99f;
     glm::vec3 g_position = glm::vec3( 0, 0, 0 );
     glm::mat4 g_view_matrix;
     glm::mat4 g_projection_matrix;
@@ -62,10 +62,10 @@ public:
         updateCameraVectors();
     }
 
-//    glm::mat4 GetViewMatrix()
-//    {
-//        return glm::lookAt(Position, Position + Front, Up);
-//    }
+    glm::mat4 GetViewMatrix()
+    {
+        return glm::lookAt(Position, Position + Front, Up);
+    }
 
 
     glm::mat4 getViewMatrix(){

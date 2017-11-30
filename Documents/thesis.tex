@@ -12,24 +12,23 @@
 W przeciągu ostatnich kilku lat nauka zrobiła duży postęp w kierunku rozwoju fizyki dużych energii. Osiągnięcie to składa się z wyników dużej liczby badań oraz eksperymentów prowadzonych w różnych naukowo-badawczych instytucjach. Równolegle z naukami fizycznymi rozwiajała się również branża informatyczna, a w szczególności grafika komputerowa. Obecnie jest obserwowany coraz silniejszy trend związany z rozwojem technik stereoskopowych. Przy połączeniu badań fizycznych i grafiki komputerowej powstaje możliwość dogłębnego przestudiowania zjawisk zachodzących podczas rożnych eksperymentów.
 
 \subsection{Cele i zakres pracy}
-Pierwszym celem niniejszej pracy dyplomowej jest stereoskopwa wizualizacja detektora oraz zdarzeń ciężkich ionów w eksperymencie ALICE. Kolejnym istotnym celem pracy jest połączenie wyżej wymienionych wizualizacji do jednego spójnego obrazu. 
-\paragraph{}
-Dla realizacji celi podstawowych niezbędne jest zapoznanie się z technologią stereoskopii i aktualnie dostępnymi rozwiązaniami, przestudiowanie podstaw działania eksperymentu ALICE oraz środowiska informatycznego w CERN. \paragraph{}
+Pierwszym celem niniejszej pracy dyplomowej jest stereoskopwa wizualizacja detektora oraz zdarzeń ciężkich ionów w eksperymencie ALICE. Kolejnym istotnym celem pracy jest połączenie wyżej wymienionych wizualizacji do jednego spójnego obrazu. \\
+Dla realizacji celi podstawowych niezbędne jest zapoznanie się z technologią stereoskopii i aktualnie dostępnymi rozwiązaniami, przestudiowanie podstaw działania eksperymentu ALICE oraz środowiska informatycznego w CERN.\\
 Celem pośrednim danej pracy jest zapoznanie się z możliwościami biblioteki OpenGL, a także innymi uwarunkowaniami ważymi w aspekcie projektowanej aplikacji.
 
 \newpage
 \section[Część analityczna]{Część analityczna}
 
 \subsection{Stereoskopia}
-Stereoskopią nazywa się technikę służącą do tworzenia iluzji głębi obrazu. Ta metoda nie zapewnia prawdziwie trójwymiarowych widoków, ale zapewnia efekt trójwymiarowości. Sceny wydają się mieć głębię, ponieważ każdemu oku obserwatora jest prezentowany inny widok. 
-\paragraph{} Istnieje kilka różnych technik osiągnięcia efektu stereoskopowego. Dla każdego rodzaju przeglądania niezbędny jest materiał stereoskopowy dostosowany do konkretnego celu. Poniżej są przedstawione krótkie opisy kilku technik cieszących się dużą rozpoznawalnością. Niektóre z nich są odpowiednie tylko dla jednego widza, podczas gdy istnieją różne typy okularów 3D, które sprawdzają się dla większej grupy odbiorców.
+Stereoskopia - to technika służącą do tworzenia iluzji głębi obrazu, nie zapewnia ona prawdziwie trójwymiarowych widoków, ale zapewnia efekt trójwymiarowości. Sceny wydają się mieć głębię, ponieważ każdemu oku obserwatora jest prezentowany inny widok. \\
+Istnieje kilka różnych technik osiągnięcia efektu stereoskopowego. Dla każdego rodzaju przeglądania niezbędny jest materiał stereoskopowy dostosowany do konkretnego celu. W dalszej części niniejszej pracy są przedstawione krótkie opisy kilku technik cieszących się dużą rozpoznawalnością. Niektóre z nich są odpowiednie tylko dla jednego widza, podczas gdy istnieją różne typy okularów 3D sprawdzające się dla większej grupy odbiorców.
 \subsubsection{Historia} 
-Historia stereoskopii liczy już ponad 180 lat. Za odkrywcę tej techniki uważa się Charlesa Wheatstone'a, który jako pierwszy zaobserwował zjawisko widzenia stereoskopowego, opisał go w artykule \cite{wheatstone} oraz skonstruował urządzenie potwierdzające słuszność jego teorii \cite{stereoscopehistory}.
-\paragraph{} Wheatstone wyjaśnia, że jeśli obiekt znajduje się w małej odległości od oczu, to każde oko widzi przedmiot pod nieco innym kątem, z innej perspektywy. Podczas gdy dla obiektów na dużej odległości nie ma to znaczenia. Wykorzystując te obserwacje, autor skonstruował urządzenie, które umożliwiło przedstawienie delikatnie różniących się obrazów prawemu i lewemu oku z osobna. W efekcie powstawała iluzja trójwymiarowości obrazu.
+Historia stereoskopii liczy już ponad 180 lat. Za odkrywcę tej techniki uważa się Charlesa Wheatstone'a, który jako pierwszy zaobserwował zjawisko widzenia stereoskopowego, opisał go w artykule \cite{wheatstone} oraz skonstruował urządzenie potwierdzające słuszność jego teorii \cite{stereoscopehistory}.\\
+Wheatstone wyjaśnia, że jeśli obiekt znajduje się w małej odległości od oczu, to każde oko widzi przedmiot pod nieco innym kątem, z innej perspektywy. Zaś dla obiektów na dużej odległości nie ma to znaczenia. Wykorzystując te obserwacje, autor skonstruował urządzenie, które umożliwiło przedstawienie delikatnie różniących się obrazów prawemu i lewemu oku z osobna z powstającą w efekcie iluzją trójwymiarowości obrazu.
 
-\subsubsection{Side by Side stereogram}
-Najprostszą metodą doświadczenia widzenia stereoskopowego jest umieszczenie dwuch oddzielnych obrazów obok siebie. Perspektywa jednego z obrazów reprezentuje lewe oko, odpowiednio druga perspektywa jest dla oka prawego. Obrazy te można zazwyczaj oglądać bez użycia dodatkowych narzędzi. Jedyna różnica polega na sposobie ich oglądania. Jeśli obraz dla lewego oka znajduje się po lewej stronie, to stosuje się technikę patrzenia równolegległego, w innym przypadku obrazy mają być oglądane poprzez skrzyżowanie oczu. Użycie niewłaściwej metody spowoduje odwrócenie efektu stereoskopowego. Może to ujawnić się w postaci zniekształconych odległości pomiędzy obiektami na obrazie lub oddalenia się dwóch obrazów. \paragraph{} 
-Warto zauważyć, że oglądanie stereogramów tworzy duże obciążenie dla oczu. W celu zmniejszenia negatywnych skutków używa się stereoskopu. To urządzenie w znacznej mierze redukuje przemęczenie oczu i pozwala przez dłuższy czas przyglądać się efektom widzenia stereoskopowego.
+\subsubsection{Stereogramy typu side by side}
+Najprostszą metodą doświadczenia widzenia stereoskopowego jest umieszczenie dwuch oddzielnych obrazów obok siebie. Perspektywa jednego z obrazów reprezentuje lewe oko, odpowiednio druga perspektywa jest dla oka prawego. Obrazy te można zazwyczaj oglądać bez użycia dodatkowych narzędzi. Jedyna różnica polega na sposobie ich oglądania. Jeśli obraz dla lewego oka znajduje się po lewej stronie, to stosuje się technikę patrzenia równolegległego, w innym przypadku obrazy mają być oglądane z użyciem techniki skrośnej. Zastosowanie niewłaściwej metody spowoduje odwrócenie efektu stereoskopowego. Może to ujawnić się w postaci zniekształconych odległości pomiędzy obiektami na obrazie lub oddalenia się dwóch obrazów. \\
+Warto zauważyć, że oglądanie stereogramów tworzy duże obciążenie dla oczu. W celu zmniejszenia negatywnych skutków używa się stereoskopu bądź specjalnego ekranu 3D z okularami. To w znacznej mierze redukuje przemęczenie oczu i pozwala przez dłuższy czas przyglądać się efektom widzenia stereoskopowego.
 \footnote{http://blogs.hebali.com/itp/?p=378}
 \begin{figure}[H]
 		\centering
@@ -39,8 +38,8 @@ Warto zauważyć, że oglądanie stereogramów tworzy duże obciążenie dla ocz
  		\label{rys1}
 \end{figure}
 
-\subsubsection{Single-image stereogram} 
-Do oglądania autostereogramów nie są potrzebne żadne urządzenia, aczkolwiek okulary pryzmatyczne ułatwiają przegladanie poprzeczne, a także nad- i podgląd.\paragraph{} 
+\subsubsection{Stereogramy typu single-image} 
+Stereogramy typu single-image, inaczej nazywane autostereogramy, to zbiór punktów, które wydają się tworzyć trójwymiarową scenę, gdy są skrośnie oglądane z bliska. Do osiągnięcia efektu stereoskopowego za pośrednictwem autostereogramów nie są potrzebne żadne urządzenia, aczkolwiek okulary pryzmatyczne ułatwiają przegladanie poprzeczne, a także nad- i podgląd.\\
 Pzy użyciu poprawnej techniki oglądania specjalnie stworzonego obrazu powstaje wrażenie trójwymiarowości. Czasem obrazy mogą wyglądać jak zniekształcone lub losowo umieszczone kolorowe plamy. "Bałagan"\ tego rodzaju w rzeczywistości nie jest przypadkowy, ponieważ poprzez użycie powtarzalnego wzoru są ukrywane obiekty trójwymiarowe \cite{stereoscopythesis}.
 \begin{figure}[H]
 		\centering
@@ -52,9 +51,9 @@ Pzy użyciu poprawnej techniki oglądania specjalnie stworzonego obrazu powstaje
 
 \subsubsection{Stereoskopia pasywna} 
 Do tworzenia iluzji obrazów trójwymiarowych są wykorzystywane specjalnie spolaryzowane okulary, ograniczające światło docierające do każdego oka. W celu przedstawienia widoku stereoskopowego dwa obrazy są wyświetlane na tym samym ekranie z użyciem różnych filtrów polaryzacji. 
-Istenieją 2 rodzaje filtrów: liniowe oraz kołowe.\paragraph{} 
-W przypadku liniowej polaryzacji pole elektryczne światła jest skierowane pionowo bądź poziomo. Odbiorca zakłada odpowiednio dopasowane okulary, w których każda soczewka przepuszcza światło o innym kierunku polaryzacji. W ten sposób oczy obserwują różniące się obrazy. Minimalne pochylenie okularów może spowodować niezgodność polaryzacji światła a soczewek. Nieporządany efekt można wyeliminować korzystając z filtrów kołowych prawo- lub lewoskrętnych. Ruch ten pozostaje niezmienny, nawet jeśli okulary są dowolnie pochylone.\paragraph{} 
-Niewątpliwą zaletą stereoskopii spolaryzowanej jest to, że wiele osób może oglądać obrazy stereoskopowe w tym samym czasie \cite{russianpage}.
+Istenieją 2 rodzaje filtrów: liniowe oraz kołowe.\\
+W przypadku liniowej polaryzacji pole elektryczne światła jest skierowane pionowo bądź poziomo. Odbiorca zakłada odpowiednio dopasowane okulary, w których każda soczewka przepuszcza światło o innym kierunku polaryzacji. W ten sposób oczy obserwują różniące się obrazy. Minimalne pochylenie okularów może spowodować niezgodność polaryzacji światła a soczewek. Nieporządany efekt można wyeliminować korzystając z filtrów kołowych prawo- lub lewoskrętnych. Ruch ten pozostaje niezmienny, nawet jeśli okulary są dowolnie pochylone.\\
+Niewątpliwą zaletą stereoskopii spolaryzowanej jest to, że wiele osób może oglądać obrazy stereoskopowe w tym samym czasie \cite{russianpage}. Wadą tego rozwiązania jest koszt specjalnego ekranu do wyświetlania obrazów. Taki ekran musi posiadać srebrną warstwę, dzięki czemu nie zniekształca się polaryzacja obrazów przy jednoczesnym wyświetlaniu.
 \begin{figure}[H]
 		\centering
  		\includegraphics[width=8cm]{circular.png}
@@ -64,11 +63,11 @@ Niewątpliwą zaletą stereoskopii spolaryzowanej jest to, że wiele osób może
 \end{figure}
 
 \subsubsection{Stereoskopia aktywna} 
-Możliwość oglądania obrazów stereoskopowych pojawia się dzięki ciekłokrystalicznym okularom migawkowym. Szkło, które tworzy soczewki okularów, zawiera ciekłe kryształy oraz filtr polaryzacyjny. Stosując napięcie można zmienić kolor soczewki na czarny, co bezpośrednio wiąże się z blokowaniem widoku dla jednego oka. Dzięki przykrywaniu widoku z dużą częstotliwością, każdemu oku są przedstawiane obrazy z różną perspektywą. Częstotliwość migotania okularów jest zsynchronizowana z aktualnym źródłem wyświetlania, żeby stale dostarczać prawidłowej perspektywy dla oczu. Jeśli prędkość aktualizacji soczewek w okularach nie jest wystarczająco wysoka, to może nastąpić zauważalne zniekształcenie obrazu końcowego. Przykładem takiego zniekształcenia może posłużyć część obrazu ze złą perspektywą, przeznaczonej innemu oku. 
+Możliwość oglądania obrazów stereoskopowych pojawia się dzięki ciekłokrystalicznym okularom migawkowym. Szkło, które tworzy soczewki okularów, zawiera ciekłe kryształy oraz filtr polaryzacyjny. Stosując napięcie można zmienić kolor soczewki na czarny, co bezpośrednio wiąże się z blokowaniem widoku dla jednego oka. Dzięki przykrywaniu widoku z dużą częstotliwością, każdemu oku są przedstawiane obrazy z różną perspektywą. Częstotliwość migotania okularów jest zsynchronizowana z aktualnym źródłem wyświetlania, żeby stale dostarczać prawidłowej perspektywy dla oczu. Jeśli prędkość aktualizacji soczewek w okularach nie jest wystarczająco wysoka, to może nastąpić zauważalne zniekształcenie obrazu końcowego. Przykładem takiego zniekształcenia może posłużyć część obrazu ze złą perspektywą, przeznaczona innemu oku. 
 
 \subsubsection{Wizualizacja wielopasmowa}
 Nowa technika wyświetlania obrazów stereoskopowych, znana też pod tytułem INFITEC - Interference filter technique. Opiera ona się na tym, że widmo światła widzialnego można podzielić na fale o różnej długości używając do tego filtrów optycznych \cite{infitec}.
- Światło widzialne jest podzielone na 6 części, po 2 na każdy z podstawowych kolorów: czerwony, zielony oraz niebieski. Poszczególne części przeznaczone są dla jednego oka, w ten sposób lekko różniące się barwy docierają do każdego oka z osobna. Wykorzystując fakt niewystarczającej wrażliwości oka do zauważenia tak niedużej różnicy, technika wizualizacji welopasmowej stwarza obrazy pełnokolorowe.  
+ Światło widzialne jest podzielone na 6 części, po 2 na każdy z podstawowych kolorów: czerwony, zielony oraz niebieski. Poszczególne części przeznaczone są dla jednego oka, w ten sposób lekko różniące się barwy docierają do każdego oka z osobna. Wykorzystując fakt niewystarczającej wrażliwości mózgu do zauważenia tak niedużej różnicy, technika wizualizacji welopasmowej stwarza obrazy pełnokolorowe.  
 
 \subsubsection{Techniki anaglifowe}
 Do generowania stereogramu anaglifowego potrzebne są 2 obrazy z delikatnie różniącą się perspektywą dla każdego oka. Każdy obraz jest wykonany w podstawowych kolorach. Najbardziej popularną kombinacją jest obraz w kolorze czerwonym dla lewego oka i obraz wykonany w przy połączeniu zielonego i niebieskiego (otrzymany kolor nazywa się cyan) odpowiednio dla prawego oka. Obrazy umieszcza się jeden nad drugim. Efekt stereoskopowego widoku jest osiągany przy użyciu okularów z poprawnymi kolorowymi filtrami (podobnie jak obrazy: czerwony dla lewego oka, cyan dla prawego). Niestety przy użyciu tej techniki nigdy nie zostanie stworzony pełnokolorowy obraz, gdyż są ograniczone barwy widziane przez każde oko.\footnote{Wattie,John.Anaglyphs for computer stereoscopy.} \\
@@ -84,15 +83,13 @@ Istenieją tak że filtry o innych kolorach, zachowując główną zasadę anagl
 
 \newpage
 \subsection{Formaty plików 3D}
-\subsubsection{Wstęp}
 W celu ponownego wykorzystania skonstruowanych modeli 3D i przesłania ich na różne platformy, tworzone są pliki graficzne. Jednak powstało wiele różnych formatów plików dla różnych aplikacji. Obecnie w grafice komputerowej istnieje ponad 70 odmiennych formatów%\footnote{https://en.wikipedia.org/wiki/List_of_file_formats#3D_graphics} 
-. Są one wykorzystywane w różnych dziedzinach zaczynając od druku 3D, gier komputerowych, aż po medycynę i nauki przyrodnicze. 
-\paragraph{}Podstawowym celem formatu pliku 3D jest przechowywanie informacji o modelu w postaci tekstu lub danych binarnych. W szczególności musi on zawierać dane o geometrii modelu, jego wyglądzie, scenie oraz animacjach. Geometria modelu opisuje jego dokładny kształt, do wyglądu zalicza się kolory, tekstury, typy wykorzystanych materiałów. Dane o scenie opisują między innymi położenie światła, kamery i obiektów pereferyjnych. 
-\paragraph{}
-U podstaw każdego opragramowania graficznego znajduje się biblioteka niskiego poziomu, taka jak OpenGL czy Direct3D. Biblioteki niskiego poziomu faktycznie rysują modele 3D na ekranie. Modele mogą być również przechowywane i przesyłane jako pliki graficzne. Narzędzia autorskie wspierają modelowanie, zapewniają użytkownikom wygodne metody tworzenia, przeglądania, modyfikowania i zapisywania stworzonych modeli. Często opragamowanie autorskie zawiera w sobie również przeglądarkę 3D - narzędzie graficzne, które odczytuje, analizuje i transformuje pliki 3D do wewnętrznych formatów, a następnie wyświetla użytkownikowi. Przeglądarki grafiki 3D, narzędzia do tworzenia i transformatory formatów mogą uzyskiwać bezpośredni dostęp do plików 3D lub przechodzić przez funkcje bibliotek narzędzi programowania \cite{formatsinfo}. Opisane relacje są zilustrowane na Rysunku 5.
+. Są one wykorzystywane w różnych dziedzinach zaczynając od druku 3D, gier komputerowych, aż po medycynę i nauki przyrodnicze. \\
+Podstawowym celem formatu pliku 3D jest przechowywanie informacji o modelu w postaci tekstu lub danych binarnych. W szczególności musi on zawierać dane o geometrii modelu, jego wyglądzie, scenie oraz animacjach. Geometria modelu opisuje jego dokładny kształt, do wyglądu zalicza się kolory, tekstury, typy wykorzystanych materiałów. Dane o scenie opisują między innymi położenie światła, kamery i obiektów pereferyjnych. \\
+U podstaw każdego opragramowania graficznego znajduje się biblioteka niskiego poziomu, taka jak OpenGL czy Direct3D. Biblioteki niskiego poziomu faktycznie rysują modele 3D na ekranie. Modele mogą być również przechowywane i przesyłane jako pliki graficzne. Narzędzia autorskie wspierają modelowanie, zapewniają użytkownikom wygodne metody tworzenia, przeglądania, modyfikowania i zapisywania stworzonych modeli. Często opragamowanie autorskie zawiera w sobie również przeglądarkę 3D - narzędzie graficzne, które odczytuje, analizuje i transformuje pliki 3D do wewnętrznych formatów, a następnie wyświetla użytkownikowi. Przeglądarki grafiki 3D, narzędzia do tworzenia i transformatory formatów mogą uzyskiwać bezpośredni dostęp do plików 3D lub przechodzić przez funkcje bibliotek narzędzi programowania \cite{formatsinfo}. Opisane relacje są zilustrowane na rys. \ref{rys5}.
 \begin{figure}[H]
 		\centering
- 		\includegraphics[width=8.0cm]{relacje.png}
+ 		\includegraphics[width=7.0cm]{relacje.png}
  		\captionsetup{font={up, footnotesize}}
     	\caption{Relacje w narzędziach 3D.}
  		\label{rys5}
@@ -100,12 +97,12 @@ U podstaw każdego opragramowania graficznego znajduje się biblioteka niskiego 
 Poniżej są przedstawione krótkie opisy najczęściej używanych formatów plików 3D. %przez kogo?%
 
 \subsubsection{Collada}
-Collada to format pliku 3D z rozszerzeniem .DAE, powszechnie jest używany do modelowania w grach komputerowych i filmografii. W całości opiera się na strukturalizowaną reprezentację w XML. Przechowuje wszystkie dane dotyczące modelu 3D, jeden z niewielu formatów wspierających kinematykę i informacje o cieniowaniu. \paragraph{}
+Collada to format pliku 3D z rozszerzeniem .DAE, powszechnie jest używany do modelowania w grach komputerowych i filmografii. W całości opiera się na strukturalizowaną reprezentację w XML. Przechowuje wszystkie dane dotyczące modelu 3D, jeden z niewielu formatów wspierających kinematykę i informacje o cieniowaniu.\\
 Struktura formatu zaczyna się w korzeniu zwanym COLLADA, który zawiera elementy mianowane bibliotekami i sceną. Element scena mieści w sobie odnośnik do rzeczywistego początku hierarchii sceny. Natomiast każdy element "biblioteka"\ składa się ze specjalnych zestawów danych dokładnie opisujących model: informacje o siatce (library\_geometries), obrazie (library\_images) itd. Taki podział jest bardzo wygodny pod względem odwoływania się do konkretnych sekcji.  
  %coś o parsowaniu XML?%
 
 \subsubsection{STL}
-STL (STereoLithography) jest jednym z najważniejszych formatów plików w dziedzinie druku 3D, tworzenia prototypów oraz komputerowo wspieranej produkcji. Rozszerzenie odpowiadające temu formatowi to .STL. Są dostępne oba rodzaje reprezentacji: tekstowy i binarny, przy czym binarny jest bardziej wykorzystywany ze względu na porównywalnie mały rozmiar plików. \paragraph{} 
+STL (STereoLithography) jest jednym z najważniejszych formatów plików w dziedzinie druku 3D, tworzenia prototypów oraz komputerowo wspieranej produkcji. Rozszerzenie odpowiadające temu formatowi to .STL. Są dostępne oba rodzaje reprezentacji: tekstowy i binarny, przy czym binarny jest bardziej wykorzystywany ze względu na porównywalnie mały rozmiar plików. \\
 W STL są pominięte takie dane jak wygląd, scena czy animacje. Jedyne ważne informacje w tym formacie to geometria obiektów, która jest zapisywana w postaci przybliżonej siatki trójkątów. Dla każdego trójkąta są przechowywane 2 rodzaje danych:
 \begin{itemize}
 \itemi współrzędne wierzchołków;
@@ -113,24 +110,24 @@ W STL są pominięte takie dane jak wygląd, scena czy animacje. Jedyne ważne i
 \end{itemize}
 \begin{figure}[H]
 		\centering
- 		\includegraphics[width=6.5cm]{vertices-and-normal.png}
+ 		\includegraphics[width=5.0cm]{vertices-and-normal.png}
  		\captionsetup{font={up, footnotesize}}
     	\caption{Wierzchołki i normalna.}
- 		\label{rys5}
+ 		\label{rys6}
 \end{figure}
  Dotychczas jest to najprostszy i najbardziej ścisły format przechowywania informacji o modelu 3D. Wadą STL możnaby nazwać brak przechowywania danych o kolorach, ze względu na dynamiczny rozwój technologii druku pełnokolorowego \cite{stlinfo}.
 
 \subsubsection{OBJ}
 OBJ jest jednym z najbardziej znanych i wykorzystywanych formatów plików 3D, obecnie nabiera szczególnej wagi w druku 3D. Ten format przechowuje informacje o modelu w postaci tekstu ASCII (rozszerzenie .OBJ) bądź pliku binarnego (rozszerzenie .MOD) \cite{objinfo}.
-Format binarny jest zastrzeżony i nieudokumentowany, dlatego poniżej zostanie opisana tylko postać tekstowa formatu. \paragraph{}
-OBJ wspiera dane o prostych, wielokątach, krzywych oraz powierzniach o różnych kształtach. Proste i wielokąty są opisywane poprzez wierzchołki, z których się składają. W przypadku krzywych oraz płaszczyzn kluczowymi są punkty kontrolne i inne niezbędne do opisu informacje, w zależności od typu krzywej. Ten format pliku 3D przybliża bądź oblicza doskładną siatkę bez drastycznego zwiększania rozmiaru pliku. Staje się to możliwe dzięki wykorzystaniu krzywych Beziera oraz metody NURBS (ang. Non-Uniform Rational Bezier Spline). \paragraph{}
+Format binarny jest zastrzeżony i nieudokumentowany, dlatego poniżej zostanie opisana tylko postać tekstowa formatu. \\
+OBJ wspiera dane o prostych, wielokątach, krzywych oraz powierzniach o różnych kształtach. Proste i wielokąty są opisywane poprzez wierzchołki, z których się składają. W przypadku krzywych oraz płaszczyzn kluczowymi są punkty kontrolne i inne niezbędne do opisu informacje, w zależności od typu krzywej. Ten format pliku 3D przybliża bądź oblicza doskładną siatkę bez drastycznego zwiększania rozmiaru pliku. Staje się to możliwe dzięki wykorzystaniu krzywych Beziera oraz metody NURBS (ang. Non-Uniform Rational Bezier Spline). \\
 Format OBJ umożliwia również przechowywanie informacji o kolorach oraz teksturach modelu w towarzyszącym formacie MTL (ang. Material Template Library). Plik .OBJ, po sparowaniu z odpowiednim plikiem .MTL, tworzy realistyczny wielokolorowy teksturowany model. Plik MTL jest zapisywany w postaci tekstu ASCII definiującego właściwości materiałów, odbijania światła itd. Dodatkowo MTL wspiera mapy tekstur, w tym przypadku każdy wierzchołek siatki modelu 3D jest przyporządkowywany do dwuwymiarowego obrazu. 
 %obrazek?: https://all3dp.com/obj-file-format-explained-cad-3d-printing/
 
 
 \subsubsection{3DS}
 3DS - to binarny format pliku początkowo wykorzystywany tylko w programie Autodesk 3D Studio. Plik binarny jest oparty o hierarchiczną strukturę "klocków"\ (ang. chunks), w której każdy fragment danych jest umieszczony w bloku z odpowiednim identyfikatorem. Pozwala to analizatorowi składni pominąć fragmenty, które nie są rozpoznawalne, oraz zapewnia możliwość rozszerzenia formatu. %https://pl.wikipedia.org/wiki/3ds
-\paragraph{}
+\\
 3DS przechowuje tylko podstawowe informacje o geomertii, wyglądzie (kolory, tekstury i materiały), scenie oraz animacji. Gromadząc dane o scenie zapisuje położenie kamer i świateł, z wyjątkiem informacji o kierunkowych źródłach światła. Do przybliżenia kształtu obiektu w formacie 3DS używa się siatki trójkątów, ale liczba wierzchołków i wielokątów nie może przekraczać 65536($2^{16}$). 3DS jest obsługiwany praktycznie przez wszystkie pakiety oprogramowania 3D. Z względu na to, że jednak ten format zbiera tylko podstawowe informacje o modelu 3D, może on być uzupełniony o format MAX (obecnie zastąpiony formatem PRJ), który zawiera dodatkowe informacje specyficzne dla Autodesk 3DS Max, aby umożliwić całkowite zapisanie i załadowanie sceny.
 
 \subsubsection{X3D}
@@ -138,6 +135,7 @@ Początkowo X3D nazywał się VRML (rozszerzenie pliku .WRL), z ang. Virtual Rea
 
 \subsubsection{Porównanie formatów plików}
 Poniższa tabela przedstawia porównanie opisanych formatów plików 3D pod względem różnorodności przechowywanych danych. 
+\begin{savenotes}
 \begin{table}[H]
 \caption{Macierz funkcjonalności najpopularniejszych formatów plików 3D}
 \centering
@@ -151,7 +149,7 @@ Poniższa tabela przedstawia porównanie opisanych formatów plików 3D pod wzgl
       \multicolumn{3}{c!{\color{black}\vrule width 1pt}}{\bfseries Scena} &
      \multirow{2}{*}{\bfseries Animacje}\\
      \cline{2-10}
-    & Przybl.\footnotemark & Dokładna & CSG\footnotemark & Kolory & Materiały & Tekstury & Kamera & Światło & Ustawienie & \\
+    & Przybl.\footnote{Przybliżona siatka}&Dokł.\footnote{Dokładna siatka}&CSG\footnote{CSG (ang. constructive solid geometry) – technika definiowania nowych brył poprzez łączenie innych brył}& Kolor& Materiał&Tekstura&Kamera&Światło&Pozycje& \\
     \hline
     Collada & X & X &  & X & X & X & X & X & X & X\\   
     \arrayrulecolor{black}
@@ -166,47 +164,84 @@ Poniższa tabela przedstawia porównanie opisanych formatów plików 3D pod wzgl
    \arrayrulecolor{sapphire}\hline
   \end{tabular}
 \end{table}
-\footnotetext{Przybliżona siatka}
-\footnotetext{CSG (ang. constructive solid geometry) – technika definiowania nowych brył poprzez łączenie innych brył}
+\end{savenotes}
 Z tabeli wynika, że najwięcej informacji przechowują formaty Collada i X3D. W niszej pracy dyplomowej zostanie wykorzystany format Collada, ze względu na strukturę oraz możliwość łatwego użycia w programie Blender.
 
-
-\subsection{Biblioteki do czytania i pisania modeli 3D}
-Niestety, graficzne biblioteki niskiego poziomu takie jak OpenGL czy DirectX nie zapewnią żadnego mechanizmu do ładowania, zapisywania lub manipulowania modelami 3D. Dlatego, powstała potrzeba stworzenia nowych bibliotek ułatwiających te czynności. 
-
-\subsubsection{Assimp}
-Assimp (ang. Open Asset Import Library) to przenośna biblioteka do importowania różnych dobrze znanych formatów modeli 3D w jednolity sposób. Najnowsza wersja potrafi nie tylko czytać, ale również i zapisywać pliki 3D i dlatego nadaje się jako transformator modeli 3D do ogólnego zastosowania. Assimp jest napisana w języku C ++, istnieje również API (ang. Application Programming Interface) w języku C, a także jest powiązana z innymi językami programowania, w tym C \#, .net, Python i D. \paragraph{}
-Assimp ładuje wszystkie formaty modeli wejściowych do jednej prostej struktury danych w celu dalszego przetwarzania. Podstawowy zestaw funkcji jest rozszerzany przez różne narzędzia do przetwarzania końcowego. Przykładem rozszerzenia mogą posłużyć często potrzebne operacje, takie jak obliczanie wektorów normalnych i stycznych \cite{assimp}.
-\subsubsection{lib3ds}
-Lib3ds to darmowa alternatywa dla pakietu 3DS File Toolkit firmy Autodesk do zarządzania plikami 3DS. Ta biblioteka jest w całości napisana w języku C, wspierana przez takie platformy jak GNU, UNIX, Mac OS X, Microsoft Visual C++ 8.0. Jest łatwo integrowalna z biblioteką OpenGL \cite{lib3dsofficial}. \paragraph{}
-Celem lib3ds jest uproszczenie tworzenia filtrów do czytania i pisania plików formatu 3DS. Ta biblioteka jest obsługiwana na różnych rodzajach procesorów (big oraz little endian), wspiera moduły wektorowe, kwaterniony, macierze, proste struktury danych, które można łatwo modyfikować, ocenę wszystkich danych animacji. Istnieje możliwość załadowania większości fragmentów 3DS, sekcje: materiały, kamera, światło, siatka i klucze \cite{lib3dsdirectory}.
 \newpage
 \subsection{Biblioteka OpenGL}
-OpenGL (z angielskiego Open Graphics Library) jest potężnym systemem graficznym stanowiącym niejako pomost między programistą a sprzętem komputera. Biblioteka ta została stworzona przez firmę \textit{Silicon Graphics}, jednego z potentatów na rynku grafiki komputerowej. \\
-Procedury OpenGL umożliwiają rendorowanie obiektów o rożnych poziomach skomplikowania zaczynając od prostego punktu geometrycznego, linii lub wypełnionego wielokąta do utworzenia najbardziej złożonej, zakrzywionej powierzchni, oświetlonej i odwzorowanej teksturą. OpenGL pozwala programistom na dostęp do prymitywów geometrycznych i obrazowych, list wyświetlania, przekształcania modelu, oświetlenia i teksturowania, antyaliasingu, mieszania i wielu innych funkcji. Wszystkie elementy stanu OpenGL - nawet treść pamięci tekstur i bufor ramki - można uzyskać za pomocą aplikacji OpenGL. Dany system obsługuje także aplikacje wizualizacji z obrazami 2D traktowanymi jako typy prymitywów, którymi można manipulować podobnie jak obiektami geometrycznymi 3D.\\
-Mimo że specyfikacja OpenGL definiuje konkretny ciąg przetwarzania graficznego, dostawcy platformy mają swobodę dostosowywania konkretnej implementacji OpenGL w celu osiągnięcia sprecyzowanych celów w zakresie kosztów i wydajności. Pojedyncze wywołania mogą być wykonywane na dedykowanym sprzęcie, uruchamiane jako procedury programowe w standardowym systemie CPU lub implementowane jako kombinacja zarówno dedykowanych procedur sprzętowych, jak i programowych. Ta elastyczność implementacji skutkuje przyśpieszeniem renderowania, w dodatku jest powszechnie dostępna na wszystkich jednostkach od komputerów o niskich kosztach, po wysokiej klasy stacjach roboczych i superkomputerach.
-\begin{figure}[h]
-\includegraphics[width=6cm]{Hierarchy_UNIX.jpg}
-\centering
-\caption{Schemat ilustrujący relacje OpenGL GLU}
+OpenGL (z ang. Open Graphics Library) jest potężnym systemem graficznym stanowiącym niejako pomost między programistą a sprzętem komputera. Procedury OpenGL umożliwiają rendorowanie obiektów o rożnych poziomach skomplikowania zaczynając od prostego punktu geometrycznego, linii lub wypełnionego wielokąta do utworzenia najbardziej złożonej, zakrzywionej powierzchni, oświetlonej i odwzorowanej teksturą. OpenGL pozwala programistom na dostęp do prymitywów geometrycznych i obrazowych, przekształcania modelu, oświetlenia i teksturowania, antyaliasingu i wielu innych funkcji. \\
+OpenGL obsługuje aplikacje wizualizacji z obrazami 2D traktowanymi jako typy prymitywów, którymi można manipulować podobnie jak obiektami geometrycznymi 3D. Mimo że specyfikacja biblioteki definiuje konkretny potok przetwarzania graficznego, dostawcy platformy mają swobodę dostosowywania konkretnej implementacji OpenGL w celu osiągnięcia sprecyzowanych celów w zakresie kosztów i wydajności. Pojedyncze wywołania mogą być wykonywane na dedykowanym sprzęcie, uruchamiane jako procedury programowe w standardowym systemie CPU lub implementowane jako kombinacja zarówno specjalnych procedur sprzętowych, jak i programowych. Taka elastyczność implementacji skutkuje przyśpieszeniem renderowania, w dodatku jest powszechnie dostępna na wszystkich jednostkach od komputerów o niskich kosztach, po wysokiej klasy stacjach roboczych i superkomputerach \cite{openglofficial}.
+\subsubsection{Potok przetwarzania}
+\begin{figure}[H]
+		\centering
+ 		\includegraphics[width=15.5cm]{OpenGL.png}
+ 		\captionsetup{font={up, footnotesize}}
+    	\caption{Schemat potoku przetwarzania.}
+ 		\label{rys7}
 \end{figure}
-\footnote{OpenGl podstawy wg https://www.opengl.org/about/}
+W OpenGL wszystko jest przedstawione w przestrzeni trójwymiarowej, ale na ekranie obraz widzimy jako listę pikseli 2D, w związku z tym duża część pracy OpenGL polega na zmianie współrzędnych 3D na piksele 2D, które by pasowały do ekranu. Cały proces transformacji jest zarządzany poprzez potok graficzny OpenGL. Taki ciąg jest podzielony na poszczególne kroki, gdzie na wejściu są wymagane dane wyjściowe poprzedniego kroku. Każda z operacji jest dobrze sprecyzowana, gdyż mają one konkretną funkcję, i mogą być wykonane równolegle. Większość współczesnych kart graficznych posiada setki, czasmi tysiące, małych jąder procesowych do szybkiego przetwarzania danych wejściowych.
 
-\subsubsection{Shaders}
-W OpenGL wszystko jest przedstawione w przestrzeni trójwymiarowej, ale na ekranie obraz widzimy listę pikseli 2D, w związku z tym duża część pracy OpenGL polega na zmianie współrzędnych 3D na piksele 2D, które by pasowały do ekranu. Cały proces transformacji jest zarządzany poprzez ciąg graficzny OpenGL. Ciąg przetwarzania może być podzielony na poszczególne kroki, gdzie na wejściu każdego kroku są wymagane dane wyjściowe poprzedniego. Każdy z tych kroków jest dobrze sprecyzowany, gdyż mają one konkretną funkcję, i może być wykonany równolegle. Większość współczesnych kart graficznych posiada setki, czasmi tysiące, małych jąder procesowych do szybkiego przetwarzania danych wejściowych. W ciągu graficznym dla przyśpieszenia przetwarzania uruchamiane są nieduże programy w GPU dla każdego kroku w ciągu. Wspomniane nieduże programy są nazywane \textit{\textbf{shaderami}}.\\
-Shadery są pisane w języku w dużym stopniu podobnym do C - GLSL. GLSL jest dostosowany do wykorzystania w grafice, ponieważ zawiera przydatne funkcje skierowane na manipulacje wektorami i macierzami. Shadery zawsze zaczynają się od deklaracji wersji, następnie deklarowane są listy zmiennych wejściowych i wyjściowych, uniformy oraz ich główne funkcje. 
-\paragraph*{Vertex shader.}
-Pierwszym krokiem ciągu graficznego jest vertex shader, który jako daną wejściową przyjmuje jeden wierzchołek. Głównym celem vertex shadera jest transformacja współrzędnych 3D do innych współrzędnych 3D. Vertex shader również pozwala robić podstawowe przetwarzanie atrybutów wierzchołka.
-\paragraph*{Primitive assembly.}
-Primitive assembly jest krokiem, który za dane wejściowe przyjmuje wszystkie wierzchołki (lub jeden, jeśli wybrana jest flaga GL\_POINTS ) z vertex shadera. Na tym etapie przetwarzania kształtowane są prymitywy, wszystkie wierzchołki są grupowane do zadanego kształtu.
-\paragraph*{Geometry shader}
-Wyjście z primitive assembly jest przekazywane do geometry shadera. Geometry shader na wejściu przyjmuje kolekcję wierzchołków, które tworzą zadany kształt oraz mogą generować inne, emitując nowe wierzchołki, tworząc nowe (lub inne) prymitywy. 
-\paragraph*{Rasterization.}
-Dane wyjściowe geometry shadera są podawane na wejście etapu rasterization. W tym kroku uzyskane wcześniej prymitywy mapuje się na odpowiadające im piksele na ekranie ostatecznym. W wyniku czego powstają fragmenty do przetwarzania w kolejnym kroku, ale zanim zostanie uruchomiony fragment shader, jest wykonywane przycinanie. Przyciannie pozwala odrzucić wszystkie fragmenty, które są poza zasięgiem obserwatora, ów krok pozwala znacznie zwiększyć wydajność całego ciągu.
-\textit{ Fragment w OpenGL zawiera wszystkie niezbędne dane do renderowania pojedynczego piksela.}
-\paragraph*{Fragment shader.}
-Głównym celem fragment shadera jest obliczenie końcowego koloru piksela i jest to zazwyczaj etap, na którym występują wszystkie zaawansowane efekty OpenGL. Z reguły fragment shader posiada wszystkie dane o scenie 3D (takie jak światła, cienie, kolor światła itp.), które można użyć do obliczania końcowego koloru piksela.
+\subsubsection{Shadery}
+Grupując poszczególne kroki w potoku przetwarzania OpenGL, otrzymuje się uproszczony schemat przetwarzania. Jest on przedstawiony na rys. \ref{rys8}.
+\begin{figure}[H]
+		\centering
+ 		\includegraphics[width=11cm]{pipeline.png}
+ 		\captionsetup{font={up, footnotesize}}
+    	\caption{Skrócony schemat potoku przetwarzania.}
+ 		\label{rys8}
+\end{figure}
+ 
+ Dla każdego kroku przetwarzania w celu przyśpieszenia obliczeń są uruchamiane nieduże programy w procesorze graficznym. Wspomniane nieduże programy są nazywane shaderami.\\
+Shadery są pisane w języku w dużym stopniu podobnym do C - GLSL (ang. OpenGL Shading Language, język cieniowania OpenGL). GLSL jest dostosowany do wykorzystania w grafice, ponieważ zawiera przydatne funkcje skierowane na manipulacje wektorami i macierzami. Shadery zawsze zaczynają się od deklaracji wersji, następnie deklarowane są listy zmiennych wejściowych i wyjściowych, uniformy oraz ich główne funkcje. \\
 
+\begin{itemize} 
+\itemi Shader wierzchołków (ang. vertex shader). Pierwszym etapem ciągu graficznego jest przetwarzanie wierzchłków. Na wejściu jest przyjmowany jeden wierzchołek. Shader ma za zadanie transformację współrzędnych 3D do innych współrzędnych 3D. Taki program również pozwala robić podstawowe przetwarzanie atrybutów wierzchołka.
+\itemi Zgromadzenie prymitywu (ang. primitive assembly). Jest to krok, który za dane wejściowe przyjmuje wszystkie wierzchołki (lub jeden, jeśli wybrana jest flaga GL\_POINTS ) z shadera wierzchołków. Na tym etapie przetwarzania kształtowane są prymitywy, wszystkie wierzchołki są grupowane do zadanego kształtu.
+\itemi Shader geometrii (ang. geometry shader). Dane wyjściowe z poprzedniego kroku są przekazywane do shadera geometrii. Taki program przyjmuje jako argumenty wejściowe kolekcję wierzchołków, które tworzą zadany kształt oraz mogą generować inne, emitując nowe wierzchołki, tworząc nowe (lub inne) prymitywy. 
+\itemi Rasteryzacja (ang. rasterization). Dane wyjściowe z shadera geometrii są podawane na wejście etapu rasteryzacji. W tym kroku uzyskane wcześniej prymitywy mapuje się na odpowiadające im piksele na ekranie ostatecznym. W wyniku, powstają fragmenty do przetwarzania w kolejnym kroku, ale zanim zostanie uruchomiony shader fragmentów, jest wykonywane przycinanie. Przyciannie pozwala odrzucić wszystkie fragmenty, które są poza zasięgiem obserwatora. Ów krok pozwala znacznie zwiększyć wydajność całego ciągu. Fragment w OpenGL zawiera wszystkie niezbędne dane do wyświetlenia pojedyńczego piksela.
+\itemi Shader fragmentów. Głównym celem tego programu jest obliczenie końcowego koloru piksela i jest to zazwyczaj etap, na którym występują wszystkie zaawansowane efekty OpenGL. Z reguły shader fragmentów posiada wszystkie dane o scenie 3D (takie jak światła, cienie, kolor światła itp.), które są niezbędne dla określenia ostatecznej wartości koloru piksela.
+\end{itemize}
+
+\newpage
+\subsection{Biblioteki do czytania i pisania modeli 3D}
+Niestety, graficzne biblioteki niskiego poziomu takie jak OpenGL czy DirectX nie zapewnią żadnego mechanizmu do ładowania, zapisywania lub manipulowania modelami 3D. Dlatego, powstała potrzeba stworzenia nowych bibliotek ułatwiających te czynności. 
+\subsubsection{Assimp}
+Assimp (ang. Open Asset Import Library) to przenośna biblioteka do importowania różnych dobrze znanych formatów modeli 3D w jednolity sposób. Najnowsza wersja potrafi nie tylko czytać, ale również i zapisywać pliki 3D i dlatego nadaje się jako transformator modeli 3D do ogólnego zastosowania. Assimp jest napisana w języku C ++, istnieje również API (ang. Application Programming Interface) w języku C, a także jest powiązana z innymi językami programowania, w tym C \#, .net, Python i D.\\
+Assimp ładuje wszystkie formaty modeli wejściowych do jednej prostej struktury danych w celu dalszego przetwarzania. Podstawowy zestaw funkcji jest rozszerzany przez różne narzędzia do przetwarzania końcowego. Przykładem rozszerzenia mogą posłużyć często potrzebne operacje, takie jak obliczanie wektorów normalnych i stycznych \cite{assimp}.
+\subsubsection{lib3ds}
+Lib3ds to darmowa alternatywa dla pakietu 3DS File Toolkit firmy Autodesk do zarządzania plikami 3DS. Ta biblioteka jest w całości napisana w języku C, wspierana przez takie platformy jak GNU, UNIX, Mac OS X, Microsoft Visual C++ 8.0. Jest łatwo integrowalna z biblioteką OpenGL \cite{lib3dsofficial}. \\
+Celem lib3ds jest uproszczenie tworzenia filtrów do czytania i pisania plików formatu 3DS. Ta biblioteka jest obsługiwana na różnych rodzajach procesorów (big oraz little endian), wspiera moduły wektorowe, kwaterniony, macierze, proste struktury danych, które można łatwo modyfikować, ocenę wszystkich danych animacji. Istnieje możliwość załadowania większości fragmentów 3DS, sekcje: materiały, kamera, światło, siatka i klucze \cite{lib3dsdirectory}.
+
+\newpage
+\subsection{ALICE}
+ALICE ( ang. A Large Ion Collider Experiment, czyli Wielki Eksperyment Zderzacza Jonów) jest jednym z największych na świecie eksperymentów fizycznych. Celem tego eksperymentu jest pomiar zderzeń ciężkich jonów przy najwyższych osiągalnych obecnie energiach przy użyciu detektora na Wielkim Zderzaczu Hadronów w międzynarodowym laboratorium fizyki cząstek CERN w Genewie. \\
+Detektor ALICE został zaprojektowany tak, aby w jak najbardziej kompletny sposób badać cząstki powstałe w kolizjach, które mają miejsce w środku akceleratora. Do zrealizowania założeń, używa sie wielu warstw różnych detektorów, z których każda dostarcza innych informacji o przebiegu zderzenia. Dane są gromadzone w sposób umożliwiający zrekonstruowanie i zbadanie ewolucji systemu cząstek w przestrzeni i czasie \cite{aliceofficial}. 
+
+\subsubsection{Eksperyment}
+W ekstremalnych warunkach temperatury i (lub) gęstości materia hadronowa topi się w osoczu wolnych kwarków i gluonów - tak zwanej plazmy kwarkowo-gluonowej (ang. quark–gluon plasma - QGP). Aby stworzyć odpowiednie warunki w laboratorium, ciężkie jony (np. cząstki ołowiu) przyśpiesza się do niemal prędkości światła, po czym jest powodowana kolizja. Kluczowym rozważaniem dotyczącym eksperymentu ALICE jest zdolność do badania chromodynamiki kwantowej ( ang.  quantum chromodynamics - QCD) i kwarków w tych ekstremalnych warunkach. Odbywa się to przy użyciu cząstek, utworzonych wewnątrz gorącej objętości podczas jej rozszerzania się i ochładzania. Cząstki te żyją wystarczająco długo, aby dotrzeć do wrażliwych warstw detektora zlokalizowanych wokół obszaru oddziaływania. Fizyka w ALICE polega na tym, żeby być w stanie zidentyfikować wszystkie z nich (tj. określić, czy są to elektrony, fotony, piony itd.), czy też określić ich ładunek. Wiąże się to w większości z różnymi sposobami oddziaływania cząstek z materią \cite{aliceexperiment}.
+
+\subsubsection{Ślady cząstek i detektory}
+Zespół detektorów cylindrycznych (od wewnątrz na zewnątrz: ITS\footnote{The Inner Tracking System}  Drift, ITS Strips, TPC\footnote{The ALICE Time Projection Chamber}, TRD\footnote{The ALICE Transition Radiation Detector}) mierzy w wielu punktach (ponad 100 tylko dla TPC) przejście każdej cząstki przenoszącej ładunek elektryczny tak, że trajektoria jest dokładnie znana. Detektory ALICE są osadzone w polu magnetycznym (wytwarzanym przez duży czerwony magnes), wyginając w ten sposób trajektorie cząstek: z krzywizny śladów można znaleźć ich pęd. ITS jest tak precyzyjny, że cząstki, które są generowane przez rozkład innych cząstek o bardzo krótkim czasie życia można zidentyfikować, widząc, że nie pochodzą one z punktu, w którym nastąpiła interakcja ("wierzchołek"\ zdarzenia) \cite{trackingparticles}.
+
+\begin{figure}[H]
+		\centering
+ 		\includegraphics[width=15.5cm]{detector.png}
+ 		\captionsetup{font={up, footnotesize}}
+    	\caption{Detektor ALICE.}
+ 		\label{rys9}
+\end{figure}
+\newpage
+\section{Projekt}
+\subsection{Wymagania}
+\subsubsection{funkcjonalne}
+\subsubsection{niefunkcjonalne}
+
+\subsection{Diagramy}
+\subsubsection{przypadków użycia}
+\subsubsection{klas}
+
+\newpage
+\subsection{Technologie}
 \subsubsection{GLFW} 
 GLFW jest to Open Source, multipatformowa biblioteka dla OpenGL, OpenGL ES. Zapewnia ona proste API do tworzenia okien, kontekstów i powierzchni, odbierania danych wejściowych i zdarzeń. GLFW jest napisana w C posiada macierzystą obsługę systemów Windows, macOS i wielu systemów uniksopodobnych, takich jak Linux i FreeBSD. 
 Zalety GLFW :
@@ -227,89 +262,16 @@ OpenGL Mathematics (GLM) jest nagłówkiem tylko do biblioteki matematycznej C++
 Ta biblioteka działa doskonale z OpenGL, ale zapewnia również współdziałanie z innymi bibliotekami i SDK innych firm. Jest dobrym kandydatem do oprogramowania renderowania (raytracing czy rasteryzacji), przetwarzania obrazu, symulacji fizycznych i dowolnego kontekstu programowania, który wymaga prostej i wygodnej biblioteki matematycznej. 
 \footnote{http://glm.g-truc.net/0.9.8/index.html}
 
-
-
-\subsection{ALICE}
-A Large Ion Collider Experiment został zaprojektowany tak, aby w jak najbardziej kompletny sposób mierzyć cząstki powstałe w kolizjach, które mają miejsce w środku akceleratora, tak, aby można było zrekonstruować i zbadać ewolucję systemu w przestrzeni i czasie. Aby to zrobić, należy użyć wielu różnych detektorów, z których każdy dostarcza różne informacje. Aby zrozumieć tak złożony system, należy obserwować zjawisko z różnych punktów widzenia, przy użyciu różnych instrumentów jednocześnie. \footnote{http://aliceinfo.cern.ch/Public/en/Chapter2/Chap2Experiment-en.html}
-\subsubsection{Eksperyment}
-W ekstremalnych warunkach temperatury i/lub gęstości materia hadronowa "topi się" w osoczu wolnych kwarków i gluonów - tak zwanej plazmy kwarkowo-gluonowej (QGP). Aby stworzyć odpowiednie warunki w laboratorium, ciężkie jony (np. cząstki ołowiu) przyśpiesza się do niemal prędkości światła, po czym jest powodowana kolizja, zostało to zrobione w LHC w dwóch okresach w 2010 i 2011 roku. Kluczowym rozważaniem dotyczącym eksperymentu ALICE na LHC jest zdolność do badania QCD i quarków w tych ekstremalnych warunkach. Odbywa się to przy użyciu cząstek, utworzonych wewnątrz gorącej objętości podczas jej rozszerzania się i ochładzania. Cząstki te żyją wystarczająco długo, aby dotrzeć do wrażliwych warstw detektora zlokalizowanych wokół obszaru oddziaływania. Fizyka w ALICE polega na tym, żeby być w stanie zidentyfikować wszystkie z nich (tj. określić, czy są to elektrony, fotony, piony itd.), czy też określić ich ładunek. Wiąże się to w większości z różnymi sposobami oddziaływania cząstek z materią. \footnote{http://cerncourier.com/cws/article/cern/50561}
-\subsubsection{Tracking particles}
-Zespół detektorów cylindrycznych (od wewnątrz na zewnątrz: ITS Drift, ITS Strips, TPC, TRD) mierzy w wielu punktach (ponad 100 tylko dla TPC) przejście każdej cząstki przenoszącej ładunek elektryczny tak, że trajektoria jest dokładnie znana. Detektory ALICE są osadzone w polu magnetycznym (wytwarzanym przez duży czerwony magnes), wyginając w ten sposób trajektorie cząstek: z krzywizny śladów można znaleźć ich pęd. ITS jest tak precyzyjny, że cząstki, które są generowane przez rozkład innych cząstek o bardzo krótkim czasie życia można zidentyfikować, widząc, że nie pochodzą one z punktu, w którym nastąpiła interakcja ("wierzchołek" zdarzenia).
-\footnote{http://aliceinfo.cern.ch/Public/en/Chapter2/Page3-subdetectors-en.html}
-
 \newpage
-\section{Projekt}
-\subsection{Wymagania}
-\subsubsection{funkcjonalne}
-\subsubsection{niefunkcjonalne}
+\section{Część weryfikacyjna}
+\subsection{Rysowanie ścieżek cząstek}
 
-\subsection{Diagramy}
-\subsubsection{przypadków użycia}
-\subsubsection{klas}
 
-\newpage
-\subsection{Technologie}
-\subsubsection{Instalowanie, linkowanie OpenGL oraz niezbędnych bibliotek}
-OpenGL jest dobrze znanym standardem generowania trójwymiarowej grafiki, który jest niezwykle wydajny i posiada wiele możliwości. OpenGL jest definiowany i udostępniany przez ARB (OpenGL Architecture Review Board).
-\begin{verbatim}
-# apt-cache search opengl
-\end{verbatim}
-Istnieje wiele darmowych implementacji OpenGL dla Linux, ale potrzebna jest tylko jedna. Zainstalowana zoastała FreeGLUT, ponieważ jest ona aktualna i stanowi otwartą alternatywę dla biblioteki OpenGL Utility Toolkit (GLUT):
-\begin{verbatim}
-apt-get install freeglut3 freeglut3-dev libglew-dev
-\end{verbatim}
-Przydatne jest zainstalowanie pakietu mesa-utils, aby móc używać polecenia glxinfo:
-\begin{verbatim}
-# apt-get install mesa-utils
-\end{verbatim}
-Polecenie glxinfo wyświetla użyteczne informacje o instalacji OpenGL.
-\begin{verbatim}
-sudo apt-get install glew-utils
-sudo apt-get install libglew-dev
-sudo apt-get install libsoil-dev
-\end{verbatim}
-Aby utworzyć aplikację GLFW w wierszu poleceń, skorzystano z następujących opcji linkera:
-\begin{verbatim}
--lglfw3 -lGL -lm -lXrandr -lXi -lX11 -lXxf86vm -lpthread
-\end{verbatim}
-Ostatnie trzy biblioteki są niezbędne w Ubuntu 14.04.1.
 
-\subsection{Bezier curves}
-Krzywe są zestawem nieokreślonych list punktów, które nie muszą być równe. Krzywa może być w dwuwymiarowa (krzywe płaskie) lub trójwymiarowa (przestrzeń lub krzywe przestrzeni euklidesowej). Linia jest specjalnym rodzajem krzywej, która jest prosta. Krzywa jest reprezentowana przez pewien zestaw równań, nazywany równaniem krzywej.\\
-Krzywe Béziera są parametrycznymi krzywymi, które są generowane z punktów kontrolnych. Są szeroko stosowane w grafice komputerowej i innych pokrewnych branżach, ponieważ wydają się być rozsądnie gładkie na wszystkich skalach. Krzywe Béziera mają różne stopnie - liniowe krzywe, krzywa kwadratowa, krzywa sześcienna i krzywa wysokiego rzędu. \footnote{http://www.openglprojects.in/2015/12/drawing-bezier-curves-in-opengl-c.html\#gsc.tab=0}
-Krzywa Beziera jest reprezentowana przez dwa punkty końcowe i dwa punkty kontrolne. Dlatego modyfikacja kształtu krzywej jest prosta. Postaci krzywej sześciennej Beziera:
-\begin{equation}
-B(t)=(1-t^{3})P_{0}+3(1-t)^{2}P_{1}+3(1-t)t^{2}P_{2}+t^{3}P_{3} 
-\end{equation}
 
-Stosowany wzór nazywany jest sześcienną krzywą Beziera, ponieważ mamy 2 styczne (na przykład 2 punkty w środku). P0 i P3 to dwa punkty końcowe. P1 i P2 są dwoma stycznymi punktami. Krzywa Beziera wprowadza również nową zmienną. T jest wartością pomiędzy [0-1], która w zasadzie mówi, ile punktów pośrednich chcemy między dwoma punktami końcowymi.
-\begin{table}[H]
-\caption{Kod źródłowy programu. Aproksymacja krzywych Beziera.}
-\label{tab2}
-\begin{lstlisting}[frame=single]
-GLfloat bezier(float t, GLfloat P0,
-                  GLfloat P1, GLfloat P2, GLfloat P3) {
-  // Cubic bezier Curve
-  GLfloat point = (pow((1-t), 3.0) * P0) +
-    (3 * pow((1-t),2) * t * P1) +
-    (3 * (1-t) * t * t * P2) +
-    (pow(t, 3) * P3);
-  return point;
-}
 
-void drawStuff() {
-  midpoint_x = bezier(P0.x, P1.x, P2.x, P3.x, t);
-  midpoint_y = bezier(P0.y, P1.y, P2.y, P3.y, t);
-
-  drawPoint(midpoint_x, midpoint_y);
-}
-\end{lstlisting}
-\end{table}
-
-OpenGL ma pojęcie "\ current point "\ , zaczyna się od podania pojedynczego punktu, oblicza się następny punkt za pomocą krzywej Beziera (\ textit {\ textbf {var newMidPoint}}, a następnie podaje się nowy punkt do OpenGL. OpenGL automatycznie rysuje linię między tymi dwoma punktami, ale nowy "\ current point "\ wskazuje teraz na (\textit {\textbf {newMidPoint}}. Więc przechodzi się przez pętlę, oblicza się nowy punkt krzywej Beziera (\textit {\textbf {var secondMidPoint}}, \textit {\textbf {secondMidPoint}} do OpenGL, a OpenGL rysuje linię między (\textit {\textbf {newMidPoint -> secondMidPoint}}), powtarza się kolejne kroki itracji.
-
-\newpage
-\section[Część weryfikacyjna]{Część weryfikacyjna/Wyniki eksperymentów/Wyniki symulacji}
+\subsection{Tworzenie obrazu stereoskopowego}
+\subsection{Rysowanie detektora}
 
 
 \section[Zakończenie]{Zakończenie/Wnioski/Podsumowanie}
@@ -336,6 +298,29 @@ Listuje się w sposób następujący:
 	\itemi pierwszy poziom listy - element trzeci,
 	\itemi pierwszy poziom listy - element czwarty.
 \end{itemize}
+
+\begin{table}[H]
+\caption{Kod źródłowy programu. Aproksymacja krzywych Beziera.}
+\label{tab2}
+\begin{lstlisting}[frame=single]
+GLfloat bezier(float t, GLfloat P0,
+                  GLfloat P1, GLfloat P2, GLfloat P3) {
+  // Cubic bezier Curve
+  GLfloat point = (pow((1-t), 3.0) * P0) +
+    (3 * pow((1-t),2) * t * P1) +
+    (3 * (1-t) * t * t * P2) +
+    (pow(t, 3) * P3);
+  return point;
+}
+
+void drawStuff() {
+  midpoint_x = bezier(P0.x, P1.x, P2.x, P3.x, t);
+  midpoint_y = bezier(P0.y, P1.y, P2.y, P3.y, t);
+
+  drawPoint(midpoint_x, midpoint_y);
+}
+\end{lstlisting}
+\end{table}
 
 \newpage
 \bibliographystyle{plain} % bibliography style
