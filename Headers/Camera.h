@@ -68,15 +68,7 @@ public:
         return glm::lookAt(Position, Position + Front, Up);
     }
 
-    glm::mat4 getViewMatrix(){
-        return g_view_matrix;
-    }
-
-    glm::mat4 getProjectionMatrix(){
-        return g_projection_matrix;
-    }
-
-    void computeStereoView(float aspect_ratio, float IOD, float depthZ, bool left_eye, glm::vec3 up = glm::vec3(0, 1, 0), glm::vec3 direction_z = glm::vec3(0, 0, 1) ) {
+    void computeStereoView(float aspect_ratio, float IOD, float depthZ, bool left_eye, glm::vec3 up = glm::vec3(0.0f, 100.0f, 0.0f), glm::vec3 direction_z = glm::vec3(0, 0, 1) ) {
         //mirror the parameters with the right eye
         float left_right_direction = -1.0f;
         if (left_eye)

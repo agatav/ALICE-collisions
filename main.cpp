@@ -5,6 +5,7 @@
 
 #include "Shader.h"
 #include "Camera.h"
+#include "Track.h"
 #include <iostream>
 #include <fstream>
 
@@ -27,11 +28,9 @@ bool firstMouse = true;
 float deltaTime = 0.0f;	// time between current frame and last frame
 float lastFrame = 0.0f;
 
-ifstream ifs("/home/agata/Documents/tracks/track.json");
 const char* vertexShaderPath = "/home/agata/Documents/tracks/Shaders/vertex.vert";
 const char* fragmentShaderPath = "/home/agata/Documents/tracks/Shaders/fragment.frag";
 const char* geometryShaderPath = "/home/agata/Documents/tracks/Shaders/geometry.geom";
-
 
 float rotateY = 0.0f;
 float rotateX = 0.0f;
@@ -77,47 +76,11 @@ int main()
     glViewport(0, 0, SCR_WIDTH, SCR_HEIGHT);
 
     Shader shader(vertexShaderPath, fragmentShaderPath, geometryShaderPath );
+    Track track;
 
-    Json::Value obj;
-
-    ifs >> obj; //cLion bug, works perfectly.
-    int trackSize = obj["fTracks"].size();
-    int maxPolyXValue = 0;
-
-    for (Json::Value::iterator it = obj["fTracks"].begin(); it != obj["fTracks"].end(); ++it) {
-       if ( (*it)["fPolyX"].size() > maxPolyXValue) {
-           maxPolyXValue = (*it)["fPolyX"].size();
-       }
-    }
-
-    float tracks[trackSize][maxPolyXValue*5]={};
-
+    static int trackSize = track.trackSize;
     unsigned int VBO[trackSize], VAO[trackSize];
-
-    for (Json::Value::iterator it = obj["fTracks"].begin(); it != obj["fTracks"].end(); ++it){
-        int TrackIndex = it.key().asInt();
-
-        for (int i = 0; i < (*it)["fPolyX"].size(); i++){
-            tracks[TrackIndex][i*5] = (*it)["fPolyX"][i].asFloat();
-            tracks[TrackIndex][i*5 + 1] = (*it)["fPolyY"][i].asFloat();
-            tracks[TrackIndex][i*5 + 2] = (*it)["fPolyZ"][i].asFloat();
-            tracks[TrackIndex][i*5 + 3] = 1.0;
-            tracks[TrackIndex][i*5 + 4] = 0.0;
-        }
-
-        glGenBuffers(1, &VBO[TrackIndex]);
-        glGenVertexArrays(1, &VAO[TrackIndex]);
-        glBindVertexArray(VAO[TrackIndex]);
-        glBindBuffer(GL_ARRAY_BUFFER, VBO[TrackIndex]);
-        glBufferData(GL_ARRAY_BUFFER, sizeof(tracks[TrackIndex]), &tracks[TrackIndex], GL_STATIC_DRAW);
-        glEnableVertexAttribArray(0);
-        glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), 0);
-        glEnableVertexAttribArray(1);
-        glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(2 * sizeof(float)));
-        glBindVertexArray(0);
-    }
-
-    ifs.close();
+    track.initiateBuffers(VAO, VBO);
 
     GLuint program_id = glCreateProgram();
     GLuint matrix_id = glGetUniformLocation(program_id,"MVP");
@@ -178,17 +141,18 @@ int main()
 
 void drawStereo (glm::mat4 transform, Shader shader, int trackSize, unsigned int VAO[]) {
 
-    glm::mat4 projection_matrix = camera.getProjectionMatrix();
-    shader.setMat4("projection", projection_matrix);
+    glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
+    shader.setMat4("projection", projection);
 
-    glm::mat4 view_matrix = camera.getViewMatrix();
-    shader.setMat4("view", view_matrix);
+    glm::mat4 view = camera.GetViewMatrix();
+    shader.setMat4("view", view);
 
-    glm::mat4 model_matrix = glm::mat4(1.0);
+    glm::mat4 model = glm::mat4(1.0);
 
-    transform = glm::translate(model_matrix, glm::vec3(0.0f, 0.0f, -depthZ));
-    transform = glm::rotate(model_matrix, glm::pi<float>() * rotateY, glm::vec3(0.0f, 1.0f, 0.0f));
-    transform = glm::rotate(model_matrix, glm::pi<float>() * rotateX, glm::vec3(1.0f, 0.0f, 0.0f));
+    transform = glm::scale(transform, glm::vec3(0.01, 0.01, 0.01));
+    transform = glm::translate(model, glm::vec3(0.0f, 0.0f, -depthZ));
+    transform = glm::rotate(model, glm::pi<float>() * rotateY, glm::vec3(0.0f, 1.0f, 0.0f));
+    transform = glm::rotate(model, glm::pi<float>() * rotateX, glm::vec3(1.0f, 0.0f, 0.0f));
     GLint transformLoc = glGetUniformLocation(shader.ID, "transform");
     glUniformMatrix4fv(transformLoc, 1, GL_FALSE, glm::value_ptr(transform));
 
