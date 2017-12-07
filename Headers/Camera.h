@@ -20,7 +20,8 @@ const float PITCH      =  0.0f;
 const float SPEED      =  1.5f;
 const float SENSITIVTY =  0.01f;
 const float ZOOM       =  45.0f;
-
+const float nearZ      =  0.1f;
+const float farZ       =  100.0f;
 
 class Camera
 {
@@ -32,7 +33,7 @@ public:
     glm::vec3 WorldUp;
 
     float g_initial_fov = glm::pi<float>()*0.99f;
-    glm::vec3 g_position = glm::vec3( 0, 0, 0 );
+    glm::vec3 g_position = glm::vec3(0.0f, 0.0f, -1.0f);
     glm::mat4 g_view_matrix;
     glm::mat4 g_projection_matrix;
 
@@ -44,9 +45,9 @@ public:
     float MouseSensitivity;
     float Zoom;
 
-    Camera(glm::vec3 position = glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f), float yaw = YAW, float pitch = PITCH) : Front(glm::vec3(0.0f, 0.0f, -1.0f)), MovementSpeed(SPEED), MouseSensitivity(SENSITIVTY), Zoom(ZOOM)
+    Camera(glm::vec3 g_position, glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f), float yaw = YAW, float pitch = PITCH) : Front(glm::vec3(0.0f, 0.0f, -1.0f)), MovementSpeed(SPEED), MouseSensitivity(SENSITIVTY), Zoom(ZOOM)
     {
-        Position = position;
+        Position = g_position;
         WorldUp = up;
         Yaw = yaw;
         Pitch = pitch;
@@ -67,35 +68,28 @@ public:
         return glm::lookAt(Position, Position + Front, Up);
     }
 
-
     glm::mat4 getViewMatrix(){
         return g_view_matrix;
     }
+
     glm::mat4 getProjectionMatrix(){
         return g_projection_matrix;
     }
-    void computeStereoViewProjectionMatrices(GLFWwindow* window, float IOD, float depthZ, bool left_eye) {
-        int width, height;
-        glfwGetWindowSize(window, &width, &height);
-        glm::vec3 up = glm::vec3(0, -1, 0);
-        glm::vec3 direction_z(0, 0, -1);
 
+    void computeStereoView(float aspect_ratio, float IOD, float depthZ, bool left_eye, glm::vec3 up = glm::vec3(0, 1, 0), glm::vec3 direction_z = glm::vec3(0, 0, 1) ) {
         //mirror the parameters with the right eye
         float left_right_direction = -1.0f;
         if (left_eye)
             left_right_direction = 1.0f;
-        float aspect_ratio = (float) width / (float) height;
-        float nearZ = 1.0f;
-        float farZ = 100.0f;
+
         double frustumshift = (IOD / 2) * nearZ / depthZ;
-        float top = tan(g_initial_fov / 2) * nearZ;
+        float top = tan(g_initial_fov / 2.0f) * nearZ;
         float right = aspect_ratio * top + frustumshift * left_right_direction;
         float left = -aspect_ratio * top + frustumshift * left_right_direction;
         float bottom = -top;
         g_projection_matrix = glm::frustum(left, right, bottom, top, nearZ, farZ);
         g_view_matrix = glm::lookAt( g_position - direction_z + glm::vec3(left_right_direction * IOD / 2, 0, 0),
-                             g_position + glm::vec3(left_right_direction * IOD / 2, 0, 0), up);
-
+                                     g_position + glm::vec3(left_right_direction * IOD / 2, 0, 0), up);
     }
 
 
