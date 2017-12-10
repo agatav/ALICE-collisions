@@ -51,8 +51,8 @@ public:
                 tracks[TrackIndex][i*5] = (*it)["fPolyX"][i].asFloat();
                 tracks[TrackIndex][i*5 + 1] = (*it)["fPolyY"][i].asFloat();
                 tracks[TrackIndex][i*5 + 2] = (*it)["fPolyZ"][i].asFloat();
-                tracks[TrackIndex][i*5 + 3] = 1.0;
-                tracks[TrackIndex][i*5 + 4] = 0.0;
+                tracks[TrackIndex][i*5 + 3] = (*it)["fMass"].asFloat();
+                tracks[TrackIndex][i*5 + 4] = 1.0f;
             }
 
             glGenBuffers(1, &VBO[TrackIndex]);
