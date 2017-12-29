@@ -10,7 +10,8 @@
 
 \section[Wstęp]{Wstęp}
 W przeciągu ostatnich kilku lat nauka zrobiła duży postęp w kierunku rozwoju fizyki dużych energii. Osiągnięcie to składa się z wyników dużej liczby badań oraz eksperymentów prowadzonych w różnych naukowo-badawczych instytucjach. Równolegle z naukami fizycznymi rozwiajała się również branża informatyczna, a w szczególności grafika komputerowa. Obecnie jest obserwowany coraz silniejszy trend związany z rozwojem technik stereoskopowych. Przy połączeniu badań fizycznych i grafiki komputerowej powstaje możliwość dogłębnego przestudiowania zjawisk zachodzących podczas rożnych eksperymentów. 
-%3D television and 3D glasses are becoming much more prevalent with the latest trends in consumer electronics and technological advances in wearable computing. In the market, there are currently many hardware options that allow us to visualize information with stereoscopic 3D technology
+%3D television and 3D glasses are becoming much more prevalent with the latest trends in consumer electronics and technological advances in wearable computing. In the market, there are currently many hardware options that allow us to visualize information with stereoscopic 3D technology.
+% The ability to visualize data in a stereoscopic 3D environment provides a powerful and highly intuitive platform for the interactive display of data in many applications. For example, we may acquire data from the 3D scan of a model (such as in architecture, engineering, and dentistry or medicine) and would like to visualize or manipulate 3D objects in real time.
 
 \subsection{Cele i zakres pracy}
 Pierwszym celem niniejszej pracy dyplomowej jest stereoskopwa wizualizacja detektora oraz zdarzeń ciężkich ionów w eksperymencie ALICE. Kolejnym istotnym celem pracy jest połączenie wyżej wymienionych wizualizacji do jednego spójnego obrazu.
@@ -100,6 +101,39 @@ Istenieją także filtry o innych kolorach, zachowując główną zasadę anagli
 Nowa technika wyświetlania obrazów stereoskopowych, znana również pod tytułem INFITEC (ang. Interference filter technique, technika filtrowania interferencyjnego). Główna idea tej techniki jest podobna do technik anaglifowych: pokazanie dwóch obrazów z różniącą się perspektywą, które są wykonane w różnych kolorach. Jednak do osiągnięcia efektu stereoskopowego za pośrednictwem wizualizacji wielopasmowych jest wykorzystany taki fakt, że widmo światła widzialnego można podzielić na fale o różnej długości używając do tego filtrów optycznych \cite{infitec}.
 
 Światło widzialne jest podzielone na 6 części, po 2 na każdy z podstawowych kolorów: czerwony, zielony oraz niebieski. Poszczególne części przeznaczone są dla jednego oka. W ten sposób lekko różniące się barwy docierają do każdego oka z osobna. Wykorzystując niewystarczającą wrażliwośc mózgu na tak niedużą różnicę, technika wizualizacji welopasmowej stwarza obrazy pełnokolorowe.  
+
+\subsubsection{Porównanie technik stereoskopowych}
+\begin{table}[H]
+\caption{Porównanie technik stereoskopowych.}
+\centering
+\footnotesize
+\label{tab11}
+\begin{tabular}{!{\color{sapphire}\vrule width 1pt}m{0.146\textwidth}!{\color{black}\vrule width 1pt}m{0.146\textwidth}!{\color{black}\vrule width 1pt}m{0.146\textwidth}!{\color{black}\vrule width 1pt}m{0.146\textwidth}!{\color{black}\vrule width 1pt}m{0.146\textwidth}!{\color{black}\vrule width 1pt}m{0.146\textwidth}!{\color{sapphire}\vrule width 1pt}}
+	\arrayrulecolor{sapphire}\hline
+	\Centering\bfseries Nazwa technologii &
+	\Centering\bfseries Kolory &
+	\Centering\bfseries Rozdzielczość &
+	\Centering\bfseries Specjalny monitor &
+	\Centering\bfseries Liczba widzów &
+	\Centering\bfseries Koszt \\
+	\hline
+	\arrayrulecolor{black}
+	Side by side & Obraz pełnokolorowy & Wysoka & Niekonieczny & Ograniczona & Średni \\ 
+	\hline
+	Single image & Całkowity brak kolorów & Średnia & Nie & Ograniczona & Niski \\ 
+	\hline
+	Stereoskopia pasywna & Obraz pełnokolorowy & Wysoka & Tak & Duża & Średni \\ 
+	\hline
+	Stereoskopia aktywna & Obraz pełnokolorowy & Wysoka & Tak & Ograniczona & Wysoki \\ 
+	\hline
+	Anaglify & Całkowity brak kolorów & Średnia & Nie & Duża & Bardzo niski \\ 
+	\hline
+	Wizualizacje wielopasmowe & Obraz pełnokolorowy & Wysoka & Nie & Ograniczona & Bardzo wysoki \\ 
+	\arrayrulecolor{sapphire}\hline
+\end{tabular}
+\end{table}
+
+Po porównaniu opisanych technik stereoskopowych zostały wybrane 2 do głędszego przestudiowania: technika typu syde by side oraz stereoskopia aktywna. 
 
 \newpage
 \subsection{Biblioteka OpenGL}
@@ -257,7 +291,7 @@ Zespół detektorów cylindrycznych (od wewnątrz na zewnątrz: ITS\footnote{The
 
 \begin{figure}[H]
 		\centering
- 		\includegraphics[width=16cm]{detector.png}
+ 		\includegraphics[width=16.0cm]{detector.png}
  		\captionsetup{font={up, footnotesize}}
     	\caption{Detektor ALICE \cite{aliceofficial}.}
  		\label{rys9}
@@ -405,32 +439,15 @@ Jednym ze sposobów integracji JsonCpp z projektem jest dołączenie plików z k
 \subsection{Macierze modelu, widoku, projekcji}
 Obraz wyświetlany na ekranie --- to wierzchołki o konkretnych współrzędnych dwuwymiarowych przedstawiające scenę 3D, lecz początkowo scenę tworzy się w przestrzeni trójwymiarowej. Przejścia z jednego układu współrzędnych na inny są znacznie wygodniejsze przy użyciu macierzy transformacji: modelu, widoku oraz projekcji. 
 
-Lokalny układ współrzędnych to taki układ, w którym obiekt ma swój początek. Położenia wierzchołków obiektu są zmieniane względem początku układu lokalnego. Lokalne układy współrzędnych są przeliczane na współrzędne świata, dzięki temu obiekty są rozmieszczane w różnych miejscach sceny. W kolejnych krokach układ współrzędnych świata jest przekształcany na widok z perspektywy kamery. Po wprowadzeniu współrzędnych do widoku są one zmieniane na współrzędne klipu. Decydującym faktem jest to, że współrzędne klipu są przetwarzane w zakresie (-1.0; 1.0), określając jednoznacznie wierchołki, które mają być wyświetlone na ekranie. Ostateczny obraz powstaje po przeliczeniu współrzędnych klipu na współrzędne ekranu, które są następnie przesyłane do rasteryzatora. 
-
-Stąd przyjęto założenie, że wszystkie wierzchołki modelu są w lokalnym układzie współrzędnych obiektu. Natomiast macierz modelu reprezentuje  obiekt w układzie współrzędnych świata, ze względu na możliwość skalowania, obrotu czy translacji. Widok jest z reguły przypisywany do kamery. Macierz projekcji początkowo przypisywana jest do przestrzeni klipu w zakresie (-1000; 1000) na każdej osi, lecz ostatecznie jest normalizowana do zakresu (-1.0; 1.0). Wszystkie wierzchołki umieszczone poza tym zakresem nie będą widoczne na ekranie.
-
-\subsection{Rysowanie ścieżek cząstek}
-W celu narysowania ścieżek cząstek niezbędne są wierzchołki składające się na nie. Zgodnie z założeniem początkowym są one odczytywane z pliku JSON. Współrzędne odczytanych wierzchołków są zapisywane do wspólnej tablicy. Wraz ze ścieżkami są odczytywane masy cząstek, po których zostały ślady. Masa cząstki jest później używana do kolorowania tracka.
-
-Zdefiniowane wierzchołki są wysyłane na wejście modułu cieniującego wierzchołków dla dalszego przetwarzania. Odbywa się to poprzez zaalokowanie pamięci w procesorze graficznym, skonfigurowanie sposobu interpretowania tej pamięci przez OpenGL oraz określenie sposobu wysyłania danych do karty graficznej. Zatem moduł cieniujący wierzchołków przetwarza tylko taką liczbę punktów, jaka została zdefiniowana w pamięci.
-
-Moduł cieniujący wierzchołków pozwala na określenie dowolnych danych wejściowych w postaci atrybutów wierzchołków. Oznacza to, że poszczególne części danych wejściowych są ręcznie przypisywane do atrybutów wierzchołka. W takim przypadku potrzebne jest określenie, w jaki sposób OpenGL będzie interpretować dane przed renderowaniem. Założono, że:
-\begin{itemize}
-\itemi dane pozycji są przechowywane jako 32-bitowe (4 bajty) wartości zmiennoprzecinkowe;
-\itemi każda pozycja składa się z 5 wartości: 3 współrzędnych położenia i 2 pozycji koloru;
-\itemi nie ma pustych miejsc w tablicy, wszystkie wartości są obok siebie;
-\itemi pierwsza wartość jest początkiem bufora.
-\end{itemize}
-Używając funkcji glEnableVertexAttribArray określono w jaki sposób dane wierzchołków będą interpretowane.
-
-Obiekt tablicy wierzchołków (ang. VAO --- Vertex Array Object) jest powiązany z obiektem bufora wierzchołków. Stąd wszelkie kolejne wywołania atrybutów wierzchołków będą przechowywane wewnątrz VAO. Ma to tę zaletę, że podczas konfigurowania wskaźników atrybutów wierzchołków wystarczy je wywołać tylko raz. Rysując obiekt można po prostu powiązać odpowiedni VAO, dzięki temu przełączanie pomiędzy różnymi konfiguracjami danych a konfiguracją wierzchołków jest bardzo proste.
-
-Do przechowywania dużej liczby wierzchołków w pamięci GPU (ang. Graphics Processing Unit, procesor graficzny), a także do zarządzania tym zasobem posłużono się buforem wierzchołków obiektów (ang. VBO --- Vertex Buffer Objects). Zaletą tego rozwiązania jest bezpośrednie przesyłanie dużej ilości danych do karty graficznej. Gdy niezbędne dane już są w pamięci karty graficznej, moduł cieniujący wierzchołków ma praktycznie natychmiastowy dostęp do wierzchołków, dzięki czemu działa z wyjątkową szybkością. 
-
-Następnie były stworzone macierze transformacji. Zostały one przekazane do modułów cieniujących, tam zdefiniowano je jako uniformy i przemnożono ze współrzędnymi wierzchołków. Moduł cieniujący fragmentów jest dość prosty w tym przypadku, gdyż jedynie określa kolor ścieżki, która została po cząstce.
-
-Pisanie, kompilowanie i zarządzanie modułami cieniującymi może być dość kłopotliwe, dlatego została zaimplementowana klasa Shader. Odczytuje ona moduły z dysku, kompiluje je, łączy oraz sprawdza błędy. 
-%Antyaliasing?
+Lokalny układ współrzędnych to taki układ, w którym obiekt ma swój początek. Położenia wierzchołków obiektu są zmieniane względem początku układu lokalnego. Lokalne układy współrzędnych są przeliczane na współrzędne świata, dzięki temu obiekty są rozmieszczane w różnych miejscach sceny. W kolejnych krokach układ współrzędnych świata jest przekształcany na widok z perspektywy kamery. Po wprowadzeniu współrzędnych do widoku są one zmieniane na współrzędne rzutni. Decydującym faktem jest to, że współrzędne rzutni są przetwarzane w zakresie (-1.0; 1.0), określając jednoznacznie wierchołki, które mają być wyświetlone na ekranie. Ostateczny obraz powstaje po przeliczeniu współrzędnych rzutni na współrzędne ekranu, które są następnie przesyłane do rasteryzatora. Opisane prześcia i transformacje macierzy są zilustrowane na rys.\ref{rys11}.
+\begin{figure}[H]
+		\centering
+ 		\includegraphics[width=12.0cm]{coordinate_systems.png}
+ 		\captionsetup{font={up, footnotesize}}
+    	\caption{Przejścia z jednego układu współrzędnych na inny \cite{opengltutorial}.}
+ 		\label{rys11}
+\end{figure}
+Stąd przyjęto założenie, że wszystkie wierzchołki modelu są w lokalnym układzie współrzędnych obiektu. Natomiast macierz modelu reprezentuje  obiekt w układzie współrzędnych świata, ze względu na możliwość skalowania, obrotu czy translacji. Widok jest z reguły przypisywany do kamery. Macierz projekcji początkowo przypisywana jest do przestrzeni rzutni w zakresie (-1000; 1000) na każdej osi, lecz ostatecznie jest normalizowana do zakresu (-1.0; 1.0). Wszystkie wierzchołki umieszczone poza tym zakresem nie będą widoczne na ekranie.
 
 \subsection{Kamera}
 Jednym z wymagań funkcjonalnych było sterowanie kamerą w celu przesunięcia bądź przybliżenia widoku. Umożliwia to plik nagłówkowy Camera.h.
@@ -450,22 +467,214 @@ Obroty kamery zostały zrealizowane przy użyciu macierzy obrotu i funkcji trygo
 
 Również wprowadzono do programu obsługę przybliżenia. Rozwiązano to używając właściwości "pola widzenia"\ : jak pole widzenia staje się mniejsze, rzutowana przestrzeń sceny zmniejsza się, dając iluzję powiększania. Do sterowania powiększaniem używa się kółka myszki.
 
+\newpage
+\subsection{Rysowanie ścieżek cząstek}
+W celu narysowania ścieżek cząstek niezbędne są wierzchołki składające się na nie. Zgodnie z założeniem początkowym są one odczytywane z pliku JSON. Współrzędne odczytanych wierzchołków są zapisywane do wspólnej tablicy. Wraz ze ścieżkami są odczytywane masy cząstek, po których zostały ślady. Masa cząstki jest później używana do kolorowania toru.
+
+\subsubsection{Odczytanie danych}
+Proces odczytania danych ze specjalnie przygotowanego pliku JSON jest realizowany z użyciem biblioteki JsonCpp. W tabeli \ref{tab6} jest przedstawiony kawałek kodu źródłowego, który deserializuje dane JSON (Json::Reader readerTracks) i zapisuje odczytane wartości do tablicy dwuwymiarowej. Json::Value reprezentuje wartość JSON, zmienna ifs przekazuje ścieżkę do pliku do strumienia wejściowego (ang. ifstream, strumień wejściowy do obsługi plików).
+\begin{table}[H]
+\caption{Kod źródłowy programu. Odczytanie danych z pliku JSON.}
+\label{tab6}
+\begin{lstlisting}[frame=single]  % Start your code-block
+
+Json::Value objTracks; 
+Json::Reader readerTracks; 
+// parsowanie dostarczonego pliku do obiektu typu Value;
+readerTracks.parse(ifs,objTracks); 
+
+for (Json::Value::iterator it = objTracks["fTracks"].begin(); 
+ it != objTracks["fTracks"].end(); ++it){
+  int TrackIndex = it.key().asInt();
+  for (int i = 0; i < (*it)["fPolyX"].size(); i++){
+   tracks[TrackIndex][i*5] = (*it)["fPolyX"][i].asFloat();
+   tracks[TrackIndex][i*5 + 1] = (*it)["fPolyY"][i].asFloat();
+   tracks[TrackIndex][i*5 + 2] = (*it)["fPolyZ"][i].asFloat();
+   tracks[TrackIndex][i*5 + 3] = (*it)["fMass"].asFloat();
+   tracks[TrackIndex][i*5 + 4] = 1.0f;
+  }
+\end{lstlisting}
+\end{table}
+Zdefiniowana w ten sposób tablica wierzchołków jest wysyłana na wejście modułu cieniującego wierzchołków dla dalszego przetwarzania. Odbywa się to poprzez zaalokowanie pamięci w procesorze graficznym, skonfigurowanie sposobu interpretowania tej pamięci przez OpenGL oraz określenie sposobu wysyłania danych do karty graficznej. Zatem moduł cieniujący wierzchołków przetwarza tylko taką liczbę punktów, jaka została zdefiniowana w pamięci.
+
+\subsubsection{Inicjalizowanie buforów}
+Moduł cieniujący wierzchołków pozwala na określenie dowolnych danych wejściowych w postaci atrybutów wierzchołków. Oznacza to, że poszczególne części danych wejściowych są ręcznie przypisywane do atrybutów wierzchołka. W takim przypadku potrzebne jest określenie, w jaki sposób OpenGL będzie interpretować dane przed renderowaniem. Założono, że:
+\begin{itemize}
+\itemi dane pozycji są przechowywane jako 32-bitowe (4 bajty) wartości zmiennoprzecinkowe;
+\itemi każda pozycja składa się z 5 wartości: 3 współrzędnych położenia i 2 pozycji koloru;
+\itemi nie ma pustych miejsc w tablicy, wszystkie wartości są obok siebie;
+\itemi pierwsza wartość jest początkiem bufora.
+\end{itemize}
+Używając funkcji glEnableVertexAttribArray określono w jaki sposób dane wierzchołków będą interpretowane. Przykład implementacji powyższych założeń jest przedstawiony w tabeli \ref{tab7}.
+\begin{table}[H]
+\caption{Kod źródłowy programu. Przekazanie danych do VAO i VBO.}
+\label{tab7}
+\begin{lstlisting}[frame=single]  % Start your code-block
+
+ glGenBuffers(1, &VBO[TrackIndex]);
+ glGenVertexArrays(1, &VAO[TrackIndex]);
+ glBindVertexArray(VAO[TrackIndex]);
+ glBindBuffer(GL_ARRAY_BUFFER, VBO[TrackIndex]);
+ glBufferData(GL_ARRAY_BUFFER, sizeof(tracks[TrackIndex]), 
+  &tracks[TrackIndex], GL_STATIC_DRAW);
+ glEnableVertexAttribArray(0);
+ glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), 0);
+ glEnableVertexAttribArray(1);
+ glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), 
+  (void*)(2 * sizeof(float)));
+ glBindVertexArray(0);
+}
+\end{lstlisting}
+\end{table}
+Obiekt tablicy wierzchołków (ang. VAO --- Vertex Array Object) jest powiązany z obiektem bufora wierzchołków. Stąd wszelkie kolejne wywołania atrybutów wierzchołków będą przechowywane wewnątrz VAO. Ma to tę zaletę, że podczas konfigurowania wskaźników atrybutów wierzchołków wystarczy je wywołać tylko raz. Rysując obiekt można po prostu powiązać odpowiedni VAO, dzięki temu przełączanie pomiędzy różnymi konfiguracjami danych a konfiguracją wierzchołków jest bardzo proste.
+
+Do przechowywania dużej liczby wierzchołków w pamięci GPU (ang. Graphics Processing Unit, procesor graficzny), a także do zarządzania tym zasobem posłużono się buforem wierzchołków obiektów (ang. VBO --- Vertex Buffer Objects). Zaletą tego rozwiązania jest bezpośrednie przesyłanie dużej ilości danych do karty graficznej. Gdy niezbędne dane już są w pamięci karty graficznej, moduł cieniujący wierzchołków ma praktycznie natychmiastowy dostęp do wierzchołków, dzięki czemu działa z wyjątkową szybkością.
+
+\subsubsection{Moduły cieniujące}
+Następnie były stworzone macierze transformacji. Zostały one przekazane do modułów cieniujących, tam zdefiniowano je jako uniformy i przemnożono ze współrzędnymi wierzchołków. Moduł cieniujący fragmentów jest dość prosty w tym przypadku, gdyż jedynie określa kolor ścieżki, która została po cząstce. Poniżej są umieszczone moduły cieniujące wierzchołków (tabela \ref{tab8}) oraz geometrii (tabela \ref{tab9}).
+\begin{table}[H]
+\caption{Kod źródłowy programu. Moduł cieniujący wierzchołków.}
+\label{tab8}
+\begin{lstlisting}[frame=single]  % Start your code-block
+
+#version 420 core
+layout (location = 0) in vec3 aPos;
+layout (location = 1) in vec2 aColor;
+out VS_OUT {
+    vec2 color;
+} vs_out;
+uniform mat4 transform;
+uniform mat4 view;
+uniform mat4 projection;
+void main(){
+ vs_out.color = aColor;
+ gl_Position = projection * view * transform * 
+           vec4(aPos.x, aPos.y, aPos.z, 1.0); }
+\end{lstlisting}
+\end{table}
+\begin{table}[H]
+\caption{Kod źródłowy programu. Moduł cieniujący geometrii.}
+\label{tab9}
+\begin{lstlisting}[frame=single]  % Start your code-block
+
+#version 420 core
+layout (lines_adjacency) in;
+layout (line_strip, max_vertices = 4) out;
+in VS_OUT {
+    vec2 color;
+} gs_in[];
+out vec2 fColor;
+void main(void){
+ fColor = gs_in[0].color;
+ int i;
+ for (i = 0; i < gl_in.length(); i++){
+  gl_Position = gl_in[i].gl_Position;
+  EmitVertex(); } }
+\end{lstlisting}
+\end{table}
+
+Moduł cieniujący geometrii w przeciwieństwie do modułu cieniującego wierzchołków, posiada wszystkie dane określające prymityw. Dla każdego prymitywu wejściowego, moduł cieniujący geometrii ma dostęp jak do wszystkich jego wierzchołków tak i do informacji o sąsiedztwie, jeśli takie informacje zostały wcześniej określone. W przypadku opracowywanego programu na wejście modułu cieniującego geometrii zostały podane przylegające do siebie kawałki krzywej (ang. lines adjacency). Na wyjściu tego modułu otrzymano jedną spójną ścieżkę.
+
+Pisanie, kompilowanie i zarządzanie modułami cieniującymi może być dość kłopotliwe, dlatego została zaimplementowana klasa Shader. Odczytuje ona moduły z dysku, kompiluje je, łączy oraz sprawdza błędy. 
+
+\subsubsection{Antyalising}
+Podczas tworzenia obrazów tórów napotkano problem zniekształcenia linii --- aliasing. Aliasing jest zjawiskiem związanym z rasteryzacją obiektów. Wszystkie wyświetlane prymitywy składają się z pewnej liczby pikseli, dlatego poszczególne punkty rastra są widoczne na urządzeniu końcowym. Poziom zniekształceń zależy od rozdzielczości ekranu. 
+
+Techniki eliminujące efekt aliasingu, nazywane są antyaliasingiem (lub wygładzaniem krawędzi). Najczęściej polegają one na dodaniu pikseli uzupełniających brzegi figury lub procesie nadpróbkowania. Nadpróbkowanie sprowadza się do przeprowadzenia rasteryzacji w rozdzielczości większej niż docelowa, a następnie odpowiedniego skalowania. Biblioteka OpenGL udostępnia obie techniki antyaliasingu. 
+
+W niniejszej pracy została wykorzystana metoda uzupełniająca. Antyaliasing linii w OpenGL wymaga tylko wywołania funkcji glEnable z parametrem GL\_LINE\_SMOOTH oraz włączenia mechanizmu mieszania kolorów. Domyślnie antyaliasing jest wyłączony. 
+
+%Na każdym z umieszczonych obrazów liczba torów jest inna, jak również widoczne są ścieżki o różnych kolorach (wartość określana z masy cząstki). 
+%4 obrazy z różnych plików
+
+\newpage
 \subsection{Rysowanie detektora}
-\subsection{Tworzenie obrazu stereoskopowego}
-Podstawowym celem niniejszej pracy dyplomowej było stworzenie efektu widzenia stereoskopowego w różnych technikach.
-\subsubsection{Technologia pasywna}
-Wizualicje stereoskopowe w technice pasywnej wymagają przygotowanych wcześniej obrazów wykonanych techniką side by siede: dwa obrazy z różniącą się perspektywą obok siebie. Dla wyrenderowania takich obrazów w OpenGL muszą być dopasowane regulacja asymetryczna wraz z 
+1. Wczytaj dane poprzez parsowanie Collady (assimp ma wbudowany parser)
+2. Stwórz siatkę i policz kolory
+3. Wyświetlaj 2.
 
-W OpenGL tworzenie równoległego renderowania trójwymiarowego wymaga asymetrycznego dopasowania, jak również dostosowania widoku ekranu (to znaczy renderowanego obszaru) - asymetrycznego równoległego rzutu w kształcie ściętego stożka lub równoważnego przesunięcia obiektywu w fotografii. Ta technika nie wprowadza pionowej paralaksy i jest powszechnie stosowana w renderowaniu stereoskopowym. Aby zilustrować tę koncepcję, poniższy diagram pokazuje geometrię sceny, którą użytkownik widzi z prawego oka:
-
-
+1 duży obiekt scena w assimpie, z niego wyciągamy resztę danych. 
+Problem z plikiem .dae; mój komp nie wyciąga odbrazu.
 
 
-In OpenGL, creating side-by-side 3D rendering requires asymmetric adjustment as well as viewport adjustment (that is, the area to be rendered) – asymmetric frustum parallel projection or equivalently to lens-shift in photography. This technique introduces no vertical parallax and widely adopted in the stereoscopic rendering. To illustrate this concept, the following diagram shows the geometry of the scene that a user sees from the right eye:
+\newpage
+\subsection{Tworzenie obrazu stereoskopowego w technologii side by side}
+Wizualicje stereoskopowe w technice side by side wymagają przygotowanych wcześniej dwóch obrazów z różniącą się perspektywą i umieszczenia tych obrazów obok siebie. Dla wyrenderowania różniących się perspektyw w OpenGL muszą być dopasowane regulacja asymetryczna wraz z widokiem renderowanego obszaru. Obszar widoku jest równoległym rzutem asymetrycznym w kształcie ściętego stożka lub równoważnym przesunięciem obiektywu w fotografii. 
 
+Opisywana technika nie wprowadza pionowej paralaksy i jest powszechnie stosowana w renderowaniu stereoskopowym \cite{openglCookbook}. Do zilustrowania koncepcji dla prawego oka (dla lewego oka są wykonywane analogiczne transformację w lustrzanym odbiciu) wykorzystano rys. \ref{rys10}. Przesunięcie reprezentuje wielkość odchylenia dla regulacji asymetrycznej ściętego stożka.
 
-\subsubsection{Technologia aktywna} 
+\begin{figure}[H]
+		\centering
+ 		\includegraphics[width=10cm]{stereoscopicGL.png}
+ 		\captionsetup{font={up, footnotesize}}
+    	\caption{Geometria sceny, którą użytkownik widzi z perspektywy prawego oka \cite{openglCookbook}.}
+ 		\label{rys10}
+\end{figure}
 
+Kod źródłowy umieszczony w tabeli \ref{tab5} obrazuje implementację tworzenia rzutowania i wyświetlania macierzy dla stereoskopowej wizualizacji. Kod wykorzystuje odległość między oczyma (zmienna IOD w kodzie), odległość płaszczyzny obrazu (zmienna depthZ) oraz odległość bliskiej płaszczyzny rzutowania (zmienna nearZ).  Wymienione znienne są użyte do określenia wartości przesunięcia. W przedstawionym kodzie źródłowym są zaimplementowane również obliczenie macierzy projekcji i widoku, skorzystano do tego z funkcji biblioteki GLM. 
+
+W tabeli \ref{tab10} zaprezentowano implementację widoku dla każdego oka poprzez odpowiednie ustawienia macierzy projekcji i widoku. Dla każdego oka położenie kamery jest przekładane o połowę odległości między oczyma (jak zostało pokazane na rys. \ref{rys10}). 
+
+Kod źródłowy w tabelach \ref{tab5} i \ref{tab10} był stworzony w oparciu o \cite{openglCookbook}. Ostateczny wynik renderowania składa się z dwóch oddzielnych obrazów po obu stronach ekranu.
+\begin{table}[H]
+\caption{Kod źródłowy programu. Implementacja przekształceń macierzy stereoskopowych.}
+\label{tab5}
+\begin{lstlisting}[frame=single]  % Start your code-block
+
+void computeStereoView(float aspect_ratio, float IOD, float depthZ, 
+  bool left_eye, glm::vec3 up = glm::vec3(0.0f, 100.0f, 0.0f), 
+  glm::vec3 direction_z = glm::vec3(0, 0, 1) ) {
+  float left_right_direction = -1.0f;
+  if (left_eye)
+     left_right_direction = 1.0f;
+  double frustumshift = (IOD / 2) * nearZ / depthZ;
+  float top = tan(g_initial_fov / 2.0f) * nearZ;
+  float right = aspect_ratio * top + frustumshift * left_right_direction;
+  float left = -aspect_ratio * top + frustumshift * left_right_direction;
+  float bottom = -top;
+  g_projection_matrix = glm::frustum(left,right,bottom,top,nearZ,farZ);
+  g_view_matrix = glm::lookAt( g_position - direction_z + 
+  	glm::vec3(left_right_direction * IOD / 2, 0, 0),
+    g_position + glm::vec3(left_right_direction * IOD / 2, 0, 0), up); }
+\end{lstlisting}
+\end{table}
+\begin{table}[H]
+\caption{Kod źródłowy programu. Implementacja ustawień macierzy projekcji i widoku.}
+\label{tab10}
+\begin{lstlisting}[frame=single]  % Start your code-block
+
+void drawStereo (glm::mat4 transform, Shader shader, int trackSize,
+     unsigned int VAO[]) {
+ glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom),
+     (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
+ shader.setMat4("projection", projection);
+ glm::mat4 view = camera.GetViewMatrix();
+ shader.setMat4("view", view);
+ glm::mat4 model = glm::mat4(1.0);
+ transform = glm::scale(transform, glm::vec3(0.01, 0.01, 0.01));
+ transform = glm::translate(model, glm::vec3(0.0f, 0.0f, -depthZ));
+ transform = glm::rotate(model, glm::pi<float>() * rotateY, 
+     glm::vec3(0.0f, 1.0f, 0.0f));
+ transform = glm::rotate(model, glm::pi<float>() * rotateX, 
+     glm::vec3(1.0f, 0.0f, 0.0f));
+ GLint transformLoc = glGetUniformLocation(shader.ID, "transform");
+ glUniformMatrix4fv(transformLoc, 1, GL_FALSE, glm::value_ptr(transform));
+ for (int iterator = 0; iterator < trackSize; iterator++) {
+  glBindVertexArray(VAO[iterator]);
+  glDrawArrays(GL_LINE_STRIP_ADJACENCY, 0, 4); }}
+\end{lstlisting}
+\end{table}
+
+\newpage
+\subsection{Tworzenie aktywnego obrazu stereoskopowego} 
+1) Set the geometry for the view from left human eye 
+2) Set the left eye rendering buffers 
+3) Render the left eye image 
+4) Clear Z-buffer (if the same Z-buffer for left and right image is used) 
+5) Set the geometry for the view from right human eye 
+6) Set the right eye rendering buffers 
+7) Render the right eye image 
+8) Swap buffers
 \subsection{Weryfikacja poprawności}
 \subsubsection{Testy jednostkowe}
 \subsubsection{Wynik wizualny}
@@ -475,6 +684,9 @@ In OpenGL, creating side-by-side 3D rendering requires asymmetric adjustment as 
 \newpage
 \bibliographystyle{plain} % bibliography style
 \bibliography{bibliography} % add bibliography
-
+\newpage
+\listoffigures
+\newpage
+\listoftables
 
 \end{document}
