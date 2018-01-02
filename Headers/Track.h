@@ -6,7 +6,6 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <jsoncpp/json/json.h>
 
-
 using namespace std;
 ifstream ifs("/home/agata/Documents/tracks/track.json");
 ifstream ifs1("/home/agata/Documents/tracks/track.json");
