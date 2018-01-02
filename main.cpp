@@ -8,6 +8,7 @@
 #include "Track.h"
 #include <iostream>
 #include <fstream>
+#include <Model.h>
 
 using namespace std;
 
@@ -28,9 +29,12 @@ bool firstMouse = true;
 float deltaTime = 0.0f;	// time between current frame and last frame
 float lastFrame = 0.0f;
 
-const char* vertexShaderPath = "/home/agata/Documents/tracks/Shaders/vertex.vert";
-const char* fragmentShaderPath = "/home/agata/Documents/tracks/Shaders/fragment.frag";
-const char* geometryShaderPath = "/home/agata/Documents/tracks/Shaders/geometry.geom";
+const char* tracksVertexShaderPath = "/home/agata/Documents/tracks/Shaders/tracks.vert";
+const char* tracksFragmentShaderPath = "/home/agata/Documents/tracks/Shaders/tracks.frag";
+const char* tracksGeometryShaderPath = "/home/agata/Documents/tracks/Shaders/tracks.geom";
+
+const char* materialsVertexShaderPath = "/home/agata/Documents/tracks/Shaders/materials.vert";
+const char* materialsFragmentShaderPath = "/home/agata/Documents/tracks/Shaders/materials.frag";
 
 float rotateY = 0.0f;
 float rotateX = 0.0f;
@@ -75,12 +79,16 @@ int main()
     glEnable(GL_MULTISAMPLE);
     glViewport(0, 0, SCR_WIDTH, SCR_HEIGHT);
 
-    Shader shader(vertexShaderPath, fragmentShaderPath, geometryShaderPath );
-    Track track;
+    Shader shader(tracksVertexShaderPath, tracksFragmentShaderPath, tracksGeometryShaderPath );
+    Shader materialShader(materialsVertexShaderPath, materialsFragmentShaderPath);
 
-    static int trackSize = track.trackSize;
-    unsigned int VBO[trackSize], VAO[trackSize];
-    track.initiateBuffers(VAO, VBO);
+//    Track track;
+//
+//    static int trackSize = track.trackSize;
+//    unsigned int VBO[trackSize], VAO[trackSize];
+//    track.initiateBuffers(VAO, VBO);
+
+    Model ourModel("/home/agata/Documents/tracks/detector.dae");
 
     GLuint program_id = glCreateProgram();
     GLuint matrix_id = glGetUniformLocation(program_id,"MVP");
@@ -95,45 +103,66 @@ int main()
         glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        shader.use();
-        bool stereo = false;
-        if (stereo) {
-            glm::mat4 transform;
 
-            glViewport(0, 0, SCR_WIDTH / 2, SCR_HEIGHT);
-            camera.computeStereoView((float) SCR_WIDTH / (float) SCR_HEIGHT, IOD, depthZ, true);
-            drawStereo(transform, shader, trackSize, &VAO[trackSize]);
+        materialShader.use();
+        // view/projection transformations
+        glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
+        glm::mat4 view = camera.GetViewMatrix();
+        materialShader.setMat4("projection", projection);
+        materialShader.setMat4("view", view);
 
-            //Draw the RIGHT eye, right half of the screen
-            glViewport(SCR_WIDTH / 2, 0, SCR_WIDTH / 2, SCR_HEIGHT);
-            camera.computeStereoView((float) SCR_WIDTH / (float) SCR_HEIGHT, IOD, depthZ, false);
-            drawStereo(transform, shader, trackSize, &VAO[trackSize]);
-        }
-        else {
-            glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
-            shader.setMat4("projection", projection);
+        // render the loaded model
+        glm::mat4 model;
+        model = glm::translate(model, glm::vec3(0.0f, -1.75f, 0.0f)); // translate it down so it's at the center of the scene
+        model = glm::scale(model, glm::vec3(0.01f, 0.01f, 0.01f));	// it's a bit too big for our scene, so scale it down
+        materialShader.setMat4("model", model);
 
-            // camera/view transformation
-            glm::mat4 view = camera.GetViewMatrix();
-            shader.setMat4("view", view);
+        ourModel.Draw(materialShader);
 
-            glm::mat4 transform;
-            transform = glm::scale(transform, glm::vec3(0.01, 0.01, 0.01));
-            GLint transformLoc = glGetUniformLocation(shader.ID, "transform");
-            glUniformMatrix4fv(transformLoc, 1, GL_FALSE, glm::value_ptr(transform));
 
-            for (int iterator =0; iterator < trackSize; iterator++) {
-                glBindVertexArray(VAO[iterator]);
-                glDrawArrays(GL_LINE_STRIP_ADJACENCY, 0, 4);
-            }
-        }
+        // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
+        // -------------------------------------------------------------------------------
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
-    for (int iterator =0; iterator < trackSize; iterator++) {
-        glDeleteVertexArrays(1, &VAO[iterator]);
-        glDeleteBuffers(1, &VBO[iterator]);
-    }
+//        bool stereo = false;
+//        if (stereo) {
+//            glm::mat4 transform;
+//
+//            glViewport(0, 0, SCR_WIDTH / 2, SCR_HEIGHT);
+//            camera.computeStereoView((float) SCR_WIDTH / (float) SCR_HEIGHT, IOD, depthZ, true);
+//            drawStereo(transform, shader, trackSize, &VAO[trackSize]);
+//
+//            //Draw the RIGHT eye, right half of the screen
+//            glViewport(SCR_WIDTH / 2, 0, SCR_WIDTH / 2, SCR_HEIGHT);
+//            camera.computeStereoView((float) SCR_WIDTH / (float) SCR_HEIGHT, IOD, depthZ, false);
+//            drawStereo(transform, shader, trackSize, &VAO[trackSize]);
+//        }
+//        else {
+//            glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
+//            shader.setMat4("projection", projection);
+//
+//            // camera/view transformation
+//            glm::mat4 view = camera.GetViewMatrix();
+//            shader.setMat4("view", view);
+//
+//            glm::mat4 transform;
+//            transform = glm::scale(transform, glm::vec3(0.01, 0.01, 0.01));
+//            GLint transformLoc = glGetUniformLocation(shader.ID, "transform");
+//            glUniformMatrix4fv(transformLoc, 1, GL_FALSE, glm::value_ptr(transform));
+//
+//            for (int iterator =0; iterator < trackSize; iterator++) {
+//                glBindVertexArray(VAO[iterator]);
+//                glDrawArrays(GL_LINE_STRIP_ADJACENCY, 0, 4);
+//            }
+//        }
+//        glfwSwapBuffers(window);
+//        glfwPollEvents();
+//    }
+//    for (int iterator =0; iterator < trackSize; iterator++) {
+//        glDeleteVertexArrays(1, &VAO[iterator]);
+//        glDeleteBuffers(1, &VBO[iterator]);
+//    }
 
     glfwTerminate();
     return 0;
@@ -167,14 +196,16 @@ void processInput(GLFWwindow *window)
     if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
         glfwSetWindowShouldClose(window, true);
 
-    if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
+    if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS)
         camera.ProcessKeyboard(FORWARD, deltaTime);
-    if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
+    if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS)
         camera.ProcessKeyboard(BACKWARD, deltaTime);
-    if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
+    if (glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS)
         camera.ProcessKeyboard(LEFT, deltaTime);
-    if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
+    if (glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS)
         camera.ProcessKeyboard(RIGHT, deltaTime);
+//    if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
+//        stereo=true;
 }
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)

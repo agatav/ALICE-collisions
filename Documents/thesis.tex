@@ -400,7 +400,7 @@ Aktorem w danym kontekście jest użytkownik programu. Przez to, że głównym c
 	\arrayrulecolor{sapphire}\hline
 \end{tabular}
 \end{table}
-\subsection{Diagram klas}
+%\subsection{Diagram klas}
 
 \newpage
 \subsection{Technologie}
@@ -434,6 +434,12 @@ JsonCpp --- to biblioteka w języku C++ umożliwiająca manipulowanie wartościa
 
 Jednym ze sposobów integracji JsonCpp z projektem jest dołączenie plików z kodem źródłowym (pojedynczego pliku .cpp i dwóch plików .h) do projektu oraz ich kompilacja w taki sam sposób, jak każdy inny plik źródłowy. Zapewnia to spójność flag kompilacji i kompatybilności, rozwiązuje problemy powstające podczas budowania bibliotek współdzielonych lub statycznych. 
 
+\subsubsection{Google Test}
+Google Test --- to biblioteka do tworzenia testów jednostkowych w C++, może byc skompikowana na różnych platformach (m.in. Posix, Windows). Testy mogą być uruchamiane pojedynczo lub wszystkie naraz. To sprawia, że proces szukania i naprawiania jest bardzo łatwy i intuicyjny\cite{googleTest}.
+
+Spośród wielu bibliotek do testowania jesdnostkowego została wybrana ta, ponieważ przeciwieństwie do wielu innych bibliotek, struktura testowa Google ma wbudowane asercje. Można je wdrażać do oprogramowania, w którym obsługa wyjątków jest wyłączona (zazwyczaj ze względu na wydajność). Tak więc asercje mogą być również bezpiecznie stosowane w destruktorach \cite{ibmGoogle}.
+
+Przeprowadzanie testów jest proste. Wystarczy nawiązać połączenie z wcześniej zdefiniowanym makrem RUN\_ALL\_TESTS, wtedy gdy w innych bibliotekach musi być stworzona lub wprowadzona oddzielna klasa uruchamiająca wykonanie testu. 
 \newpage
 \section{Część weryfikacyjna}
 \subsection{Macierze modelu, widoku, projekcji}
@@ -677,10 +683,23 @@ void drawStereo (glm::mat4 transform, Shader shader, int trackSize,
 8) Swap buffers
 \subsection{Weryfikacja poprawności}
 \subsubsection{Testy jednostkowe}
-\subsubsection{Wynik wizualny}
+Zgodnie z zaleceniami \cite{cleanCode}, testy jednostkowe zostały stworzone dla wszystkich funkcji dostępnych publicznie, w tym funkcji nie zadeklarowanych jako statyczne oraz publicznych konstruktorów i operatorów. Testy obejmują wszystkie główne ścieżki w ramach funkcji i alternatywne gałęzi warunków. Podczas pisania testów jednostkowych trzymano się założenia, że powinny one sprawdzać zarówno przypadki podstawowe, jak i graniczne, dostarczając błędne lub losowe dane, żeby obsługa błędów również została przetestowana.
 
+Główne zasady podczas tworzenia testów jednostkowych:
+\begin{itemize}
+\itemi jeden test jednostkowy sprawdza tylko jedną rzecz;
+\itemi przypadek testowy jest krótki;
+\itemi testy przebiegają szybko;
+\itemi każdy test działa niezależne, żeby błąd w jednym nie spowodował błędy w innych testach.
+\end{itemize}
+
+Głównym celem testów jednostkowych w niniejszej pracy dyplomowej jest sprawdzenie poprawności przekazywania odczytanych danych. Przykładem może posłużyć sprawdzenie czy liczba torów cząstek odczytana z pliku JSON zgadza się z liczbą torów zapisaną do tablicy wierszchołków.
+
+%\subsubsection{Wynik wizualny}
+
+\newpage
 \section[Zakończenie]{Zakończenie/Wnioski/Podsumowanie}
-\subsection{na ile zostały spełnione wymagania}
+%\subsection{na ile zostały spełnione wymagania}
 \newpage
 \bibliographystyle{plain} % bibliography style
 \bibliography{bibliography} % add bibliography
