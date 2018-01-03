@@ -230,7 +230,7 @@ Początkowo X3D nazywał się VRML (rozszerzenie pliku .WRL), z ang. Virtual Rea
 X3D wykorzystuje siatkę wielokątów do zakodowania kształtu modelu, umożliwia przechowywanie wyglądu i danych, które wiążą się z tym parametrem. Na przeciągu ostatnich lat rozwoju tego formatu zostały dodane: kodowanie NURBS powierzchni geometrii a także możliwość gromadzenia danych o scenie i animacjach.
 
 \subsubsection{Porównanie formatów plików}
-Poniższa tabela przedstawia porównanie opisanych formatów plików 3D pod względem różnorodności przechowywanych danych. 
+Tabela \ref{tab1} przedstawia porównanie opisanych formatów plików 3D pod względem różnorodności przechowywanych danych. 
 \begin{savenotes}
 \begin{table}[H]
 \caption{Macierz funkcjonalności najpopularniejszych formatów plików 3D}
@@ -261,7 +261,7 @@ Poniższa tabela przedstawia porównanie opisanych formatów plików 3D pod wzgl
   \end{tabular}
 \end{table}
 \end{savenotes}
-Z tabeli wynika, że najwięcej informacji przechowują formaty Collada i X3D. W niszej pracy dyplomowej zostanie wykorzystany format Collada, ze względu na strukturę oraz możliwość łatwego użycia z poziomu kodu źródłowego programu.
+Z tabeli wynika, że najwięcej informacji przechowują formaty Collada i X3D. W niniejszej pracy dyplomowej zostanie wykorzystany format Collada, ponieważ pliki z rozszerzeniem .dae są łatwe w odczytaniu dzięki swojej strukturze. 
 
 \newpage
 \subsection{Biblioteki do czytania i pisania modeli 3D}
@@ -400,6 +400,7 @@ Aktorem w danym kontekście jest użytkownik programu. Przez to, że głównym c
 	\arrayrulecolor{sapphire}\hline
 \end{tabular}
 \end{table}
+
 %\subsection{Diagram klas}
 
 \newpage
@@ -584,22 +585,124 @@ Moduł cieniujący geometrii w przeciwieństwie do modułu cieniującego wierzch
 Pisanie, kompilowanie i zarządzanie modułami cieniującymi może być dość kłopotliwe, dlatego została zaimplementowana klasa Shader. Odczytuje ona moduły z dysku, kompiluje je, łączy oraz sprawdza błędy. 
 
 \subsubsection{Antyalising}
-Podczas tworzenia obrazów tórów napotkano problem zniekształcenia linii --- aliasing. Aliasing jest zjawiskiem związanym z rasteryzacją obiektów. Wszystkie wyświetlane prymitywy składają się z pewnej liczby pikseli, dlatego poszczególne punkty rastra są widoczne na urządzeniu końcowym. Poziom zniekształceń zależy od rozdzielczości ekranu. 
+Podczas tworzenia obrazów tórów cząstek napotkano problem zniekształcenia linii --- aliasing. Aliasing jest zjawiskiem związanym z rasteryzacją obiektów. Wszystkie wyświetlane prymitywy składają się z pewnej liczby pikseli, dlatego poszczególne punkty rastra są widoczne na urządzeniu końcowym. Poziom zniekształceń zależy od rozdzielczości ekranu. 
 
 Techniki eliminujące efekt aliasingu, nazywane są antyaliasingiem (lub wygładzaniem krawędzi). Najczęściej polegają one na dodaniu pikseli uzupełniających brzegi figury lub procesie nadpróbkowania. Nadpróbkowanie sprowadza się do przeprowadzenia rasteryzacji w rozdzielczości większej niż docelowa, a następnie odpowiedniego skalowania. Biblioteka OpenGL udostępnia obie techniki antyaliasingu. 
 
-W niniejszej pracy została wykorzystana metoda uzupełniająca. Antyaliasing linii w OpenGL wymaga tylko wywołania funkcji glEnable z parametrem GL\_LINE\_SMOOTH oraz włączenia mechanizmu mieszania kolorów. Domyślnie antyaliasing jest wyłączony. 
+W niniejszej pracy została wykorzystana metoda próbkowania wielokrotnego. Każdy piksel na krzywej został spróbkowany wiele razy. Dla każdego przebiegu próbki, zostało zastosowane nieduże przesunięcie wszystkich współrzędnych na ekranie. To przesunięcie jest odpowiednio mniejsze niż rzeczywisty rozmiar pikseli. Uśredniając wszystkie te próbki, otrzymuje się płynniejsze przejście kolorów \cite{glfw}. 
+
+Antyaliasing linii w OpenGL wymaga tylko wywołania funkcji glEnable z parametrem GL\_MULTISAMPLE (wielopróbkowanie) oraz funkcji glfwWindowHint(GLFW\_SAMPLES, 8), gdzie GLFW\_SAMPLES określa żądaną liczbę próbek do wykorzystania w próbkowaniu. Podając liczbę 0 jako argument wyłącza się antyliasing. 
+
+Niestety nie da się w całości wyeliminować efektu aliasingu, lecz można znacznie zmniejszyć jego skutki poprzez zastosowanie różnych metod. Jak widać z obrazów \ref{rys13} po użyciu techniki wielokrotnego próbkowania krzywe ilustrujące tory cząstek się wygładziły, aczkolwiek wydają się być nieco grubsze.
+
+\begin{figure}[H]
+	\begin{subfigure}{0.50\textwidth}
+		\centering
+ 		\includegraphics[width=\textwidth]{withAliasing.png}
+ 		\captionsetup{font={up, footnotesize}}
+    	\caption{Widoczny aliasing.}
+ 		\label{rys11}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}{0.50\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{Antialiasing.png}
+		\captionsetup{font={up, footnotesize}}
+    	\caption{Po zastosowaniu metod antyalisingowych.}
+		\label{rys12}
+	\end{subfigure}
+	\captionsetup{justification=raggedleft, font={it, footnotesize}}
+    \captionsetup{justification=justified, font={up, footnotesize}}
+    \caption{Przykład zmniejszenia efektu aliasingu na wyrenderowanych torach cząstek w opracowywanym programie.}
+    \label{rys13}
+\end{figure}
 
 %Na każdym z umieszczonych obrazów liczba torów jest inna, jak również widoczne są ścieżki o różnych kolorach (wartość określana z masy cząstki). 
 %4 obrazy z różnych plików
 
 \newpage
 \subsection{Rysowanie detektora}
-1. Wczytaj dane poprzez parsowanie Collady (assimp ma wbudowany parser)
-2. Stwórz siatkę i policz kolory
-3. Wyświetlaj 2.
+\subsubsection{Wczytanie danych z pliku Collada}
+Do wczytania modelu z dostarczonego pliku w formacie Collada użyto biblioteki Assimp. Odbywa się to poprzez ładowanie wszystkich informacji o modelu do uogólnionych struktur danych zdefiniowanych w bibliotece. Po załadowaniu modelu, wszystkie niezbędne do renderowania dane mogą być pobrane ze struktur danych Assimp. Podczas opracowywania programu korzystano z samouczek opublikowanych na stronie \cite{learnopengl}. 
 
-1 duży obiekt scena w assimpie, z niego wyciągamy resztę danych. 
+Pobierany z pliku model jest ładowany do obiektu sceny przechowującego wszystkie informacje o modelu czy scenie. Na rysunku \ref{rys14} jest pokazany diagram klas bezpośrednio dotyczący wczytanej sceny.
+\begin{figure}[H]
+		\centering
+ 		\includegraphics[width=10.0cm]{assimpClasses.jpg}
+ 		\captionsetup{font={up, footnotesize}}
+    	\caption{Diagram klas sceny wczytanej za pomocą biblioteki Assimp \cite{assimpImport}.}
+ 		\label{rys14}
+\end{figure}
+
+Klasa aiScene zawiera wskaźnik do aiNode (węzła głównego sceny), który z kolei utrzymuje wskaźniki do węzłów potomnych. Wskaźnik do aiNode rekursywnie definiuje strukturę sceny. AiScene służy również jako centralne miejsce przechowywania wszystkich siatek, materiałów lub źródeł światła. Natomiast instancje aiNode po prostu indeksują te tablice, które znajdują się w scenie. Obiekt mMesh przechowuje wszystkie istotne dane wymagane do renderowania: położenia wierzchołków, wektory normalnych, współrzędne tekstur, powierzchnie i materiały obiektu.
+
+\subsubsection{Określenie siatki detektora}
+Używając biblioteki Assimp istnieje możliwość załadowania wielu różnych modeli do jednej aplikacji, lecz po wczytaniu wszystkie dane są przechowywane w strukturach Assimp. Dla umożliwienia renderowania obiektów konieczne jest przekształcenie sruktur danych Assimp na struktury w OpenGL. 
+
+W rozpatrywanym przypadku pojedyńcza encja do narysowania jest reprezentowana przez siatkę (ang. mesh), dlatego rozbudowanie programu zaczęto od zdefiniowania własnej klasy siatki. Składa się ona z zestawu wierzchołków, gdzie każdy wierzchołek zawiera wektory położenia, normalnych.
+
+Klasa Mesh nie jest zbyt skomplikowana. W konstruktorze są podawane wszystkie potrzebne dane, funkcja setupMesh inicjalizuje bufory VAO i VBO. Siatka jest rysowana za pomocą funkcji Draw. Funkcja konstruktora jest dość prosta: publiczne zmienne klasy są ustawiane  z odpowiednimi zmiennymi argumentów konstruktora, na koniec jest wywoływane inicjalizowanie buforów --- funkcja setupMesh. 
+\begin{table}[H]
+\caption{Kod źródłowy programu. Funkcja setupMesh.}
+\label{tab12}
+\begin{lstlisting}[frame=single]  % Start your code-block
+
+ void setupMesh() {
+   glGenVertexArrays(1, &VAO);
+   glGenBuffers(1, &VBO);
+   glGenBuffers(1, &EBO);
+
+   glBindVertexArray(VAO);
+   glBindBuffer(GL_ARRAY_BUFFER, VBO);
+   glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(Vertex), 
+   	&vertices[0], GL_STATIC_DRAW);
+   glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+   glBufferData(GL_ELEMENT_ARRAY_BUFFER, 
+   	indices.size() * sizeof(unsigned int),&indices[0], 
+   	GL_STATIC_DRAW);
+   glEnableVertexAttribArray(0);
+   glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), 
+   	(void*)0);
+   glEnableVertexAttribArray(1);
+   glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex),
+   	(void*)offsetof(Vertex, Normal));
+   glBindVertexArray(0);}
+\end{lstlisting}
+\end{table}
+
+W kodzie źródłowym z tabeli \ref{tab12} użyto dodatkowego bufora --- EBO (ang. Element Buffer Objects) --- bufora elementów obiektu. W modelach przybliżanych siatką trójkątów duża część wierzchołków może się pokrywać. Lepszym rozwiązaniem jest przechowywanie nie wszystkich wierzchołków, a tylko unikatowych, wraz z określaniem kolejności, w której zostaną one wyświetlone \cite{learnopengl}. Wsparciem właśnie tej techniki jest EBO. Bufor elementów obiektu przechowuje indeksy używane przez OpenGL do podjęcia decyzji, które wierzchołki muszą być wyświetlone.
+
+\subsubsection{Wyświetlanie modelu}
+Scena może może zawierać wiele różnych siatek, dlatego utworzono klasę, która by reprezentowała model w całości. Z tego powodu w klasie Model został zdefiniowany wektor obiektów typu Mesh --- wektor skłądający się z różnych siatek odczytanych z pliku. Ładowanie danych z pliku odbywa się za pomocą funkcji loadModel, kod źródłowy tej funkcji jest przedstawiony w tabeli \ref{tab13}.
+
+\begin{table}[H]
+\caption{Kod źródłowy programu. Funkcja pobierająca model z pliku.}
+\label{tab13}
+\begin{lstlisting}[frame=single]  % Start your code-block
+
+void loadModel(string const &path) {
+Assimp::Importer importer;
+const aiScene* scene = importer.ReadFile(path, aiProcess_Triangulate |
+ aiProcess_FlipUVs | aiProcess_CalcTangentSpace | 
+ aiProcess_JoinIdenticalVertices | aiProcess_SortByPType);
+if(!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE 
+	|| !scene->mRootNode) {
+ cout << "ERROR::ASSIMP:: " << importer.GetErrorString() << endl;
+ return; }
+directory = path.substr(0, path.find_last_of('/'));
+processNode(scene->mRootNode, scene); }
+\end{lstlisting}
+\end{table}
+
+Początkowo jest tworzony obiekt Importer dedykowany do wczytywania modeli do struktur danych Assimp. Na tym obiekcie wywołano funkcję ReadFile, gdzie ścieżką do pliku Collada jest pierwszym argumentem. Jako drugi argument poprzez funkcję ReadFile są przyjmowane różne opcje używane w trakcie przetwarzania końcowego. Opcje te inicjują dodatkowe obliczenia na odczytywanych danych. Ze wszystkimi możliwymi opcjami oraz ich opisami można zapoznać się na stronie z oficjalną dokumentacją biblioteki \cite{assimpDocumentation}.
+
+Jak było pokazane na diagramie klas (rysunek \ref{rys14}) scena w Assimp ma strukturę drzewiastą. Po wczytaniu sceny przetwarzane są wszystkie jej węzły, służy do tego rekursywna funkcja processNode, która zatrzymuje swoje działanie dopiero w chwili, gdy wszystkie węzły sceny zostały już przetworzone.
+
+Jak zapewne pamiętasz ze struktury Assimpa, każdy węzeł zawiera zestaw indeksów siatki, gdzie każdy indeks wskazuje na konkretną siatkę znajdującą się w obiekcie sceny. Chcemy zatem pobrać te indeksy siatki, pobrać każdą siatkę, przetworzyć każdą siatkę, a następnie wykonać to wszystko ponownie dla każdego z węzłów podrzędnych węzła. Zawartość funkcji processNode jest pokazana poniżej:
+
+Funkcja rysowania nie jest niczym specjalnym i zasadniczo wykonuje pętle nad każdą siatką, aby wywołać odpowiednią funkcję Draw:
+
+\subsubsection{Napotkane problemy}
 Problem z plikiem .dae; mój komp nie wyciąga odbrazu.
 
 
