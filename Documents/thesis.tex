@@ -552,7 +552,6 @@ out VS_OUT {
 uniform mat4 transform;
 uniform mat4 view;
 uniform mat4 projection;
-
 void main(){
  vs_out.color = aColor;
  gl_Position = projection * view * transform * 
@@ -571,7 +570,6 @@ in VS_OUT {
     vec2 color;
 } gs_in[];
 out vec2 fColor;
-
 void main(void){
  fColor = gs_in[0].color;
  int i;
@@ -597,7 +595,7 @@ Antyaliasing linii w OpenGL wymaga tylko wywołania funkcji glEnable z parametre
 Niestety nie da się w całości wyeliminować efektu aliasingu, lecz można znacznie zmniejszyć jego skutki poprzez zastosowanie różnych metod. Jak widać z obrazów \ref{rys13} po użyciu techniki wielokrotnego próbkowania krzywe ilustrujące tory cząstek się wygładziły, aczkolwiek wydają się być nieco grubsze.
 
 \begin{figure}[H]
-	\begin{subfigure}{0.50\textwidth}
+	\begin{subfigure}{0.45\textwidth}
 		\centering
  		\includegraphics[width=\textwidth]{withAliasing.png}
  		\captionsetup{font={up, footnotesize}}
@@ -605,7 +603,7 @@ Niestety nie da się w całości wyeliminować efektu aliasingu, lecz można zna
  		\label{rys11}
 	\end{subfigure}
 	\hfill
-	\begin{subfigure}{0.50\textwidth}
+	\begin{subfigure}{0.45\textwidth}
 		\centering
 		\includegraphics[width=\textwidth]{Antialiasing.png}
 		\captionsetup{font={up, footnotesize}}
@@ -616,6 +614,28 @@ Niestety nie da się w całości wyeliminować efektu aliasingu, lecz można zna
     \captionsetup{justification=justified, font={up, footnotesize}}
     \caption{Przykład zmniejszenia efektu aliasingu na wyrenderowanych torach cząstek w opracowywanym programie.}
     \label{rys13}
+\end{figure}
+
+\begin{figure}[H]
+	\begin{subfigure}{0.5\textwidth}
+		\centering
+ 		\includegraphics[width=\textwidth]{WithAliasingDuzo.png}
+ 		\captionsetup{font={up, footnotesize}}
+    	\caption{Widoczny aliasing.}
+ 		\label{rys15}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}{0.5\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{AntialiasingDuzo.png}
+		\captionsetup{font={up, footnotesize}}
+    	\caption{Po zastosowaniu metod antyalisingowych.}
+		\label{rys16}
+	\end{subfigure}
+	\captionsetup{justification=raggedleft, font={it, footnotesize}}
+    \captionsetup{justification=justified, font={up, footnotesize}}
+    \caption{Przykład zmniejszenia efektu aliasingu na wyrenderowanych torach w przypadku dużej liczby cząstek.}
+    \label{rys17}
 \end{figure}
 
 %Na każdym z umieszczonych obrazów liczba torów jest inna, jak również widoczne są ścieżki o różnych kolorach (wartość określana z masy cząstki). 
@@ -827,7 +847,12 @@ void drawStereo (glm::mat4 transform, Shader shader, int trackSize,
 6) Set the right eye rendering buffers 
 7) Render the right eye image 
 8) Swap buffers
-\subsection{Weryfikacja poprawności}
+
+\newpage
+\subsection{Weryfikacja poprawności i jakości programu}
+Weryfikacja poprawności i jakości programu może mieć różny charakter i odnosić się do różnych etapów procesu wytwórczego. W działaniach weryfikacyjnych w niniejszej pracy dyplomowej posługiwano się wskazówkami z książki \cite{specyfikacja}.
+
+W trakcie procesu weryfikacji oceniano, a w niektórych przypadkach ulepszano, kolejno wytwarzane części pracy dyplomowej --- opisy analityczne, elementy projektu, fragmenty kodu, testy. 
 \subsubsection{Testy jednostkowe}
 Zgodnie z zaleceniami \cite{cleanCode}, testy jednostkowe zostały stworzone dla wszystkich funkcji dostępnych publicznie, w tym funkcji nie zadeklarowanych jako statyczne oraz publicznych konstruktorów i operatorów. Testy obejmują wszystkie główne ścieżki w ramach funkcji i alternatywne gałęzi warunków. Podczas pisania testów jednostkowych trzymano się założenia, że powinny one sprawdzać zarówno przypadki podstawowe, jak i graniczne, dostarczając błędne lub losowe dane, żeby obsługa błędów również została przetestowana.
 
@@ -841,15 +866,123 @@ Główne zasady podczas tworzenia testów jednostkowych:
 
 Głównym celem testów jednostkowych w niniejszej pracy dyplomowej jest sprawdzenie poprawności przekazywania odczytanych danych. Przykładem może posłużyć sprawdzenie czy liczba torów cząstek odczytana z pliku JSON zgadza się z liczbą torów zapisaną do tablicy wierszchołków.
 
-%\subsubsection{Wynik wizualny}
+\subsubsection{Zarządzanie jakością projektu}
+Po zakończeniu procesu wytwórczego oceniono końcowy produkt --- program wraz z jakością stworzonych obrazów. Zwrócono uwagę również na stopień spełnienia przez projekt wymagań funkcjonalnych i niefunkcjonalnych.
+
+\begin{table}[H]
+\caption{Stopień spełnienia wymagań fukcjonalnych.}
+\centering
+\footnotesize
+\label{tab15}
+\begin{tabular}{!{\color{sapphire}\vrule width 1pt}m{0.05\textwidth}!{\color{black}\vrule width 1pt}m{0.26\textwidth}!{\color{black}\vrule width 1pt}m{0.57\textwidth}!{\color{sapphire}\vrule width 1pt}}
+	\arrayrulecolor{sapphire}\hline
+	\Centering\bfseries Nr &
+	\Centering\bfseries Nazwa &
+	\Centering\bfseries W jakim stopniu jest spełnione \\
+	\hline
+	\arrayrulecolor{black}
+	1 & Renderowanie torów cząstek & Spełnione w 100\%, obrazy umieszczono w Appendixie1.\\ 
+	\hline
+	2 & Renderowanie detektora & Spełnione w 100\%, obrazy umieszczono w Appendixie2.\\ 
+	\hline
+	3 & Stworzenie efektu widzenia stereoskopowego & Spełnione w 100\%. Przetestowano w laboratorium graficznym z użyciem zestawu 3D.\\ 
+	\hline
+	4 & Stworzenie efektu aktywnego widzenia stereoskopowego &  \\ 
+	\hline
+	5 & Możliwość interakcji z użytkownikiem & Spełnione w 100\%, instrukcję użytkownika umieszczono w Appendixie3. \\ 
+	\arrayrulecolor{sapphire}\hline
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\caption{Stopień spełnienia wymagań niefukcjonalnych.}
+\centering
+\footnotesize
+\label{tab3}
+\begin{tabular}{!{\color{sapphire}\vrule width 1pt}m{0.05\textwidth}!{\color{black}\vrule width 1pt}m{0.26\textwidth}!{\color{black}\vrule width 1pt}m{0.57\textwidth}!{\color{sapphire}\vrule width 1pt}}
+	\arrayrulecolor{sapphire}\hline
+	\Centering\bfseries Nr &
+	\Centering\bfseries Nazwa &
+	\Centering\bfseries W jakim stopniu jest spełnione \\
+	\hline
+	\arrayrulecolor{black}
+	1 & Przenośność & Spełnione w 100\%. Program bezproblemowo uruchamiano na różnych systemach operacyjnych.\\ 
+	\hline
+	2 & Zrozumiałość & Spełnione w 100\%, instrukcję użytkownika umieszczono w Appendixie3. \\ 
+	\hline
+	3 & Czytelność kodu źródłowego & Spełnione w 70\%, niektóre rozwiązania niezgodne z zasadami czystego kodu zastosowano ze względu na specyfikacje bibliotek zewnętrznych. \\ 
+	\hline
+	4 & Tolerowanie defektów & Spełnione w 100\%, błędne dane mogą być wprowadzone tylko poprzez pliki zewnętrzne. O problemach z plikiem użytkownik zostanie poinformawany za pomocą komunikatów błędu, odpowiednich dla analizatorów składni wybranego formatu. \\
+	\hline
+	5 & Przyjazność programu dla użytkownika & Spełnione w 100\%, instrukcję użytkownika umieszczono w Appendixie3.\\  
+	\arrayrulecolor{sapphire}\hline
+\end{tabular}
+\end{table}
 
 \newpage
 \section[Zakończenie]{Zakończenie/Wnioski/Podsumowanie}
 %\subsection{na ile zostały spełnione wymagania}
 
 \cleardoublepage
-\appendix
-\section{Appendix Title}
+\begin{appendices}
+\section{Wyniki tworzenia obrazów torów cząstek}
+\begin{figure}[H]
+	\begin{subfigure}{0.50\textwidth}
+		\centering
+ 		\includegraphics[width=\textwidth]{trackScreen1.png}
+ 		\captionsetup{font={up, footnotesize}}
+    	\caption{}
+ 		\label{rys18}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}{0.50\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{trackScreen3.png}
+		\captionsetup{font={up, footnotesize}}
+    	\caption{}
+		\label{rys19}
+	\end{subfigure}
+	
+	\vskip\baselineskip
+		\begin{subfigure}{0.50\textwidth}
+		\centering
+ 		\includegraphics[width=\textwidth]{trackScreen4.png}
+ 		\captionsetup{font={up, footnotesize}}
+    	\caption{}
+ 		\label{rys20}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}{0.50\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{trackScreen5.png}
+		\captionsetup{font={up, footnotesize}}
+    	\caption{}
+		\label{rys21}
+	\end{subfigure}
+	
+	\vskip\baselineskip
+		\begin{subfigure}{0.50\textwidth}
+		\centering
+ 		\includegraphics[width=\textwidth]{trackScreen8.png}
+ 		\captionsetup{font={up, footnotesize}}
+    	\caption{}
+ 		\label{rys22}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}{0.50\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{trackScreen9.png}
+		\captionsetup{font={up, footnotesize}}
+    	\caption{}
+		\label{rys23}
+	\end{subfigure}
+    \label{rys}
+\end{figure}
+
+\section{Wyniki tworzenia obrazów stereoskopowych w technologii side by side}
+
+\section{Instrukcja użytkowania programu}
+\end{appendices}
 
 \newpage
 \bibliographystyle{plain} % bibliography style
