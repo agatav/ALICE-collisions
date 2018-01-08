@@ -994,49 +994,43 @@ Po zakończeniu procesu wytwórczego oceniono końcowy produkt --- program wraz 
 
 \newpage
 \section{Podsumowanie}
+Opracowanie wizualizacji stereoskopowych detektora ALICE wymagało podzielenia całości prac na kilka dużych etapów.
 
-analiza, projektowanie, implementacja, weryfikacja
+Określenie celów całego przedwsięwzięcia na samym początku wyznaczyło kierunek rozwoju opracowania, wyeliminowało ściezki alternatywne narzucając z góry OpenGL jako podstawową bibliotekę graficzną. Etap pozwolił naszkicować ogólny plan postępowania w dążeniu za wizją niniejszej pracy dyplomowej --- zwiększeniu atrakcyjności fizyki dużych energii poprzez obrazy stereoskopowe. 
 
-Trójwymiarowa wizualizacja naukowa i dydaktyczna pełni nieocenioną rolę w
-zastosowaniach komputerów w nauce i dydaktyce. Szczególnie interesujące zastosowania
-spotkać można w biologii, medycynie, fizyce, chemii i naukach technicznych.
-Jednak intensywny rozwój multimedialnych narzędzi prezentacyjnych sprawia,
-że coraz częściej wizualizację trójwymiarową można spotkać już w szkole podstawowej
-i również w naukach pedagogicznych. Wdrażane aktualnie w szkołach polskich
-oprogramowanie graficzne firmy Micrografx: Charisma, Snapgraphics, ABC
-flow charter, Designer, Picture Publisher dostarcza nauczycielowi i uczniowi narzę­
-dzi zarówno do przygotowywania grafiki, wykonywania prezentacji multimedialnych,
-jak i do modelowania geometrii przestrzennej. Oczywiście wszystkie prace z
-grafiką trójwymiarową przedstawiane na standardowym ekranie komputera bez stosowania
-specjalnych gogli jest tylko ograniczoną symulacją, przedstawianiem obrazu trójwymiarowego na płaszczyźnie dwuwymiarowej. Połączenie animacji
-trójwymiarowej i technologii wirtualnej rzeczywistości stanowi potężne narzędzie
-edukacyjne, które może zrewolucjonizować komputerowe systemy wspomagania
-dydaktyki. Mogą one prezentować zjawiska i procesy w realistycznych warunkach
-podobnych do rzeczywistego środowiska. Komputerowe metody wizualizacji
-naukowej i dydaktycznej są niezwykle mocnym narzędziem w rękach nauczycieli i
-uczniów
+Znaczącą cześcią tego opracowania jest etap analizy. Zaczynając od przestudiowania dostępnych technik stereoskopowych aż po poznanie eksperymentów z cząstkami w międzynarodowym laboratorium fizyki cząstek CERN. Już na tym etapie powstał pewien problem nie do ominięcia. Jak to było opisywane wcześniej, pobranie danych z repozytoriów w laboratorium ALICE sprowadziłoby się do stworzenia skomplikowanego parsera plików w języku Root. Dlatego, mimo że nie było to bezpośrednim celem niniejszej pracy, przeanalizowano różne formaty plików 3D oraz biblioteki, które by były w stanie wczytać modele z tych plików do sceny w programie. Dzięki takiej analizie stało się możliwe wykonanie zapytania o model w najbardziej pasującym rozszerzeniu (.DAE). Po części analitycznej zaczęto projektowanie oprogramowania.
 
-S
-CIENTIFIC visualization is potentially a very
-fruitful application area for virtual reality
-and should be pursued aggressively. Unlike
-the ease of some application areas, significant
-scientific-visualization applications can
-be developed with existing technology. Critical to this
-capability are high-performance three-dimensional
-graphics workstations with multiple scalar processors
-having total floating-point power of hundreds of
-megaflops; operating systems that support regularly
-scheduled preemptive lightweight threads, so that
-processes are reliably and regularly scheduled; and
-very large (more than 10 gigabytes) physical memory
-capability. The trend in workstation design toward
-faster graphics, higher computational power, operating
-systems supporting concurrent execution, and
-very large memory should be encouraged and accelerated.
+Proces projektowania w całości przebiegał zgodnie z zaleceniami z \cite{specyfikacja}. Po ogólnym opisie projektu wyspecyfikowano wymagania funkcjonalne i niefunkcjonalne, określono przypadki użycia, zaplanowano i opisano diagram klas. Na tym etapie również określono biblioteki do użycia w programie. Opracowany projekt był dużym wsparciem podczas implementacji rozwiązania, gdzyż pozwalał kontrolować przebieg prac oraz utrzymywać jakość produktu końcowego na odpowiednim poziomie.
 
+Kolejnym ważnym etapem była implementacja zaporojektowanego programu. W tej części opracowania prowadzono najwiejcej eksperymentów z różnymi wartościami mającymi wpływ na jakość tworzonych obrazów. Ponadto dużą składową etapu implementacji było testowanie. Celem testowania było doświadczalne porównanie programu z projektem. Integralną częścią weryfikacji poprawności programu było wyświetlenie obrazów końcowych z użyciem różnego sprzętu komputerowego i stereoskopowego. Testowanie oprogramowania zakończono pomyślnie, oznacza to, że produkt końcowy spełnia wymagania projektowe i dodatkowo jest akrakcyjny pod względem technologii, z których korzysta.
 
+Tak jak przy przygotowaniu przeważnej większości projektów informatycznych, tak i w niniejszym pojawiały się rozmaite trudności, których nie przewidziano wcześniej. Wbrew tym niedogodnociom zrealizowano większość celów. Reasumując założenia wstępne to:
+\begin{itemize}
+\itemi analiza dostępnych narzędzi graficznych;
+\itemi stworzenie oprogramowania z wykorzystaniem biblioteki OpenGL, które:
+	\begin{itemize}
+	\itemii wyświetla detektor ALICE;
+	\itemii zobrazowuje zderzenia cząstek w eksperymencie ALICE;
+	\end{itemize}
+\itemi osiągnięcie efektu głębi w stworzonych obrazach za pomocą dwóch technologii;
+\itemi zapewnienie przenośności oprogramowania (działa zarówno pod systemem operacyjnym Linux jak i Windows).
+\end{itemize}
 
+Nie do końca został zrealizowany cel przenośności oprogramowania. Jest to związane z wymaganiami systemowymi obsługi stereoskopii aktywnej. Obecnie liderem na rynku aktywnych obrazów stereoskopowych jest technologia Nvidia 3D Vision, która wymaga operacyjnego systemu Windows dla poprawnego działania sprzętu i sterowników. Niestety nie zostało opublikowane jeszcze rozwiązanie dla innych systemów operacyjnych. Pozostałe cele zostały w pełni zrealizowane. 
+
+\subsection{Ciąg dalszy prac}
+Wizualizacje 3D w nauce są bardzo obiecującym obszarem zastosowania. W kolejnym opracowaniu temat streoskopii zostałby rozszerzony do wirtualnej rzeczywistości. Wtedy zestaw VR (ang. Virtual Reality, wirtualna rzeczywistość) oferowałby szansę zobaczenia akceleratora LHC, detektora i centrum danych z bliska.
+
+Obecnie potężne aplikacje do wizualizacji naukowych mogą być rozwijane przy użyciu istniejących technologii dość małym kosztem. Tendencja do projektowania zwykłych komputerów w kierunku szybszej grafiki, większej mocy obliczeniowej, systemów operacyjnych wspierających współbiezność i bardzo dużej pamięci powinna wesprzeć i przyspieszyć rozwój rzeczywistości wirtualnej.
+
+Wykorzystanie najnowszych technologii skróciłoby dystans między złożoną terminologią naukową a szerokim zrozumieniem społecznym. Poprzez zanurzenie publiczności do w pełni interaktywnego środowiska możnaby zwizualizować trudne pojęcia fizyczne. Wypełniłoby to lukę między nauką, interaktywnymi mediami i wizualizacją informacji, tworząc zabawne narzędzie do wypróbowania.
+
+\subsection{Zakończenie}
+Wizualizacje trójwymiarowe w celach dydaktycznych czy naukowych stanowią nieoceniony napęd w rozwoju komputerów i nowych technologii.   Tak duży postęp narzędzi multimedialnych w ostatnich czasach sprawia, że coraz częściej wizualizacje trójwymiarowe można powszechnie spotkać na uczelniach lub w centrach rozrywki.
+
+Oczywiście obrazy trójwymiarowe przedstawiane na zwykłym ekranie 2D bez zastosowania sprzętu specjalistycznego (okularów 3D, emitera podczerwieni w przypadku stereoskopii aktywnej) są prymitywną symulacją, przedstawieniem sceny trójwymiarowej na płaszczyźnie o dwóch wymiarach. Jednak poprzez połączenie technologii wirtualnej rzeczywistości z animacją można uzyskać kolosalne narzędzie edukacyjne, które by było potężnym wsparciem dla stosowanych w tej chwili metodyk. 
+
+Mogły by one obrazować pojedyńcze zjawiska czy procesy w warunkach mocno zbliżonych do rzeczywistego środowiska.
 \newpage
 \begin{appendices}
 \section{Wyniki tworzenia obrazów torów cząstek}
