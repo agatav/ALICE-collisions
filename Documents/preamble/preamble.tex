@@ -1,7 +1,7 @@
 \documentclass[11pt,a4paper,twoside]{article}
 \usepackage[includeheadfoot, left=3cm, right=2cm, top=2.5cm, bottom=2.5cm, headheight=19.3pt]{geometry}
 
-\usepackage[russian,english,main=polish]{babel}
+\usepackage[polish]{babel}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage[scaled]{helvet}
@@ -13,6 +13,7 @@
 \usepackage{amssymb}
 \usepackage{bm}
 \usepackage{url}
+
 \usepackage{pdfpages}
 \usepackage{footnote}
 \usepackage[bookmarks, pagebackref]{hyperref}
@@ -28,6 +29,7 @@
 \usepackage[nottoc]{tocbibind}
 \usepackage{titlesec}
 \urlstyle{rm}
+
 \usepackage[ampersand]{easylist}
 \usepackage{enumitem}
 \setlist[itemize]{noitemsep, topsep=0pt, leftmargin=*, itemindent=-1cm}
@@ -68,17 +70,14 @@
 	urlcolor = black
 }
 
-
 \newcommand{\itemi}[1][sapphire]{\item[\color{#1} $\filledsquare$]}
 \newcommand{\itemii}[1][sapphire]{\item[\color{#1} $\square$]}
 \newcommand{\itemiii}[1][sapphire]{\item[\color{#1} $\bullet$]}
 
 \ListProperties(Hide=100, Progressive=1cm, Style=\color{sapphire}, Style**=\color{black}, Style*=$\square$ ,Style2*=$\bullet$)
 
-
 \newcommand{\headrulecolor}[1]{\patchcmd{\headrule}{\hrule}{\color{#1}\hrule}{}{}}
 \newcommand{\footrulecolor}[1]{\patchcmd{\footrule}{\hrule}{\color{#1}\hrule}{}{}}
-
 
 \newcommand{\infostyle}[1]
 {
@@ -90,7 +89,6 @@
 	\justify
 	\pagestyle{fancy}
 }
-
 
 \newcommand{\thesisstyle}
 {
@@ -105,7 +103,6 @@
 	\justify
 	\pagestyle{fancy}
 }
-
 
 \newcommand{\fancyfootnotetext}[2]
 {
