@@ -428,7 +428,10 @@ Wskazanie funkcji oprogramowania nie określa wszystkich cech istotnych dla uży
 \end{tabular}
 \end{table}
 
+\newpage
 \subsection{Przypadki użycia}
+Wymagania użytkownika programu mogą być pokazane jak lista zadań, które może być wykonana z użyciem rozwiajanego programu. W takim przypadku każde takie zadanie musi być opisane, z uwzględnieniem kolejności poszczególnych kroków, które by doprowadziły użytkownika do konkretnego miejsca w programie. Podsumowując, opis wymagań sprowadza się do opisu możliwych sposobów używania programu przez aktorów (użytkowników).
+
 Aktorem w danym kontekście jest użytkownik programu. Przez to, że głównym celem tej oto pracy dyplomowej są wizualizacje, wszystkie przypadki użycia sprowadzają się do oglądania wyrenderowanych scen oraz poruszania się w nich.
 
 \begin{table}[H]
@@ -470,11 +473,44 @@ Aktorem w danym kontekście jest użytkownik programu. Przez to, że głównym c
 	\itemi Przełącza ekran w tryb aktywnego widzenia 3D oraz zakłada specjalne okulary.
 	\itemi Steruje kamerą przy pomocy klawiatury i myszy.
 	\end{itemize} & Brak \\ 
+	\hline
+	FU5 & Przełączenie widoków & \begin{itemize}
+	\itemi Użytkownik uruchamia program.
+	\itemi Wybiera opcję zwykłego wyświetlania torów cząstek.
+	\itemi Wybiera opcję stereoskopowego wyświetlania detektora.
+	\itemi Przełącza ekran w tryb 3D oraz zakłada specjalne okulary.
+	\itemi Wybiera opcję zwykłego wyświetlania obrazu detektora. 
+	\itemi Zejmuje okulary 3D, przełącza ekran w tryb zwykłego wyświetlania.
+	\itemi Steruje kamerą przy pomocy klawiatury i myszy.
+	\end{itemize} & Brak \\ 
 	\arrayrulecolor{sapphire}\hline
 \end{tabular}
 \end{table}
 
-%\subsection{Diagram klas}
+
+\subsection{Diagram klas}
+Model przypadków użycia opisuje zachowanie programu z punktu widzenia zwykłego użytkownika, nie określa on natomiast sposobu, w jaki
+należy oprogramowanie stworzyć. Podstawowymi elementami programu napisanego w języku obiektowym są klasy. Mogą one być powiązane z innymi klasami programu na wiele różnych sposóbów. Nieduży rozmiar programu pozwala na projektowanie architektury na poziomie klas.
+
+Na tym etapie projektu diagram klas jest wciąż postrzegany tylko w perspektywie pojęciowej, gdzie nie podjęto jeszcze decyzji o dokładnym rozmieszczeniu w klasach metod implementujących przypadki użycia opisane w tabeli \ref{tab4}. Diagram na rysunku \ref{rys24} przedstawia wstępną wersję budowy klas w programie. 
+
+\begin{figure}[H]
+		\centering
+ 		\includegraphics[width=15.5cm]{diagramKlas.png}
+ 		\captionsetup{font={up, footnotesize}}
+    	\caption{Wstępny diagram klas programu wizualizacji.}
+ 		\label{rys24}
+\end{figure}
+
+Pisanie, kompilowanie i zarządzanie modułami cieniującymi może być dość kłopotliwe. Dlatego postanowiono zebrać te metosy do wspolnej klasy klasy Shader (moduł cieniujący). Ta klasa miałaby za zadanie odczytanie modułów z dysku, ich kompilację i łączenie, sprawdzałaby także błędy występujące w trakcie przetwarzania modułów cieniujących.
+
+Klasa Camera (kamera) odpowiadałaby za zmiany widoku przy interakcji z użytkownikiem. Zmiany widoku by zachodziły po wciśnieciu wybranych klawiszy, po poruszeniu myszą czy kółkiem myszy. Dodatkowo ta klasa obliczałaby widok stereoskopowy (computeStreoView), innymi słowy tworzyłaby dwa obrazy z różniącą się perspektywą jako materiał stereoskopowy. Wartość wyliczeniowa Camera\_Movement (ruch kamery) określałaby kierunek ruchu kamery w zależności od wciśniętego przycisku. Ułatwi to komunikację pomiędzy obsługą zdarzeń przychodzących z kalwiatury a kamerą, owocując w odpowiednie przeliczania widoku w programie. 
+
+W klasie Camera również zostaną zdefiniowane takie zmienne globalne jak szybkość poruszania się kamery, wartości kątów obrotów czy wrażliwość kamery na ruchy myszy.
+
+Klasy Mesh (siatka) i Model są musza być opracowane na potrzeby wczytania modelu z pliku o formacie Collada do programu. Konieczna będzie do zrealizowania zmiana struktur danych z biblioteki Assimp na konstrukcje obsługiwane przez OpenGl. Obiekt typu Mesh będzie przechowywał odczytane informacje o poszczególnej siatce, natomiast obiekt typu Model będzie gromadził dane o modelu jako całości. Dla poprawnego wyświetlenia modelu detektora wczytanego do obiektu typu Model zaprojektowano połączenie Model-Shader.
+
+W klasie Track wczytywano by dane z pliku JSON. Po czym byłyby aktualizowane bufory przesyłające informację prosto do karty graficznej. Ten krok przyspieszyłby generowanie obrazów nie wywierając negatywnych skutków na obrazach, przedstawiających tory cząstek po kolizji w detektorze.
 
 \newpage
 \subsection{Technologie}
@@ -663,7 +699,7 @@ Techniki eliminujące efekt aliasingu, nazywane są antyaliasingiem (lub wygład
 
 W niniejszej pracy została wykorzystana metoda próbkowania wielokrotnego. Każdy piksel na krzywej został spróbkowany wiele razy. Dla każdego przebiegu próbki, zostało zastosowane nieduże przesunięcie wszystkich współrzędnych na ekranie. To przesunięcie jest odpowiednio mniejsze niż rzeczywisty rozmiar pikseli. Uśredniając wszystkie te próbki, otrzymuje się płynniejsze przejście kolorów \cite{glfw}. 
 
-Antyaliasing linii w OpenGL wymaga tylko wywołania funkcji glEnable z parametrem GL\_MULTISAMPLE (wielopróbkowanie) oraz funkcji glfwWindowHint(GLFW\_SAMPLES, 8), gdzie GLFW\_SAMPLES określa żądaną liczbę próbek do wykorzystania w próbkowaniu. Podając liczbę 0 jako argument wyłącza się antyliasing. 
+Antyaliasing linii w OpenGL wymaga tylko wywołania funkcji glEnable z parametrem GL\_MULTISAMPLE (wielopróbkowanie) oraz funkcji glfwWindowHint(GLFW\_SAMPLES, 8), gdzie GLFW\_SAMPLES określa żądaną liczbę próbek do wykorzystania w próbkowaniu. Podając liczbę 0 jako argument wyłącza się antyliasing. Liczba 8 została wybrana po kilku eksperymentach z różnymi wartościami tego parametru. Po próbach w laboratorium postanowiono użyć dokładniej tej liczby próbek. Obrazy z różnymi parametrami są przestawione na rysunkach \ref{rys12}, \ref{rys15}, \ref{rys16}.
 
 Niestety nie da się w całości wyeliminować efektu aliasingu, lecz można znacznie zmniejszyć jego skutki poprzez zastosowanie różnych metod. Jak widać z obrazów \ref{rys13} po użyciu techniki wielokrotnego próbkowania krzywe ilustrujące tory cząstek się wygładziły, aczkolwiek wydają się być nieco grubsze.
 
@@ -680,7 +716,7 @@ Niestety nie da się w całości wyeliminować efektu aliasingu, lecz można zna
 		\centering
 		\includegraphics[width=\textwidth]{Antialiasing.png}
 		\captionsetup{font={up, footnotesize}}
-    	\caption{Po zastosowaniu metod antyalisingowych.}
+    	\caption{Po zastosowaniu GLFW\_SAMPLES z wartością parametru 8.}
 		\label{rys12}
 	\end{subfigure}
 	\captionsetup{justification=raggedleft, font={it, footnotesize}}
@@ -694,7 +730,7 @@ Niestety nie da się w całości wyeliminować efektu aliasingu, lecz można zna
 		\centering
  		\includegraphics[width=\textwidth]{WithAliasingDuzo.png}
  		\captionsetup{font={up, footnotesize}}
-    	\caption{Widoczny aliasing.}
+    	\caption{Po zastosowaniu GLFW\_SAMPLES z wartością parametru 8.}
  		\label{rys15}
 	\end{subfigure}
 	\hfill
@@ -702,7 +738,7 @@ Niestety nie da się w całości wyeliminować efektu aliasingu, lecz można zna
 		\centering
 		\includegraphics[width=\textwidth]{AntialiasingDuzo.png}
 		\captionsetup{font={up, footnotesize}}
-    	\caption{Po zastosowaniu metod antyalisingowych.}
+    	\caption{Po zastosowaniu GLFW\_SAMPLES z wartością parametru 8.}
 		\label{rys16}
 	\end{subfigure}
 	\captionsetup{justification=raggedleft, font={it, footnotesize}}
@@ -1000,7 +1036,17 @@ Określenie celów całego przedwsięwzięcia na samym początku wyznaczyło kie
 
 Znaczącą cześcią tego opracowania jest etap analizy. Zaczynając od przestudiowania dostępnych technik stereoskopowych aż po poznanie eksperymentów z cząstkami w międzynarodowym laboratorium fizyki cząstek CERN. Już na tym etapie powstał pewien problem nie do ominięcia. Jak to było opisywane wcześniej, pobranie danych z repozytoriów w laboratorium ALICE sprowadziłoby się do stworzenia skomplikowanego parsera plików w języku Root. Dlatego, mimo że nie było to bezpośrednim celem niniejszej pracy, przeanalizowano różne formaty plików 3D oraz biblioteki, które by były w stanie wczytać modele z tych plików do sceny w programie. Dzięki takiej analizie stało się możliwe wykonanie zapytania o model w najbardziej pasującym rozszerzeniu (.DAE). Po części analitycznej zaczęto projektowanie oprogramowania.
 
-Proces projektowania w całości przebiegał zgodnie z zaleceniami z \cite{specyfikacja}. Po ogólnym opisie projektu wyspecyfikowano wymagania funkcjonalne i niefunkcjonalne, określono przypadki użycia, zaplanowano i opisano diagram klas. Na tym etapie również określono biblioteki do użycia w programie. Opracowany projekt był dużym wsparciem podczas implementacji rozwiązania, gdzyż pozwalał kontrolować przebieg prac oraz utrzymywać jakość produktu końcowego na odpowiednim poziomie.
+Proces projektowania w całości przebiegał zgodnie z zaleceniami z \cite{specyfikacja}. Po ogólnym opisie projektu wyspecyfikowano wymagania funkcjonalne i niefunkcjonalne, określono przypadki użycia
+
+
+Lukę między opisem wymagań a implementacją wypełnia projekt oprogramowania, definiujący jego elementy składowe, ich zachowanie i reguły współpracy. W ten sposób projekt oprogramowania wyznacza
+schemat, zgodnie z którym zostaną napisane i uruchomione wszystkie programy. Rolą
+projektanta (architekta, dewelopera) jest stworzenie takiej architektury oprogramowa-
+nia, która zapewni spełnienie wymagań, oraz udokumentowanie tej architektury
+w postaci odpowiedniego modelu.
+
+
+, zaplanowano i opisano diagram klas. Na tym etapie również określono biblioteki do użycia w programie. Opracowany projekt był dużym wsparciem podczas implementacji rozwiązania, gdzyż pozwalał kontrolować przebieg prac oraz utrzymywać jakość produktu końcowego na odpowiednim poziomie.
 
 Kolejnym ważnym etapem była implementacja zaporojektowanego programu. W tej części opracowania prowadzono najwiejcej eksperymentów z różnymi wartościami mającymi wpływ na jakość tworzonych obrazów. Ponadto dużą składową etapu implementacji było testowanie. Celem testowania było doświadczalne porównanie programu z projektem. Integralną częścią weryfikacji poprawności programu było wyświetlenie obrazów końcowych z użyciem różnego sprzętu komputerowego i stereoskopowego. Testowanie oprogramowania zakończono pomyślnie, oznacza to, że produkt końcowy spełnia wymagania projektowe i dodatkowo jest akrakcyjny pod względem technologii, z których korzysta.
 
