@@ -553,9 +553,9 @@ Przeprowadzanie testów jest proste. Wystarczy nawiązać połączenie z wcześn
 \newpage
 \section{Część weryfikacyjna}
 \subsection{Macierze modelu, widoku, projekcji}
-Obraz wyświetlany na ekranie --- to wierzchołki o konkretnych współrzędnych dwuwymiarowych przedstawiające scenę 3D, lecz początkowo scenę tworzy się w przestrzeni trójwymiarowej. Przejścia z jednego układu współrzędnych na inny są znacznie wygodniejsze przy użyciu macierzy transformacji: modelu, widoku oraz projekcji. 
+Obraz wyświetlany na ekranie --- wierzchołki o konkretnych współrzędnych dwuwymiarowych przedstawiające scenę 3D, lecz początkowo scenę tworzy się w przestrzeni trójwymiarowej. Przejścia z jednego układu współrzędnych na inny są znacznie wygodniejsze przy użyciu macierzy transformacji: modelu, widoku oraz projekcji. 
 
-Lokalny układ współrzędnych to taki układ, w którym obiekt ma swój początek. Położenia wierzchołków obiektu są zmieniane względem początku układu lokalnego. Lokalne układy współrzędnych są przeliczane na współrzędne świata, dzięki temu obiekty są rozmieszczane w różnych miejscach sceny. W kolejnych krokach układ współrzędnych świata jest przekształcany na widok z perspektywy kamery. Po wprowadzeniu współrzędnych do widoku są one zmieniane na współrzędne rzutni. Decydującym faktem jest to, że współrzędne rzutni są przetwarzane w zakresie (-1.0; 1.0), określając jednoznacznie wierchołki, które mają być wyświetlone na ekranie. Ostateczny obraz powstaje po przeliczeniu współrzędnych rzutni na współrzędne ekranu, które są następnie przesyłane do rasteryzatora. Opisane prześcia i transformacje macierzy są zilustrowane na rys.\ref{rys11}.
+Lokalny układ współrzędnych to taki układ, w którym obiekt ma swój początek. Położenia wierzchołków obiektu są zmieniane względem początku układu lokalnego. Lokalne układy współrzędnych są przeliczane na współrzędne świata, dzięki temu obiekty są rozmieszczane w różnych miejscach sceny. W kolejnych krokach układ współrzędnych świata jest przekształcany na widok z perspektywy kamery. Po wprowadzeniu współrzędnych do widoku są one zmieniane na współrzędne rzutni. Decydującym faktem jest to, że współrzędne rzutni są przetwarzane w zakresie (-1.0; 1.0), określając jednoznacznie wierchołki, które mają być wyświetlone na ekranie. Ostateczny obraz powstaje po przeliczeniu współrzędnych rzutni na współrzędne ekranu, które są następnie przesyłane do rasteryzatora. Opisane prześcia i transformacje macierzy są zilustrowane na rysunku \ref{rys11}.
 \begin{figure}[H]
 		\centering
  		\includegraphics[width=12.0cm]{coordinate_systems.png}
@@ -566,29 +566,29 @@ Lokalny układ współrzędnych to taki układ, w którym obiekt ma swój począ
 Stąd przyjęto założenie, że wszystkie wierzchołki modelu są w lokalnym układzie współrzędnych obiektu. Natomiast macierz modelu reprezentuje  obiekt w układzie współrzędnych świata, ze względu na możliwość skalowania, obrotu czy translacji. Widok jest z reguły przypisywany do kamery. Macierz projekcji początkowo przypisywana jest do przestrzeni rzutni w zakresie (-1000; 1000) na każdej osi, lecz ostatecznie jest normalizowana do zakresu (-1.0; 1.0). Wszystkie wierzchołki umieszczone poza tym zakresem nie będą widoczne na ekranie.
 
 \subsection{Kamera}
-Jednym z wymagań funkcjonalnych było sterowanie kamerą w celu przesunięcia bądź przybliżenia widoku. Umożliwia to plik nagłówkowy Camera.h.
+Jednym z wymagań funkcjonalnych było sterowanie kamerą w celu przesunięcia bądź przybliżenia widoku. Zgodnie z założeniem projektowym w tym celu powstała klasa Camera (plik nagłówkowy Camera.h).
 
-Podchodząc do rozwiązania takiego zadania zakłada się, że za pomocą macierzy widoku wszystkie współrzędne sceny są przekształcane na współrzędne widoku względem położenia i kierunku patrzenia kamery. Stąd do zdefiniowania kamery niezbędne są: 
+Podchodząc do rozwiązania tego zadania przyjęto, że za pomocą macierzy widoku wszystkie współrzędne sceny będą przekształcane na współrzędne widoku względem położenia i kierunku patrzenia kamery. Stąd do zdefiniowania kamery niezbędne są: 
 \begin{itemize}
 \itemi położenie kamery w scenie;
 \itemi kierunek patrzenia kamery;
-\itemi wektora skierowanego w prawo od kamery;
-\itemi wektora skierowanego w górę od kamery.
+\itemi wektor skierowany w prawo od kamery;
+\itemi wektor skierowany w górę od kamery.
 \end{itemize}
-W ten sposób został utworzony układ współrzędnych, gdzie położenie kamery jest punktem początkowym, a trzy pozostałe wektory --- to prostopadłe do siebie osie. 
+W ten sposób został utworzony układ współrzędnych, gdzie położenie kamery jest punktem początkowym, a trzy pozostałe wektory to prostopadłe do siebie osie. 
 
 Funkcja glm::LookAt z biblioteki GLM przyjmuje jako argumenty położenie kamery, kierunek patrzenia oraz wektor skierowany w górę (tworzy z tego wektor skierowany w prawo od kamery), zwracając przy tym gotową macierz widoku. W głównym pliku programu została zdefiniowana funkcja processInput, która używając biblioteki GLFW zarządza danymi przychodzącymi z klawiatury. Dzięki tej funkcji łączone są określone klawisze z odpowiednimi zmianami położenia kamery.
 
-Obroty kamery zostały zrealizowane przy użyciu macierzy obrotu i funkcji trygonometrycznych. Wartości odchylenia i nachylenia kamery są pozyskiwane z ruchu myszy, gdzie poziomy ruch myszy wpływa na odchylenie, a pionowy odpowiednio na nachylenie. Zapamiętywana jest pozycja myszy w ostatniej klatce, a w aktualnej jest obliczana różnica wartości aktualnych i zapamiętanych. W zależności od wielkości obliczonych wartośći porusza się kamera. Dla uniknięcia zbyt szybkich albo dużych odchyleń (lub nachyleń) zostały wprowadzone ograniczniki, zmniejszające zakres poruszania kamerą \cite{learnopengl}. 
+Obroty kamery zostały zrealizowane przy użyciu macierzy obrotu i funkcji trygonometrycznych. Wartości odchylenia i nachylenia kamery, zgodnie z projektem, są pozyskiwane z ruchu myszy, gdzie poziomy ruch myszy wpływa na odchylenie, a pionowy odpowiednio na nachylenie. Zapamiętywana jest pozycja myszy w ostatniej klatce, a w aktualnej jest obliczana różnica wartości aktualnych i zapamiętanych. W zależności od wielkości obliczonych wartośći porusza się kamera. Dla uniknięcia zbyt szybkich albo dużych odchyleń (lub nachyleń) zostały wprowadzone ograniczniki, zmniejszające zakres poruszania kamerą \cite{learnopengl}. 
 
 Również wprowadzono do programu obsługę przybliżenia. Rozwiązano to używając właściwości "pola widzenia"\ : jak pole widzenia staje się mniejsze, rzutowana przestrzeń sceny zmniejsza się, dając iluzję powiększania. Do sterowania powiększaniem używa się kółka myszki.
 
 \newpage
 \subsection{Rysowanie ścieżek cząstek}
-W celu narysowania ścieżek cząstek niezbędne są wierzchołki składające się na nie. Zgodnie z założeniem początkowym są one odczytywane z pliku JSON. Współrzędne odczytanych wierzchołków są zapisywane do wspólnej tablicy. Wraz ze ścieżkami są odczytywane masy cząstek, po których zostały ślady. Masa cząstki jest później używana do kolorowania toru.
+W celu narysowania ścieżek cząstek niezbędne są wierzchołki składające się na nie. Zgodnie z założeniem początkowym są one odczytywane z pliku JSON. Współrzędne odczytanych wierzchołków są zapisywane do wspólnego wektora. Wraz ze ścieżkami są odczytywane masy cząstek, po których zostały ślady. Masa cząstki jest później używana do kolorowania toru.
 
 \subsubsection{Odczytanie danych}
-Proces odczytania danych ze specjalnie przygotowanego pliku JSON jest realizowany z użyciem biblioteki JsonCpp. W tabeli \ref{tab6} jest przedstawiony kawałek kodu źródłowego, który deserializuje dane JSON (Json::Reader readerTracks) i zapisuje odczytane wartości do tablicy dwuwymiarowej. Json::Value reprezentuje wartość JSON, zmienna ifs przekazuje ścieżkę do pliku do strumienia wejściowego (ang. ifstream, strumień wejściowy do obsługi plików).
+Proces odczytania danych ze specjalnie przygotowanego pliku JSON jest realizowany z użyciem biblioteki JsonCpp. W tabeli \ref{tab6} jest przedstawiony kawałek kodu źródłowego, który deserializuje dane JSON (Json::Reader readerTracks) i zapisuje odczytane wartości do wektora. Json::Value reprezentuje wartość JSON, zmienna ifs przekazuje ścieżkę do pliku do strumienia wejściowego (ang. ifstream, strumień wejściowy do obsługi plików).
 \begin{table}[H]
 \caption{Kod źródłowy programu. Odczytanie danych z pliku JSON.}
 \label{tab6}
@@ -601,13 +601,12 @@ readerTracks.parse(ifs,objTracks);
 
 for (Json::Value::iterator it = objTracks["fTracks"].begin(); 
  it != objTracks["fTracks"].end(); ++it){
-  int TrackIndex = it.key().asInt();
   for (int i = 0; i < (*it)["fPolyX"].size(); i++){
-   tracks[TrackIndex][i*5] = (*it)["fPolyX"][i].asFloat();
-   tracks[TrackIndex][i*5 + 1] = (*it)["fPolyY"][i].asFloat();
-   tracks[TrackIndex][i*5 + 2] = (*it)["fPolyZ"][i].asFloat();
-   tracks[TrackIndex][i*5 + 3] = (*it)["fMass"].asFloat();
-   tracks[TrackIndex][i*5 + 4] = 1.0f;
+   tracks.pushback((*it)["fPolyX"][i].asFloat());
+   tracks.pushback((*it)["fPolyY"][i].asFloat());
+   tracks.pushback((*it)["fPolyZ"][i].asFloat());
+   tracks.pushback((*it)["fMass"].asFloat());
+   tracks.pushback(1.0f);
   }
 \end{lstlisting}
 \end{table}
@@ -627,12 +626,12 @@ Używając funkcji glEnableVertexAttribArray określono w jaki sposób dane wier
 \label{tab7}
 \begin{lstlisting}[frame=single]  % Start your code-block
 
- glGenBuffers(1, &VBO[TrackIndex]);
- glGenVertexArrays(1, &VAO[TrackIndex]);
- glBindVertexArray(VAO[TrackIndex]);
- glBindBuffer(GL_ARRAY_BUFFER, VBO[TrackIndex]);
- glBufferData(GL_ARRAY_BUFFER, sizeof(tracks[TrackIndex]), 
-  &tracks[TrackIndex], GL_STATIC_DRAW);
+ glGenBuffers(1, &VBO);
+ glGenVertexArrays(1, &VAO);
+ glBindVertexArray(VAO);
+ glBindBuffer(GL_ARRAY_BUFFER, VBO);
+ glBufferData(GL_ARRAY_BUFFER, tracks.size()), 
+  &tracks[0], GL_STATIC_DRAW);
  glEnableVertexAttribArray(0);
  glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), 0);
  glEnableVertexAttribArray(1);
@@ -690,7 +689,7 @@ void main(void){
 
 Moduł cieniujący geometrii w przeciwieństwie do modułu cieniującego wierzchołków, posiada wszystkie dane określające prymityw. Dla każdego prymitywu wejściowego, moduł cieniujący geometrii ma dostęp jak do wszystkich jego wierzchołków tak i do informacji o sąsiedztwie, jeśli takie informacje zostały wcześniej określone. W przypadku opracowywanego programu na wejście modułu cieniującego geometrii zostały podane przylegające do siebie kawałki krzywej (ang. lines adjacency). Na wyjściu tego modułu otrzymano jedną spójną ścieżkę.
 
-Pisanie, kompilowanie i zarządzanie modułami cieniującymi może być dość kłopotliwe, dlatego została zaimplementowana klasa Shader. Odczytuje ona moduły z dysku, kompiluje je, łączy oraz sprawdza błędy. 
+Dla zarządzania modułami cieniującymi zgodnie z założeniem projektowym została zaimplementowana klasa Shader. Zdefiniowano w nej metody odczytujące moduły z dysku, kompilujące i łączące je. Została również zaimplementowana obsługa błędów. 
 
 \subsubsection{Antyalising}
 Podczas tworzenia obrazów tórów cząstek napotkano problem zniekształcenia linii --- aliasing. Aliasing jest zjawiskiem związanym z rasteryzacją obiektów. Wszystkie wyświetlane prymitywy składają się z pewnej liczby pikseli, dlatego poszczególne punkty rastra są widoczne na urządzeniu końcowym. Poziom zniekształceń zależy od rozdzielczości ekranu. 
@@ -699,9 +698,9 @@ Techniki eliminujące efekt aliasingu, nazywane są antyaliasingiem (lub wygład
 
 W niniejszej pracy została wykorzystana metoda próbkowania wielokrotnego. Każdy piksel na krzywej został spróbkowany wiele razy. Dla każdego przebiegu próbki, zostało zastosowane nieduże przesunięcie wszystkich współrzędnych na ekranie. To przesunięcie jest odpowiednio mniejsze niż rzeczywisty rozmiar pikseli. Uśredniając wszystkie te próbki, otrzymuje się płynniejsze przejście kolorów \cite{glfw}. 
 
-Antyaliasing linii w OpenGL wymaga tylko wywołania funkcji glEnable z parametrem GL\_MULTISAMPLE (wielopróbkowanie) oraz funkcji glfwWindowHint(GLFW\_SAMPLES, 8), gdzie GLFW\_SAMPLES określa żądaną liczbę próbek do wykorzystania w próbkowaniu. Podając liczbę 0 jako argument wyłącza się antyliasing. Liczba 8 została wybrana po kilku eksperymentach z różnymi wartościami tego parametru. Po próbach w laboratorium postanowiono użyć dokładniej tej liczby próbek. Obrazy z różnymi parametrami są przestawione na rysunkach \ref{rys12}, \ref{rys15}, \ref{rys16}.
+Antyaliasing linii w OpenGL wymaga tylko wywołania funkcji glEnable z parametrem GL\_MULTISAMPLE (wielopróbkowanie) oraz funkcji glfwWindowHint(GLFW\_SAMPLES, 8), gdzie GLFW\_SAMPLES określa żądaną liczbę próbek do wykorzystania w próbkowaniu. Podając liczbę 0 jako argument wyłącza się antyliasing. Liczba 8 została wybrana po kilku eksperymentach z różnymi wartościami tego parametru. Po próbach w laboratorium postanowiono użyć dokładnie tej liczby próbek. Obrazy z różnymi parametrami są przestawione na rysunkach \ref{rys12}, \ref{rys15}, \ref{rys16}.
 
-Niestety nie da się w całości wyeliminować efektu aliasingu, lecz można znacznie zmniejszyć jego skutki poprzez zastosowanie różnych metod. Jak widać z obrazów \ref{rys13} po użyciu techniki wielokrotnego próbkowania krzywe ilustrujące tory cząstek się wygładziły, aczkolwiek wydają się być nieco grubsze.
+Niestety nie da się w całości wyeliminować efektu aliasingu, lecz można znacznie zmniejszyć jego skutki poprzez zastosowanie różnych metod. Jak widać z rysunków \ref{rys13} i \ref{rys17} po użyciu techniki wielokrotnego próbkowania krzywe ilustrujące tory cząstek się wygładziły, aczkolwiek wydają się być nieco grubsze.
 
 \begin{figure}[H]
 	\begin{subfigure}{0.45\textwidth}
@@ -709,7 +708,7 @@ Niestety nie da się w całości wyeliminować efektu aliasingu, lecz można zna
  		\includegraphics[width=\textwidth]{withAliasing.png}
  		\captionsetup{font={up, footnotesize}}
     	\caption{Widoczny aliasing.}
- 		\label{rys11}
+ 		\label{rys25}
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}{0.45\textwidth}
@@ -753,9 +752,9 @@ Niestety nie da się w całości wyeliminować efektu aliasingu, lecz można zna
 \newpage
 \subsection{Rysowanie detektora}
 \subsubsection{Wczytanie danych z pliku Collada}
-Do wczytania modelu z dostarczonego pliku w formacie Collada użyto biblioteki Assimp. Odbywa się to poprzez ładowanie wszystkich informacji o modelu do uogólnionych struktur danych zdefiniowanych w bibliotece. Po załadowaniu modelu, wszystkie niezbędne do renderowania dane mogą być pobrane ze struktur danych Assimp. Podczas opracowywania programu korzystano z samouczek opublikowanych na stronie \cite{learnopengl}. 
+Do wczytania modelu z dostarczonego pliku w formacie Collada użyto biblioteki Assimp. Odbywa się to poprzez ładowanie wszystkich informacji o modelu do uogólnionych struktur danych zdefiniowanych w bibliotece. Po załadowaniu modelu, wszystkie niezbędne do renderowania dane mogą być pobrane ze struktur danych Assimp. Podczas opracowywania programu korzystano z samouczek opublikowanych na stronie internetowej \cite{learnopengl}. 
 
-Pobierany z pliku model jest ładowany do obiektu sceny przechowującego wszystkie informacje o modelu czy scenie. Na rysunku \ref{rys14} jest pokazany diagram klas bezpośrednio dotyczący wczytanej sceny.
+Pobierany z pliku model jest ładowany do obiektu sceny, przechowującego wszystkie informacje o modelu czy scenie. Na rysunku \ref{rys14} jest pokazany diagram klas bezpośrednio dotyczący wczytanej sceny.
 \begin{figure}[H]
 		\centering
  		\includegraphics[width=10.0cm]{assimpClasses.jpg}
@@ -872,7 +871,7 @@ Przed rozpoczęciem prac nad programem wizualizacji detektora zakładano, że ge
 
 Root również posiada własną platformę graficzną (Root 3D Graphics \cite{root3dGraphics}) umożliwiającą tworzenie obrazów na podstawie przeanalizowanych danych. W tej oto platformie początkowo stworzono model detektora ALICE. Bezpośrednie pobranie danych o modelu wiązałoby się z dużym nakładem prac w kierunku przestudiowania struktur danych Root 3D Graphics i stworzenia odpowiedniego programu do przekształcenia danych na konkretny format pliku 3D (na przykład .obj czy .dae). 
 
-Potrzebne rozwiązanie już zostało opracowane w CERN, ale nie zostało jeszcze upublicznione, dlatego na potrzeby niniejszej pracy inżynierskiej otrzymano gotowy plik Collada z geometrią detektora ALICE. Ze względu na to, że niezbędne oprogramowanie jest w trakcie tworzenia, otrzymany plik zawierał błędy w strukturze formatu. Ujawniało się to podczas ładowania modelu z pliku do obiektu aiScene. 
+Potrzebne rozwiązanie już zostało opracowane w CERN, ale nie zostało jeszcze upublicznione, dlatego na potrzeby niniejszej pracy inżynierskiej otrzymano gotowy plik Collada z geometrią detektora ALICE. Ze względu na to, że niezbędne oprogramowanie jest w trakcie tworzenia, otrzymany plik zawierał błędy w strukturze formatu. Ujawniało się to miedzy innymi podczas ładowania modelu z pliku do obiektu aiScene. 
 
 Przy uruchomieniu programu pojawiał się komunikat błędu: \textquotedblleft ERROR::ASSIMP:: Collada: aliceGeom.dae - Expected end of <accessor> element \textquotedblright . Ta wiadomość jest generowana przez funkcję readAccessor w pliku ColladaParser.kt (biblioteka Assimp) i świadczy o błędzie składni podczas użycia funkcji COLLADA <accessor> / <param> \cite{collada}.
 
@@ -882,7 +881,7 @@ Rozwiązano ten problem za pomocą narzędzia Blender, do którego najpierw wczy
 \subsection{Tworzenie obrazu stereoskopowego w technice pasywnej}
 Pasywne wizualicje stereoskopowe wymagają przygotowanych wcześniej dwóch obrazów z różniącą się perspektywą i umieszczenia tych obrazów obok siebie. Dla wyrenderowania różniących się perspektyw w OpenGL muszą być dopasowane regulacja asymetryczna wraz z widokiem renderowanego obszaru. Obszar widoku jest równoległym rzutem asymetrycznym w kształcie ściętego stożka lub równoważnym przesunięciem obiektywu w fotografii. 
 
-Opisywana technika nie wprowadza pionowej paralaksy i jest powszechnie stosowana w renderowaniu stereoskopowym \cite{openglCookbook}. Do zilustrowania koncepcji dla prawego oka (dla lewego oka są wykonywane analogiczne transformację w lustrzanym odbiciu) wykorzystano rys. \ref{rys10}. Przesunięcie reprezentuje wielkość odchylenia dla regulacji asymetrycznej ściętego stożka.
+Opisywana technika nie wprowadza pionowej paralaksy i jest powszechnie stosowana w renderowaniu stereoskopowym \cite{openglCookbook}. Do zilustrowania koncepcji dla prawego oka (dla lewego oka są wykonywane analogiczne transformację w lustrzanym odbiciu) wykorzystano rysunek \ref{rys10}. Przesunięcie reprezentuje wielkość odchylenia dla regulacji asymetrycznej ściętego stożka.
 
 \begin{figure}[H]
 		\centering
@@ -925,7 +924,7 @@ void computeStereoView(float aspect_ratio, float IOD, float depthZ,
 \begin{lstlisting}[frame=single]  % Start your code-block
 
 void drawStereo (glm::mat4 transform, Shader shader, int trackSize,
-     unsigned int VAO[]) {
+ Track track ) {
  glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom),
      (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
  shader.setMat4("projection", projection);
@@ -940,9 +939,7 @@ void drawStereo (glm::mat4 transform, Shader shader, int trackSize,
      glm::vec3(1.0f, 0.0f, 0.0f));
  GLint transformLoc = glGetUniformLocation(shader.ID, "transform");
  glUniformMatrix4fv(transformLoc, 1, GL_FALSE, glm::value_ptr(transform));
- for (int iterator = 0; iterator < trackSize; iterator++) {
-  glBindVertexArray(VAO[iterator]);
-  glDrawArrays(GL_LINE_STRIP_ADJACENCY, 0, 4); }}
+track.draw(); }
 \end{lstlisting}
 \end{table}
 
@@ -976,7 +973,7 @@ Główne zasady podczas tworzenia testów jednostkowych:
 Głównym celem testów jednostkowych w niniejszej pracy dyplomowej jest sprawdzenie poprawności przekazywania odczytanych danych. Przykładem może posłużyć sprawdzenie czy liczba torów cząstek odczytana z pliku JSON zgadza się z liczbą torów zapisaną do tablicy wierszchołków.
 
 \subsubsection{Zarządzanie jakością projektu}
-Po zakończeniu procesu wytwórczego oceniono końcowy produkt --- program wraz z jakością stworzonych obrazów. Zwrócono uwagę również na stopień spełnienia przez projekt wymagań funkcjonalnych i niefunkcjonalnych.
+Po zakończeniu procesu wytwórczego oceniono końcowy produkt --- program wraz z jakością stworzonych obrazów. Zwrócono uwagę również na stopień spełnienia przez oprogramowanie wymagań funkcjonalnych i niefunkcjonalnych.
 
 \begin{table}[H]
 \caption{Stopień spełnienia wymagań fukcjonalnych.}
@@ -1036,17 +1033,9 @@ Określenie celów całego przedwsięwzięcia na samym początku wyznaczyło kie
 
 Znaczącą cześcią tego opracowania jest etap analizy. Zaczynając od przestudiowania dostępnych technik stereoskopowych aż po poznanie eksperymentów z cząstkami w międzynarodowym laboratorium fizyki cząstek CERN. Już na tym etapie powstał pewien problem nie do ominięcia. Jak to było opisywane wcześniej, pobranie danych z repozytoriów w laboratorium ALICE sprowadziłoby się do stworzenia skomplikowanego parsera plików w języku Root. Dlatego, mimo że nie było to bezpośrednim celem niniejszej pracy, przeanalizowano różne formaty plików 3D oraz biblioteki, które by były w stanie wczytać modele z tych plików do sceny w programie. Dzięki takiej analizie stało się możliwe wykonanie zapytania o model w najbardziej pasującym rozszerzeniu (.DAE). Po części analitycznej zaczęto projektowanie oprogramowania.
 
-Proces projektowania w całości przebiegał zgodnie z zaleceniami z \cite{specyfikacja}. Po ogólnym opisie projektu wyspecyfikowano wymagania funkcjonalne i niefunkcjonalne, określono przypadki użycia
+Proces projektowania w całości przebiegał zgodnie z zaleceniami z \cite{specyfikacja}. Po ogólnym opisie projektu wyspecyfikowano wymagania funkcjonalne i niefunkcjonalne, określono przypadki użycia.
 
-
-Lukę między opisem wymagań a implementacją wypełnia projekt oprogramowania, definiujący jego elementy składowe, ich zachowanie i reguły współpracy. W ten sposób projekt oprogramowania wyznacza
-schemat, zgodnie z którym zostaną napisane i uruchomione wszystkie programy. Rolą
-projektanta (architekta, dewelopera) jest stworzenie takiej architektury oprogramowa-
-nia, która zapewni spełnienie wymagań, oraz udokumentowanie tej architektury
-w postaci odpowiedniego modelu.
-
-
-, zaplanowano i opisano diagram klas. Na tym etapie również określono biblioteki do użycia w programie. Opracowany projekt był dużym wsparciem podczas implementacji rozwiązania, gdzyż pozwalał kontrolować przebieg prac oraz utrzymywać jakość produktu końcowego na odpowiednim poziomie.
+Lukę między opisem wymagań a implementacją wypełnia projekt oprogramowania, definiujący jego elementy składowe oraz ich zachowanie. Wyznaczony schemat, zgodnie z którym zostaną napisane i uruchomione wszystkie metody, zaplanowano i opisano w diagramie klas. Na tym etapie również określono biblioteki do użycia w programie. Opracowany projekt był dużym wsparciem podczas implementacji rozwiązania, gdzyż pozwalał kontrolować przebieg prac oraz utrzymywać jakość produktu końcowego na odpowiednim poziomie.
 
 Kolejnym ważnym etapem była implementacja zaporojektowanego programu. W tej części opracowania prowadzono najwiejcej eksperymentów z różnymi wartościami mającymi wpływ na jakość tworzonych obrazów. Ponadto dużą składową etapu implementacji było testowanie. Celem testowania było doświadczalne porównanie programu z projektem. Integralną częścią weryfikacji poprawności programu było wyświetlenie obrazów końcowych z użyciem różnego sprzętu komputerowego i stereoskopowego. Testowanie oprogramowania zakończono pomyślnie, oznacza to, że produkt końcowy spełnia wymagania projektowe i dodatkowo jest akrakcyjny pod względem technologii, z których korzysta.
 
@@ -1076,7 +1065,7 @@ Wizualizacje trójwymiarowe w celach dydaktycznych czy naukowych stanowią nieoc
 
 Oczywiście obrazy trójwymiarowe przedstawiane na zwykłym ekranie 2D bez zastosowania sprzętu specjalistycznego (okularów 3D, emitera podczerwieni w przypadku stereoskopii aktywnej) są prymitywną symulacją, przedstawieniem sceny trójwymiarowej na płaszczyźnie o dwóch wymiarach. Jednak poprzez połączenie technologii wirtualnej rzeczywistości z animacją można uzyskać kolosalne narzędzie edukacyjne, które by było potężnym wsparciem dla stosowanych w tej chwili metodyk. 
 
-Mogły by one obrazować pojedyńcze zjawiska czy procesy w warunkach mocno zbliżonych do rzeczywistego środowiska.
+%Mogły by one obrazować pojedyńcze zjawiska czy procesy w warunkach mocno zbliżonych do rzeczywistego środowiska.
 
 \begin{appendices}
 \section{Wyniki tworzenia obrazów torów cząstek}
