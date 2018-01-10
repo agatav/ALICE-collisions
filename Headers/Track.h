@@ -8,64 +8,72 @@
 
 using namespace std;
 ifstream ifs("/home/agata/Documents/tracks/track.json");
-ifstream ifs1("/home/agata/Documents/tracks/track.json");
-ifstream ifs2("/home/agata/Documents/tracks/track.json");
 
 class Track{
+    unsigned int VBO, VAO;
+    bool isInited;
+    bool gammaCorrection;
+
+
 public:
-    int trackSize = getTrackSize();
-    int maxPolyXValue = getMaxPolyXValue();
-    float tracks[360][300]={};
+    void init(){
+        vector<GLfloat> tracks;
+        getTracks(tracks);
+        glGenVertexArrays(1, &VAO);
+        glGenBuffers(1, &VBO);
+        glBindVertexArray(VAO);
+        glBindBuffer(GL_ARRAY_BUFFER, VBO);
+        glBufferData(GL_ARRAY_BUFFER, tracks.size() * sizeof(GLfloat),  &tracks[0], GL_STATIC_DRAW);
+        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), 0);
+        glEnableVertexAttribArray(0);
+        glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(2 * sizeof(float)));
+        glBindVertexArray(1);
 
-    int getTrackSize(){
-        Json::Reader readerSize;
-        Json::Value objSize;
-        readerSize.parse(ifs1,objSize);
-        int trackSize = objSize["fTracks"].size();
-        return trackSize;
+        isInited = true;
     }
 
-    int getMaxPolyXValue() {
-        Json::Value objPoly;
-        Json::Reader readerPoly;
-        readerPoly.parse(ifs,objPoly);
-        for (Json::Value::iterator it = objPoly["fTracks"].begin(); it != objPoly["fTracks"].end(); ++it) {
-
-            if ((*it)["fPolyX"].size() > maxPolyXValue) {
-                maxPolyXValue = (*it)["fPolyX"].size();
-            }
+    void cleanUp(){
+        if (!isInited) {
+            return;
         }
-        return maxPolyXValue;
+        if(VBO) {
+            glDeleteBuffers(1, &VBO);
+        }
+        if (VAO) {
+            glDeleteVertexArrays(1, &VAO);
+        }
+
+        isInited = false;
+        VAO = 0;
+        VBO = 0;
     }
 
-    void initiateBuffers(unsigned int *VAO, unsigned int *VBO){
-        Json::Value objTracks;
-        Json::Reader readerTracks;
-        readerTracks.parse(ifs2,objTracks);
+    void draw()
+    {
+        if (!isInited) {
+            std::cout << "please call init() before draw()" << std::endl;
+        }
 
-        for (Json::Value::iterator it = objTracks["fTracks"].begin(); it != objTracks["fTracks"].end(); ++it){
-            int TrackIndex = it.key().asInt();
+        glBindVertexArray(VAO);
+        glDrawArrays(GL_LINE_STRIP_ADJACENCY, 0, 348);
+    }
+private:
+
+    void getTracks(vector<GLfloat> &tracks){
+        Json::Value objectTracks;
+        Json::Reader readerTracks;
+        readerTracks.parse(ifs,objectTracks);
+        for (Json::Value::iterator it = objectTracks["fTracks"].begin(); it != objectTracks["fTracks"].end(); ++it){
 
             for (int i = 0; i < (*it)["fPolyX"].size(); i++){
-                tracks[TrackIndex][i*5] = (*it)["fPolyX"][i].asFloat();
-                tracks[TrackIndex][i*5 + 1] = (*it)["fPolyY"][i].asFloat();
-                tracks[TrackIndex][i*5 + 2] = (*it)["fPolyZ"][i].asFloat();
-                tracks[TrackIndex][i*5 + 3] = (*it)["fMass"].asFloat();
-                tracks[TrackIndex][i*5 + 4] = 1.0f;
+                tracks.push_back((*it)["fPolyX"][i].asFloat());
+                tracks.push_back((*it)["fPolyY"][i].asFloat());
+                tracks.push_back((*it)["fPolyZ"][i].asFloat());
+                tracks.push_back((*it)["fMass"].asFloat());
+                tracks.push_back(1.0f);
             }
-
-            glGenBuffers(1, &VBO[TrackIndex]);
-            glGenVertexArrays(1, &VAO[TrackIndex]);
-            glBindVertexArray(VAO[TrackIndex]);
-            glBindBuffer(GL_ARRAY_BUFFER, VBO[TrackIndex]);
-            glBufferData(GL_ARRAY_BUFFER, sizeof(tracks[TrackIndex]), &tracks[TrackIndex], GL_STATIC_DRAW);
-            glEnableVertexAttribArray(0);
-            glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), 0);
-            glEnableVertexAttribArray(1);
-            glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(2 * sizeof(float)));
-            glBindVertexArray(0);
         }
-    }
+    };
 };
 #endif
 

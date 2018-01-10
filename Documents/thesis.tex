@@ -400,7 +400,7 @@ Zanim podjęto bezpośrednią pracę nad programem sprecyzowano wymagania, jakie
 \end{table}
 
 \subsection{Wymagania niefunkcjonalne}
-Wskazanie funkcji oprogramowania nie określa wszystkich cech istotnych dla użytkownika \cite{specyfikacja}. Wymagania niefunkcjonalne, które w danym zastosowaniu są ważne, zostały określone i opisane w tabeli \ref{tab3}. Ze względu na badawczą specyfikę niniejszego programu zostały pominięte niektóre zalecane wymagania niefunkcjonalne. Te zaś, które umieszczono poniżej, spriorytezowano podobnie jak w przypadku wymagań funkcjonalnych.
+Wskazanie funkcji oprogramowania nie określa wszystkich cech istotnych dla użytkownika \cite{specyfikacja}. Wymagania niefunkcjonalne, które w danym zastosowaniu są ważne, zostały zdefinowane i opisane w tabeli \ref{tab3}. Ze względu na badawczą specyfikę niniejszego programu zostały pominięte niektóre zalecane wymagania niefunkcjonalne. Te zaś, które umieszczono poniżej, spriorytezowano podobnie jak w przypadku wymagań funkcjonalnych.
 
 \begin{table}[H]
 \caption{Wymagania niefukcjonalne.}
@@ -430,9 +430,9 @@ Wskazanie funkcji oprogramowania nie określa wszystkich cech istotnych dla uży
 
 \newpage
 \subsection{Przypadki użycia}
-Wymagania użytkownika programu mogą być pokazane jak lista zadań, które może być wykonana z użyciem rozwiajanego programu. W takim przypadku każde takie zadanie musi być opisane, z uwzględnieniem kolejności poszczególnych kroków, które by doprowadziły użytkownika do konkretnego miejsca w programie. Podsumowując, opis wymagań sprowadza się do opisu możliwych sposobów używania programu przez aktorów (użytkowników).
+Wymagania użytkownika programu mogą być pokazane jak lista zadań, która może być wykonana z użyciem powstającego programu. W takim przypadku, każde zadanie musi być opisane, z uwzględnieniem kolejności poszczególnych kroków, które by doprowadziły użytkownika do konkretnego miejsca w programie. Podsumowując, opis wymagań sprowadza się do opisu możliwych sposobów używania programu przez aktorów (użytkowników).
 
-Aktorem w danym kontekście jest użytkownik programu. Przez to, że głównym celem tej oto pracy dyplomowej są wizualizacje, wszystkie przypadki użycia sprowadzają się do oglądania wyrenderowanych scen oraz poruszania się w nich.
+Aktorem w danym kontekście jest zwykły użytkownik programu. Przez to, że głównym celem tej oto pracy dyplomowej są wizualizacje, wszystkie przypadki użycia sprowadzają się do oglądania wygenerowanych scen oraz poruszania się w nich.
 
 \begin{table}[H]
 \caption{Przypadki użycia programu}
@@ -480,7 +480,7 @@ Aktorem w danym kontekście jest użytkownik programu. Przez to, że głównym c
 	\itemi Wybiera opcję stereoskopowego wyświetlania detektora.
 	\itemi Przełącza ekran w tryb 3D oraz zakłada specjalne okulary.
 	\itemi Wybiera opcję zwykłego wyświetlania obrazu detektora. 
-	\itemi Zejmuje okulary 3D, przełącza ekran w tryb zwykłego wyświetlania.
+	\itemi Zdejmuje okulary 3D, przełącza ekran w tryb zwykłego wyświetlania.
 	\itemi Steruje kamerą przy pomocy klawiatury i myszy.
 	\end{itemize} & Brak \\ 
 	\arrayrulecolor{sapphire}\hline
@@ -489,7 +489,7 @@ Aktorem w danym kontekście jest użytkownik programu. Przez to, że głównym c
 
 
 \subsection{Diagram klas}
-Model przypadków użycia opisuje zachowanie programu z punktu widzenia zwykłego użytkownika, nie określa on natomiast sposobu, w jaki
+Model przypadków użycia opisuje zachowanie programu z punktu widzenia przeciętnego użytkownika, nie określa on natomiast sposobu, w jaki
 należy oprogramowanie stworzyć. Podstawowymi elementami programu napisanego w języku obiektowym są klasy. Mogą one być powiązane z innymi klasami programu na wiele różnych sposóbów. Nieduży rozmiar programu pozwala na projektowanie architektury na poziomie klas.
 
 Na tym etapie projektu diagram klas jest wciąż postrzegany tylko w perspektywie pojęciowej, gdzie nie podjęto jeszcze decyzji o dokładnym rozmieszczeniu w klasach metod implementujących przypadki użycia opisane w tabeli \ref{tab4}. Diagram na rysunku \ref{rys24} przedstawia wstępną wersję budowy klas w programie. 
@@ -502,15 +502,15 @@ Na tym etapie projektu diagram klas jest wciąż postrzegany tylko w perspektywi
  		\label{rys24}
 \end{figure}
 
-Pisanie, kompilowanie i zarządzanie modułami cieniującymi może być dość kłopotliwe. Dlatego postanowiono zebrać te metosy do wspolnej klasy klasy Shader (moduł cieniujący). Ta klasa miałaby za zadanie odczytanie modułów z dysku, ich kompilację i łączenie, sprawdzałaby także błędy występujące w trakcie przetwarzania modułów cieniujących.
+Pisanie, kompilowanie i zarządzanie modułami cieniującymi może być dość kłopotliwe. Dlatego postanowiono zebrać wszystkie metody dotyczące tych programów do wspolnej klasy Shader (moduł cieniujący). Ta klasa miałaby za zadanie odczytanie modułów z dysku, ich kompilację i łączenie, sprawdzałaby także błędy występujące w trakcie przetwarzania modułów cieniujących.
 
 Klasa Camera (kamera) odpowiadałaby za zmiany widoku przy interakcji z użytkownikiem. Zmiany widoku by zachodziły po wciśnieciu wybranych klawiszy, po poruszeniu myszą czy kółkiem myszy. Dodatkowo ta klasa obliczałaby widok stereoskopowy (computeStreoView), innymi słowy tworzyłaby dwa obrazy z różniącą się perspektywą jako materiał stereoskopowy. Wartość wyliczeniowa Camera\_Movement (ruch kamery) określałaby kierunek ruchu kamery w zależności od wciśniętego przycisku. Ułatwi to komunikację pomiędzy obsługą zdarzeń przychodzących z kalwiatury a kamerą, owocując w odpowiednie przeliczania widoku w programie. 
 
 W klasie Camera również zostaną zdefiniowane takie zmienne globalne jak szybkość poruszania się kamery, wartości kątów obrotów czy wrażliwość kamery na ruchy myszy.
 
-Klasy Mesh (siatka) i Model są musza być opracowane na potrzeby wczytania modelu z pliku o formacie Collada do programu. Konieczna będzie do zrealizowania zmiana struktur danych z biblioteki Assimp na konstrukcje obsługiwane przez OpenGl. Obiekt typu Mesh będzie przechowywał odczytane informacje o poszczególnej siatce, natomiast obiekt typu Model będzie gromadził dane o modelu jako całości. Dla poprawnego wyświetlenia modelu detektora wczytanego do obiektu typu Model zaprojektowano połączenie Model-Shader.
+Klasy Mesh (siatka) i Model musza zostać opracowane na potrzeby wczytania modelu z pliku o formacie Collada do programu. Konieczna będzie do zrealizowania zmiana struktur danych z biblioteki Assimp na konstrukcje obsługiwane przez OpenGL. Obiekt typu Mesh będzie przechowywał odczytane informacje o poszczególnej siatce, natomiast obiekt typu Model będzie gromadził dane o modelu jako całości. Dla poprawnego wyświetlenia modelu detektora, wczytanego do obiektu typu Model, zaprojektowano połączenie Model-Shader.
 
-W klasie Track wczytywano by dane z pliku JSON. Po czym byłyby aktualizowane bufory przesyłające informację prosto do karty graficznej. Ten krok przyspieszyłby generowanie obrazów nie wywierając negatywnych skutków na obrazach, przedstawiających tory cząstek po kolizji w detektorze.
+W klasie Track wczytywano by dane z pliku JSON. Po czym byłyby aktualizowane bufory przesyłające informację prosto do karty graficznej. Ten krok przyspieszyłby generowanie sceny, nie wywierając negatywnych skutków na obrazach, przedstawiających tory cząstek po kolizji w detektorze.
 
 \newpage
 \subsection{Technologie}
@@ -1077,7 +1077,7 @@ Wizualizacje trójwymiarowe w celach dydaktycznych czy naukowych stanowią nieoc
 Oczywiście obrazy trójwymiarowe przedstawiane na zwykłym ekranie 2D bez zastosowania sprzętu specjalistycznego (okularów 3D, emitera podczerwieni w przypadku stereoskopii aktywnej) są prymitywną symulacją, przedstawieniem sceny trójwymiarowej na płaszczyźnie o dwóch wymiarach. Jednak poprzez połączenie technologii wirtualnej rzeczywistości z animacją można uzyskać kolosalne narzędzie edukacyjne, które by było potężnym wsparciem dla stosowanych w tej chwili metodyk. 
 
 Mogły by one obrazować pojedyńcze zjawiska czy procesy w warunkach mocno zbliżonych do rzeczywistego środowiska.
-\newpage
+
 \begin{appendices}
 \section{Wyniki tworzenia obrazów torów cząstek}
 \label{Tory}
@@ -1092,16 +1092,15 @@ Mogły by one obrazować pojedyńcze zjawiska czy procesy w warunkach mocno zbli
 	\hfill
 	\begin{subfigure}{0.50\textwidth}
 		\centering
-		\includegraphics[width=\textwidth]{trackScreen3.png}
+		\includegraphics[width=\textwidth]{trackScreen6.png}
 		\captionsetup{font={up, footnotesize}}
     	\caption{}
 		\label{rys19}
-	\end{subfigure}
-	
+	\end{subfigure}	
 	\vskip\baselineskip
 		\begin{subfigure}{0.50\textwidth}
 		\centering
- 		\includegraphics[width=\textwidth]{trackScreen4.png}
+ 		\includegraphics[width=\textwidth]{trackScreen3.png}
  		\captionsetup{font={up, footnotesize}}
     	\caption{}
  		\label{rys20}
@@ -1109,7 +1108,7 @@ Mogły by one obrazować pojedyńcze zjawiska czy procesy w warunkach mocno zbli
 	\hfill
 	\begin{subfigure}{0.50\textwidth}
 		\centering
-		\includegraphics[width=\textwidth]{trackScreen5.png}
+		\includegraphics[width=\textwidth]{trackScreen4.png}
 		\captionsetup{font={up, footnotesize}}
     	\caption{}
 		\label{rys21}
@@ -1118,7 +1117,7 @@ Mogły by one obrazować pojedyńcze zjawiska czy procesy w warunkach mocno zbli
 	\vskip\baselineskip
 		\begin{subfigure}{0.50\textwidth}
 		\centering
- 		\includegraphics[width=\textwidth]{trackScreen8.png}
+ 		\includegraphics[width=\textwidth]{trackScreen5.png}
  		\captionsetup{font={up, footnotesize}}
     	\caption{}
  		\label{rys22}
@@ -1126,7 +1125,7 @@ Mogły by one obrazować pojedyńcze zjawiska czy procesy w warunkach mocno zbli
 	\hfill
 	\begin{subfigure}{0.50\textwidth}
 		\centering
-		\includegraphics[width=\textwidth]{trackScreen9.png}
+		\includegraphics[width=\textwidth]{trackScreen7.png}
 		\captionsetup{font={up, footnotesize}}
     	\caption{}
 		\label{rys23}

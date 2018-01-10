@@ -6,8 +6,6 @@
 #include "Shader.h"
 #include "Camera.h"
 #include "Track.h"
-#include <iostream>
-#include <fstream>
 #include <Model.h>
 
 using namespace std;
@@ -19,7 +17,7 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void mouse_callback(GLFWwindow* window, double xpos, double ypos);
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
 void processInput(GLFWwindow *window);
-void drawStereoTracks(glm::mat4 transform, Shader shader, int trackSize, unsigned int VAO[]);
+void drawStereoTracks(glm::mat4 transform, Shader shader, Track track);
 void drawStereoDetector(glm::mat4 transform, Shader shader, Model ourModel);
 
 Camera camera(glm::vec3(0.0f, 0.0f, 2.0f));
@@ -75,16 +73,12 @@ int main()
     }
 
     glEnable(GL_MULTISAMPLE);
-
-
+    //glEnable(GL_DEPTH_TEST);
     Shader shader(tracksVertexShaderPath, tracksFragmentShaderPath, tracksGeometryShaderPath );
     Shader materialShader(materialsVertexShaderPath, materialsFragmentShaderPath);
 
     Track track;
-
-    static int trackSize = track.trackSize;
-    unsigned int VBO[trackSize], VAO[trackSize];
-    track.initiateBuffers(VAO, VBO);
+    track.init();
 
     Model ourModel("/home/agata/Documents/tracks/detector.dae");
 
@@ -98,46 +92,27 @@ int main()
 
         processInput(window);
 
-        glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
+        glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-//        materialShader.use();
-//        // view/projection transformations
-//        glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
-//        glm::mat4 view = camera.GetViewMatrix();
-//        materialShader.setMat4("projection", projection);
-//        materialShader.setMat4("view", view);
-//
-//        // render the loaded model
-//        glm::mat4 model;
-//        model = glm::translate(model, glm::vec3(0.0f, -1.75f, 0.0f)); // translate it down so it's at the center of the scene
-//        model = glm::scale(model, glm::vec3(0.01f, 0.01f, 0.01f));	// it's a bit too big for our scene, so scale it down
-//        materialShader.setMat4("model", model);
-//
-//        ourModel.Draw(materialShader);
-//
-//
-//        // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
-//        // -------------------------------------------------------------------------------
-//        glfwSwapBuffers(window);
-//        glfwPollEvents();
-//    }
         shader.use();
         if (stereo) {
             glm::mat4 transform;
 
             glViewport(0, 0, SCR_WIDTH / 2, SCR_HEIGHT);
             camera.computeStereoView((float) SCR_WIDTH / (float) SCR_HEIGHT, IOD, depthZ, true);
+
             if(tracks)
-               drawStereoTracks(transform, shader, trackSize, &VAO[trackSize]);
+               drawStereoTracks(transform, shader, track);
             else
                 drawStereoDetector(transform, materialShader, ourModel);
 
             //Draw the RIGHT eye, right half of the screen
             glViewport(SCR_WIDTH / 2, 0, SCR_WIDTH / 2, SCR_HEIGHT);
             camera.computeStereoView((float) SCR_WIDTH / (float) SCR_HEIGHT, IOD, depthZ, false);
+
             if(tracks)
-                drawStereoTracks(transform, shader, trackSize, &VAO[trackSize]);
+                drawStereoTracks(transform, shader, track);
             else
                 drawStereoDetector(transform, materialShader, ourModel);
         }
@@ -147,33 +122,28 @@ int main()
                 glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom),
                                                         (float) SCR_WIDTH / (float) SCR_HEIGHT, 0.1f, 100.0f);
                 shader.setMat4("projection", projection);
-
-                // camera/view transformation
                 glm::mat4 view = camera.GetViewMatrix();
                 shader.setMat4("view", view);
-
                 glm::mat4 transform;
+
                 transform = glm::scale(transform, glm::vec3(0.01, 0.01, 0.01));
                 GLint transformLoc = glGetUniformLocation(shader.ID, "transform");
                 glUniformMatrix4fv(transformLoc, 1, GL_FALSE, glm::value_ptr(transform));
 
-                for (int iterator = 0; iterator < trackSize; iterator++) {
-                    glBindVertexArray(VAO[iterator]);
-                    glDrawArrays(GL_LINE_STRIP_ADJACENCY, 0, 4);
-                }
+                track.draw();
+
             }
             else {
                 materialShader.use();
-                // view/projection transformations
                 glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
-                glm::mat4 view = camera.GetViewMatrix();
+
                 materialShader.setMat4("projection", projection);
+                glm::mat4 view = camera.GetViewMatrix();
                 materialShader.setMat4("view", view);
 
-                // render the loaded model
                 glm::mat4 model;
-                model = glm::translate(model, glm::vec3(0.0f, -1.75f, 0.0f)); // translate it down so it's at the center of the scene
-                model = glm::scale(model, glm::vec3(0.01f, 0.01f, 0.01f));	// it's a bit too big for our scene, so scale it down
+                model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f)); // translate it down so it's at the center of the scene
+                model = glm::scale(model, glm::vec3(0.001f, 0.001f, 0.001f));	// it's a bit too big for our scene, so scale it down
                 materialShader.setMat4("model", model);
 
                 ourModel.Draw(materialShader);
@@ -182,11 +152,8 @@ int main()
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
-    for (int iterator =0; iterator < trackSize; iterator++) {
-        glDeleteVertexArrays(1, &VAO[iterator]);
-        glDeleteBuffers(1, &VBO[iterator]);
-    }
 
+    track.cleanUp();
     glfwTerminate();
     return 0;
 }
@@ -201,7 +168,7 @@ void drawStereoDetector (glm::mat4 transform, Shader materialShader, Model ourMo
 
     glm::mat4 model;
 
-    transform = glm::scale(transform, glm::vec3(0.01, 0.01, 0.01));
+    transform = glm::scale(transform, glm::vec3(0.001, 0.001, 0.001));
     transform = glm::translate(model, glm::vec3(0.0f, 0.0f, -depthZ));
     transform = glm::rotate(model, glm::pi<float>() * rotateY, glm::vec3(0.0f, 1.0f, 0.0f));
     transform = glm::rotate(model, glm::pi<float>() * rotateX, glm::vec3(1.0f, 0.0f, 0.0f));
@@ -211,7 +178,7 @@ void drawStereoDetector (glm::mat4 transform, Shader materialShader, Model ourMo
     ourModel.Draw(materialShader);
 }
 
-void drawStereoTracks(glm::mat4 transform, Shader shader, int trackSize, unsigned int VAO[]) {
+void drawStereoTracks(glm::mat4 transform, Shader shader, Track track) {
 
     glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
     shader.setMat4("projection", projection);
@@ -228,10 +195,7 @@ void drawStereoTracks(glm::mat4 transform, Shader shader, int trackSize, unsigne
     GLint transformLoc = glGetUniformLocation(shader.ID, "transform");
     glUniformMatrix4fv(transformLoc, 1, GL_FALSE, glm::value_ptr(transform));
 
-    for (int iterator = 0; iterator < trackSize; iterator++) {
-        glBindVertexArray(VAO[iterator]);
-        glDrawArrays(GL_LINE_STRIP_ADJACENCY, 0, 4);
-    }
+    track.draw();
 }
 
 void processInput(GLFWwindow *window)
