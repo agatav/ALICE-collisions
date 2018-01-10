@@ -72,7 +72,6 @@ private:
     {
         vector<Vertex> vertices;
         vector<unsigned int> indices;
-        vector<Texture> textures;
 
         for(unsigned int i = 0; i < mesh->mNumVertices; i++)
         {
@@ -88,17 +87,7 @@ private:
             vector.z = mesh->mNormals[i].z;
             vertex.Normal = vector;
 
-            if(mesh->mTextureCoords[0])
-            {
-                glm::vec2 vec;
-                vec.x = mesh->mTextureCoords[0][i].x;
-                vec.y = mesh->mTextureCoords[0][i].y;
-                vertex.TexCoords = vec;
-            }
-            else
-                vertex.TexCoords = glm::vec2(0.0f, 0.0f);
-
-              vertices.push_back(vertex);
+            vertices.push_back(vertex);
         }
         for(unsigned int i = 0; i < mesh->mNumFaces; i++)
         {
@@ -106,8 +95,8 @@ private:
             for(unsigned int j = 0; j < face.mNumIndices; j++)
                 indices.push_back(face.mIndices[j]);
         }
-        aiMaterial* material = scene->mMaterials[mesh->mMaterialIndex];
-        return Mesh(vertices, indices, textures);
+       // aiMaterial* material = scene->mMaterials[mesh->mMaterialIndex];
+        return Mesh(vertices, indices);
     }
 };
 #endif

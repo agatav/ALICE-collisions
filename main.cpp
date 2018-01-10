@@ -21,11 +21,12 @@ void drawStereoTracks(glm::mat4 transform, Shader shader, Track track);
 void drawStereoDetector(glm::mat4 transform, Shader shader, Model ourModel);
 
 Camera camera(glm::vec3(0.0f, 0.0f, 2.0f));
+
 float lastX = SCR_WIDTH / 2.0f;
 float lastY = SCR_HEIGHT / 2.0f;
 bool firstMouse = true;
 
-float deltaTime = 0.0f;	// time between current frame and last frame
+float deltaTime = 0.0f;
 float lastFrame = 0.0f;
 
 const char* tracksVertexShaderPath = "/home/agata/Documents/tracks/Shaders/tracks.vert";
@@ -38,7 +39,7 @@ const char* materialsFragmentShaderPath = "/home/agata/Documents/tracks/Shaders/
 float rotateY = 0.0f;
 float rotateX = 0.0f;
 float IOD = 0.0001f;
-float depthZ = 100.0f;
+float depthZ = 1000.0f;
 
 bool stereo = false;
 bool tracks =true;
@@ -190,8 +191,8 @@ void drawStereoTracks(glm::mat4 transform, Shader shader, Track track) {
 
     transform = glm::scale(transform, glm::vec3(0.01, 0.01, 0.01));
     transform = glm::translate(model, glm::vec3(0.0f, 0.0f, -depthZ));
-    transform = glm::rotate(model, glm::pi<float>() * rotateY, glm::vec3(0.0f, 1.0f, 0.0f));
-    transform = glm::rotate(model, glm::pi<float>() * rotateX, glm::vec3(1.0f, 0.0f, 0.0f));
+    transform = glm::rotate(model, glm::pi<float>(), glm::vec3(0.0f, 1.0f, 0.0f));
+    transform = glm::rotate(model, glm::pi<float>(), glm::vec3(1.0f, 0.0f, 0.0f));
     GLint transformLoc = glGetUniformLocation(shader.ID, "transform");
     glUniformMatrix4fv(transformLoc, 1, GL_FALSE, glm::value_ptr(transform));
 

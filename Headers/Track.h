@@ -46,7 +46,7 @@ public:
         glBufferData(GL_ARRAY_BUFFER, tracks.size() * sizeof(GLfloat),  &tracks[0], GL_STATIC_DRAW);
         glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), 0);
         glEnableVertexAttribArray(0);
-        glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(2 * sizeof(float)));
+        glVertexAttribPointer(3, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(2 * sizeof(float)));
         glBindVertexArray(1);
 
         glGenBuffers(1, &EBO);
