@@ -11,13 +11,12 @@ out vec2 fColor;
 
 void main(void)
 {
-
-    fColor = gs_in[0].color;
     int i;
-
     for (i = 0; i < gl_in.length(); i++)
     {
         gl_Position = gl_in[i].gl_Position;
+        fColor = gs_in[i].color;
         EmitVertex();
     }
+    EndPrimitive();
 }

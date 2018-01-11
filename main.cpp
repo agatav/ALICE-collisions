@@ -93,10 +93,10 @@ int main()
 
         processInput(window);
 
-        glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+        glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        shader.use();
+        //shader.use();
         if (stereo) {
             glm::mat4 transform;
 
@@ -120,6 +120,7 @@ int main()
         else {
             glViewport(0, 0, SCR_WIDTH, SCR_HEIGHT);
             if(tracks) {
+                shader.use();
                 glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom),
                                                         (float) SCR_WIDTH / (float) SCR_HEIGHT, 0.1f, 100.0f);
                 shader.setMat4("projection", projection);
@@ -180,7 +181,7 @@ void drawStereoDetector (glm::mat4 transform, Shader materialShader, Model ourMo
 }
 
 void drawStereoTracks(glm::mat4 transform, Shader shader, Track track) {
-
+    shader.use();
     glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
     shader.setMat4("projection", projection);
 

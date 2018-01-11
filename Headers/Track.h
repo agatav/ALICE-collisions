@@ -26,13 +26,13 @@ public:
         readerTracks.parse(ifs,objectTracks);
 
         for (Json::Value::iterator it = objectTracks["fTracks"].begin(); it != objectTracks["fTracks"].end(); ++it){
-
+            float color = (*it)["fMass"].asFloat();
             for (int i = 0; i < (*it)["fPolyX"].size(); i++){
                 tracks.push_back((*it)["fPolyX"][i].asFloat());
                 tracks.push_back((*it)["fPolyY"][i].asFloat());
                 tracks.push_back((*it)["fPolyZ"][i].asFloat());
-                tracks.push_back((*it)["fMass"].asFloat());
-                tracks.push_back((*it)["fMass"].asFloat());
+                tracks.push_back(color*0.9f);
+                tracks.push_back(color*0.9f);
                 indices.push_back(indicator);
                 indicator++;
             }
@@ -41,17 +41,19 @@ public:
 
         glGenVertexArrays(1, &VAO);
         glGenBuffers(1, &VBO);
+        glGenBuffers(1, &EBO);
+
         glBindVertexArray(VAO);
         glBindBuffer(GL_ARRAY_BUFFER, VBO);
         glBufferData(GL_ARRAY_BUFFER, tracks.size() * sizeof(GLfloat),  &tracks[0], GL_STATIC_DRAW);
-        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), 0);
-        glEnableVertexAttribArray(0);
-        glVertexAttribPointer(3, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(2 * sizeof(float)));
-        glBindVertexArray(1);
-
-        glGenBuffers(1, &EBO);
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
         glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(GLuint), &indices[0], GL_STATIC_DRAW);
+
+        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
+        glEnableVertexAttribArray(0);
+        glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
+        glEnableVertexAttribArray(1);
+       // glBindVertexArray(0);
 
         numsToDraw = indices.size();
         isInited = true;
