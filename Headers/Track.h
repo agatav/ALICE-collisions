@@ -53,7 +53,6 @@ public:
         glEnableVertexAttribArray(0);
         glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
         glEnableVertexAttribArray(1);
-       // glBindVertexArray(0);
 
         numsToDraw = indices.size();
         isInited = true;

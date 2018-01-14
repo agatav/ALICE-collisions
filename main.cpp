@@ -42,7 +42,7 @@ float IOD = 0.0001f;
 float depthZ = 1000.0f;
 
 bool stereo = false;
-bool tracks =true;
+bool tracks =false;
 
 int main()
 {
@@ -168,7 +168,7 @@ void drawStereoDetector (glm::mat4 transform, Shader materialShader, Model ourMo
     glm::mat4 view = camera.GetViewMatrix();
     materialShader.setMat4("view", view);
 
-    glm::mat4 model;
+    glm::mat4 model = glm::mat4(1.0);
 
     transform = glm::scale(transform, glm::vec3(0.001, 0.001, 0.001));
     transform = glm::translate(model, glm::vec3(0.0f, 0.0f, -depthZ));
@@ -190,7 +190,7 @@ void drawStereoTracks(glm::mat4 transform, Shader shader, Track track) {
 
     glm::mat4 model = glm::mat4(1.0);
 
-    transform = glm::scale(transform, glm::vec3(0.01, 0.01, 0.01));
+    transform = glm::scale(transform, glm::vec3(0.001, 0.001, 0.001));
     transform = glm::translate(model, glm::vec3(0.0f, 0.0f, -depthZ));
     transform = glm::rotate(model, glm::pi<float>(), glm::vec3(0.0f, 1.0f, 0.0f));
     transform = glm::rotate(model, glm::pi<float>(), glm::vec3(1.0f, 0.0f, 0.0f));

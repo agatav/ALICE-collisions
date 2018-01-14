@@ -1,6 +1,5 @@
 #ifndef TRACKS_MODEL_H
 #define TRACKS_MODEL_H
-#define STB_IMAGE_IMPLEMENTATION
 #include <glad/glad.h>
 
 #include <glm/glm.hpp>
@@ -95,7 +94,6 @@ private:
             for(unsigned int j = 0; j < face.mNumIndices; j++)
                 indices.push_back(face.mIndices[j]);
         }
-       // aiMaterial* material = scene->mMaterials[mesh->mMaterialIndex];
         return Mesh(vertices, indices);
     }
 };
