@@ -181,7 +181,7 @@ Dla bezproblemowego korzystania z technologii wystawaniono następujące wymagan
  		\includegraphics[width=9cm]{3dVision.png}
  		\captionsetup{font={up, footnotesize}}
     	\caption{3D Vision wraz z diagramem poprawnego ustawienia \cite{3dVisionPic}.}
- 		\label{rys4}
+ 		\label{rys29}
 \end{figure}
 
 Podstawowy zestaw 3D Vision według oficjalnej strony internetowej \cite{3dVisionInfo} składa się z: 
@@ -854,9 +854,11 @@ Głównym zadaniem tych buforów jest przesyłanie paczek danych o wierzchołkac
 \subsubsection{Wczytanie danych z pliku Collada}
 Do wczytania modelu z dostarczonego pliku w formacie Collada użyto biblioteki Assimp. Odbywa się to poprzez ładowanie wszystkich informacji o modelu do uogólnionych struktur danych zdefiniowanych w bibliotece. Po załadowaniu modelu, wszystkie niezbędne do renderowania dane mogą być pobrane ze struktur danych Assimp. Podczas opracowywania programu korzystano z samouczek opublikowanych na stronie internetowej \cite{learnopengl}. 
 
-Pobierany z pliku model jest ładowany do obiektu sceny, przechowującego wszystkie informacje o modelu czy scenie. Na rysunku \ref{rys14} jest pokazany diagram klas bezpośrednio dotyczący wczytanej sceny.
+Pobierany z pliku model jest ładowany do obiektu sceny, przechowującego wszystkie informacje o modelu i jego otoczeniu. Na rysunku \ref{rys14} jest pokazany diagram klas Assimp, definiujący sposób, w jaki odczytanane dane są dzielone i ładowane do pamięci.
 
-Klasa aiScene zawiera wskaźnik do aiNode (węzła głównego sceny), który z kolei utrzymuje wskaźniki do węzłów potomnych. Wskaźnik do aiNode rekursywnie definiuje strukturę sceny. AiScene służy również jako centralne miejsce przechowywania wszystkich siatek, materiałów lub źródeł światła. Natomiast instancje aiNode po prostu indeksują te tablice, które znajdują się w scenie. Obiekt mMesh przechowuje wszystkie istotne dane wymagane do renderowania: położenia wierzchołków, wektory normalnych, współrzędne tekstur, powierzchnie i materiały obiektu.
+Klasa aiScene zawiera wskaźnik do aiNode (węzła głównego sceny), który z kolei utrzymuje wskaźniki do węzłów potomnych. Wskaźnik do aiNode rekursywnie definiuje strukturę sceny. AiScene służy również jako centralne miejsce przechowywania wszystkich siatek, materiałów lub źródeł światła. Natomiast instancje aiNode po prostu indeksują te tablice, które znajdują się w scenie.
+
+Obiekt mMesh przechowuje wszystkie istotne dane wymagane do renderowania: położenia wierzchołków, wektory normalnych, współrzędne tekstur i kształt powierzchni obiektu. Informacje o użytych materiałach można znaleźć w obiekcie klasy aiMaterial. Obiekt klasy aiLight gromadzi informacje o wszystkich źródłach światła w scenie, a w szczególności o ich położeniu, kierunku i kolorach. 
 
 \begin{figure}[H]
 		\centering
@@ -867,13 +869,16 @@ Klasa aiScene zawiera wskaźnik do aiNode (węzła głównego sceny), który z k
 \end{figure}
 
 \subsubsection{Określenie siatki detektora}
-Używając biblioteki Assimp istnieje możliwość załadowania wielu różnych modeli do jednej aplikacji, lecz po wczytaniu wszystkie dane są przechowywane w strukturach Assimp. Dla umożliwienia renderowania obiektów konieczne jest przekształcenie sruktur danych Assimp na struktury w OpenGL. 
+Używając biblioteki Assimp, istnieje możliwość załadować wiele różnych modeli do jednej aplikacji. Jak było wcześniej wspomniane, po wczytaniu wszystkie dane są przechowywane w strukturach Assimp. Dla skorzystania z funkcji renderowania obiektów konieczne jest przekształcenie sruktur danych Assimp na struktury w OpenGL. 
 
 W rozpatrywanym przypadku pojedyńcza encja do narysowania jest reprezentowana przez siatkę (ang. mesh), dlatego rozbudowanie programu zaczęto od zdefiniowania własnej klasy siatki. Składa się ona z zestawu wierzchołków, gdzie każdy wierzchołek zawiera wektory położenia, normalnych.
 
-Klasa Mesh nie jest zbyt skomplikowana. W konstruktorze są podawane wszystkie potrzebne dane, funkcja setupMesh inicjalizuje bufory VAO i VBO. Siatka jest rysowana za pomocą funkcji Draw. Funkcja konstruktora jest dość prosta: publiczne zmienne klasy są ustawiane  z odpowiednimi zmiennymi argumentów konstruktora, na koniec jest wywoływane inicjalizowanie buforów --- funkcja setupMesh. 
+Klasa Mesh nie jest zbyt skomplikowana. Założono dość prostą funkcję konstruktora obiektu Mesh, która publiczne zmienne klasy ustawia  z odpowiednimi zmiennymi argumentów konstruktora. W argumentach kontrukstora są podawane tylko dane podstawowe --- wierzchołki i ich indeksy. Na końcu tej sunkcji jest wywoływana metoda setupMesh, która to uzupełnia bufory VAO i VBO w dane. Natomiast bezpośrednie rysowanie siatki odbywa się za pomocą funkcji Draw.
+
+W przypadku rysowania modelu detektora, podobnie jak przy tworzeniu obrazu torów cząstek, użyto dodatkowego bufora --- EBO, bufora elementów obiektu (widać to w tabeli \ref{tab12}). Powodem do tego służy fakt, że w modelach przybliżanych siatką trójkątów duża część wierzchołków może się pokrywać. Lepszym rozwiązaniem jest przechowywanie nie wszystkich wierzchołków, a tylko unikatowych, wraz z określaniem kolejności, w której zostaną one wyświetlone \cite{learnopengl}. Również w tym przypadku z pomocą przychodzi bufor elementów obiektu. EBO przechowuje indeksy używane przez OpenGL do podjęcia decyzji, które wierzchołki muszą być wyświetlone i w jakiej kolejności.
+
 \begin{table}[H]
-\caption{Kod źródłowy programu. Funkcja inicjalizacji buforów.}
+\caption{Kod źródłowy programu. Funkcja definiująca bufory.}
 \label{tab12}
 \begin{lstlisting}[frame=single]  % Start your code-block
 
@@ -881,7 +886,6 @@ void setupMesh() {
  glGenVertexArrays(1, &VAO);
  glGenBuffers(1, &VBO);
  glGenBuffers(1, &EBO);
-
  glBindVertexArray(VAO);
  glBindBuffer(GL_ARRAY_BUFFER, VBO);
  glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(Vertex), 
@@ -900,10 +904,10 @@ void setupMesh() {
 \end{lstlisting}
 \end{table}
 
-W kodzie źródłowym z tabeli \ref{tab12} użyto dodatkowego bufora --- EBO (ang. Element Buffer Objects) --- bufora elementów obiektu. W modelach przybliżanych siatką trójkątów duża część wierzchołków może się pokrywać. Lepszym rozwiązaniem jest przechowywanie nie wszystkich wierzchołków, a tylko unikatowych, wraz z określaniem kolejności, w której zostaną one wyświetlone \cite{learnopengl}. Wsparciem właśnie tej techniki jest EBO. Bufor elementów obiektu przechowuje indeksy używane przez OpenGL do podjęcia decyzji, które wierzchołki muszą być wyświetlone.
-
 \subsubsection{Wyświetlanie modelu}
-Scena może może zawierać wiele różnych siatek, dlatego utworzono klasę, która by reprezentowała model w całości. Z tego powodu w klasie Model został zdefiniowany wektor obiektów typu Mesh --- wektor skłądający się z różnych siatek odczytanych z pliku. Ładowanie danych z pliku odbywa się za pomocą funkcji loadModel, kod źródłowy tej funkcji jest przedstawiony w tabeli \ref{tab13}.
+Scena może może zawierać wiele różnych siatek, dlatego utworzono klasę, która by je łączyła i reprezentowała model w całości. Z tego powodu w klasie Model został zdefiniowany wektor obiektów typu Mesh --- wektor skłądający się z różnych siatek odczytanych z pliku. Ładowanie danych z pliku odbywa się za pomocą funkcji loadModel, kod źródłowy tej funkcji jest przedstawiony w tabeli \ref{tab13}.
+
+Początkowo jest tworzony obiekt klasy Importer dedykowany do wczytywania modeli do struktur danych Assimp. Na tym obiekcie wywołano funkcję ReadFile, gdzie jako pierwszy argument jest przyjmowana ścieżka do pliku Collada. Jako drugi argument poprzez funkcję ReadFile są przyjmowane różne opcje używane w trakcie przetwarzania końcowego. Opcje te inicjują dodatkowe obliczenia na odczytanych danych. Ze wszystkimi możliwymi opcjami oraz ich opisami można zapoznać się na stronie z oficjalną dokumentacją biblioteki \cite{assimpDocumentation}.
 
 \begin{table}[H]
 \caption{Kod źródłowy programu. Funkcja pobierająca model z pliku.}
@@ -912,25 +916,35 @@ Scena może może zawierać wiele różnych siatek, dlatego utworzono klasę, kt
 
 void loadModel(string const &path) {
  Assimp::Importer importer;
- const aiScene* scene = importer.ReadFile(path, aiProcess_Triangulate |
-   aiProcess_FlipUVs | aiProcess_CalcTangentSpace | 
-   aiProcess_JoinIdenticalVertices | aiProcess_SortByPType);
-
- if(!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE 
-    	|| !scene->mRootNode) {
-  
+ const aiScene* scene = importer.ReadFile(path, aiProcess_Triangulate);
+ if(!scene || scene->mFlags || !scene->mRootNode) {
   cout << "ERROR::ASSIMP::" << importer.GetErrorString() << endl;
   return; }
- directory = path.substr(0, path.find_last_of('/'));
- processNode(scene->mRootNode, scene); }
+  processNode(scene->mRootNode, scene); }
 \end{lstlisting}
 \end{table}
 
-Początkowo jest tworzony obiekt Importer dedykowany do wczytywania modeli do struktur danych Assimp. Na tym obiekcie wywołano funkcję ReadFile, gdzie ścieżka do pliku Collada jest podawana jako pierwszy argument. Jako drugi argument poprzez funkcję ReadFile są przyjmowane różne opcje używane w trakcie przetwarzania końcowego. Opcje te inicjują dodatkowe obliczenia na odczytanych danych. Ze wszystkimi możliwymi opcjami oraz ich opisami można zapoznać się na stronie z oficjalną dokumentacją biblioteki \cite{assimpDocumentation}.
+Jak było pokazane na diagramie klas (rysunek \ref{rys14}) scena w Assimp ma strukturę drzewiastą. Po wczytaniu sceny przetwarzane są wszystkie jej węzły, służy do tego rekursywna funkcja processNode, która zatrzymuje swoje działanie dopiero w chwili, gdy wszystkie węzły sceny zostały już przetworzone (tabela \ref{tab18}). Na tym etapie zostaje uzupełniony w dane wektor siatek.
 
-Jak było pokazane na diagramie klas (rysunek \ref{rys14}) scena w Assimp ma strukturę drzewiastą. Po wczytaniu sceny przetwarzane są wszystkie jej węzły, służy do tego rekursywna funkcja processNode, która zatrzymuje swoje działanie dopiero w chwili, gdy wszystkie węzły sceny zostały już przetworzone. Na tym etapie zostaje uzupełniony w dane wektor siatek.
+\begin{table}[H]
+\caption{Kod źródłowy programu. Funkcja przetwarzająca węzły sceny.}
+\label{tab18}
+\begin{lstlisting}[frame=single]  % Start your code-block
 
-Samo przetwarzanie siatki sprowadza się do 2 czynności: do pobierania wszystkich informacji o wierzchołkach oraz do pobierania indeksów siatki. Na koniec wywoływany jest konstruktor obiektu siatka. W tabeli \ref{tab14} z kodem źródłowym pokazana jest funkcja przetwarzająca siatki w modelu.
+void processNode(aiNode *node, const aiScene *scene){
+ for(unsigned int i = 0; i < node->mNumMeshes; i++){
+  aiMesh* mesh = scene->mMeshes[node->mMeshes[i]];
+  meshes.push_back(processMesh(mesh, scene));}
+ for(unsigned int i = 0; i < node->mNumChildren; i++){
+   processNode(node->mChildren[i], scene);}}
+\end{lstlisting}
+\end{table}
+
+Samo przetwarzanie siatki sprowadza się do 2 czynności: do pobierania wszystkich informacji o wierzchołkach oraz do pobierania indeksów siatki. Na koniec wywoływany jest konstruktor obiektu Mesh. W tabeli \ref{tab14} z kodem źródłowym pokazana jest funkcja przetwarzająca siatki w modelu.
+
+Pobieranie informacji o wierzchołkach zostało zrealizowane poprzez zdefiniowanie struktury wierzchołków, która po każdej iteracji jest dodawana do ogólnej tablicy wierzchołków. Do załadowania danych o indeksach siatki skorzystano z interfejsu udestępnionego przez bibiliotekę Assimp --- aiFace. Face, w kontekście opracowywanego programu, jest najmniejszym zdefiniowanym prymitywem i ma on kształt trójkąta. Ten właśnie prymityw przechowuje indeksy definiujące kolejność wyświetlania wierzchołków siatki.
+
+Na podstawie uzyskanych danych z Assimp --- listy wierzchołków i indeksów --- uruchomiono pętlę rysującą siatkę. Do rysowania użyto funkcji glDrawElements, tak samo jak w przypadku torów cząstek.
 
 \begin{table}[H]
 \caption{Kod źródłowy programu. Funkcja przetwarzania siatek w modelu.}
@@ -947,14 +961,11 @@ Mesh processMesh(aiMesh *mesh, const aiScene *scene) {
   vector.y = mesh->mVertices[i].y;
   vector.z = mesh->mVertices[i].z;
   vertex.Position = vector;
-
   vector.x = mesh->mNormals[i].x;
   vector.y = mesh->mNormals[i].y;
   vector.z = mesh->mNormals[i].z;
   vertex.Normal = vector;
-  
   vertices.push_back(vertex);}
-  
  for(unsigned int i = 0; i < mesh->mNumFaces; i++) {
   aiFace face = mesh->mFaces[i];
   for(unsigned int j = 0; j < face.mNumIndices; j++)
@@ -963,50 +974,47 @@ Mesh processMesh(aiMesh *mesh, const aiScene *scene) {
 \end{lstlisting}
 \end{table}
 
-Pobieranie informacji o wierzchołkach zostało zrealizowane poprzez zdefiniowanie struktury wierzchołków, która po każdej iteracji jest dodawana do ogólnej tablicy wierzchołków. Do załadowania danych o indeksach siatki skorzystano z interfejsu udestępnionego przez bibiliotekę Assimp --- aiFace. Face, w kontekście opracowywanego programu, jest najmniejszym zdefiniowanym prymitywem i ma on kształt trójkąta. Ten właśnie prymityw przechowuje indeksy definiujące kolejność wyświetlania wierzchołków siatki.
-
-Na podstawie uzyskanych danych z Assimp --- listy wierzchołków i indeksów --- uruchomiono pętlę rysującą siatkę. Do rysowania użyto funkcji glDrawElements, tak samo jak w przypadku torów cząstek.
-
 \subsubsection{Napotkane problemy}
-Przed rozpoczęciem prac nad programem wizualizacji detektora zakładano, że geometria modelu zostanie bezpośrednio pobrana z repozytorium w CERN. Okazało się jednak, że nie są to szeroko dostępne dane oraz że są one przechowywane w strukturach danych języka Root. Root --- język wewnętrznego użytkowania w CERN, nieco przypomina C, lecz jest bardziej dostosowany do zapotrzebowania w laboratorium fizycznym.
+Przed rozpoczęciem prac nad programem wizualizacji detektora zakładano, że geometria modelu zostanie bezpośrednio pobrana z repozytorium w CERN. Okazało się jednak, że nie są to szeroko dostępne dane oraz że są one przechowywane w strukturach danych języka ROOT. ROOT --- język wewnętrznego użytkowania w CERN, nieco przypomina C, lecz jest bardziej dostosowany do zapotrzebowania w laboratorium fizycznym.
 
-Root również posiada własną platformę graficzną (Root 3D Graphics \cite{root3dGraphics}) umożliwiającą tworzenie obrazów na podstawie przeanalizowanych danych. W tej oto platformie początkowo stworzono model detektora ALICE. Bezpośrednie pobranie danych o modelu wiązałoby się z dużym nakładem prac w kierunku przestudiowania struktur danych Root 3D Graphics i stworzenia odpowiedniego programu do przekształcenia danych na konkretny format pliku 3D (na przykład .obj czy .dae). 
+ROOT również posiada własną platformę graficzną (Root 3D Graphics: TGeoManager \cite{root3dGraphics}) umożliwiającą tworzenie obrazów na podstawie przeanalizowanych danych. W tej oto platformie początkowo stworzono model detektora ALICE. Bezpośrednie pobranie danych o modelu wiązałoby się z dużym nakładem prac w kierunku przestudiowania struktur danych Root 3D Graphics i stworzenia odpowiedniego programu do przekształcenia danych na konkretny format pliku 3D (na przykład .obj czy .dae). 
 
-Potrzebne rozwiązanie już zostało opracowane w CERN, ale nie zostało jeszcze upublicznione, dlatego na potrzeby niniejszej pracy inżynierskiej otrzymano gotowy plik Collada z geometrią detektora ALICE. Ze względu na to, że niezbędne oprogramowanie jest w trakcie tworzenia, otrzymany plik zawierał błędy w strukturze formatu. Ujawniało się to miedzy innymi podczas ładowania modelu z pliku do obiektu aiScene. 
+Potrzebne rozwiązanie już zostało opracowane w CERN, ale nie zostało jeszcze upublicznione, dlatego na potrzeby niniejszej pracy inżynierskiej otrzymano gotowy plik Collada z geometrią detektora ALICE. Ze względu na to, że niezbędne oprogramowanie jest w trakcie tworzenia, otrzymany plik zawierał błędy w strukturze formatu. Ujawniało się to między innymi podczas ładowania modelu z pliku do obiektu aiScene. 
 
 Przy uruchomieniu programu pojawiał się komunikat błędu: \textquotedblleft ERROR::ASSIMP:: Collada: aliceGeom.dae - Expected end of <accessor> element \textquotedblright . Ta wiadomość jest generowana przez funkcję readAccessor w pliku ColladaParser.kt (biblioteka Assimp) i świadczy o błędzie składni podczas użycia funkcji COLLADA <accessor> / <param> \cite{collada}.
 
 Rozwiązano ten problem za pomocą narzędzia Blender, do którego najpierw wczytano nie do końca poprawny plik z modelem detektora, a później wyeksportowano ten sam model do innego pliku, również z rozszerzeniem .dae. Po wykonaniu tych prostych czynności udało się wyświetlić geometrię detektora ALICE. 
 
-Jednak niepoprawna struktura pliku Collada przełożyła się również na współrzędne użytych materiałów. Tych danych już niestety nie udało się naprawić w dostępnych programach graficznych. Dlatego wczytaną siatkę modelu pokolorowano w jeden podstawowy kolor (niebieski). Na rysunku \ref{rys27} widać kształt detektora, lecz z braku możliwości wglądu w warstwy wewnętrzne i braku poprawnych materiałów, obraz ten wygląda prymitywnie.
+Jednak niepoprawna struktura pliku Collada przełożyła się również na współrzędne użytych materiałów. Tych danych już niestety nie udało się naprawić w dostępnych programach graficznych. Dlatego wczytaną siatkę modelu pokolorowano w jeden podstawowy kolor (niebieski). Na rysunku \ref{rys28} widać kształt detektora, lecz z braku możliwości wglądu w warstwy wewnętrzne i braku poprawnych materiałów, obraz ten wygląda prymitywnie.
 
 \begin{figure}[H]
 		\centering
- 		\includegraphics[width=8.0cm]{myGeom.png}
+ 		\includegraphics[width=12.0cm]{myGeom.png}
  		\captionsetup{font={up, footnotesize}}
     	\caption{Obraz detektora}
- 		\label{rys27}
+ 		\label{rys28}
 \end{figure}
 
-\newpage
 \subsection{Tworzenie obrazu stereoskopowego w technice pasywnej}
-Pasywne wizualicje stereoskopowe wymagają przygotowanych wcześniej dwóch obrazów z różniącą się perspektywą i umieszczenia tych obrazów obok siebie. Dla wyrenderowania różniących się perspektyw w OpenGL muszą być dopasowane regulacja asymetryczna wraz z widokiem renderowanego obszaru. Obszar widoku jest równoległym rzutem asymetrycznym w kształcie ściętego stożka lub równoważnym przesunięciem obiektywu w fotografii. 
+Pasywne wizualicje stereoskopowe wymagają przygotowanych wcześniej dwóch obrazów z różniącą się perspektywą i umieszczenia tych obrazów obok siebie. Dla stworzenia różniących się perspektyw w OpenGL muszą być dopasowane regulacja asymetryczna wraz z widokiem renderowanego obszaru. Obszar widoku jest równoległym rzutem asymetrycznym w kształcie ściętego stożka lub równoważnym przesunięciem obiektywu w fotografii. 
 
 Opisywana technika nie wprowadza pionowej paralaksy i jest powszechnie stosowana w renderowaniu stereoskopowym \cite{openglCookbook}. Do zilustrowania koncepcji dla prawego oka (dla lewego oka są wykonywane analogiczne transformację w lustrzanym odbiciu) wykorzystano rysunek \ref{rys10}. Przesunięcie reprezentuje wielkość odchylenia dla regulacji asymetrycznej ściętego stożka.
 
 \begin{figure}[H]
 		\centering
- 		\includegraphics[width=10cm]{stereoscopicGL.png}
+ 		\includegraphics[width=12cm]{stereoscopicGL.png}
  		\captionsetup{font={up, footnotesize}}
     	\caption{Geometria sceny, którą użytkownik widzi z perspektywy prawego oka \cite{openglCookbook}.}
  		\label{rys10}
 \end{figure}
 
-Kod źródłowy umieszczony w tabeli \ref{tab5} obrazuje implementację tworzenia rzutowania i wyświetlania macierzy dla stereoskopowej wizualizacji. Kod wykorzystuje odległość między oczyma (zmienna IOD w kodzie), odległość płaszczyzny obrazu (zmienna depthZ) oraz odległość bliskiej płaszczyzny rzutowania (zmienna nearZ).  Wymienione znienne są użyte do określenia wartości przesunięcia. W przedstawionym kodzie źródłowym są zaimplementowane również obliczenie macierzy projekcji i widoku, skorzystano do tego z funkcji biblioteki GLM. 
+Kod źródłowy umieszczony w tabeli \ref{tab5} przedstawia implementację tworzenia rzutowania i wyświetlania macierzy dla wizualizacji stereoskopowej. Kod wykorzystuje odległość między oczyma (zmienna IOD w kodzie), odległość płaszczyzny obrazu (zmienna depthZ) oraz odległość bliskiej płaszczyzny rzutowania (zmienna nearZ).  Wymienione znienne są użyte do określenia wartości przesunięcia (zmienna frustumshift). W przedstawionym kodzie źródłowym są zaimplementowane również obliczenia macierzy projekcji i widoku, skorzystano do tego z funkcji biblioteki GLM, podobnie jak w przypadku ze zwykłą kamerą dla widoku była to funkcja glm::lookAt. Natomiast macierz projekcji obliczano za pomocą funkcji glm::frustum;
 
-W tabeli \ref{tab10} zaprezentowano implementację widoku dla każdego oka poprzez odpowiednie ustawienia macierzy projekcji i widoku. Dla każdego oka położenie kamery jest przekładane o połowę odległości między oczyma (jak zostało pokazane na rys. \ref{rys10}). 
+W tabeli \ref{tab10} zaprezentowano implementację stworzenia obrazów dla każdego oka, poprzez odpowiednie ustawienia macierzy projekcji i widoku. Dla każdego oka położenie kamery jest przesuwane o połowę odległości między oczyma (jak zostało pokazane na rys. \ref{rys10}). 
 
 Kod źródłowy w tabelach \ref{tab5} i \ref{tab10} był stworzony w oparciu o \cite{openglCookbook}. Ostateczny wynik renderowania składa się z dwóch oddzielnych obrazów po obu stronach ekranu.
+
+\newpage
 \begin{table}[H]
 \caption{Kod źródłowy programu. Implementacja przekształceń macierzy stereoskopowych.}
 \label{tab5}
@@ -1054,7 +1062,7 @@ track.draw(); }
 \end{lstlisting}
 \end{table}
 
-\newpage
+
 \subsection{Tworzenie aktywnego obrazu stereoskopowego} 
 1) Set the geometry for the view from left human eye 
 2) Set the left eye rendering buffers 
@@ -1083,6 +1091,7 @@ Główne zasady podczas tworzenia testów jednostkowych:
 
 Głównym celem testów jednostkowych w niniejszej pracy dyplomowej jest sprawdzenie poprawności przekazywania odczytanych danych. Przykładem może posłużyć sprawdzenie czy liczba torów cząstek odczytana z pliku JSON zgadza się z liczbą torów zapisaną do tablicy wierszchołków.
 
+\newpage
 \subsubsection{Zarządzanie jakością projektu}
 Po zakończeniu procesu wytwórczego oceniono końcowy produkt --- program wraz z jakością stworzonych obrazów. Zwrócono uwagę również na stopień spełnienia przez oprogramowanie wymagań funkcjonalnych i niefunkcjonalnych.
 
@@ -1115,7 +1124,7 @@ Po zakończeniu procesu wytwórczego oceniono końcowy produkt --- program wraz 
 \caption{Stopień spełnienia wymagań niefukcjonalnych.}
 \centering
 \footnotesize
-\label{tab3}
+\label{tab19}
 \begin{tabular}{!{\color{sapphire}\vrule width 1pt}m{0.05\textwidth}!{\color{black}\vrule width 1pt}m{0.26\textwidth}!{\color{black}\vrule width 1pt}m{0.57\textwidth}!{\color{sapphire}\vrule width 1pt}}
 	\arrayrulecolor{sapphire}\hline
 	\Centering\bfseries Nr &
@@ -1136,6 +1145,47 @@ Po zakończeniu procesu wytwórczego oceniono końcowy produkt --- program wraz 
 \end{tabular}
 \end{table}
 
+
+\subsection{Porównanie technologii stereoskopowych}
+Po przetestowaniu oprogramowania na dwóch zestawach dla widzenia stereoskopowego można wyciągnąć pewne wnioski, a przede wszystkim mieć podstawy i kryteria do porównania technologii widzenia w trzech wymiarach.
+
+Pierwsza rzecz, na którą zwraca się uwagę podczas pierwszego korzystania z zestawów, to znacząca różnica w rozdzielczości. Stereoskopia aktywna jest bezwarunkowo w tym lepsza od technologii pasywnej.
+
+Kolejna ważna rzecz to jasność obrazu. Po założeniu okularów zauważalny jest spadek jasnośi o około połowę. W przypadku obu metod, zarówno aktywnej, jak i pasywnej, tylko połowa światła dociera do oka. W technologii aktywnej jest to spowodowane przyciemnianiem soczewek na zmianę, w przypadku pasywnego 3D co druga wyświetlana przez ekran linia jest czarna. Aby zrekompensować tę stratę, większość wyświetlaczy po prostu zwiększa jasność w trybie stereoskopowym.
+
+Obie wyżej wymienione własności mają wpływ na jakość obrazu i na komfort oglądania. Biorąc pod uwagę to kryterium, warto odznaczyć, że każda technologia posiada wady, których nie da się wyeliminować, gdyż leżą one u podstaw działania technik. W przypadku stereoskopii pasywnej wadą jest dobranie odpowiedniej pozyzji, żeby móc obejrzeć obraz stereoskopowy. Wiąże się to, z dopasowaniem polaryzaji ekranu i okularów, ponieważ każde odchylenie zabuża cały obraz. W przypadku stereoskopii aktywnej komfort oglądania zabużają migotanie obrazu. Migotanie jest spowodowane szybką zmianą obrazów i przyciemnianiem odpowiednich soczewek. Po dłuższym oglądaniu wada ta może doprowadzić do bólu głowy, a w przypadkach skrajnych nawet do ataku epileptycznego. Dlatego przed użyciem Nvidia 3D Vision należy wykonać test zdrowotny, udostępniony w oprogramowaniu zestawu, który sprawdza podatność ogranizmu na efekty uboczne.
+
+Jak technika stereoskopowego widzenia pasywnego, tak i aktywnego wymagają użycia okularów. Wadą okularów aktywnych jest po pierwsze koszt, a po drugie bateria, która musi być naładowana, żeby oglądanie obrazów trójwymiarowych powiodło się. Warto zaznaczyć, że urzędzenia umożliwiające widzenie stereoskopowe stają się coraz bardziej popularne, lecz nie są jeszcze powszechnie dostpne w sklepach.
+
+Tabela \ref{tab19} strukturyzuje opisane wcześniej informacje.
+
+\begin{table}[H]
+\caption{Porównanie technologii stereoskopowych.}
+\centering
+\footnotesize
+\label{tab19}
+\begin{tabular}{!{\color{sapphire}\vrule width 1pt}m{0.29\textwidth}!{\color{black}\vrule width 1pt}m{0.29\textwidth}!{\color{black}\vrule width 1pt}m{0.29\textwidth}!{\color{sapphire}\vrule width 1pt}}
+	\arrayrulecolor{sapphire}\hline
+	\Centering\bfseries Kryterium &
+	\Centering\bfseries Stereoskopia pasywna &
+	\Centering\bfseries Stereoskopia aktywna \\
+	\hline
+	\arrayrulecolor{black}
+	Rozdzielczość & Średnia: 1920x540 & Bardzo wysoka: 1920x1080. \\ 
+	\hline
+	Jasność & Słaba & Słaba \\ 
+	\hline
+	Komfort oglądania & Trzeba utrzymywać stałe położenie przy ekranie. & Migotanie może powodować ból głowy. \\
+	\hline
+	Dostępność na rynku & Średnia & Średnia \\
+	\hline
+	Okulary & Niedrogie, nie wymagają baterii. & Drogie, wymagają posiadanie naładowanej baterii.  \\  
+	\arrayrulecolor{sapphire}\hline
+\end{tabular}
+\end{table}
+
+Pomimo wielu zalet stereoskopii pasywnej, finalnie oddano przewagę technologii aktywnej ze względu na rozdzielczość obrazu i na komfort użycia. Przy oglądaniu do 30 minut nie było objaw żadnego efektu ubocznego, i też nie było problemów z wybraniem położenia przy ekranie.
+
 \newpage
 \section{Podsumowanie}
 Opracowanie wizualizacji stereoskopowych detektora ALICE wymagało podzielenia całości prac na kilka dużych etapów.
@@ -1146,11 +1196,11 @@ Znaczącą cześcią tego opracowania jest etap analizy. Zaczynając od przestud
 
 Proces projektowania w całości przebiegał zgodnie z zaleceniami z \cite{specyfikacja}. Po ogólnym opisie projektu wyspecyfikowano wymagania funkcjonalne i niefunkcjonalne, określono przypadki użycia.
 
-Lukę między opisem wymagań a implementacją wypełnia projekt oprogramowania, definiujący jego elementy składowe oraz ich zachowanie. Wyznaczony schemat, zgodnie z którym zostaną napisane i uruchomione wszystkie metody, zaplanowano i opisano w diagramie klas. Na tym etapie również określono biblioteki do użycia w programie. Opracowany projekt był dużym wsparciem podczas implementacji rozwiązania, gdzyż pozwalał kontrolować przebieg prac oraz utrzymywać jakość produktu końcowego na odpowiednim poziomie.
+Lukę między opisem wymagań a implementacją wypełnił projekt oprogramowania, definiujący jego elementy składowe oraz ich zachowanie. Wyznaczony schemat, zgodnie z którym zostały napisane i uruchomione wszystkie metody, zaplanowano i opisano w diagramie klas. Na tym etapie również określono biblioteki do użycia w programie. Opracowany projekt był dużym wsparciem podczas implementacji rozwiązania, gdzyż pozwalał kontrolować przebieg prac oraz utrzymywać jakość produktu końcowego na odpowiednim poziomie.
 
-Kolejnym ważnym etapem była implementacja zaporojektowanego programu. W tej części opracowania prowadzono najwiejcej eksperymentów z różnymi wartościami mającymi wpływ na jakość tworzonych obrazów. Ponadto dużą składową etapu implementacji było testowanie. Celem testowania było doświadczalne porównanie programu z projektem. Integralną częścią weryfikacji poprawności programu było wyświetlenie obrazów końcowych z użyciem różnego sprzętu komputerowego i stereoskopowego. Testowanie oprogramowania zakończono pomyślnie, oznacza to, że produkt końcowy spełnia wymagania projektowe i dodatkowo jest akrakcyjny pod względem technologii, z których korzysta.
+Kolejnym ważnym etapem była implementacja zaprojektowanego programu. W tej części opracowania prowadzono najwiejcej eksperymentów z różnymi wartościami mającymi wpływ na jakość tworzonych obrazów. Ponadto dużą składową etapu implementacji było testowanie. Celem testowania było doświadczalne porównanie programu z projektem. Integralną częścią weryfikacji poprawności programu było wyświetlenie obrazów końcowych z użyciem różnego sprzętu komputerowego i stereoskopowego. Testowanie oprogramowania zakończono pomyślnie, oznacza to, że produkt końcowy spełnia wymagania projektowe i dodatkowo jest akrakcyjny pod względem technologii, z których korzysta.
 
-Tak jak przy przygotowaniu przeważnej większości projektów informatycznych, tak i w niniejszym pojawiały się rozmaite trudności, których nie przewidziano wcześniej. Wbrew tym niedogodnociom zrealizowano większość celów. Reasumując założenia wstępne to:
+Tak jak przy przygotowaniu przeważnej większości opracowań informatycznych, tak i w niniejszym pojawiały się rozmaite trudności, których nie przewidziano wcześniej. Wbrew tym niedogodnociom zrealizowano większość celów. Reasumując założenia wstępne to:
 \begin{itemize}
 \itemi analiza dostępnych narzędzi graficznych;
 \itemi stworzenie oprogramowania z wykorzystaniem biblioteki OpenGL, które:
@@ -1162,10 +1212,10 @@ Tak jak przy przygotowaniu przeważnej większości projektów informatycznych, 
 \itemi zapewnienie przenośności oprogramowania (działa zarówno pod systemem operacyjnym Linux jak i Windows).
 \end{itemize}
 
-Nie do końca został zrealizowany cel przenośności oprogramowania. Jest to związane z wymaganiami systemowymi obsługi stereoskopii aktywnej. Obecnie liderem na rynku aktywnych obrazów stereoskopowych jest technologia Nvidia 3D Vision, która wymaga operacyjnego systemu Windows dla poprawnego działania sprzętu i sterowników. Niestety nie zostało opublikowane jeszcze rozwiązanie dla innych systemów operacyjnych. Pozostałe cele zostały w pełni zrealizowane. 
+Nie do końca został zrealizowany cel przenośności oprogramowania. Jest to związane z wymaganiami systemowymi obsługi stereoskopii aktywnej. Obecnie liderem na rynku aktywnych obrazów stereoskopowych jest technologia Nvidia 3D Vision, która wymaga operacyjnego systemu Windows dla poprawnego działania sprzętu i sterowników. Niestety nie zostało opublikowane jeszcze rozwiązanie dla innych systemów operacyjnych. Natomiast pozostałe cele zostały w pełni zrealizowane. 
 
 \subsection{Ciąg dalszy prac}
-Wizualizacje 3D w nauce są bardzo obiecującym obszarem zastosowania. W kolejnym opracowaniu temat streoskopii zostałby rozszerzony do wirtualnej rzeczywistości. Wtedy zestaw VR (ang. Virtual Reality, wirtualna rzeczywistość) oferowałby szansę zobaczenia akceleratora LHC, detektora i centrum danych z bliska.
+Wizualizacje 3D w nauce są bardzo obiecującym obszarem zastosowania. W kolejnym opracowaniu temat streoskopii zostałby rozszerzony do wirtualnej rzeczywistości. Wtedy zestaw VR (ang. Virtual Reality, wirtualna rzeczywistość) oferowałby szansę zobaczenia akceleratora LHC, detektorów i centrum danych z bliska.
 
 Obecnie potężne aplikacje do wizualizacji naukowych mogą być rozwijane przy użyciu istniejących technologii dość małym kosztem. Tendencja do projektowania zwykłych komputerów w kierunku szybszej grafiki, większej mocy obliczeniowej, systemów operacyjnych wspierających współbiezność i bardzo dużej pamięci powinna wesprzeć i przyspieszyć rozwój rzeczywistości wirtualnej.
 
@@ -1174,9 +1224,7 @@ Wykorzystanie najnowszych technologii skróciłoby dystans między złożoną te
 \subsection{Zakończenie}
 Wizualizacje trójwymiarowe w celach dydaktycznych czy naukowych stanowią nieoceniony napęd w rozwoju komputerów i nowych technologii.   Tak duży postęp narzędzi multimedialnych w ostatnich czasach sprawia, że coraz częściej wizualizacje trójwymiarowe można powszechnie spotkać na uczelniach lub w centrach rozrywki.
 
-Oczywiście obrazy trójwymiarowe przedstawiane na zwykłym ekranie 2D bez zastosowania sprzętu specjalistycznego (okularów 3D, emitera podczerwieni w przypadku stereoskopii aktywnej) są prymitywną symulacją, przedstawieniem sceny trójwymiarowej na płaszczyźnie o dwóch wymiarach. Jednak poprzez połączenie technologii wirtualnej rzeczywistości z animacją można uzyskać kolosalne narzędzie edukacyjne, które by było potężnym wsparciem dla stosowanych w tej chwili metodyk. 
-
-%Mogły by one obrazować pojedyńcze zjawiska czy procesy w warunkach mocno zbliżonych do rzeczywistego środowiska.
+Oczywiście obrazy trójwymiarowe przedstawiane na zwykłym ekranie 2D bez zastosowania sprzętu specjalistycznego (okularów 3D, emitera podczerwieni w przypadku stereoskopii aktywnej) są prymitywną symulacją, przedstawieniem sceny trójwymiarowej na płaszczyźnie o dwóch wymiarach. Jednak poprzez połączenie technologii stereoskopowych z animacją można uzyskać kolosalne narzędzie edukacyjne, które by było potężnym wsparciem dla stosowanych w tej chwili metodyk. 
 
 \begin{appendices}
 \section{Wyniki tworzenia obrazów torów cząstek}
