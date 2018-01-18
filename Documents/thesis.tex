@@ -66,7 +66,7 @@ Najprostszą metodą doświadczenia widzenia stereoskopowego jest umieszczenie d
 Warto zauważyć, że oglądanie stereogramów tworzy duże obciążenie dla oczu. W celu zmniejszenia negatywnych skutków używa się stereoskopu bądź specjalnego ekranu 3D w zestawie z okularami. To w znacznej mierze redukuje przemęczenie oczu i pozwala przez dłuższy czas przyglądać się efektom widzenia stereoskopowego.
 \begin{figure}[H]
 		\centering
- 		\includegraphics[width=10cm]{sbs.jpg}
+ 		\includegraphics[width=12cm]{sbs.jpg}
  		\captionsetup{font={up, footnotesize}}
     	\caption{Stereogram typu side by side\cite{sidebyside}.}
  		\label{rys1}
@@ -79,7 +79,7 @@ Przy użyciu poprawnej techniki oglądania specjalnie stworzonego obrazu powstaj
 
 \begin{figure}[H]
 		\centering
- 		\includegraphics[width=6.5cm]{68.jpg}
+ 		\includegraphics[width=8.5cm]{68.jpg}
  		\captionsetup{font={up, footnotesize}}
     	\caption{Autostereogram\cite{autostereogram}.}
  		\label{rys26}
@@ -92,7 +92,7 @@ W przypadku liniowej polaryzacji pole elektryczne światła jest skierowane pion
 
 \begin{figure}[H]
 		\centering
- 		\includegraphics[width=6.5cm]{circular.png}
+ 		\includegraphics[width=7.0cm]{circular.png}
  		\captionsetup{font={up, footnotesize}}
     	\caption{Polaryzacja kołowa prawoskrętna \cite{polarization}.}
  		\label{rys3}
@@ -110,7 +110,7 @@ Istenieją także filtry o innych kolorach, zachowujące główną zasadę anagl
 
 \begin{figure}[H]
 		\centering
- 		\includegraphics[width=13cm]{NASA.png}
+ 		\includegraphics[width=12.5cm]{NASA.png}
  		\captionsetup{font={up, footnotesize}}
     	\caption{Teren Księżyca \cite{anaglif}.}
  		\label{rys4}
@@ -118,7 +118,6 @@ Istenieją także filtry o innych kolorach, zachowujące główną zasadę anagl
 
 To jest jedna z najstarszych technik stereoskopowych, używana początkowo do tworzenia filmów 3D (pozbawionych barw). Natomist obecnie jednym z najciekawszych zastowsowań techniki anaglifowej jest inicjatywa NASA, pokazująca powierzchnię Księżyca w postaci obrazów anaglifowych, rysunek \ref{rys4}. 
 
-\newpage
 \subsubsection{Wizualizacja wielopasmowa}
 Nowa technika wyświetlania obrazów stereoskopowych, znana również pod tytułem INFITEC (ang. Interference filter technique, czyli technika filtrowania interferencyjnego). Główna jej idea jest podobna do stereoskopii anaglifowej: pokazanie dwóch obrazów z różniącą się perspektywą, które są wykonane w różnych kolorach. Jednak do osiągnięcia efektu stereoskopowego za pośrednictwem wizualizacji wielopasmowych jest wykorzystany fakt, że widmo światła widzialnego można podzielić na fale o różnej długości, używając do tego filtrów optycznych \cite{infitec}.
 
@@ -159,7 +158,7 @@ Tabela \ref{tab11} przedstawia główne kryteria porównania technik stereoskopo
 
 Po przeanalizowaniu opisanych technik zostały wybrane 2 do głębszego przestudiowania: technika stereoskopii pasywnej oraz technika stereoskopii aktywnej. Obie techniki wyróżniają się na tle innych, gdyż mają najlepszy stosunek jakości obserwowanych obrazów do kosztu ich wytwarzania. Zostaną one użyte w oprogramowaniu końcowym.
 
-\newpage
+
 \subsection{Nvidia 3D Vision --- implementacja stereoskopii aktywnej}
 Nvidia --- światowy lider w dziedzinie technologii obliczeń graficznych i wynalazca GPU (ang. Graphics Processing Unit, wysokowydajny procesor graficzny, potocznie nazywany kartą graficzną), który potrafi tworzyć realistyczne interaktywne obrazy na stacjach roboczych, komputerach osobistych, konsolach do gier i urządzeniach mobilnych \cite{NvidiaInfo}. 
 
@@ -178,7 +177,7 @@ Dla bezproblemowego korzystania z technologii wystawaniono następujące wymagan
 
 \begin{figure}[H]
 		\centering
- 		\includegraphics[width=9cm]{3dVision.png}
+ 		\includegraphics[width=7cm]{3dVision.png}
  		\captionsetup{font={up, footnotesize}}
     	\caption{3D Vision wraz z diagramem poprawnego ustawienia \cite{3dVisionPic}.}
  		\label{rys29}
@@ -482,7 +481,17 @@ Wskazanie funkcji oprogramowania nie określa wszystkich cech istotnych dla uży
 \subsection{Przypadki użycia}
 Wymagania użytkownika programu mogą być pokazane jak lista zadań, która może być wykonana z użyciem powstającego programu. W takim przypadku, każde zadanie musi być opisane, z uwzględnieniem kolejności poszczególnych kroków, które by doprowadziły użytkownika do konkretnego miejsca w programie. Podsumowując, opis wymagań sprowadza się do opisu możliwych sposobów używania programu przez aktorów (użytkowników).
 
-Aktorem w tym kontekście jest zwykły użytkownik programu. Przez to, że głównym celem tej oto pracy dyplomowej są wizualizacje, wszystkie przypadki użycia kończą się oglądaniem wygenerowanych scen oraz poruszaniem się w nich.
+Graficzną reprezentacją modelu przypadków użycia jest rysunek \ref{rys34}.
+
+\begin{figure}[H]
+		\centering
+ 		\includegraphics[width=14.0cm]{UseCase.png}
+ 		\captionsetup{font={up, footnotesize}}
+    	\caption{Diagram przypadków użycia.}
+ 		\label{rys34}
+\end{figure}
+
+Aktorem w tym kontekście jest zwykły użytkownik programu. Przez to, że głównym celem tej oto pracy dyplomowej są wizualizacje, opis każdego przypadku użycia kończy się oglądaniem wygenerowanych scen oraz poruszaniem się w nich.
 
 \begin{table}[H]
 \caption{Przypadki użycia programu}
@@ -545,7 +554,7 @@ Na tym etapie projektu diagram klas jest wciąż postrzegany tylko w perspektywi
 
 \begin{figure}[H]
 		\centering
- 		\includegraphics[width=16.0cm]{diagramKlas.png}
+ 		\includegraphics[width=16.0cm]{DiagramKlas.png}
  		\captionsetup{font={up, footnotesize}}
     	\caption{Diagram klas programu wizualizacji.}
  		\label{rys24}
@@ -718,7 +727,7 @@ Obiekt wektora wierzchołków jest powiązany z obiektem bufora wierzchołków (
 
 Do przechowywania dużej liczby wierzchołków w pamięci GPU, a także do zarządzania tym zasobem posłużono się buforem wierzchołków obiektów (ang. VBO --- Vertex Buffer Objects). Zaletą tego rozwiązania jest bezpośrednie przesyłanie dużej ilości danych do karty graficznej. Gdy niezbędne dane już są w pamięci karty graficznej, moduł cieniujący wierzchołków ma praktycznie natychmiastowy dostęp do wierzchołków, dzięki czemu działa z wyjątkową szybkością.
 
-Każde wysłanie danych do procesora czy do karty graficznej jest bardzo kosztowną wydajnościowo czynnością. Dlatego postanowiono stworzyć jeden wspólny bufor wierzchołków i dodatkowy bufor elementów (ang. EBO --- Element Buffer Object), który by przechowywał kolejno numery wierzchołków, które muszą być wyświetlone. Wektor numerów został uzupełniony równolegle z wektorem wierzchołków (tabela \ref{6}). Flaga GL\_PRIMITIVE\_RESTART\_FIXED\_INDEX uprzedza VBO, że się zaczyna nowa ścieżka i nie należy jej łączyć z ostatnim wyświetlonym wierzchołkiem.
+Każde wysłanie danych do procesora czy do karty graficznej jest bardzo kosztowną wydajnościowo czynnością. Dlatego postanowiono stworzyć jeden wspólny bufor wierzchołków i dodatkowy bufor elementów (ang. EBO --- Element Buffer Object), który by przechowywał kolejno numery wierzchołków, które muszą być wyświetlone. Wektor numerów został uzupełniony równolegle z wektorem wierzchołków (tabela \ref{tab6}). Flaga GL\_PRIMITIVE\_RESTART\_FIXED\_INDEX uprzedza VBO, że się zaczyna nowa ścieżka i nie należy jej łączyć z ostatnim wyświetlonym wierzchołkiem.
 
 \subsubsection{Moduły cieniujące}
 Następnie były stworzone macierze transformacji. Zostały one przekazane do modułów cieniujących, tam zdefiniowano je jako uniformy i przemnożono ze współrzędnymi wierzchołków. Moduł cieniujący fragmentów jest dość prosty w tym przypadku, gdyż jedynie określa kolor ścieżki, która została po cząstce. Poniżej są umieszczone moduły cieniujące wierzchołków (tabela \ref{tab8}) oraz geometrii (tabela \ref{tab9}).
@@ -796,12 +805,12 @@ Techniki eliminujące efekt aliasingu, nazywane są antyaliasingiem (lub wygład
 
 W niniejszej pracy została wykorzystana metoda próbkowania wielokrotnego. Każdy piksel na krzywej został spróbkowany wiele razy. Dla każdego przebiegu próbki, zostało zastosowane nieduże przesunięcie wszystkich współrzędnych na ekranie. To przesunięcie jest odpowiednio mniejsze niż rzeczywisty rozmiar pikseli. Uśredniając wszystkie te próbki, otrzymuje się płynniejsze przejście kolorów \cite{glfw}. 
 
-Antyaliasing linii w OpenGL wymaga tylko wywołania funkcji glEnable z parametrem GL\_MULTISAMPLE (wielopróbkowanie) oraz funkcji glfwWindowHint(GLFW\_SAMPLES, 8), gdzie GLFW\_SAMPLES określa żądaną liczbę próbek do wykorzystania. Podając liczbę 0 jako argument wyłącza się antyliasing. Liczba 8 została wybrana po kilku eksperymentach z różnymi wartościami tego parametru. Po dużej liczbie uruchomień programu w laboratorium, postanowiono użyć dokładnie tej liczby próbek. PrzykLadowe obrazy z różnymi parametrami są przestawione na rysunkach \ref{rys12}, \ref{rys15}, \ref{rys16}.
+Antyaliasing linii w OpenGL wymaga tylko wywołania funkcji glEnable z parametrem GL\_MULTISAMPLE (wielopróbkowanie) oraz funkcji glfwWindowHint(GLFW\_SAMPLES, 8), gdzie GLFW\_SAMPLES określa żądaną liczbę próbek do wykorzystania. Podając liczbę 0 jako argument wyłącza się antyliasing. Liczba 8 została wybrana po kilku eksperymentach z różnymi wartościami tego parametru. Po dużej liczbie uruchomień programu w laboratorium, postanowiono użyć dokładnie tej liczby próbek. Przykładowe obrazy z różnymi parametrami są przestawione na rysunkach \ref{rys12}, \ref{rys15}, \ref{rys16}.
 
 Niestety nie da się w całości wyeliminować efektu aliasingu, lecz można znacznie zmniejszyć jego skutki poprzez zastosowanie różnych metod. Jak widać z rysunków \ref{rys13} i \ref{rys17} po użyciu techniki wielokrotnego próbkowania krzywe wygładziły, aczkolwiek wydają się być nieco grubsze.
 
 \begin{figure}[H]
-	\begin{subfigure}{0.45\textwidth}
+	\begin{subfigure}{0.5\textwidth}
 		\centering
  		\includegraphics[width=\textwidth]{withAliasing.png}
  		\captionsetup{font={up, footnotesize}}
@@ -809,25 +818,22 @@ Niestety nie da się w całości wyeliminować efektu aliasingu, lecz można zna
  		\label{rys25}
 	\end{subfigure}
 	\hfill
-	\begin{subfigure}{0.45\textwidth}
+	\begin{subfigure}{0.5\textwidth}
 		\centering
 		\includegraphics[width=\textwidth]{Antialiasing.png}
 		\captionsetup{font={up, footnotesize}}
-    	\caption{Po zastosowaniu GLFW\_SAMPLES z wartością parametru 8.}
+    	\caption{Po zastosowaniu GLFW\_SAMPLES = 8.}
 		\label{rys12}
 	\end{subfigure}
 	\captionsetup{justification=raggedleft, font={it, footnotesize}}
     \captionsetup{justification=justified, font={up, footnotesize}}
     \caption{Przykład zmniejszenia efektu aliasingu na wyrenderowanych krzywych.}
-    \label{rys13}
-\end{figure}
-
-\begin{figure}[H]
+\vskip\baselineskip
 	\begin{subfigure}{0.5\textwidth}
 		\centering
  		\includegraphics[width=\textwidth]{Wart3.png}
  		\captionsetup{font={up, footnotesize}}
-    	\caption{Po zastosowaniu GLFW\_SAMPLES z wartością parametru 3.}
+    	\caption{Po zastosowaniu GLFW\_SAMPLES = 3.}
  		\label{rys15}
 	\end{subfigure}
 	\hfill
@@ -835,7 +841,7 @@ Niestety nie da się w całości wyeliminować efektu aliasingu, lecz można zna
 		\centering
 		\includegraphics[width=\textwidth]{Wart20.png}
 		\captionsetup{font={up, footnotesize}}
-    	\caption{Po zastosowaniu GLFW\_SAMPLES z wartością parametru 20.}
+    	\caption{Po zastosowaniu GLFW\_SAMPLES = 20.}
 		\label{rys16}
 	\end{subfigure}
 	\captionsetup{justification=raggedleft, font={it, footnotesize}}
@@ -862,7 +868,7 @@ Obiekt mMesh przechowuje wszystkie istotne dane wymagane do renderowania: poło�
 
 \begin{figure}[H]
 		\centering
- 		\includegraphics[width=10.0cm]{assimpClasses.jpg}
+ 		\includegraphics[width=10.0cm]{assimpClasses.png}
  		\captionsetup{font={up, footnotesize}}
     	\caption{Diagram klas sceny wczytanej za pomocą biblioteki Assimp \cite{assimpImport}.}
  		\label{rys14}
@@ -977,7 +983,7 @@ Mesh processMesh(aiMesh *mesh, const aiScene *scene) {
 \subsubsection{Napotkane problemy}
 Przed rozpoczęciem prac nad programem wizualizacji detektora zakładano, że geometria modelu zostanie bezpośrednio pobrana z repozytorium w CERN. Okazało się jednak, że nie są to szeroko dostępne dane oraz że są one przechowywane w strukturach danych języka ROOT. ROOT --- język wewnętrznego użytkowania w CERN, nieco przypomina C, lecz jest bardziej dostosowany do zapotrzebowania w laboratorium fizycznym.
 
-ROOT również posiada własną platformę graficzną (Root 3D Graphics: TGeoManager \cite{root3dGraphics}) umożliwiającą tworzenie obrazów na podstawie przeanalizowanych danych. W tej oto platformie początkowo stworzono model detektora ALICE. Bezpośrednie pobranie danych o modelu wiązałoby się z dużym nakładem prac w kierunku przestudiowania struktur danych Root 3D Graphics i stworzenia odpowiedniego programu do przekształcenia danych na konkretny format pliku 3D (na przykład .obj czy .dae). 
+ROOT również posiada własną platformę graficzną (ROOT 3D Graphics: TGeoManager \cite{root3dGraphics}) umożliwiającą tworzenie obrazów na podstawie przeanalizowanych danych. W tej oto platformie początkowo stworzono model detektora ALICE. Bezpośrednie pobranie danych o modelu wiązałoby się z dużym nakładem prac w kierunku przestudiowania struktur danych ROOT 3D Graphics i stworzenia odpowiedniego programu do przekształcenia danych na konkretny format pliku 3D (na przykład .obj czy .dae). 
 
 Potrzebne rozwiązanie już zostało opracowane w CERN, ale nie zostało jeszcze upublicznione, dlatego na potrzeby niniejszej pracy inżynierskiej otrzymano gotowy plik Collada z geometrią detektora ALICE. Ze względu na to, że niezbędne oprogramowanie jest w trakcie tworzenia, otrzymany plik zawierał błędy w strukturze formatu. Ujawniało się to między innymi podczas ładowania modelu z pliku do obiektu aiScene. 
 
@@ -1115,7 +1121,7 @@ Po zakończeniu procesu wytwórczego oceniono końcowy produkt --- program wraz 
 	\hline
 	4 & Stworzenie efektu aktywnego widzenia stereoskopowego &  \\ 
 	\hline
-	5 & Możliwość interakcji z użytkownikiem & Spełnione w 100\%, instrukcję użytkownika umieszczono w Dodatku \ref{instrukcja}. \\ 
+	5 & Możliwość interakcji z użytkownikiem & Spełnione w 100\%, instrukcję użytkownika umieszczono w folderze z kodem źródłowym. \\ 
 	\arrayrulecolor{sapphire}\hline
 \end{tabular}
 \end{table}
@@ -1134,13 +1140,13 @@ Po zakończeniu procesu wytwórczego oceniono końcowy produkt --- program wraz 
 	\arrayrulecolor{black}
 	1 & Przenośność & Spełnione w 100\%. Program bezproblemowo uruchamiano na różnych systemach operacyjnych.\\ 
 	\hline
-	2 & Zrozumiałość & Spełnione w 100\%, instrukcję użytkownika umieszczono w Dodatku \ref{instrukcja}. \\ 
+	2 & Zrozumiałość & Spełnione w 100\%, instrukcję użytkownika umieszczono w folderze z kodem źródłowym.. \\ 
 	\hline
 	3 & Czytelność kodu źródłowego & Spełnione w 70\%, niektóre rozwiązania niezgodne z zasadami czystego kodu zastosowano ze względu na specyfikacje bibliotek zewnętrznych. \\ 
 	\hline
 	4 & Tolerowanie defektów & Spełnione w 100\%, błędne dane mogą być wprowadzone tylko poprzez pliki zewnętrzne. O problemach z plikiem użytkownik zostanie poinformawany za pomocą komunikatów błędu, odpowiednich dla analizatorów składni wybranego formatu. \\
 	\hline
-	5 & Przyjazność programu dla użytkownika & Spełnione w 100\%, instrukcję użytkownika umieszczono w Dodatku \ref{instrukcja}.\\  
+	5 & Przyjazność programu dla użytkownika & Spełnione w 100\%, instrukcję użytkownika umieszczono w folderze z kodem źródłowym.\\  
 	\arrayrulecolor{sapphire}\hline
 \end{tabular}
 \end{table}
@@ -1192,7 +1198,7 @@ Opracowanie wizualizacji stereoskopowych detektora ALICE wymagało podzielenia c
 
 Określenie celów całego przedwsięwzięcia na samym początku wyznaczyło kierunek rozwoju opracowania, wyeliminowało ściezki alternatywne narzucając z góry OpenGL jako podstawową bibliotekę graficzną. Etap pozwolił naszkicować ogólny plan postępowania w dążeniu za wizją niniejszej pracy dyplomowej --- zwiększeniu atrakcyjności fizyki dużych energii poprzez obrazy stereoskopowe. 
 
-Znaczącą cześcią tego opracowania jest etap analizy. Zaczynając od przestudiowania dostępnych technik stereoskopowych aż po poznanie eksperymentów z cząstkami w międzynarodowym laboratorium fizyki cząstek CERN. Już na tym etapie powstał pewien problem nie do ominięcia. Jak to było opisywane wcześniej, pobranie danych z repozytoriów w laboratorium ALICE sprowadziłoby się do stworzenia skomplikowanego parsera plików w języku Root. Dlatego, mimo że nie było to bezpośrednim celem niniejszej pracy, przeanalizowano różne formaty plików 3D oraz biblioteki, które by były w stanie wczytać modele z tych plików do sceny w programie. Dzięki takiej analizie stało się możliwe wykonanie zapytania o model w najbardziej pasującym rozszerzeniu (.DAE). Po części analitycznej zaczęto projektowanie oprogramowania.
+Znaczącą cześcią tego opracowania jest etap analizy. Zaczynając od przestudiowania dostępnych technik stereoskopowych aż po poznanie eksperymentów z cząstkami w międzynarodowym laboratorium fizyki cząstek CERN. Już na tym etapie powstał pewien problem nie do ominięcia. Jak to było opisywane wcześniej, pobranie danych z repozytoriów w laboratorium ALICE sprowadziłoby się do stworzenia skomplikowanego parsera plików w języku ROOT. Dlatego, mimo że nie było to bezpośrednim celem niniejszej pracy, przeanalizowano różne formaty plików 3D oraz biblioteki, które by były w stanie wczytać modele z tych plików do sceny w programie. Dzięki takiej analizie stało się możliwe wykonanie zapytania o model w najbardziej pasującym rozszerzeniu (.DAE). Po części analitycznej zaczęto projektowanie oprogramowania.
 
 Proces projektowania w całości przebiegał zgodnie z zaleceniami z \cite{specyfikacja}. Po ogólnym opisie projektu wyspecyfikowano wymagania funkcjonalne i niefunkcjonalne, określono przypadki użycia.
 
@@ -1226,86 +1232,125 @@ Wizualizacje trójwymiarowe w celach dydaktycznych czy naukowych stanowią nieoc
 
 Oczywiście obrazy trójwymiarowe przedstawiane na zwykłym ekranie 2D bez zastosowania sprzętu specjalistycznego (okularów 3D, emitera podczerwieni w przypadku stereoskopii aktywnej) są prymitywną symulacją, przedstawieniem sceny trójwymiarowej na płaszczyźnie o dwóch wymiarach. Jednak poprzez połączenie technologii stereoskopowych z animacją można uzyskać kolosalne narzędzie edukacyjne, które by było potężnym wsparciem dla stosowanych w tej chwili metodyk. 
 
+\newpage
+\bibliographystyle{plain} % bibliography style
+\bibliography{bibliography} % add bibliography
+
+\newpage
+\listoffigures
+
+\newpage
+\listoftables
+
+
 \begin{appendices}
 \section{Wyniki tworzenia obrazów torów cząstek}
 \label{Tory}
 \begin{figure}[H]
 	\begin{subfigure}{0.50\textwidth}
 		\centering
- 		\includegraphics[width=\textwidth]{trackScreen1.png}
+ 		\includegraphics[width=\textwidth]{TrackScreen7.jpg}
  		\captionsetup{font={up, footnotesize}}
-    	\caption{}
+    	\caption{Dane z pliku event4047\_run226466.json}
  		\label{rys18}
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}{0.50\textwidth}
 		\centering
-		\includegraphics[width=\textwidth]{trackScreen6.png}
+		\includegraphics[width=\textwidth]{TrackScreen3.jpg}
 		\captionsetup{font={up, footnotesize}}
-    	\caption{}
+    	\caption{Dane z pliku event254\_run226466.json}
 		\label{rys19}
 	\end{subfigure}	
 	\vskip\baselineskip
 		\begin{subfigure}{0.50\textwidth}
 		\centering
- 		\includegraphics[width=\textwidth]{trackScreen3.png}
+ 		\includegraphics[width=\textwidth]{TrackScreen4.jpg}
  		\captionsetup{font={up, footnotesize}}
-    	\caption{}
+    	\caption{Dane z pliku event786\_run122374.json}
  		\label{rys20}
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}{0.50\textwidth}
 		\centering
-		\includegraphics[width=\textwidth]{trackScreen4.png}
+		\includegraphics[width=\textwidth]{TrackScreen5.jpg}
 		\captionsetup{font={up, footnotesize}}
-    	\caption{}
+    	\caption{Dane z pliku event1153\_run122374.json}
 		\label{rys21}
 	\end{subfigure}
 	
 	\vskip\baselineskip
 		\begin{subfigure}{0.50\textwidth}
 		\centering
- 		\includegraphics[width=\textwidth]{trackScreen5.png}
+ 		\includegraphics[width=\textwidth]{TrackScreen6.jpg}
  		\captionsetup{font={up, footnotesize}}
-    	\caption{}
+    	\caption{Dane z pliku event2162\_run226466.json}
  		\label{rys22}
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}{0.50\textwidth}
 		\centering
-		\includegraphics[width=\textwidth]{trackScreen7.png}
+		\includegraphics[width=\textwidth]{TrackScreen1.jpg}
 		\captionsetup{font={up, footnotesize}}
-    	\caption{}
+    	\caption{Dane z pliku event3055\_run226466.json}
 		\label{rys23}
 	\end{subfigure}
-    \label{rys}
+    \label{rys30}
 \end{figure}
 
 \newpage
-\section{Wyniki tworzenia obrazów w technice stereoskopii pasywnej}
+\section{Wyniki tworzenia obrazów dla stereoskopii pasywnej}
 \label{sideBside}
+\begin{figure}[H]
+	\begin{subfigure}{0.90\textwidth}
+		\centering
+ 		\includegraphics[width=\textwidth]{Stereo_event4047_run226466.jpg}
+ 		\captionsetup{font={up, footnotesize}}
+    	\caption{Dane z pliku event4047\_run226466.json}
+ 		\label{rys32}
+	\end{subfigure}
+	\vskip\baselineskip
+	\begin{subfigure}{0.90\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{Stereo_event3055_run226466.jpg}
+		\captionsetup{font={up, footnotesize}}
+    	\caption{Dane z pliku event3055\_run226466.json}
+		\label{rys33}
+	\end{subfigure}	
+
+    \label{rys31}
+\end{figure}
+
+%\newpage
+%\section{Instrukcja użytkowania programu}
+%\label{instrukcja}
+%Sterowanie widokiem kamery w programie wygląda następująco:
+%\begin{itemize}
+%\itemi $\uparrow$, $\downarrow$, $\leftarrow$, $\rightarrow$ --- sterowanie położeniem obserwatora;
+%\itemi ruchy w prawo lub lewo myszą --- rozglądanie się;
+%\itemi kółko myszy --- przyciąganie lub oddalanie obrazu;
+%\itemi klawisz t --- wyświetlanie torów cząstek;
+%\itemi klawisz d --- wyświetlenie detektora;
+%\itemi klawisz s --- widok stereoskopii pasywnej;
+%\itemi klawisz u --- widok zwykły;
+%\end{itemize}
 
 \newpage
-\section{Instrukcja użytkowania programu}
-\label{instrukcja}
-Sterowanie widokiem kamery w programie wygląda następująco:
+\section{Zawartość płyty CD}
+Płyta CD zawiera folder z oprogramowaniem, w tym folderze zagdnieżdżone są: 
 \begin{itemize}
-\itemi $\uparrow$, $\downarrow$, $\leftarrow$, $\rightarrow$ --- sterowanie położeniem obserwatora;
-\itemi ruchy w prawo lub lewo myszą --- rozglądanie się;
-\itemi kółko myszy --- przyciąganie lub oddalanie obrazu;
-\itemi klawisz t --- wyświetlanie torów cząstek;
-\itemi klawisz d --- wyświetlenie detektora;
-\itemi klawisz s --- widok stereoskopii pasywnej;
-\itemi klawisz u --- widok zwykły;
+\itemi Folder Documents zawiera pdf niniejszej pracy.
+\itemi Folder Glitter przechowuje potrzebne biblioteki, które przy pierwszym uruchomieniu zostaną zbudowane.
+\itemi Folder Headers zawiera wszystkie pliki nagłówkowe programu.
+\itemi Folder Shaders gromadzi w jednym miejscu wszystkie moduły cieniujące użyte w programie.
+\itemi Folder events.zip przechowuje wszystkie otrzymane pliki JSON z danymi o torach.
+\itemi Plik CMakeLists.txt zawiera zestaw instrukcji opisujących pliki wykonywalne, dołączone biblioteki. 
+\itemi Plik detector.dae przechowuje model detektora ALICE.
+\itemi Plik main.cpp uruchamia program.
+\itemi Track.json to plik z danymi o torach cząstki.
+\itemi Readme przechowuje instrukcję uruchomienia programu na różnych platformach.
 \end{itemize}
-\end{appendices}
 
-\newpage
-\bibliographystyle{plain} % bibliography style
-\bibliography{bibliography} % add bibliography
-\newpage
-\listoffigures
-\newpage
-\listoftables
+\end{appendices}
 
 \end{document}
