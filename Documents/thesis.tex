@@ -1,7 +1,8 @@
 \input{preamble/preamble.tex}
 \graphicspath{{images/}}
-\begin{document}
 
+\begin{document}
+\tocloftpagestyle{fancy}
 \includepdf[pages={-}]{preamble/begining.pdf}
 \thesisstyle
 \tableofcontents
@@ -12,7 +13,7 @@ W dzisiejszych czasach techniki 3D są rozwijane na podstawie opracowań efektu 
 
 Historia stereoskopii liczy już ponad 180 lat. Za odkrywcę uważa się Charlesa Wheatstone'a, który jako pierwszy zaobserwował zjawisko widzenia stereoskopowego, opisał go w artykule oraz skonstruował urządzenie potwierdzające słuszność jego teorii \cite{stereoscopehistory}. Wheatstone wyjaśnia, że jeśli obiekt znajduje się w małej odległości od oczu, to każde oko widzi przedmiot pod nieco innym kątem, z innej perspektywy. Zaś dla obiektów na dużej odległości nie ma to znaczenia \cite{wheatstone}. Wykorzystując te obserwacje, naukowiec skonstruował urządzenie (stereoskop), które umożliwiło przedstawienie delikatnie różniących się obrazów prawemu i lewemu oku z osobna, z powstającą w efekcie iluzją trójwymiarowości obrazu.
 
-Do około 1930 r. stereoskop łączono z nowo rozwijającym się aparatem fotograficznym, takie połączenie zrobiło się niezwykle popularne szczególnie wśród ludzi epoki wiktoriańskiej. Od około 1950 do wczesnych lat 1970., stereografia wzbudziła kolejne zainteresowanie wraz ze wzrostem użycia drukowanych obrazów anaglifowych i spolaryzowanego światła w kinematografii. Jednak zanim nie były wystarczająco rozwinięte środowiska obliczeniowe i dopóki nie opracowano odpowiednio dużej rozdzielczości wyświetlaczy, ciężko było mówić o dużym postępie grafiki komputerowej i o kroku w kierunku wirtualnej rzeczywistości. Znaczący wzrost zainteresowania tym tematem można zaobserwować na początku lat 90., ponieważ zaczęto korzystać z wizualizacji stereoskopowych do celów badawczych i naukowych. Wtedy też wynaleziono pierwsze okulary migawkowe z soczewkami z ciekłych kryształów oraz projektory CRT, pozwalające na znaczne ulepszenie jakości stworzonych obrazów stereoskopowych.
+Do około 1930 r. stereoskop łączono z nowo rozwijającym się aparatem fotograficznym, takie połączenie zrobiło się niezwykle popularne szczególnie wśród ludzi epoki wiktoriańskiej. Od około 1950 do wczesnych lat 1970., stereografia wzbudziła kolejne zainteresowanie wraz ze wzrostem użycia drukowanych obrazów anaglifowych i spolaryzowanego światła w kinematografii. Brak mocy obliczeniowych i wyświetlaczy, które by zapewniały odpowiednio dużą rozdzielczość, powstrzymał postęp grafiki komputerowej w kierunku wirtualnej rzeczywistości. Znaczący wzrost zainteresowania tym tematem można zaobserwować na początku lat 90., ponieważ zaczęto korzystać z wizualizacji stereoskopowych do celów badawczych i naukowych. Wtedy też wynaleziono pierwsze okulary migawkowe z soczewkami z ciekłych kryształów oraz projektory CRT, pozwalające na znaczne ulepszenie jakości stworzonych obrazów stereoskopowych.
 
 Technologie wyświetlania i wizualizacji od lat 1990. rozwijały się w każdym kierunku, i dzisiaj można zauważyć na rynku zarówno większe, jak i mniejsze ekrany, z zaskakującą jakością wyświetlanych obrazów. Telewizja i okulary 3D stają się coraz bardziej powszechne dzięki najnowszym trendom w elektronice użytkowej i postępowi w dziedzinie technologii noszonych. Istnieje obecnie wiele rozwiązań sprzętowych, które umożliwiają stworzenie wizualizacji za pomocą stereoskopowej technologii 3D. 
 
@@ -1079,7 +1080,7 @@ W trakcie opracowania oprogramowania wizualizacji stereoskopowych został zaproj
 \itemi Ustawienie widoku dla lewego oka.
 \itemi Załadowanie widoku dla lewego oka do bufora.
 \itemi Wyświetlenie widoku dla lewego oka.
-\itemi Czyszczenie Z-bufora (jeśli używany jest ten sam dla lewego i prawego obrazu).
+\itemi Czyszczenie bufora (jeśli używany jest ten sam dla lewego i prawego obrazu).
 \itemi Ustawienie widoku dla prawego oka.
 \itemi Załadowanie widoku dla prawego oka do bufora.
 \itemi Wyświetlenie widoku dla prawego oka.
@@ -1090,13 +1091,13 @@ Wszystkie działania algorytmu należałoby wykonywać z bardzo dużą częstotl
 
 Użycie takiego algorytmu jest dobre tylko w teorii, gdyż w rzeczywistości powstaje problem synchronizacji wyświetlacza i okularów 3D. W zestawie Nvidia 3D Vision ten problem jest rozwiązany na poziomie sprzętowym, użyto do tego nadajnika podczerwieni oraz specjalnych okularów.
 
-Niestety, w roku 2008 firma Nvidia usunęła stereoskopową obsługę OpenGL dla kart graficznych GeForce i AMD. Jednak była kontynuowana obsługa wyświetlania obrazów stereoskopowych z OpenGL w najdroższych, profesjonalnych rozwiązaniach Quadro + 3D Vision. Ten niefortunny stan rzeczy zmienił się w lutym 2013 roku, przy realizacji kolejnego sterownika Nvidia GeForce 314.07. Biblioteka OpenGL zaczęła działać dla pełnoekranowych programów stereoskopowych dla pojedynczych konfiguracji komputerowych (na przykład Windows 8 64-bit, GeForce GTX 680M). Wszystkie informacje o konfiguracjach można znaleźć na oficjalnym formum użytkowników GeForce \cite{GeForceForum}.
+Niestety, w roku 2008 firma Nvidia usunęła stereoskopową obsługę OpenGL dla kart graficznych GeForce i AMD. Jednak była kontynuowana obsługa wyświetlania obrazów stereoskopowych z OpenGL w najdroższych, profesjonalnych rozwiązaniach Quadro + 3D Vision. Ten niefortunny stan rzeczy zmienił się w lutym 2013 roku, przy realizacji kolejnego sterownika Nvidia GeForce 314.07. Biblioteka OpenGL zaczęła działać dla pełnoekranowych programów stereoskopowych dla pojedynczych konfiguracji komputerowych (na przykład Windows 8 64-bit, GeForce GTX 680M). Wszystkie informacje o konfiguracjach można znaleźć na oficjalnym forum użytkowników GeForce \cite{GeForceForum}.
 
-Zmiana, która zaszła, nie była zapowiedziana oficjalnie i mogła ona być niezamierzonym efektem wprowadzonych do sterownika modyfikacji, a powodzenie przy uruchomieniu OpenGL na wybranych konfiguracjach komputerów i zastawów 3D Vision można uważać za wyjątek. Z informacji umieszczonych na oficjalnej stronie internetowej \cite{NvidiaInfo} wynika, że ta technologia wciąż nie wspiera biblioteki OpenGL. Stąd, osiągnięcie celu: wykonanie obrazów w technologii stereoskopii aktywnej, nie jest możliwe.
+Zmiana, która zaszła, nie była zapowiedziana oficjalnie i mogła ona być niezamierzonym efektem wprowadzonych do sterownika modyfikacji, a powodzenie przy uruchomieniu OpenGL na wybranych konfiguracjach komputerów i zestawów 3D Vision można uważać za wyjątek. Z informacji umieszczonych na oficjalnej stronie internetowej \cite{NvidiaInfo} wynika, że ta technologia wciąż nie wspiera biblioteki OpenGL. Stąd, osiągnięcie celu: wykonanie obrazów w technologii stereoskopii aktywnej, nie jest możliwe.
 
-Gry komputerowe, które można wyświetlać za pomocą zestawu do stereoskopii aktywnej, są tworzone przy użyciu silnika gragicznego Unity w wersjach 4 Pro lub 5. Dla połącznia Unity z 3D Vision została opracowana specjalna wtyczka, którą można kupić na stronie \cite{Unity}.
+Gry komputerowe, które można wyświetlać za pomocą zestawu do stereoskopii aktywnej, są tworzone przy użyciu silnika graficznego Unity w wersjach 4 Pro lub 5. Dla połączenia Unity z 3D Vision została opracowana specjalna wtyczka, którą można kupić na stronie \cite{Unity}.
 
-W ramach opracowania uruchomiono zestaw Nvidia 3D Vision z programami dostarczonymi w pakiecie. Podczas uruchomienia należy krok po kroku spełniać wszystkie wymagania spisane na stronie \cite{NvidiaInfo}, w przeciwnym przypadku grozi to niepowodzeniem w próbach skonfigurowania sprzętu z oprogramowaniem.
+W ramach opracowania uruchomiono zestaw Nvidia 3D Vision z programami dostarczonymi w pakiecie. Podczas uruchomienia należy krok po kroku spełniać wszystkie wymagania spisane na stronie \cite{NvidiaInfo}, w przeciwnym przypadku jest duże prawdopodobieństwo niepowodzenia w próbach skonfigurowania sprzętu z oprogramowaniem.
 
 \newpage
 \subsection{Weryfikacja poprawności i jakości programu}
@@ -1166,13 +1167,13 @@ Obie wyżej wymienione własności mają wpływ na jakość obrazu i na komfort 
 
 Jak technika stereoskopowego widzenia pasywnego, tak i aktywnego wymagają użycia okularów. Wadą okularów aktywnych jest po pierwsze koszt, a po drugie bateria, która musi być naładowana, żeby oglądanie obrazów trójwymiarowych się powiodło. Warto zaznaczyć, że urządzenia umożliwiające widzenie stereoskopowe stają się coraz bardziej popularne, lecz nie są jeszcze powszechnie dostępne w sklepach.
 
-Tabela \ref{tab19} strukturyzuje opisane wcześniej informacje.
+Tabela \ref{tab20} strukturyzuje opisane wcześniej informacje.
 
 \begin{table}[H]
 \caption{Porównanie technologii stereoskopowych.}
 \centering
-\footnotesize
-\label{tab19}
+\footnotesize 
+\label{tab20}
 \begin{tabular}{!{\color{sapphire}\vrule width 1pt}m{0.29\textwidth}!{\color{black}\vrule width 1pt}m{0.29\textwidth}!{\color{black}\vrule width 1pt}m{0.29\textwidth}!{\color{sapphire}\vrule width 1pt}}
 	\arrayrulecolor{sapphire}\hline
 	\Centering\bfseries Kryterium &
@@ -1235,6 +1236,20 @@ Wizualizacje trójwymiarowe w celach dydaktycznych czy naukowych stanowią nieoc
 
 Oczywiście obrazy trójwymiarowe przedstawiane na zwykłym ekranie 2D bez zastosowania sprzętu specjalistycznego (okularów 3D, emitera podczerwieni w przypadku stereoskopii aktywnej) są prymitywną symulacją, przedstawieniem sceny trójwymiarowej na płaszczyźnie o dwóch wymiarach. Jednak poprzez połączenie technologii stereoskopowych z animacją można uzyskać kolosalne narzędzie edukacyjne, które by było potężnym wsparciem dla stosowanych w tej chwili metodyk. 
 
+\newpage
+\bibliographystyle{plain} % bibliography style
+\bibliography{bibliography} % add bibliography
+
+\newpage
+\listoffigures
+
+\newpage
+\listoftables
+
+\newpage
+\listofappendix
+
+%\newpage
 \begin{appendices}
 \section{Wyniki tworzenia obrazów torów cząstek}
 \label{Tory}
@@ -1329,19 +1344,5 @@ Płyta CD zawiera folder z oprogramowaniem, w tym folderze umieszczone są:
 \itemi Readme przechowuje instrukcję uruchomienia programu na różnych platformach.
 \end{itemize}
 \end{appendices}
-
-\newpage
-\bibliographystyle{plain} % bibliography style
-\bibliography{bibliography} % add bibliography
-
-\newpage
-\listoffigures
-
-\newpage
-\listoftables
-
-%\newpage
-%\listofappendix
-
 
 \end{document}

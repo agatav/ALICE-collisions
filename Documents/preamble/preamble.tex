@@ -4,8 +4,9 @@
 \usepackage[polish]{babel}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
-\usepackage[scaled]{helvet}
-\renewcommand\familydefault{\sfdefault} 
+\usepackage{pslatex}
+\addto\captionspolish{\renewcommand{\refname}{Bibliografia}}
+\renewcommand{\refname}{Bibliografia}
 
 \let\lll=\relax
 \usepackage{amsmath}
@@ -47,7 +48,7 @@
 \setlength{\arrayrulewidth}{1pt}
 \captionsetup[table]{name=Tabela}
 \usepackage{multirow}
-\usepackage[toc, titletoc, title, header]{appendix}
+\usepackage[titletoc, title, header]{appendix}
 \definecolor{sapphire}{RGB}{120,150,207}
 \definecolor{grafit}{RGB}{60,60,60}
 
@@ -104,6 +105,30 @@
 	\pagestyle{fancy}
 }
 
+\usepackage{etoolbox}
+\usepackage{appendix}
+
+\usepackage{tocloft,titlesec}
+\newcommand{\listappendixname}{\Large\selectfont{Spis dodatków}}
+\newlistof{appendix}{apc}{\listappendixname}
+
+\makeatletter
+\AtBeginEnvironment{appendices}{%
+  \addcontentsline{toc}{section}{Spis dotatków}
+  \write\@auxout{%
+    \string\let\string\latex@tf@toc\string\tf@toc% Store the original `\tf@toc` file handle
+    \string\let\string\tf@toc\string\tf@apc% 
+  }% Naughty trick
+    \clearpage
+}
+
+\AtEndEnvironment{appendices}{%
+  \write\@auxout{%
+    \string\let\string\tf@toc\string\latex@tf@toc% 
+  }% Naughty trick, restoring the old `\tf@toc` number, to be able to write stuff to the real `.toc` again.
+}
+\makeatother
+
 \newcommand{\fancyfootnotetext}[2]
 {
 	\fancypagestyle{footnotes}
@@ -132,7 +157,6 @@
 	}
 	\thispagestyle{footnotes}
 }
-
 
 \titlespacing\section{0pt}{15pt}{10pt} 
 \titlespacing\subsection{0pt}{15pt}{10pt} 
