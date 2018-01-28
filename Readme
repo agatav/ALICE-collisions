@@ -1,19 +1,24 @@
-Uruchomienie programu na Ubuntu 16.04 w CLion 2016.1.3:
+Program opracowywano na systemie operacyjnym Ubuntu 16.04 w programie CLion 2016.1.3 z CMake wersji 3.9.1, ale da się
+uruchomić program i pod innymi systemami operacyjnymi, np. Windows.
 
-1. Zbudowanie projektu (przy pierwszym uruchomieniu). 
-
+Dla Ubuntu 16.04:
+1. Zbudowanie projektu (przy pierwszym uruchomieniu).
 Żeby zbudować projekt, trzeba wejść do katalogu tracks i uruchomić program CMake (wymagana wersja 3.5 lub nowsza). 
 
 2. Uruchomienie programu.
-
 Żeby uruchomić program trzeba odpalić plik main.cpp, na tym etapie w niektórych systemach operacyjnych mogą wystąpić
 problemy związane ze ścieżkami:
 - do modułów cieniujących (shaderów), do modelu detektora. W projekcie jest ścieżka lokalna, należy dopisać
     dokładne miejsce przechowywania pliku w systemie. Należy to zrobić w pliku main (32 - 39 linie);
 - do pliku z danymi o zderzeniu. Również należy uzupełnić ścieżkę globalną. Plik Track.h, 10 linia.
 
-3. Sterowanie programem.
+Dla Windows 10 i środowiska Visual Studio 2017 uruchomienie programu wygląda w podobny sposób, jak dla Ubuntu, gdyż
+Visual Studio 2017 ma wbudowaną obsługę CMake, dla starszych wersji należy zmapować zależności predefiniowane w CMake
+na właściwości z Visual Studio
+(przykładowe mapowanie jest umieszczone na stronie https://cognitivewaves.wordpress.com/cmake-and-visual-studio/).
 
+
+Sterowanie widokiem w programie:
 $\uparrow$, $\downarrow$, $\leftarrow$, $\rightarrow$ --- sterowanie położeniem obserwatora;
 ruchy w prawo lub lewo myszą --- rozglądanie się;
 kółko myszy --- przyciąganie lub oddalanie obrazu;
