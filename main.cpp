@@ -36,13 +36,15 @@ const char* tracksGeometryShaderPath = "/home/agata/Documents/tracks/Shaders/tra
 const char* materialsVertexShaderPath = "/home/agata/Documents/tracks/Shaders/materials.vert";
 const char* materialsFragmentShaderPath = "/home/agata/Documents/tracks/Shaders/materials.frag";
 
+const char* modelPath = "/home/agata/Documents/tracks/detector.dae";
+
 float rotateY = 0.0f;
 float rotateX = 0.0f;
 float IOD = 0.0001f;
-float depthZ = 1000.0f;
+float depthZ = -1000.0f;
 
 bool stereo = false;
-bool tracks =false;
+bool tracks =true;
 
 int main()
 {
@@ -74,14 +76,13 @@ int main()
     }
 
     glEnable(GL_MULTISAMPLE);
-    //glEnable(GL_DEPTH_TEST);
     Shader shader(tracksVertexShaderPath, tracksFragmentShaderPath, tracksGeometryShaderPath );
     Shader materialShader(materialsVertexShaderPath, materialsFragmentShaderPath);
 
     Track track;
     track.init();
 
-    Model ourModel("/home/agata/Documents/tracks/detector.dae");
+    Model ourModel(modelPath);
 
     GLuint program_id = glCreateProgram();
     GLuint matrix_id = glGetUniformLocation(program_id,"MVP");
@@ -93,7 +94,7 @@ int main()
 
         processInput(window);
 
-        glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+        glClearColor(0.0f, 0.0f, 0.1f, 0.4f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         //shader.use();
@@ -137,15 +138,18 @@ int main()
             }
             else {
                 materialShader.use();
-                glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
+                glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom),
+                                                        (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
 
                 materialShader.setMat4("projection", projection);
                 glm::mat4 view = camera.GetViewMatrix();
                 materialShader.setMat4("view", view);
 
                 glm::mat4 model;
-                model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f)); // translate it down so it's at the center of the scene
-                model = glm::scale(model, glm::vec3(0.001f, 0.001f, 0.001f));	// it's a bit too big for our scene, so scale it down
+                model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f)); // translate it down so it's
+                // at the center of the scene
+                model = glm::scale(model, glm::vec3(0.001f, 0.001f, 0.001f));	// it's a bit too big for our scene,
+                // so scale it down
                 materialShader.setMat4("model", model);
 
                 ourModel.Draw(materialShader);
@@ -163,7 +167,8 @@ int main()
 void drawStereoDetector (glm::mat4 transform, Shader materialShader, Model ourModel) {
     materialShader.use();
 
-    glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
+    glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom),
+                                            (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
     materialShader.setMat4("projection", projection);
     glm::mat4 view = camera.GetViewMatrix();
     materialShader.setMat4("view", view);
@@ -176,13 +181,14 @@ void drawStereoDetector (glm::mat4 transform, Shader materialShader, Model ourMo
     transform = glm::rotate(model, glm::pi<float>() * rotateX, glm::vec3(1.0f, 0.0f, 0.0f));
     GLint transformLoc = glGetUniformLocation(materialShader.ID, "transform");
     glUniformMatrix4fv(transformLoc, 1, GL_FALSE, glm::value_ptr(transform));
-    materialShader.setMat4("model", model);
+
     ourModel.Draw(materialShader);
 }
 
 void drawStereoTracks(glm::mat4 transform, Shader shader, Track track) {
     shader.use();
-    glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
+    glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom),
+                                            (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
     shader.setMat4("projection", projection);
 
     glm::mat4 view = camera.GetViewMatrix();
@@ -190,10 +196,10 @@ void drawStereoTracks(glm::mat4 transform, Shader shader, Track track) {
 
     glm::mat4 model = glm::mat4(1.0);
 
-    transform = glm::scale(transform, glm::vec3(0.001, 0.001, 0.001));
     transform = glm::translate(model, glm::vec3(0.0f, 0.0f, -depthZ));
     transform = glm::rotate(model, glm::pi<float>(), glm::vec3(0.0f, 1.0f, 0.0f));
     transform = glm::rotate(model, glm::pi<float>(), glm::vec3(1.0f, 0.0f, 0.0f));
+    transform = glm::scale(model, glm::vec3(0.01f, 0.01f, 0.01f));
     GLint transformLoc = glGetUniformLocation(shader.ID, "transform");
     glUniformMatrix4fv(transformLoc, 1, GL_FALSE, glm::value_ptr(transform));
 

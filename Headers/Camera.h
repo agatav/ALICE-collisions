@@ -33,7 +33,7 @@ public:
     glm::vec3 WorldUp;
 
     float g_initial_fov = glm::pi<float>()*0.99f;
-    glm::vec3 g_position = glm::vec3(0.0f, 0.0f, -1.0f);
+    glm::vec3 g_position = glm::vec3(0.0f, 0.0f, -1000.0f);
     glm::mat4 g_view_matrix;
     glm::mat4 g_projection_matrix;
 
@@ -45,7 +45,9 @@ public:
     float MouseSensitivity;
     float Zoom;
 
-    Camera(glm::vec3 g_position, glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f), float yaw = YAW, float pitch = PITCH) : Front(glm::vec3(0.0f, 0.0f, -1.0f)), MovementSpeed(SPEED), MouseSensitivity(SENSITIVTY), Zoom(ZOOM)
+    Camera(glm::vec3 g_position, glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f), float yaw = YAW,
+           float pitch = PITCH) : Front(glm::vec3(0.0f, 0.0f, -10.0f)), MovementSpeed(SPEED),
+                                  MouseSensitivity(SENSITIVTY), Zoom(ZOOM)
     {
         Position = g_position;
         WorldUp = up;
@@ -54,7 +56,9 @@ public:
         updateCameraVectors();
     }
 
-    Camera(float posX, float posY, float posZ, float upX, float upY, float upZ, float yaw, float pitch) : Front(glm::vec3(0.0f, 0.0f, -1.0f)), MovementSpeed(SPEED), MouseSensitivity(SENSITIVTY), Zoom(ZOOM)
+    Camera(float posX, float posY, float posZ, float upX, float upY, float upZ, float yaw,
+           float pitch) : Front(glm::vec3(0.0f, 0.0f, -1.0f)), MovementSpeed(SPEED),
+                          MouseSensitivity(SENSITIVTY), Zoom(ZOOM)
     {
         Position = glm::vec3(posX, posY, posZ);
         WorldUp = glm::vec3(upX, upY, upZ);
@@ -68,7 +72,9 @@ public:
         return glm::lookAt(Position, Position + Front, Up);
     }
 
-    void computeStereoView(float aspect_ratio, float IOD, float depthZ, bool left_eye, glm::vec3 up = glm::vec3(0.0f, 100.0f, 0.0f), glm::vec3 direction_z = glm::vec3(0, 0, 1) ) {
+    void computeStereoView(float aspect_ratio, float IOD, float depthZ, bool left_eye,
+                           glm::vec3 up = glm::vec3(0.0f, 100.0f, 0.0f), glm::vec3 direction_z = glm::vec3(0, 0, 10) )
+    {
         //mirror the parameters with the right eye
         float left_right_direction = -1.0f;
         if (left_eye)
@@ -139,7 +145,8 @@ private:
         front.z = sin(glm::radians(Yaw)) * cos(glm::radians(Pitch));
         Front = glm::normalize(front);
         // Also re-calculate the Right and Up vector
-        Right = glm::normalize(glm::cross(Front, WorldUp));  // Normalize the vectors, because their length gets closer to 0 the more you look up or down which results in slower movement.
+        Right = glm::normalize(glm::cross(Front, WorldUp));  // Normalize the vectors, because their length
+        // gets closer to 0 the more you look up or down which results in slower movement.
         Up    = glm::normalize(glm::cross(Right, Front));
     }
 };

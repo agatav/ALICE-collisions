@@ -28,6 +28,7 @@ include_directories(Glitter/Glitter/Headers/
         Glitter/Glitter/Vendor/glad/include/
         Glitter/Glitter/Vendor/glfw/include/
         Glitter/Glitter/Vendor/glm/
+        Glitter/Glitter/Vendor/jsoncpp/
         )
 
 file(GLOB VENDORS_SOURCES Glitter/Glitter/Vendor/glad/src/glad.c)

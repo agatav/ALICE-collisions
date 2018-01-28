@@ -1,0 +1,23 @@
+Uruchomienie programu na Ubuntu 16.04 w CLion 2016.1.3:
+
+1. Zbudowanie projektu (przy pierwszym uruchomieniu). 
+
+Żeby zbudować projekt, trzeba wejść do katalogu tracks i uruchomić program CMake (wymagana wersja 3.5 lub nowsza). 
+
+2. Uruchomienie programu.
+
+Żeby uruchomić program trzeba odpalić plik main.cpp, na tym etapie w niektórych systemach operacyjnych mogą wystąpić
+problemy związane ze ścieżkami:
+- do modułów cieniujących (shaderów), do modelu detektora. W projekcie jest ścieżka lokalna, należy dopisać
+    dokładne miejsce przechowywania pliku w systemie. Należy to zrobić w pliku main (32 - 39 linie);
+- do pliku z danymi o zderzeniu. Również należy uzupełnić ścieżkę globalną. Plik Track.h, 10 linia.
+
+3. Sterowanie programem.
+
+$\uparrow$, $\downarrow$, $\leftarrow$, $\rightarrow$ --- sterowanie położeniem obserwatora;
+ruchy w prawo lub lewo myszą --- rozglądanie się;
+kółko myszy --- przyciąganie lub oddalanie obrazu;
+klawisz t --- wyświetlanie torów cząstek;
+klawisz d --- wyświetlenie detektora;
+klawisz s --- widok stereoskopii pasywnej;
+klawisz u --- widok zwykły;

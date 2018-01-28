@@ -4,7 +4,7 @@
 #include <glad/glad.h>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
-#include <jsoncpp/json/json.h>
+#include <json/json.h>
 
 using namespace std;
 ifstream ifs("/home/agata/Documents/tracks/track.json");
