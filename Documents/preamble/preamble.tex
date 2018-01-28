@@ -1,13 +1,14 @@
 \documentclass[11pt,a4paper,twoside]{article}
 \usepackage[includeheadfoot, left=3cm, right=2cm, top=2.5cm, bottom=2.5cm, headheight=19.3pt]{geometry}
-
+\usepackage{polski}
 \usepackage[polish]{babel}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage{pslatex}
+
 \addto\captionspolish{\renewcommand{\refname}{Bibliografia}}
 \renewcommand{\refname}{Bibliografia}
-
+  
 \let\lll=\relax
 \usepackage{amsmath}
 \usepackage{amsfonts}
@@ -48,7 +49,7 @@
 \setlength{\arrayrulewidth}{1pt}
 \captionsetup[table]{name=Tabela}
 \usepackage{multirow}
-\usepackage[titletoc, title, header]{appendix}
+\usepackage[title, header]{appendix}
 \definecolor{sapphire}{RGB}{120,150,207}
 \definecolor{grafit}{RGB}{60,60,60}
 
@@ -107,19 +108,17 @@
 
 \usepackage{etoolbox}
 \usepackage{appendix}
-
 \usepackage{tocloft,titlesec}
-\newcommand{\listappendixname}{\Large\selectfont{Spis dodatków}}
+\newcommand{\listappendixname}{\Large\selectfont{Spis załączników}}
 \newlistof{appendix}{apc}{\listappendixname}
 
 \makeatletter
 \AtBeginEnvironment{appendices}{%
-  \addcontentsline{toc}{section}{Spis dotatków}
+  \addcontentsline{toc}{section}{Spis załączników}
   \write\@auxout{%
     \string\let\string\latex@tf@toc\string\tf@toc% Store the original `\tf@toc` file handle
     \string\let\string\tf@toc\string\tf@apc% 
   }% Naughty trick
-    \clearpage
 }
 
 \AtEndEnvironment{appendices}{%
@@ -128,6 +127,7 @@
   }% Naughty trick, restoring the old `\tf@toc` number, to be able to write stuff to the real `.toc` again.
 }
 \makeatother
+
 
 \newcommand{\fancyfootnotetext}[2]
 {

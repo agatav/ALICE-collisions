@@ -1,8 +1,8 @@
 \input{preamble/preamble.tex}
 \graphicspath{{images/}}
-
-\begin{document}
 \tocloftpagestyle{fancy}
+\begin{document}
+
 \includepdf[pages={-}]{preamble/begining.pdf}
 \thesisstyle
 \tableofcontents
@@ -11,11 +11,11 @@
 \section[Wstęp]{Wstęp}
 W dzisiejszych czasach techniki 3D są rozwijane na podstawie opracowań efektu stereoskopowego. Ogólnie, stereoskopia to technika służącą do tworzenia iluzji głębi obrazu, nie zapewnia ona prawdziwie trójwymiarowych widoków, ale zapewnia efekt trójwymiarowości. Każdemu oku obserwatora jest prezentowany inny widok, dlatego sceny wydają się mieć głębię.
 
-Historia stereoskopii liczy już ponad 180 lat. Za odkrywcę uważa się Charlesa Wheatstone'a, który jako pierwszy zaobserwował zjawisko widzenia stereoskopowego, opisał go w artykule oraz skonstruował urządzenie potwierdzające słuszność jego teorii \cite{stereoscopehistory}. Wheatstone wyjaśnia, że jeśli obiekt znajduje się w małej odległości od oczu, to każde oko widzi przedmiot pod nieco innym kątem, z innej perspektywy. Zaś dla obiektów na dużej odległości nie ma to znaczenia \cite{wheatstone}. Wykorzystując te obserwacje, naukowiec skonstruował urządzenie (stereoskop), które umożliwiło przedstawienie delikatnie różniących się obrazów prawemu i lewemu oku z osobna, z powstającą w efekcie iluzją trójwymiarowości obrazu.
+Historia stereoskopii liczy już ponad 180 lat. Za odkrywcę uważa się Charlesa Wheatstone'a, który jako pierwszy zaobserwował zjawisko widzenia stereoskopowego, opisał go w artykule oraz skonstruował urządzenie potwierdzające słuszność jego teorii \cite{stereoscopehistory}. Wheatstone wyjaśnia, że jeśli obiekt znajduje się w małej odległości od oczu, to każde oko widzi przedmiot pod nieco innym kątem, z innej perspektywy. Natomiast dla obiektów na dużej odległości nie ma to znaczenia \cite{wheatstone}. Wykorzystując te obserwacje, naukowiec skonstruował urządzenie (stereoskop), które umożliwiło przedstawienie delikatnie różniących się obrazów prawemu i lewemu oku z osobna, z powstającą w efekcie iluzją trójwymiarowości obrazu.
 
-Do około 1930 r. stereoskop łączono z nowo rozwijającym się aparatem fotograficznym, takie połączenie zrobiło się niezwykle popularne szczególnie wśród ludzi epoki wiktoriańskiej. Od około 1950 do wczesnych lat 1970., stereografia wzbudziła kolejne zainteresowanie wraz ze wzrostem użycia drukowanych obrazów anaglifowych i spolaryzowanego światła w kinematografii. Brak mocy obliczeniowych i wyświetlaczy, które by zapewniały odpowiednio dużą rozdzielczość, powstrzymał postęp grafiki komputerowej w kierunku wirtualnej rzeczywistości. Znaczący wzrost zainteresowania tym tematem można zaobserwować na początku lat 90., ponieważ zaczęto korzystać z wizualizacji stereoskopowych do celów badawczych i naukowych. Wtedy też wynaleziono pierwsze okulary migawkowe z soczewkami z ciekłych kryształów oraz projektory CRT, pozwalające na znaczne ulepszenie jakości stworzonych obrazów stereoskopowych.
+Do około 1930 r. stereoskop łączono z nowo rozwijającym się aparatem fotograficznym, takie połączenie zrobiło się niezwykle popularne szczególnie wśród ludzi epoki wiktoriańskiej. Od około 1950 do wczesnych lat 70. XX w., stereografia wzbudziła kolejne zainteresowanie wraz ze wzrostem użycia drukowanych obrazów anaglifowych i spolaryzowanego światła w kinematografii. Brak mocy obliczeniowych i wyświetlaczy, które by zapewniały odpowiednio dużą rozdzielczość, powstrzymał postęp grafiki komputerowej w kierunku wirtualnej rzeczywistości. Znaczący wzrost zainteresowania tym tematem można zaobserwować na początku lat 90., ponieważ zaczęto korzystać z wizualizacji stereoskopowych do celów badawczych i naukowych. Wtedy też wynaleziono pierwsze okulary migawkowe z soczewkami z ciekłych kryształów oraz projektory CRT, pozwalające na znaczne ulepszenie jakości stworzonych obrazów stereoskopowych.
 
-Technologie wyświetlania i wizualizacji od lat 1990. rozwijały się w każdym kierunku, i dzisiaj można zauważyć na rynku zarówno większe, jak i mniejsze ekrany, z zaskakującą jakością wyświetlanych obrazów. Telewizja i okulary 3D stają się coraz bardziej powszechne dzięki najnowszym trendom w elektronice użytkowej i postępowi w dziedzinie technologii noszonych. Istnieje obecnie wiele rozwiązań sprzętowych, które umożliwiają stworzenie wizualizacji za pomocą stereoskopowej technologii 3D. 
+Technologie wyświetlania i wizualizacji od roku 1990 rozwijały się w każdym kierunku, i dzisiaj można zauważyć na rynku zarówno większe, jak i mniejsze ekrany, z zaskakującą jakością wyświetlanych obrazów. Telewizja i okulary 3D stają się coraz bardziej powszechne dzięki najnowszym trendom w elektronice użytkowej i postępowi w dziedzinie technologii noszonych. Istnieje obecnie wiele rozwiązań sprzętowych, które umożliwiają stworzenie wizualizacji za pomocą stereoskopowej technologii 3D. 
 
 Trzeci wymiar zapewnia nowy stopień swobody projektantom, a iluzja głębokości może być wykorzystana zarówno do wizualizacji statycznych, jak i do interaktywnego użytkowania. Możliwość zobrazowania danych w stereoskopowym środowisku 3D udostępnia potężną i wysoce urozmaiconą płaszczyznę do interaktywnego wyświetlania informacji w wielu aplikacjach. Na przykład w architekturze, możliwe jest pozyskanie danych z rzeczywistych modeli 3D (po zeskanowaniu ich urządzeniem mobilnym), oraz ich pokazanie na specjalistycznym sprzęcie do oglądania obrazów 3D. Wyświetlane w ten sposób modele można obracać, zwiększać lub odpowiednio zmniejszać. Wizualizacje danych w stereoskopowym środowisku znalazły również wykorzystanie w fizyce dużych energii. 
 
@@ -32,22 +32,22 @@ Odpowiednim narzędziem do implementacji programu jest biblioteka OpenGL, umożl
 \subsection{Cele pracy}
 Za cele niniejszej pracy dyplomowej przyjęto:
 \begin{itemize}
-\itemi analizę i prównanie dostępnych narzędzi graficznych;
+\itemi analizę i porównanie dostępnych narzędzi graficznych;
 \itemi stworzenie oprogramowania z wykorzystaniem biblioteki OpenGL, które:
-	\begin{itemize}
-	\itemii wyświetla realistyczny obraz detektora ALICE;
-	\itemii zobrazowuje zderzenia ciężkich ionów w eksperymencie ALICE;
-	\end{itemize}
+\begin{itemize}
+\itemii wyświetla realistyczny obraz detektora ALICE;
+\itemii zobrazowuje zderzenia ciężkich jonów w eksperymencie ALICE;
+\end{itemize}
 \itemi osiągnięcie efektu głębi w stworzonych obrazach za pomocą dwóch technologii;
-\itemi zapewnienie przenośności oprogramowania (działa zarówno pod systemem operacyjnym Linux jak i Windows).
+\itemi zapewnienie przenośności oprogramowania (działa zarówno pod systemem operacyjnym Linux, jak i Windows).
 \end{itemize}
 
 \subsection{Słownik użytych terminów}
-Ze względu na brak jednolitego tłumaczenia niektórych zasadniczych terminów z języka angielskiego na język polski, przedstawione jest użyte w tej pracy nazewnictwo. Tłumaczenia były zbierane głównie w oparciu o literaturę specjalistyczną oraz różne słowniki.
+Ze względu na brak jednolitego tłumaczenia niektórych zasadniczych terminów z języka angielskiego na język polski, przedstawione jest użyte w tej pracy nazewnictwo. Tłumaczenia były zbierane głównie na podstawie literatury specjalistycznej oraz różnych słowników.
 \begin{itemize}
 \itemi Renderować (-ruje) --- ang. rendering, tworzyć realistyczne obrazy komputerowe \cite{pwn}.
 \itemi Shader (-ra, -rze; -ry, -rów) --- moduł cieniujący, nieduży program w procesorze graficznym \cite{slownik}.
-\itemi Antyaliasing (-ngu, -ngiem)  --- ang. anti-aliasing, zespół technik służących usuwaniu zakłóceń powstających przy renderowaniu obrazu \cite{wprowadzeniedografiki}.
+\itemi Antyaliasing (-ngu, -ngiem) --- ang. anti-aliasing, zespół technik służących usuwaniu zakłóceń powstających przy renderowaniu obrazu \cite{wprowadzeniedografiki}.
 \itemi Asemblacja --- ang. assembling, montaż, zebranie, zgromadzenie prymitywu \cite{slownik}.
 \itemi Teselacja --- ang. tessellation, dzielenie wygenerowanych podczas tworzenia obrazu 3D wielokątów na mniejsze \cite{slownik}.
 \itemi Rasteryzacja --- ang. rasterisation, działanie polegające na jak najwierniejszym przedstawieniu płaskiej figury geometrycznej na urządzeniu rastrowym \cite{slownik}.
@@ -63,16 +63,16 @@ Istnieje kilka różnych technik osiągnięcia efektu stereoskopowego. Każda te
 \subsubsection{Stereogramy typu side by side}
 Najprostszą metodą doświadczenia widzenia stereoskopowego jest umieszczenie dwóch oddzielnych obrazów obok siebie (ang. side by side). Perspektywa jednego z obrazów reprezentuje lewe oko, odpowiednio druga perspektywa jest dla oka prawego. Obrazy te można zazwyczaj oglądać bez użycia dodatkowych narzędzi. Jedyna różnica polega na sposobie ich oglądania \cite{stereoscopythesis}. 
 
-Istnieją dwie metody umieszczania obrazów. Jednym ze sposobów jest umieszczenie stereogramu na papierze w taki sposób, że obraz dla lewego oka znajduje się po lewej stronie, a obraz dla prawego oka jest po prawej. Jest to metoda standardowa do pokazania obrazów stereoskopowych w publikacjach, ponieważ ona bardzo dobrze się sprawdza, gdy wyświetlacz (w tym przypadku kartkę papieru) można podnieść blisko oczu. Ta metoda nazywa się patrzeniem równoległym, ponieważ oczy są skierowane w taki sam sposób, w jaki patrzyłyby na obiekt na dużej odległości \cite{sidebysideinfo}.
+Istnieją dwie metody umieszczania obrazów. Jednym ze sposobów jest umieszczenie stereogramu na papierze w taki sposób, że obraz dla lewego oka znajduje się po lewej stronie, a obraz dla prawego oka jest po prawej. Jest to metoda standardowa do pokazania obrazów stereoskopowych w publikacjach, ponieważ wyświetlacz (w tym przypadku kartkę papieru) można podnieść blisko oczu. Ta metoda nazywa się patrzeniem równoległym, gdyż oczy są skierowane w taki sam sposób, w jaki patrzyłyby na obiekt na dużej odległości \cite{sidebysideinfo}.
 
-Druga metoda wymaga umieszczenia obrazu dla lewego oka po prawej stronie stereogramu, a obrazu dla prawego oka po lewej stronie. W takim przypadku efekt widzenia stereoskopowego powstaje przy skrzyżowaniu oczu, stąd pochodzi również nazwa tej metody: patrzenie skośne. Głównie ta technika jest stosowana w przypadku ekranów lub wyświetlaczy na określonej odległości, ponieważ umożliwia ona oglądanie obrazów stereoskopowych dużej liczbie widzów w tym samym czasie\cite{sidebysideinfo}. Rysunek \ref{rys1} przedstawia stereogram wykonany dla techniki patrzenia skrośnego.
+Druga metoda wymaga umieszczenia obrazu dla lewego oka po prawej stronie stereogramu, a obrazu dla prawego oka po lewej stronie. W takim przypadku efekt widzenia stereoskopowego powstaje przy skrzyżowaniu oczu, stąd pochodzi również nazwa tej metody: patrzenie skośne. Głównie ta technika jest stosowana w przypadku ekranów lub wyświetlaczy na określonej odległości, umożliwia ona w ten sposób oglądanie obrazów stereoskopowych dużej liczbie widzów w tym samym czasie\cite{sidebysideinfo}. Rysunek \ref{rys1} przedstawia stereogram wykonany dla techniki patrzenia skośnego.
 
 Zastosowanie niewłaściwej metody spowoduje odwrócenie efektu stereoskopowego. Może to ujawnić się w postaci zniekształconych odległości pomiędzy obiektami na obrazie lub oddalenia się dwóch obrazów.
 
 Warto zauważyć, że oglądanie stereogramów tworzy duże obciążenie dla oczu. W celu zmniejszenia negatywnych skutków używa się stereoskopu bądź specjalnego ekranu 3D w zestawie z okularami. To w znacznej mierze redukuje przemęczenie oczu i pozwala przez dłuższy czas przyglądać się efektom widzenia stereoskopowego.
 \begin{figure}[H]
 		\centering
- 		\includegraphics[width=13cm]{sbs.jpg}
+ 		\includegraphics[width=13.5cm]{sbs.jpg}
  		\captionsetup{font={up, footnotesize}}
     	\caption{Stereogram typu side by side\cite{sidebyside}.}
  		\label{rys1}
@@ -83,11 +83,11 @@ Stereogramy typu single-image, inaczej nazywane autostereogramy, to zbiór punkt
 
 Przy długim wpatrywaniu się w specjalnie stworzony obraz powstaje wrażenie trójwymiarowości. Czasem autostereogramy mogą wyglądać jak zniekształcone lub losowo umieszczone kolorowe plamy. Taki wygląd w rzeczywistości nie jest przypadkowy, ponieważ poprzez użycie powtarzalnego wzoru są ukrywane obiekty trójwymiarowe \cite{stereoscopythesis}.
 
-Gdy się patrzy na autostereogram, mózg początkowo widzi powtarzające się wzory dwuwymiarowe przez obojga oczu. Dzieje się tak dlatego, że mózg przede wszytskim skupia się na samym obrazie jako całości. Po jakimś czasie skupienia się na wzorze umieszczonym na obrazku oczy zaczynają patrzeć na niego pod nieco innym kątem. W tym momencie zaczyna działać stereoskopowy odbiór rzeczywistości i mózg jest w stanie skonstruować obraz trójwymiarowy \cite{autostereogramInfo}. Rysunek \ref{rys26} jest przykładem autostereogramu, gdzie pod powtarzającym się wzrorem można zobaczyć ośmiornicę.
+Podczas patrzenia na autostereogram, początkowo widzi się powtarzające się wzory dwuwymiarowe przez obojga oczu. Dzieje się tak dlatego, że mózg przede wszystkim skupia się na samym obrazie jako całości. Po jakimś czasie skupienia się na wzorze umieszczonym na obrazku oczy zaczynają patrzeć na niego pod nieco innym kątem. W tym momencie zaczyna działać stereoskopowy odbiór rzeczywistości i mózg jest w stanie skonstruować obraz trójwymiarowy \cite{autostereogramInfo}. Rysunek \ref{rys26} jest przykładem autostereogramu, gdzie pod powtarzającym się wzorem można zobaczyć ośmiornicę.
 
 \begin{figure}[H]
 		\centering
- 		\includegraphics[width=9.0cm]{68.jpg}
+ 		\includegraphics[width=9.5cm]{68.jpg}
  		\captionsetup{font={up, footnotesize}}
     	\caption{Autostereogram\cite{autostereogram}.}
  		\label{rys26}
@@ -181,7 +181,7 @@ Dla bezproblemowego korzystania z technologii postawiono następujące wymagania
 \itemi minimum 100 MB wolnej pamięci na dysku;
 \end{itemize}
 
-\subsubsection{Szegółowy opis zestawu 3D Vision}
+\subsubsection{Szczegółowy opis zestawu 3D Vision}
 3D Vision (wcześniej GeForce 3D Vision) to zestaw dla widzenia stereoskopowego, również opracowany przez firmę Nvidia. Zestaw 3D Vision jest skierowany głównie do graczy i twórców gier komputerowych, ponieważ wyróżniona została jakość obrazów i duża prędkość ich przetwarzania. Sterownik Nvidia 3D Vision jest w stanie zinterpretować dowolną grę na wyświetlaczach o wystarczająco dużej szybkości odświeżania \cite{NvidiaInfo}. 
 
 \begin{figure}[H]
@@ -202,12 +202,12 @@ Podstawowy zestaw 3D Vision według oficjalnej strony internetowej \cite{3dVisio
 \end{itemize}
 
 \subsubsection{Sposób działania sterownika}
-Wewnątrz sterownika każda scena 3D jest tworzona dwukrotnie --- raz dla lewego oka i raz dla prawego. Sterownik jest w stanie zmodyfikować typowe moduły cieniujące gier czasie rzeczywistym, żeby móc generować poprawne obrazy w trakcie wykonywania programu. Opcje dostępne użytkownikom pozwalają na zostosowanie ustawień indywidualnych, takich jak odległość między oczami czy wartość głębi obrazu. Natomiast twórcom oprogramowania umożliwiono bezpośrednie sterowanie aspektami stereo \cite{3dVisionInfo}.
+Wewnątrz sterownika każda scena 3D jest tworzona dwukrotnie --- raz dla lewego oka i raz dla prawego. Sterownik jest w stanie zmodyfikować typowe moduły cieniujące gier czasie rzeczywistym, żeby móc generować poprawne obrazy w trakcie wykonywania programu. Opcje dostępne użytkownikom pozwalają na zastosowanie ustawień indywidualnych, takich jak odległość między oczami czy wartość głębi obrazu. Natomiast twórcom oprogramowania umożliwiono bezpośrednie sterowanie aspektami stereo \cite{3dVisionInfo}.
 
 W celu umożliwienia jak największej liczbie programistów stworzenie obrazów stereoskopowych dla wyświetlenia aktywnego jest rozwijana technologia Nvidia 3D Vision Automatic. W tej chwili ta technika nie jest jeszcze dostępna dla OpenGL, lecz została opublikowana działająca wersja dla OpenGL ES pod systemem Android 3.2 (lub nowszej wersji) dla urządzeń z procesorem Tegra 3 (lub nowszym).
 
 \subsection{Biblioteka OpenGL}
-Biblioteka OpenGL jest potężnym standardem stanowiącym niejako pomost między programistą a sprzętem komputerowym. Procedury OpenGL umożliwiają renderowanie obiektów o różnych poziomach skomplikowania, zaczynając od prostego punktu geometrycznego, linii lub wypełnionego wielokąta do utworzenia najbardziej złożonej, zakrzywionej powierzchni, oświetlonej i odwzorowanej teksturą. OpenGL pozwala programistom na dostęp do prymitywów geometrycznych i obrazowych, przekształcenia modelu, oświetlenia i teksturowania, antyaliasingu i wielu innych funkcji. 
+Biblioteka OpenGL jest potężnym standardem stanowiącym niejako pomost między programistą a sprzętem komputerowym. Procedury OpenGL umożliwiają renderowanie obiektów o różnych poziomach skomplikowania, zaczynając od prostego punktu geometrycznego, linii lub wypełnionego wielokąta do utworzenia najbardziej złożonej, zakrzywionej powierzchni, oświetlonej i odwzorowanej teksturą. OpenGL pozwala programistom manipulować prymitywami geometrycznymi i obrazowymi, przekształceniami modelu, oświetleniem i teksturowaniem, antyaliasingiem i wieloma innymi funkcjami. 
 
 Biblioteka OpenGL jest powszechnie dostępna na wszystkich jednostkach od komputerów o niskich kosztach, po wysokiej klasy stacjach roboczych i superkomputerach \cite{openglofficial}. Cały proces transformacji jest zarządzany poprzez potok graficzny OpenGL. Taki ciąg jest podzielony na poszczególne kroki, gdzie na wejściu są wymagane dane wyjściowe poprzedniego kroku. Każda z operacji jest dobrze sprecyzowana, gdyż mają one konkretną funkcję. 
 
@@ -242,9 +242,9 @@ W celu ponownego wykorzystania skonstruowanych modeli 3D i przesłania ich na r�
 
 Podstawowym celem formatu pliku 3D jest przechowywanie informacji o modelu w postaci tekstu lub danych binarnych. W szczególności musi on zawierać dane o geometrii modelu, jego wyglądzie, scenie oraz animacjach. Geometria modelu opisuje jego dokładny kształt, do wyglądu zalicza się kolory, tekstury, typy wykorzystanych materiałów. Dane o scenie opisują między innymi położenie światła, kamery i obiektów peryferyjnych.
 
-U podstaw każdego oprogramowania graficznego znajduje się biblioteka niskiego poziomu, taka jak OpenGL czy Direct3D. Biblioteki niskiego poziomu faktycznie rysują modele 3D na ekranie. Narzędzia autorskie wspierają modelowanie, zapewniają użytkownikom wygodne metody tworzenia, przeglądania, modyfikowania i zapisywania stworzonych modeli. Często oprogramowanie autorskie zawiera w sobie również przeglądarkę 3D --- narzędzie graficzne, które odczytuje, analizuje i transformuje pliki 3D do wewnętrznych formatów, a następnie wyświetla użytkownikowi.
+U podstaw każdego oprogramowania graficznego znajduje się biblioteka niskiego poziomu, taka jak OpenGL czy Direct3D. Biblioteki niskiego poziomu faktycznie rysują modele 3D na ekranie. Narzędzia autorskie wspierają modelowanie, zapewniają użytkownikom wygodne metody tworzenia, przeglądania, modyfikowania i zapisywania stworzonych modeli. Często oprogramowanie autorskie zawiera w sobie również przeglądarkę 3D --- narzędzie graficzne, które odczytuje, analizuje i transformuje pliki 3D do wewnętrznych formatów, a następnie wyświetla użytkownikowi \cite{formatsinfo}.
 
-W dalszej części tej pracy dyplomowej są przedstawione krótkie opisy najczęściej używanych formatów plików 3D. Na koniec tego podrozdziału jest umieszczone porównane formatów plików pod względem rozmaitości informacji, które one są w stanie przechowywać. Ma to pomóc w wyborze formatu pliku do przechowywania danych o modelu detektora ALICE.
+W dalszej części tej pracy dyplomowej są przedstawione krótkie opisy najczęściej używanych formatów plików 3D. Na końcu tego podrozdziału jest umieszczone porównane formatów plików pod względem rozmaitości informacji, które one są w stanie przechowywać. Ma to pomóc w wyborze formatu pliku do przechowywania danych o modelu detektora ALICE.
 
 \subsubsection{COLLADA}
 COLLADA (ang. COLLAborative Design Activity) obsługuje wszystkie funkcje potrzebne współczesnym aplikacjom interaktywnym do tworzenia modeli 3D i pełnego przechowywania danych dotyczących tych modeli. Format został opracowany przez pracowników firmy Sony Computer Entertainment, ale od dłuższego czasu jest on własnością spółki Khronos Group, która obecnie współdzieli prawa autorskie z Sony. 
@@ -286,7 +286,7 @@ STL (ang. STereoLithography, stereolitografia) jest jednym z najważniejszych fo
 W STL są pominięte takie dane jak wygląd, scena czy animacje. Jedyne ważne informacje w tym formacie to geometria obiektów, która jest zapisywana w postaci przybliżonej siatki trójkątów. Dla każdego trójkąta są przechowywane 2 rodzaje danych:
 \begin{itemize}
 \itemi współrzędne wierzchołków;
-\itemi współrzędne normalnej, przy tym wektor powinien wskazywać na zewnątrz w odniesieniu do modelu 3D.
+\itemi współrzędne normalnej, przy tym wektor powinien wskazywać na zewnątrz w odniesieniu do modelu 3D (rysunek \ref{rys6}).
 \end{itemize}
 \begin{figure}[H]
 		\centering
@@ -340,7 +340,7 @@ Przede wszystkim dlatego, że pliki z rozszerzeniem .DAEsą łatwe zarówno do s
 \cline{2-10}
 & Przybl.\footnote{Przybliżona siatka}&Dokł.\footnote{Dokładna siatka}&CSG\footnote{CSG (ang. constructive solid geometry, strukturalna geometria bryły) – technika definiowania nowych brył poprzez łączenie innych brył}& Kolor& Materiał&Tekstura&Kamera&Światło&Pozycje& \\
 \hline
-COLLADA & X & X & & X & X & X & X & X & X & X\\
+DAE & X & X & & X & X & X & X & X & X & X\\
 \arrayrulecolor{black}
 \hline
 STL & X & & & & & & & & & \\
@@ -368,7 +368,7 @@ Lib3ds to darmowa alternatywa dla pakietu 3DS File Toolkit firmy Autodesk do zar
 
 Celem lib3ds jest uproszczenie tworzenia filtrów do czytania i pisania plików formatu 3DS. Ta biblioteka jest obsługiwana na różnych rodzajach procesorów (big oraz little endian), wspiera moduły wektorowe, kwaterniony, macierze, proste struktury danych, które można łatwo modyfikować, ocenę wszystkich danych animacji. Istnieje możliwość załadowania większości fragmentów 3DS, sekcje: materiały, kamera, światło, siatka i klucze \cite{lib3dsdirectory}.
 
-\subsubsection{Rozwiązania alternatywne}
+\subsubsection{Inne biblioteki}
 Na chwilę obecną absolutna większość programów korzystająca z OpenGL i modelów przechowywanych w innych plikach używa biblioteki Assimp do załadowania danych do aplikacji. Natomiast istnieje kilka alternatywnych rozwiązań, które są mniej popularne przez to, że są dopasowane tylko do wybranego formatu plików 3D.
 
 Na przykład Tinyobjloader jest parserem plików w formacie .OBJ. Tinyobjloader jest stworzony w C++, nie wymaga instalowania dodatkowych bibliotek z wyjątkiem STL --- biblioteki do ładowania tekstur \cite{tinyobjloader}. Zaletą tego parsera jest prędkość sczytywania i dalszego przetwarzania danych. 
@@ -386,7 +386,7 @@ W ekstremalnych warunkach temperatury i (lub) gęstości materia hadronowa topi 
 
 \subsubsection{Ślady cząstek i detektory}
 
-Zespół detektorów cylindrycznych (od wewnątrz na zewnątrz: ITS\footnote{The Inner Tracking System} Drift, ITS Strips, TPC\footnote{The ALICE Time Projection Chamber}, TRD\footnote{The ALICE Transition Radiation Detector}) mierzy w wielu punktach (ponad 100 tylko dla TPC) przejście każdej cząstki przenoszącej ładunek elektryczny tak, że trajektoria jest dokładnie znana. Detektory ALICE są osadzone w polu magnetycznym (wytwarzanym przez duży czerwony magnes), wyginając w ten sposób trajektorie naładowanych cząstek. Krzywizna śladów pozwala na obliczenie pędu badanych cząstek. ITS jest tak precyzyjny, że cząstki, które są generowane przez rozkład innych cząstek o bardzo krótkim czasie życia, można zidentyfikować, widząc, że nie pochodzą one z punktu, w którym nastąpiła interakcja ("wierzchołek"\ zderzenia) \cite{trackingparticles}.
+Zespół detektorów cylindrycznych (od wewnątrz na zewnątrz: ITS\footnote{The Inner Tracking System} Drift, ITS Strips, TPC\footnote{The ALICE Time Projection Chamber}, TRD\footnote{The ALICE Transition Radiation Detector}) mierzy w wielu punktach (ponad 100 tylko dla TPC) przejście każdej cząstki przenoszącej ładunek elektryczny tak, że trajektoria jest dokładnie znana. Detektory ALICE są osadzone w polu magnetycznym (wytwarzanym przez duży czerwony magnes), wyginając w ten sposób trajektorie naładowanych cząstek. Krzywizna śladów pozwala na obliczenie pędu badanych cząstek. ITS jest tak precyzyjny, że cząstki, które są generowane przez rozkład innych cząstek o bardzo krótkim czasie życia, można zidentyfikować, widząc, że nie pochodzą one z punktu, w którym nastąpiła interakcja ("wierzchołek"\ zderzenia) \cite{trackingparticles}. Rysunek \ref{rys9} ilustruje warstwy w detektorze ALICE.
 
 \begin{figure}[H]
 		\centering
@@ -617,7 +617,7 @@ Glitter kompiluje i statycznie łączy wszystkie niezbędne biblioteki. Robi on 
 \end{itemize}
 
 \subsubsection{JSONcpp}
-JSONcpp --- biblioteka w języku C++ umożliwiająca manipulowanie wartościami JSON, w tym serializację i deserializację ciągów. Dzięki JSONcpp istenieje możliwość na odczytanie i zapisanie pliku formatu JSON, na dołączenie komentarzy w konwencji C++ do elementu podczas parsowania oraz przerobić plik JSON, zachowując oryginalne komentarze \cite{jsoncpp}.
+JSONcpp --- biblioteka w języku C++ umożliwiająca manipulowanie wartościami JSON, w tym serializację i deserializację ciągów. Dzięki JSONcpp istnieje możliwość na odczytanie i zapisanie pliku formatu JSON, na dołączenie komentarzy w konwencji C++ do elementu podczas parsowania oraz przerobić plik JSON, zachowując oryginalne komentarze \cite{jsoncpp}.
 
 Jednym ze sposobów integracji JSONcpp z projektem jest dołączenie plików z kodem źródłowym (pojedynczego pliku .cpp i dwóch plików .h) do projektu oraz ich kompilacja w taki sam sposób jak każdy inny plik źródłowy. Zapewnia to spójność flag kompilacji i kompatybilności, rozwiązuje problemy powstające podczas budowania bibliotek współdzielonych lub statycznych.
 
@@ -630,7 +630,7 @@ Lokalny układ współrzędnych to taki układ, w którym obiekt ma swój począ
 
 \begin{figure}[H]
 		\centering
- 		\includegraphics[width=12.0cm]{coordinate_systems.png}
+ 		\includegraphics[width=16.0cm]{coordinate_systems.png}
  		\captionsetup{font={up, footnotesize}}
     	\caption{Przejścia z jednego układu współrzędnych na inny \cite{opengltutorial}.}
  		\label{rys11}
@@ -650,7 +650,7 @@ Podchodząc do rozwiązania tego zadania, przyjęto, że za pomocą macierzy wid
 \end{itemize}
 W ten sposób został utworzony układ współrzędnych, gdzie położenie kamery jest punktem początkowym, a trzy pozostałe wektory to prostopadłe do siebie osie.
 
-Funkcja glm::LookAt z biblioteki GLM przyjmuje jako argumenty położenie kamery, kierunek patrzenia oraz wektor skierowany w górę (tworzy z tego wektor skierowany w prawo od kamery), zwracając przy tym gotową macierz widoku. W głównym pliku programu została zdefiniowana funkcja processInput, która, używając biblioteki GLFW, zarządza danymi przychodzącymi z klawiatury. Dzięki tej funkcji łączone są określone klawisze z odpowiednimi zmianami położenia kamery, owocując przeliczeniem macierzy widoku.
+Funkcja glm::LookAt z biblioteki GLM przyjmuje jako argumenty położenie kamery, kierunek patrzenia oraz wektor skierowany w górę (tworzy z tego wektor skierowany na prawo od kamery), zwracając przy tym gotową macierz widoku. W głównym pliku programu została zdefiniowana funkcja processInput, która, używając biblioteki GLFW, zarządza danymi przychodzącymi z klawiatury. Dzięki tej funkcji łączone są określone klawisze z odpowiednimi zmianami położenia kamery, owocując przeliczeniem macierzy widoku.
 
 Obroty kamery zostały zrealizowane przy użyciu macierzy obrotu i funkcji trygonometrycznych. Wartości odchylenia i nachylenia kamery, zgodnie z projektem, są pozyskiwane z ruchu myszy, gdzie poziomy ruch myszy wpływa na odchylenie, a pionowy odpowiednio na nachylenie. Zapamiętywana jest pozycja myszy w ostatniej klatce, a w aktualnej jest obliczana różnica wartości aktualnych i zapamiętanych. W zależności od wielkości obliczonych wartości porusza się kamera. Dla uniknięcia zbyt szybkich albo dużych odchyleń (lub nachyleń) zostały wprowadzone ograniczniki, zmniejszające zakres poruszania kamerą \cite{learnopengl}.
 
@@ -864,7 +864,7 @@ Głównym zadaniem tych buforów jest przesyłanie paczek danych o wierzchołkac
 \subsubsection{Wczytanie danych z pliku COLLADA}
 Do wczytania modelu z dostarczonego pliku w formacie COLLADA użyto biblioteki Assimp. Odbywa się to poprzez ładowanie wszystkich informacji o modelu do uogólnionych struktur danych zdefiniowanych w bibliotece. Po załadowaniu modelu, wszystkie niezbędne do renderowania dane mogą być pobrane ze struktur danych Assimp. Podczas opracowywania programu korzystano z materiałów opublikowanych na stronie internetowej \cite{learnopengl}. 
 
-Pobierany z pliku model jest ładowany do obiektu sceny, przechowującego wszystkie informacje o modelu i jego otoczeniu. Na rysunku \ref{rys14} jest pokazany diagram klas Assimp, definiujący sposób, w jaki odczytanane dane są dzielone i ładowane do pamięci.
+Pobierany z pliku model jest ładowany do obiektu sceny, przechowującego wszystkie informacje o modelu i jego otoczeniu. Na rysunku \ref{rys14} jest pokazany diagram klas Assimp, definiujący sposób, w jaki odczytane dane są dzielone i ładowane do pamięci.
 
 Klasa aiScene zawiera wskaźnik do aiNode (węzła głównego sceny), który z kolei utrzymuje wskaźniki do węzłów potomnych. Wskaźnik do aiNode rekursywnie definiuje strukturę sceny. AiScene służy również jako centralne miejsce przechowywania wszystkich siatek, materiałów lub źródeł światła. Natomiast instancje aiNode po prostu indeksują te tablice, które znajdują się w scenie.
 
@@ -885,7 +885,7 @@ W rozpatrywanym przypadku pojedyncza encja do narysowania jest reprezentowana pr
 
 Klasa Mesh nie jest zbyt skomplikowana (rysunek \ref{rys24}). Założono dość prostą funkcję konstruktora obiektu Mesh, która publiczne zmienne klasy ustawia z odpowiednimi zmiennymi argumentów konstruktora. W argumentach konstruktora są podawane tylko dane podstawowe --- wierzchołki i ich indeksy. Na końcu tej funkcji jest wywoływana metoda setupMesh, która to uzupełnia bufory VAO i VBO w dane. Natomiast bezpośrednie rysowanie siatki odbywa się za pomocą funkcji Draw.
 
-W przypadku rysowania modelu detektora podobnie jak przy tworzeniu obrazu torów cząstek, użyto dodatkowego bufora --- EBO, bufora elementów obiektu (widać to w tabeli \ref{tab12}). Powodem do tego służy fakt, że w modelach przybliżanych siatką trójkątów duża część wierzchołków może się pokrywać. Lepszym rozwiązaniem jest przechowywanie nie wszystkich wierzchołków, a tylko unikatowych, wraz z określaniem kolejności, w której zostaną one wyświetlone \cite{learnopengl}. Również w tym przypadku z pomocą przychodzi bufor elementów obiektu. EBO przechowuje indeksy używane przez OpenGL do podjęcia decyzji, które wierzchołki muszą być wyświetlone i w jakiej kolejności.
+W przypadku rysowania modelu detektora podobnie jak przy tworzeniu obrazu torów cząstek użyto dodatkowego bufora --- EBO, bufora elementów obiektu (widać to w tabeli \ref{tab12}). Powodem do tego służy fakt, że w modelach przybliżanych siatką trójkątów duża część wierzchołków może się pokrywać. Lepszym rozwiązaniem jest przechowywanie nie wszystkich wierzchołków, a tylko unikatowych, wraz z określaniem kolejności, w której zostaną one wyświetlone \cite{learnopengl}. Również w tym przypadku z pomocą przychodzi bufor elementów obiektu. EBO przechowuje indeksy używane przez OpenGL do podjęcia decyzji, które wierzchołki muszą być wyświetlone i w jakiej kolejności.
 
 \begin{table}[H]
 \caption{Kod źródłowy programu. Funkcja definiująca bufory.}
@@ -917,7 +917,7 @@ void setupMesh() {
 \subsubsection{Wyświetlanie modelu}
 Scena może zawierać wiele różnych siatek, dlatego utworzono klasę, która by je łączyła i reprezentowała model w całości (rysunek \ref{rys24}). Z tego powodu w klasie Model został zdefiniowany wektor obiektów typu Mesh --- wektor składający się z różnych siatek odczytanych z pliku. Ładowanie danych z pliku odbywa się za pomocą funkcji loadModel, kod źródłowy tej funkcji jest przedstawiony w tabeli \ref{tab13}.
 
-Początkowo jest tworzony obiekt klasy Importer dedykowany do wczytywania modeli do struktur danych Assimp. Na tym obiekcie wywołano funkcję ReadFile, gdzie jako pierwszy argument jest przyjmowana ścieżka do pliku Collada. Jako drugi argument poprzez funkcję ReadFile są przyjmowane różne opcje używane w trakcie przetwarzania końcowego. Opcje te inicjują dodatkowe obliczenia na odczytanych danych. Ze wszystkimi możliwymi opcjami oraz ich opisami można zapoznać się na stronie z oficjalną dokumentacją biblioteki \cite{assimpDocumentation}.
+Początkowo jest tworzony obiekt klasy Importer dedykowany do wczytywania modeli do struktur danych Assimp. Na tym obiekcie wywołano funkcję ReadFile, gdzie jako pierwszy argument jest przyjmowana ścieżka do pliku COLLADA. Jako drugi argument poprzez funkcję ReadFile są przyjmowane różne opcje używane w trakcie przetwarzania końcowego. Opcje te inicjują dodatkowe obliczenia na odczytanych danych. Ze wszystkimi możliwymi opcjami oraz ich opisami można zapoznać się na stronie z oficjalną dokumentacją biblioteki \cite{assimpDocumentation}.
 
 \begin{table}[H]
 \caption{Kod źródłowy programu. Funkcja pobierająca model z pliku.}
@@ -926,7 +926,7 @@ Początkowo jest tworzony obiekt klasy Importer dedykowany do wczytywania modeli
 
 void loadModel(string const &path) {
  Assimp::Importer importer;
- const aiScene* scene = importer.ReadFile(path, aiProcess_Triangulate);
+ const aiScene* scene = importer.ReadFile(path,aiProcess_Triangulate);
  if(!scene || scene->mFlags || !scene->mRootNode) {
   cout << "ERROR::ASSIMP::" << importer.GetErrorString() << endl;
   return; }
@@ -1001,7 +1001,7 @@ Jednak niepoprawna struktura pliku COLLADA przełożyła się również na wspó
 		\centering
  		\includegraphics[width=12.0cm]{myGeom.png}
  		\captionsetup{font={up, footnotesize}}
-    	\caption{Obraz detektora}
+    	\caption{Obraz detektora.}
  		\label{rys28}
 \end{figure}
 
@@ -1022,7 +1022,7 @@ Kod źródłowy umieszczony w tabeli \ref{tab5} przedstawia implementację tworz
 
 W tabeli \ref{tab10} zaprezentowano implementację stworzenia obrazów dla każdego oka, poprzez odpowiednie ustawienia macierzy projekcji i widoku. Dla każdego oka położenie kamery jest przesuwane o połowę odległości między oczyma (jak zostało pokazane na rys. \ref{rys10}).
 
-Kod źródłowy w tabelach \ref{tab5} i \ref{tab10} był stworzony na podstawie \cite{openglCookbook}. Ostateczny wynik renderowania składa się z dwóch oddzielnych obrazów po obu stronach ekranu.
+Kod źródłowy w tabelach \ref{tab5} i \ref{tab10} był stworzony na podstawie podręcznika \cite{openglCookbook}. Ostateczny wynik renderowania składa się z dwóch oddzielnych obrazów po obu stronach ekranu.
 
 \newpage
 \begin{table}[H]
@@ -1038,13 +1038,14 @@ void computeStereoView(float aspect_ratio, float IOD, float depthZ,
      left_right_direction = 1.0f;
   double frustumshift = (IOD / 2) * nearZ / depthZ;
   float top = tan(g_initial_fov / 2.0f) * nearZ;
-  float right = aspect_ratio * top + frustumshift * left_right_direction;
-  float left = -aspect_ratio * top + frustumshift * left_right_direction;
+  float right = aspect_ratio*top + frustumshift*left_right_direction;
+  float left = -aspect_ratio*top + frustumshift*left_right_direction;
   float bottom = -top;
-  g_projection_matrix = glm::frustum(left,right,bottom,top,nearZ,farZ);
+  g_projection_matrix = glm::frustum(left,right,bottom,top,
+  	nearZ,farZ);
   g_view_matrix = glm::lookAt( g_position - direction_z + 
   	glm::vec3(left_right_direction * IOD / 2, 0, 0),
-    g_position + glm::vec3(left_right_direction * IOD / 2, 0, 0), up); }
+    g_position + glm::vec3(left_right_direction * IOD/2, 0, 0), up);}
 \end{lstlisting}
 \end{table}
 \begin{table}[H]
@@ -1067,7 +1068,8 @@ void drawStereo (glm::mat4 transform, Shader shader, int trackSize,
  transform = glm::rotate(model, glm::pi<float>() * rotateX, 
      glm::vec3(1.0f, 0.0f, 0.0f));
  GLint transformLoc = glGetUniformLocation(shader.ID, "transform");
- glUniformMatrix4fv(transformLoc, 1, GL_FALSE, glm::value_ptr(transform));
+ glUniformMatrix4fv(transformLoc, 1, GL_FALSE, 
+ 	glm::value_ptr(transform));
 track.draw(); }
 \end{lstlisting}
 \end{table}
@@ -1091,7 +1093,7 @@ Wszystkie działania algorytmu należałoby wykonywać z bardzo dużą częstotl
 
 Użycie takiego algorytmu jest dobre tylko w teorii, gdyż w rzeczywistości powstaje problem synchronizacji wyświetlacza i okularów 3D. W zestawie Nvidia 3D Vision ten problem jest rozwiązany na poziomie sprzętowym, użyto do tego nadajnika podczerwieni oraz specjalnych okularów.
 
-Niestety, w roku 2008 firma Nvidia usunęła stereoskopową obsługę OpenGL dla kart graficznych GeForce i AMD. Jednak była kontynuowana obsługa wyświetlania obrazów stereoskopowych z OpenGL w najdroższych, profesjonalnych rozwiązaniach Quadro + 3D Vision. Ten niefortunny stan rzeczy zmienił się w lutym 2013 roku, przy realizacji kolejnego sterownika Nvidia GeForce 314.07. Biblioteka OpenGL zaczęła działać dla pełnoekranowych programów stereoskopowych dla pojedynczych konfiguracji komputerowych (na przykład Windows 8 64-bit, GeForce GTX 680M). Wszystkie informacje o konfiguracjach można znaleźć na oficjalnym forum użytkowników GeForce \cite{GeForceForum}.
+Niestety, w roku 2008 firma Nvidia usunęła stereoskopową obsługę OpenGL dla kart graficznych GeForce i AMD. Jednak była kontynuowana obsługa wyświetlania obrazów stereoskopowych z OpenGL w najdroższych, profesjonalnych rozwiązaniach Quadro+ 3D Vision. Ten niefortunny stan rzeczy zmienił się w lutym 2013 roku, przy realizacji kolejnego sterownika Nvidia GeForce 314.07. Biblioteka OpenGL zaczęła działać dla pełnoekranowych programów stereoskopowych dla pojedynczych konfiguracji komputerowych (na przykład Windows 8 64-bit, GeForce GTX 680M). Wszystkie informacje o konfiguracjach można znaleźć na oficjalnym forum użytkowników GeForce \cite{GeForceForum}.
 
 Zmiana, która zaszła, nie była zapowiedziana oficjalnie i mogła ona być niezamierzonym efektem wprowadzonych do sterownika modyfikacji, a powodzenie przy uruchomieniu OpenGL na wybranych konfiguracjach komputerów i zestawów 3D Vision można uważać za wyjątek. Z informacji umieszczonych na oficjalnej stronie internetowej \cite{NvidiaInfo} wynika, że ta technologia wciąż nie wspiera biblioteki OpenGL. Stąd, osiągnięcie celu: wykonanie obrazów w technologii stereoskopii aktywnej, nie jest możliwe.
 
@@ -1103,7 +1105,7 @@ W ramach opracowania uruchomiono zestaw Nvidia 3D Vision z programami dostarczon
 \subsection{Weryfikacja poprawności i jakości programu}
 Weryfikacja poprawności i jakości programu może mieć różny charakter i odnosić się do różnych etapów procesu wytwórczego. W działaniach weryfikacyjnych w niniejszej pracy dyplomowej posługiwano się wskazówkami z książki \cite{specyfikacja}.
 
-Po zakończeniu procesu wytwórczego oceniono końcowy produkt --- program wraz z jakością stworzonych obrazów. Zwrócono uwagę również na stopień spełnienia przez oprogramowanie wymagań funkcjonalnych i niefunkcjonalnych.
+Po zakończeniu procesu wytwórczego oceniono końcowy produkt --- program wraz z jakością stworzonych obrazów. Zwrócono uwagę również na stopień spełnienia przez oprogramowanie wymagań funkcjonalnych i niefunkcjonalnych. Tabela \ref{tab15} oraz tabela \ref{tab19} przedstawiają wyniki weryfikacji.
 
 \begin{table}[H]
 \caption{Stopień spełnienia wymagań funkcjonalnych.}
@@ -1111,61 +1113,61 @@ Po zakończeniu procesu wytwórczego oceniono końcowy produkt --- program wraz 
 \footnotesize
 \label{tab15}
 \begin{tabular}{!{\color{sapphire}\vrule width 1pt}m{0.05\textwidth}!{\color{black}\vrule width 1pt}m{0.26\textwidth}!{\color{black}\vrule width 1pt}m{0.57\textwidth}!{\color{sapphire}\vrule width 1pt}}
-	\arrayrulecolor{sapphire}\hline
-	\Centering\bfseries Nr &
-	\Centering\bfseries Nazwa &
-	\Centering\bfseries W jakim stopniu jest spełnione \\
-	\hline
-	\arrayrulecolor{black}
-	1 & Renderowanie torów cząstek & Spełnione w 100\%, obrazy umieszczono w Dodatku \ref{Tory}.\\ 
-	\hline
-	2 & Renderowanie detektora & Spełnione w 100\%.\\ 
-	\hline
-	3 & Stworzenie efektu widzenia stereoskopowego & Spełnione w 100\%. Przetestowano w laboratorium graficznym z użyciem zestawu 3D.\\ 
-	\hline
-	4 & Stworzenie efektu aktywnego widzenia stereoskopowego &  Nie spełniono, ze względu na ograniczenia sprzętowe.\\ 
-	\hline
-	5 & Możliwość interakcji z użytkownikiem & Spełnione w 100\%, instrukcję użytkownika umieszczono w folderze z kodem źródłowym. \\ 
-	\arrayrulecolor{sapphire}\hline
+\arrayrulecolor{sapphire}\hline
+\Centering\bfseries Nr &
+\Centering\bfseries Nazwa &
+\Centering\bfseries W jakim stopniu jest spełnione \\
+\hline
+\arrayrulecolor{black}
+1 & Renderowanie torów cząstek & Spełnione w 100\%, obrazy umieszczono w Załączniku \ref{Tory}.\\
+\hline
+2 & Renderowanie detektora & Spełnione w 100\%.\\
+\hline
+3 & Stworzenie efektu widzenia stereoskopowego & Spełnione w 100\%. Przetestowano w laboratorium graficznym z użyciem zestawu 3D.\\
+\hline
+4 & Stworzenie efektu aktywnego widzenia stereoskopowego & Nie spełniono, ze względu na ograniczenia sprzętowe.\\
+\hline
+5 & Możliwość interakcji z użytkownikiem & Spełnione w 100\%, instrukcję użytkownika umieszczono w folderze z kodem źródłowym. \\
+\arrayrulecolor{sapphire}\hline
 \end{tabular}
 \end{table}
 
 \begin{table}[H]
-\caption{Stopień spełnienia wymagań niefukcjonalnych.}
+\caption{Stopień spełnienia wymagań niefunkcjonalnych.}
 \centering
 \footnotesize
 \label{tab19}
 \begin{tabular}{!{\color{sapphire}\vrule width 1pt}m{0.05\textwidth}!{\color{black}\vrule width 1pt}m{0.26\textwidth}!{\color{black}\vrule width 1pt}m{0.57\textwidth}!{\color{sapphire}\vrule width 1pt}}
-	\arrayrulecolor{sapphire}\hline
-	\Centering\bfseries Nr &
-	\Centering\bfseries Nazwa &
-	\Centering\bfseries W jakim stopniu jest spełnione \\
-	\hline
-	\arrayrulecolor{black}
-	1 & Przenośność & Spełnione w 100\%. Program bezproblemowo uruchamiano na różnych systemach operacyjnych.\\ 
-	\hline
-	2 & Zrozumiałość & Spełnione w 100\%, instrukcję użytkownika umieszczono w folderze z kodem źródłowym.. \\ 
-	\hline
-	3 & Czytelność kodu źródłowego & Spełnione w 70\%, niektóre rozwiązania niezgodne z zasadami czystego kodu zastosowano ze względu na specyfikacje bibliotek zewnętrznych. \\ 
-	\hline
-	4 & Tolerowanie defektów & Spełnione w 100\%, błędne dane mogą być wprowadzone tylko poprzez pliki zewnętrzne. O problemach z plikiem użytkownik zostanie poinformawany za pomocą komunikatów błędu, odpowiednich dla analizatorów składni wybranego formatu. \\
-	\hline
-	5 & Przyjazność programu dla użytkownika & Spełnione w 100\%, instrukcję użytkownika umieszczono w folderze z kodem źródłowym.\\  
-	\arrayrulecolor{sapphire}\hline
+\arrayrulecolor{sapphire}\hline
+\Centering\bfseries Nr &
+\Centering\bfseries Nazwa &
+\Centering\bfseries W jakim stopniu jest spełnione \\
+\hline
+\arrayrulecolor{black}
+1 & Przenośność & Spełnione w 100\%. Program bezproblemowo uruchamiano na różnych systemach operacyjnych.\\
+\hline
+2 & Zrozumiałość & Spełnione w 100\%, instrukcję użytkownika umieszczono w folderze z kodem źródłowym. \\
+\hline
+3 & Czytelność kodu źródłowego & Spełnione w 70\%, niektóre rozwiązania niezgodne z zasadami czystego kodu zastosowano ze względu na specyfikacje bibliotek zewnętrznych. \\
+\hline
+4 & Tolerowanie defektów & Spełnione w 100\%, błędne dane mogą być wprowadzone tylko poprzez pliki zewnętrzne. O problemach z plikiem użytkownik zostanie poinformowany za pomocą komunikatów o błędzie, odpowiednich dla analizatorów składni wybranego formatu. \\
+\hline
+5 & Przyjazność programu dla użytkownika & Spełnione w 100\%, instrukcję użytkownika umieszczono w folderze z kodem źródłowym.\\
+\arrayrulecolor{sapphire}\hline
 \end{tabular}
 \end{table}
 
 
 \subsection{Porównanie technologii stereoskopowych}
-Po przetestowaniu oprogramowania na dwóch zestawach dla widzenia stereoskopowego można wyciągnąć pewne wnioski, a przede wszystkim mieć podstawy i kryteria do porównania technologii widzenia w trzech wymiarach.
+Po obejrzeniu dużej liczby obrazów 3D na dwóch zestawach dla widzenia stereoskopowego można wyciągnąć pewne wnioski, a przede wszystkim mieć podstawy i kryteria do porównania technologii widzenia w trzech wymiarach.
 
 Pierwsza rzecz, na którą zwraca się uwagę podczas pierwszego korzystania z zestawów, to znacząca różnica w rozdzielczości. Stereoskopia aktywna jest bezwarunkowo w tym lepsza od technologii pasywnej.
 
 Kolejna ważna rzecz to jasność obrazu. Po założeniu okularów zauważalny jest spadek jasności niemal o połowę. W przypadku obu metod, zarówno aktywnej, jak i pasywnej, tylko połowa światła dociera do oka. W technologii aktywnej jest to spowodowane przyciemnianiem soczewek na zmianę, w przypadku pasywnego 3D co druga wyświetlana przez ekran linia jest czarna. Aby zrekompensować tę stratę, większość wyświetlaczy po prostu zwiększa jasność w trybie stereoskopowym.
 
-Obie wyżej wymienione własności mają wpływ na jakość obrazu i na komfort oglądania. Biorąc pod uwagę to kryterium, warto odznaczyć, że każda technologia ma wady, których nie da się wyeliminować, gdyż leżą one u podstaw działania technik. W przypadku stereoskopii pasywnej wadą jest dobranie odpowiedniej pozycji, żeby móc obejrzeć obraz stereoskopowy. Wiąże się to, z dopasowaniem polaryzacji ekranu i okularów, ponieważ każde odchylenie zaburza cały obraz. W przypadku stereoskopii aktywnej komfort oglądania zaburzają migotanie obrazu. Migotanie jest spowodowane szybką zmianą obrazów i przyciemnianiem odpowiednich soczewek. Po dłuższym oglądaniu wada ta może doprowadzić do bólu głowy, a w przypadkach skrajnych nawet do ataku epileptycznego. Dlatego przed użyciem Nvidia 3D Vision należy wykonać test zdrowotny, udostępniony w oprogramowaniu zestawu, który sprawdza podatność organizmu na efekty uboczne.
+Obie wyżej wymienione własności mają wpływ na jakość obrazu i na komfort oglądania. Biorąc pod uwagę to kryterium, warto odznaczyć, że każda technologia ma wady, których nie da się wyeliminować, gdyż leżą one u podstaw działania technik. W przypadku stereoskopii pasywnej wadą jest dobranie odpowiedniej pozycji, żeby móc obejrzeć obraz stereoskopowy. Wiąże się to, z dopasowaniem polaryzacji ekranu i okularów, ponieważ każde odchylenie zaburza cały obraz. W przypadku stereoskopii aktywnej komfort oglądania zaburzają migotanie obrazu. Migotanie jest spowodowane szybką zmianą obrazów i przyciemnianiem odpowiednich soczewek. Po dłuższym oglądaniu wada ta może doprowadzić do bólu głowy, a w przypadku skrajnym nawet do ataku epileptycznego. Dlatego przed użyciem Nvidia 3D Vision należy wykonać test zdrowotny, udostępniony w oprogramowaniu zestawu, który sprawdza podatność organizmu na efekty uboczne.
 
-Jak technika stereoskopowego widzenia pasywnego, tak i aktywnego wymagają użycia okularów. Wadą okularów aktywnych jest po pierwsze koszt, a po drugie bateria, która musi być naładowana, żeby oglądanie obrazów trójwymiarowych się powiodło. Warto zaznaczyć, że urządzenia umożliwiające widzenie stereoskopowe stają się coraz bardziej popularne, lecz nie są jeszcze powszechnie dostępne w sklepach.
+Jak technika stereoskopowego widzenia pasywnego, tak i aktywnego wymagają użycia specjalnych okularów. Wadą okularów aktywnych jest po pierwsze koszt, a po drugie bateria, która musi być naładowana, żeby oglądanie obrazów trójwymiarowych się powiodło. Warto zaznaczyć, że urządzenia umożliwiające widzenie stereoskopowe stają się coraz bardziej popularne, lecz nie są jeszcze powszechnie dostępne w sklepach.
 
 Tabela \ref{tab20} strukturyzuje opisane wcześniej informacje.
 
@@ -1202,15 +1204,15 @@ Opracowanie wizualizacji stereoskopowych detektora ALICE wymagało podzielenia c
 
 Określenie celów całego przedsięwzięcia na samym początku wyznaczyło kierunek rozwoju opracowania, wyeliminowało ścieżki alternatywne, narzucając z góry OpenGL jako podstawową bibliotekę graficzną. Etap pozwolił naszkicować ogólny plan postępowania w dążeniu za wizją niniejszej pracy dyplomowej --- zwiększeniu atrakcyjności fizyki dużych energii poprzez obrazy stereoskopowe.
 
-Znaczącą częścią tego opracowania jest etap analizy, zaczynając od przestudiowania dostępnych technik stereoskopowych aż po poznanie eksperymentów z cząstkami w międzynarodowym laboratorium fizyki cząstek CERN. Już na tym etapie powstał pewien problem nie do ominięcia. Jak to było opisywane wcześniej, pobranie danych z repozytoriów w laboratorium ALICE sprowadziłoby się do stworzenia skomplikowanego parsera plików w języku ROOT. Dlatego, mimo że nie było to bezpośrednim celem niniejszej pracy, przeanalizowano różne formaty plików 3D oraz biblioteki, które by były w stanie wczytać modele z tych plików do sceny w programie. Dzięki takiej analizie stało się możliwe wykonanie zapytania o model w najbardziej pasującym rozszerzeniu (.DAE). Po części analitycznej zaczęto projektowanie oprogramowania.
+Znaczącą częścią tego opracowania jest etap analizy, zaczynając od przestudiowania dostępnych technik stereoskopowych aż po poznanie eksperymentów z cząstkami w międzynarodowym laboratorium fizyki cząstek CERN. Już na tym etapie powstał pewien problem nie do ominięcia. Jak to było opisywane wcześniej, pobranie danych z repozytoriów w laboratorium ALICE sprowadziłoby się do stworzenia skomplikowanego parsera plików ROOT. Dlatego, mimo że nie było to bezpośrednim celem niniejszej pracy, przeanalizowano różne formaty plików 3D oraz biblioteki, które by były w stanie wczytać modele z tych plików do sceny w programie. Dzięki takiej analizie stało się możliwe wykonanie zapytania o model w najbardziej pasującym rozszerzeniu (.DAE). Po części analitycznej zaczęto projektowanie oprogramowania.
 
-Proces projektowania w całości przebiegał zgodnie z zaleceniami z \cite{specyfikacja}. Po ogólnym opisie projektu wyspecyfikowano wymagania funkcjonalne i niefunkcjonalne, określono przypadki użycia.
+Proces projektowania w całości przebiegał zgodnie z zaleceniami z książki \cite{specyfikacja}. Po ogólnym opisie projektu wyspecyfikowano wymagania funkcjonalne i niefunkcjonalne, określono przypadki użycia.
 
 Lukę między opisem wymagań a implementacją wypełnił projekt oprogramowania, definiujący jego elementy składowe oraz ich zachowanie. Wyznaczony schemat, zgodnie z którym zostały napisane i uruchomione wszystkie metody, zaplanowano i opisano w diagramie klas. Na tym etapie również określono biblioteki do użycia w programie. Opracowany projekt był dużym wsparciem podczas implementacji rozwiązania, gdyż pozwalał kontrolować przebieg prac oraz utrzymywać jakość produktu końcowego na odpowiednim poziomie.
 
 Kolejnym ważnym etapem była implementacja zaprojektowanego programu. W tej części opracowania prowadzono najwięcej eksperymentów z różnymi wartościami mającymi wpływ na jakość tworzonych obrazów. Ponadto dużą składową etapu implementacji było testowanie. Celem testowania było doświadczalne porównanie programu z projektem. Integralną częścią weryfikacji poprawności programu było wyświetlenie obrazów końcowych z użyciem różnego sprzętu komputerowego i stereoskopowego. Testowanie oprogramowania zakończono pomyślnie, oznacza to, że produkt końcowy spełnia wymagania projektowe i dodatkowo jest atrakcyjny pod względem technologii, z których korzysta.
 
-Tak jak przy przygotowaniu przeważnej większości opracowań informatycznych, tak i w niniejszym pojawiały się rozmaite trudności, których nie przewidziano wcześniej. Wbrew tym niedogodnościom zrealizowano większość celów. Reasumując założenia wstępne to:
+Tak jak przy przygotowaniu większości opracowań informatycznych, tak i w niniejszym pojawiały się rozmaite trudności, których nie przewidziano wcześniej. Wbrew tym niedogodnościom zrealizowano większość celów. Reasumując założenia wstępne to:
 \begin{itemize}
 \itemi analiza dostępnych narzędzi graficznych;
 \itemi stworzenie oprogramowania z wykorzystaniem biblioteki OpenGL, które:
@@ -1247,10 +1249,11 @@ Oczywiście obrazy trójwymiarowe przedstawiane na zwykłym ekranie 2D bez zasto
 \listoftables
 
 \newpage
+\raggedbottom
 \listofappendix
 
-%\newpage
 \begin{appendices}
+\renewcommand{\sectionname}{Załącznik}
 \section{Wyniki tworzenia obrazów torów cząstek}
 \label{Tory}
 \begin{figure}[H]
